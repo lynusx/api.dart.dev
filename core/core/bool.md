@@ -4,38 +4,43 @@
 final class bool {}
 ```
 
-The reserved words `true` and `false` denote objects that are the only two instances of this class.
+保留字 `true` 和 `false` 表示该类仅有的两个实例对象。
 
-It is a compile-time error for a class to attempt to extend or implement bool.
+类若试图继承（extend）或实现（implement）bool 是编译时错误。
+
+## 构造函数
 
 ### bool.fromEnvironment()
 
 ```dart
-bool.fromEnvironment(String name, {bool defaultValue = false})
+const bool.fromEnvironment(
+  String name, {
+  bool defaultValue = false,
+})
 ```
 
-Boolean value for [name] in the compilation configuration environment.
+编译配置环境中 [name] 对应的布尔值。
 
-The compilation configuration environment is provided by the surrounding tools which are compiling or running the Dart program. The environment is a mapping from a set of string keys to their associated string value. The string value, or lack of a value, associated with a [name] must be consistent across all calls to [String.fromEnvironment], [int.fromEnvironment], `bool.fromEnvironment` and [bool.hasEnvironment] in a single program. The string values can be directly accessed using [String.fromEnvironment].
+编译配置环境由编译或运行 Dart 程序的外围工具提供。该环境是一组字符串键到其关联字符串值的映射。在单个程序中，与 [name] 关联的字符串值（或值的缺失）在对 [String.fromEnvironment]、[int.fromEnvironment]、`bool.fromEnvironment` 和 [bool.hasEnvironment] 的所有调用中必须保持一致。可以使用 [String.fromEnvironment] 直接访问该字符串值。
 
-This constructor parses the string value associated with [name] as a boolean, as if by [`bool.tryParse(value)`][bool.tryParse], meaning that it accepts only the strings `"true"` and `"false"`.
+该构造函数会将与 [name] 关联的字符串值解析为布尔值，其解析方式等同于调用 [`bool.tryParse(value)`][bool.tryParse]，即只接受字符串 `"true"` 和 `"false"`。
 
-If there is no value associated with [name] in the compilation configuration environment, or if the associated string value is not one of `"true"` or `"false"`, the value of the constructor invocation is the [defaultValue] boolean, which defaults to the boolean value `false`.
+如果编译配置环境中不存在与 [name] 关联的值，或者关联的字符串值既不是 `"true"` 也不是 `"false"`，则该构造函数调用的结果为 [defaultValue] 的布尔值，其默认值为 `false`。
 
-The result is the same as that of:
+结果等价于：
 
 ```dart template:expression
 (const String.fromEnvironment(name) == "true")
     || ((const String.fromEnvironment(name) != "false") && defaultValue)
 ```
 
-Example:
+示例：
 
 ```dart
 const bool loggingEnabled = bool.fromEnvironment("logging");
 ```
 
-In order to check whether a value is there at all, use [bool.hasEnvironment]. Example:
+若需检查某个值是否存在，可使用 [bool.hasEnvironment]。示例：
 
 ```dart
 const bool? yesNoMaybe = bool.hasEnvironment("optionalFlag")
@@ -43,13 +48,13 @@ const bool? yesNoMaybe = bool.hasEnvironment("optionalFlag")
     : null;
 ```
 
-To accept other strings than `"true"` or `"false"`, use the [String.fromEnvironment] constructor directly. Example:
+如需接受除 `"true"` 或 `"false"` 之外的其他字符串，请直接使用 [String.fromEnvironment] 构造函数。示例：
 
 ```dart
 const isLoggingOn = (const String.fromEnvironment("logging") == "on");
 ```
 
-This constructor is only guaranteed to work when invoked as `const`. It may work as a non-constant invocation on some platforms which have access to compiler options at run-time, but most ahead-of-time compiled platforms will not have this information.
+该构造函数只保证在以 `const` 方式调用时正常工作。在某些能够在运行时访问编译器选项的平台上，非常量调用也可能有效，但大多数提前编译（AOT）平台不具备此信息。
 
 ### bool.hasEnvironment()
 
@@ -57,15 +62,15 @@ This constructor is only guaranteed to work when invoked as `const`. It may work
 bool.hasEnvironment(String name)
 ```
 
-Whether [name] is declared in the compilation configuration environment.
+[name] 是否已在编译配置环境中声明。
 
-The compilation configuration environment is provided by the surrounding tools which are compiling or running the Dart program. The environment is a mapping from a set of string keys to their associated string value. The string value, or lack of a value, associated with a [name] must be consistent across all calls to [String.fromEnvironment], [int.fromEnvironment], `bool.fromEnvironment` and [bool.hasEnvironment] in a single program.
+编译配置环境由编译或运行 Dart 程序的外围工具提供。该环境是一组字符串键到其关联字符串值的映射。在单个程序中，与 [name] 关联的字符串值（或值的缺失）在对 [String.fromEnvironment]、[int.fromEnvironment]、`bool.fromEnvironment` 和 [bool.hasEnvironment] 的所有调用中必须保持一致。
 
-This constructor evaluates to `true` if [name] has an associated value in the compilation configuration environment, and to `false` if not. If there is an associated value, then the value can be accessed using `const String.fromEnvironment(name)`. Otherwise, `String.fromEnvironment(name, defaultValue: someString)` is known to evaluate to the given `defaultValue`.
+如果 [name] 在编译配置环境中存在关联值，该构造函数的求值结果为 `true`；否则为 `false`。若存在关联值，则可以通过 `const String.fromEnvironment(name)` 访问该值。否则，已知 `String.fromEnvironment(name, defaultValue: someString)` 会求值为给定的 `defaultValue`。
 
-The [String.fromEnvironment], [int.fromEnvironment] and [bool.fromEnvironment] constructors always produce a [String], [int], or [bool], as required for a constructor. In most cases, the absence of a configuration environment association for a [name] simply means that the code should fall back on a default behavior, and a default value of the same type typically represents that perfectly.
+[String.fromEnvironment]、[int.fromEnvironment] 和 [bool.fromEnvironment] 构造函数始终产生构造函数所要求的 [String]、[int] 或 [bool] 类型的结果。在大多数情况下，某个 [name] 在配置环境中缺少关联值仅意味着代码应回退到默认行为，而相同类型的默认值通常能完美地表示这种情况。
 
-In some cases, a value of different type, mostly `null`, may better represent the absence of a choice. In that case, this constructor can be used to first check whether there is a value, and only then use the other `fromEnvironment` constructors. Example:
+在某些情况下，使用不同类型的值（通常是 `null`）能更好地表示"未做选择"这一状态。此时，可以先使用该构造函数检查是否存在某个值，然后再使用其他 `fromEnvironment` 构造函数。示例：
 
 ```dart
 const int? indentOverride = bool.hasEnvironment("indent-override")
@@ -73,13 +78,13 @@ const int? indentOverride = bool.hasEnvironment("indent-override")
     : null;
 void indentLines(List<String> lines, int indentation) {
   int actualIndentation = indentOverride ?? indentation;
-  // ... Do something to lines.
+  // ... 对 lines 执行某些操作
 }
 ```
 
-This pattern allows a compilation configuration to provide an override value to the program, but also to not do so, and the program can tell the difference between an explicitly provided value and the absence of one.
+这种模式允许编译配置为程序提供一个覆盖值，同时也允许不提供该值，程序可以区分"显式提供了值"和"未提供值"这两种情况。
 
-Another use case is to only do something extra when a needed value is available. Example:
+另一个使用场景是：仅当所需的值可用时才执行额外操作。示例：
 
 ```dart
 const Logger? logger = bool.hasEnvironment("logging-id")
@@ -87,55 +92,65 @@ const Logger? logger = bool.hasEnvironment("logging-id")
     : null;
 ```
 
-This constructor is only guaranteed to work when invoked as `const`. It may work as a non-constant invocation on some platforms which have access to compiler options at run-time, but most ahead-of-time compiled platforms will not have this information.
+该构造函数只保证在以 `const` 方式调用时正常工作。在某些能够在运行时访问编译器选项的平台上，非常量调用也可能有效，但大多数提前编译（AOT）平台不具备此信息。
+
+## 静态方法
 
 ### parse()
 
 ```dart
-bool parse(String source, {bool caseSensitive = true})
+@Since.new("3.0")
+bool parse(
+	String source, {
+	bool caseSensitive = true,
+})
 ```
 
-Parses [source] as an, optionally case-insensitive, boolean literal.
+将 [source] 解析为布尔字面量，可选择是否区分大小写。
 
-If [caseSensitive] is `true`, which is the default, the only accepted inputs are the strings `"true"` and `"false"`, which returns the results `true` and `false` respectively.
+如果 [caseSensitive] 为 `true`（默认值），则唯一可接受的输入是字符串 `"true"` 和 `"false"`，分别返回结果 `true` 和 `false`。
 
-If [caseSensitive] is `false`, any combination of upper and lower case ASCII letters in the words `"true"` and `"false"` are accepted, as if the input was first lower-cased.
+如果 [caseSensitive] 为 `false`，则单词 `"true"` 和 `"false"` 的任意大小写组合（ASCII 字母）都会被接受，如同先将输入转换为小写后再处理。
 
-Throws a [FormatException] if the [source] string does not contain a valid boolean literal.
+如果 [source] 字符串不包含有效的布尔字面量，则抛出 [FormatException]。
 
-Rather than throwing and immediately catching the [FormatException], instead use [tryParse] to handle a potential parsing error.
+与其抛出异常后立即捕获 [FormatException]，不如使用 [tryParse] 来处理可能出现的解析错误。
 
-Example:
+示例：
 
 ```dart
 print(bool.parse('true')); // true
 print(bool.parse('false')); // false
-print(bool.parse('TRUE')); // throws FormatException
+print(bool.parse('TRUE')); // 抛出 FormatException
 print(bool.parse('TRUE', caseSensitive: false)); // true
 print(bool.parse('FALSE', caseSensitive: false)); // false
-print(bool.parse('NO')); // throws FormatException
-print(bool.parse('YES')); // throws FormatException
-print(bool.parse('0')); // throws FormatException
-print(bool.parse('1')); // throws FormatException
+print(bool.parse('NO')); // 抛出 FormatException
+print(bool.parse('YES')); // 抛出 FormatException
+print(bool.parse('0')); // 抛出 FormatException
+print(bool.parse('1')); // 抛出 FormatException
 ```
 
 ### tryParse()
 
 ```dart
-bool? tryParse(String source, {bool caseSensitive = true})
+@Since.new("3.0")
+bool? tryParse(
+	String source, {
+	bool caseSensitive = true,
+})
 ```
 
-Parses [source] as an, optionally case-insensitive, boolean literal.
+将 [source] 解析为布尔字面量，可选择是否区分大小写。
 
-If [caseSensitive] is `true`, which is the default, the only accepted inputs are the strings `"true"` and `"false"`, which returns the results `true` and `false` respectively.
+如果 [caseSensitive] 为 `true`（默认值），则唯一可接受的输入是字符串 `"true"` 和 `"false"`，分别返回结果 `true` 和 `false`。
 
-If [caseSensitive] is `false`, any combination of upper and lower case ASCII letters in the words `"true"` and `"false"` are accepted, as if the input was first lower-cased.
+如果 [caseSensitive] 为 `false`，则单词 `"true"` 和 `"false"` 的任意大小写组合（ASCII 字母）都会被接受，如同先将输入转换为小写后再处理。
 
-Returns `null` if the [source] string does not contain a valid boolean literal.
+如果 [source] 字符串不包含有效的布尔字面量，则返回 `null`。
 
-If the input can be assumed to be valid, use [bool.parse] to avoid having to deal with a possible `null` result.
+如果可以假定输入有效，可使用 [bool.parse] 以避免处理可能为 `null` 的结果。
 
-Example:
+示例：
 
 ```dart
 print(bool.tryParse('true')); // true
@@ -149,41 +164,29 @@ print(bool.tryParse('0')); // null
 print(bool.tryParse('1')); // null
 ```
 
+## 属性
+
 ### hashCode
+
+该对象的哈希码（hash code）。
+
+哈希码是一个表示对象状态的单一整数，该状态会影响 [operator ==](https://api.flutter.dev/flutter/dart-core/Object/operator_equals.html) 的比较结果。
+
+所有对象都有哈希码。[Object](https://api.flutter.dev/flutter/dart-core/Object-class.html) 实现的默认哈希码仅表示对象的标识（identity），这与默认的 [operator ==](https://api.flutter.dev/flutter/dart-core/Object/operator_equals.html) 实现方式相同，即仅当两个对象是同一个对象（identical）时才认为它们相等（参见 [identityHashCode](https://api.flutter.dev/flutter/dart-core/identityHashCode.html)）。
+
+如果重写 [operator ==](https://api.flutter.dev/flutter/dart-core/Object/operator_equals.html) 以改为基于对象状态进行比较，则也必须相应地修改哈希码以表示该状态，否则该对象将无法在基于哈希的数据结构（如默认的 [Set](https://api.flutter.dev/flutter/dart-core/Set-class.html) 和 [Map](https://api.flutter.dev/flutter/dart-core/Map-class.html) 实现）中使用。
+
+根据 [operator ==](https://api.flutter.dev/flutter/dart-core/Object/operator_equals.html)，彼此相等的对象其哈希码必须相同。对象的哈希码应仅在该对象以影响相等性的方式发生变化时才改变。除此之外，对哈希码没有其他要求。它们无需在同一程序的多次运行之间保持一致，也不保证任何分布特性。
+
+允许不相等的对象拥有相同的哈希码。技术上甚至允许所有实例都拥有相同的哈希码，但如果冲突发生得过于频繁，可能会降低基于哈希的数据结构（如 [HashSet](https://api.flutter.dev/flutter/dart-collection/HashSet-class.html) 或 [HashMap](https://api.flutter.dev/flutter/dart-collection/HashMap-class.html)）的效率。
+
+如果子类重写了 [hashCode](https://api.flutter.dev/flutter/dart-core/bool/hashCode.html)，则也应同时重写 [operator ==](https://api.flutter.dev/flutter/dart-core/Object/operator_equals.html) 运算符以保持一致性。
 
 ```dart
 int get hashCode
 ```
 
-### operator &()
-
-```dart
-bool operator &(bool other)
-```
-
-The logical conjunction ("and") of this and [other].
-
-Returns `true` if both this and [other] are `true`, and `false` otherwise.
-
-### operator |()
-
-```dart
-bool operator |(bool other)
-```
-
-The logical disjunction ("inclusive or") of this and [other].
-
-Returns `true` if either this or [other] is `true`, and `false` otherwise.
-
-### operator ^()
-
-```dart
-bool operator ^(bool other)
-```
-
-The logical exclusive disjunction ("exclusive or") of this and [other].
-
-Returns whether this and [other] are neither both `true` nor both `false`.
+## 方法
 
 ### toString()
 
@@ -191,4 +194,36 @@ Returns whether this and [other] are neither both `true` nor both `false`.
 String toString()
 ```
 
-Returns either `"true"` for `true` and `"false"` for `false`.
+对于 `true` 返回 `"true"`，对于 `false` 返回 `"false"`。
+
+## 运算符
+
+### operator &
+
+```dart
+bool operator &(bool other)
+```
+
+this 和 [other] 的逻辑合取（"与"运算）。
+
+当 this 和 [other] 都为 `true` 时返回 `true`，否则返回 `false`。
+
+### operator |
+
+```dart
+bool operator |(bool other)
+```
+
+this 和 [other] 的逻辑析取（"或"运算，即"包含或"）。
+
+当 this 或 [other] 中至少有一个为 `true` 时返回 `true`，否则返回 `false`。
+
+### operator ^
+
+```dart
+bool operator ^(bool other)
+```
+
+this 和 [other] 的逻辑异或（"排斥或"运算）。
+
+返回 this 和 [other] 是否既非同时为 `true` 也非同时为 `false`。
