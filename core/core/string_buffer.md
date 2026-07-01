@@ -4,18 +4,18 @@
 class StringBuffer implements StringSink {}
 ```
 
-A class for concatenating strings efficiently.
+一个用于高效拼接字符串的类。
 
-Allows for the incremental building of a string using `write*()` methods. The strings are concatenated to a single string only when [toString] is called.
+允许使用 `write*()` 方法增量构建字符串。只有在调用 [toString] 时，这些字符串才会被拼接成一个单一的字符串。
 
-Example:
+示例：
 
 ```dart
 final buffer = StringBuffer('DART');
 print(buffer.length); // 4
 ```
 
-To add the string representation of an object, as returned by [Object.toString], to the buffer, use [write]. Is also used for adding a string directly.
+要将对象的字符串表示形式（由 [Object.toString] 返回）添加到缓冲区，请使用 [write]。也可用于直接添加字符串。
 
 ```
 buffer.write(' is open source');
@@ -30,7 +30,7 @@ print(buffer); // DART is open source since 2011
 print(buffer.length); // 30
 ```
 
-To add a newline after the object's string representation, use [writeln]. Calling [writeln] with no argument adds a single newline to the buffer.
+要在对象的字符串表示形式后添加换行符，请使用 [writeln]。不带参数调用 [writeln] 会向缓冲区添加一个换行符。
 
 ```
 buffer.writeln(); // Contains "DART is open source since 2011\n".
@@ -38,7 +38,7 @@ buffer.writeln('-' * (buffer.length - 1)); // 30 '-'s and a newline.
 print(buffer.length); // 62
 ```
 
-To write multiple objects to the buffer, use [writeAll].
+要将多个对象写入缓冲区，请使用 [writeAll]。
 
 ```
 const separator = '-';
@@ -50,7 +50,7 @@ print(buffer);
 // Dart-is-fun!
 ```
 
-To add the string representation of a Unicode code point, `charCode`, to the buffer, use [writeCharCode].
+要将 Unicode 码位 `charCode` 的字符串表示形式添加到缓冲区，请使用 [writeCharCode]。
 
 ```
 buffer.writeCharCode(0x0A); // LF (line feed)
@@ -61,7 +61,7 @@ buffer.writeCharCode(0x74); // 't'
 print(buffer.length); // 79
 ```
 
-To convert the content to a single string, use [toString].
+要将内容转换为单个字符串，请使用 [toString]。
 
 ```
 final text = buffer.toString();
@@ -72,7 +72,7 @@ print(text);
 // Dart
 ```
 
-To clear the buffer, so that it can be reused, use [clear].
+要清空缓冲区以便重复使用，请使用 [clear]。
 
 ```
 buffer.clear();
@@ -80,13 +80,17 @@ print(buffer.isEmpty); // true
 print(buffer.length); // 0
 ```
 
+## 构造函数
+
 ### StringBuffer()
 
 ```dart
 StringBuffer([Object content = ""])
 ```
 
-Creates a string buffer containing the provided [content].
+创建一个包含所提供的 [content] 的字符串缓冲区。
+
+## 属性
 
 ### length
 
@@ -94,7 +98,7 @@ Creates a string buffer containing the provided [content].
 int get length
 ```
 
-Returns the length of the content that has been accumulated so far. This is a constant-time operation.
+返回目前已累积内容的长度。这是一个常数时间操作。
 
 ### isEmpty
 
@@ -102,7 +106,7 @@ Returns the length of the content that has been accumulated so far. This is a co
 bool get isEmpty
 ```
 
-Returns whether the buffer is empty. This is a constant-time operation.
+返回缓冲区是否为空。这是一个常数时间操作。
 
 ### isNotEmpty
 
@@ -110,7 +114,9 @@ Returns whether the buffer is empty. This is a constant-time operation.
 bool get isNotEmpty
 ```
 
-Returns whether the buffer is not empty. This is a constant-time operation.
+返回缓冲区是否不为空。这是一个常数时间操作。
+
+## 方法
 
 ### write()
 
@@ -118,16 +124,43 @@ Returns whether the buffer is not empty. This is a constant-time operation.
 void write(Object? object)
 ```
 
+写入 `object` 的字符串表示形式。
+
+使用 `object.toString()` 将 `object` 转换为字符串。
+
+请注意，调用 `sink.write(null)` 将写入字符串 `"null"`。
+
 ### writeCharCode()
 
 ```dart
 void writeCharCode(int charCode)
 ```
 
+写入一个包含码位为 `charCode` 的字符的字符串。
+
+等效于 `write(String.fromCharCode(charCode))`。
+
 ### writeAll()
 
 ```dart
-void writeAll(Iterable<dynamic> objects, [String separator = ""])
+void writeAll( Iterable objects, [ String separator = "" ])
+```
+
+写入 `objects` 的元素，并以 `separator` 分隔。
+
+按迭代顺序写入 `objects` 中每个元素的字符串表示形式，并在任意两个元素之间写入 `separator`。
+
+```dart
+sink.writeAll(["Hello", "World"], " Beautiful ");
+```
+
+等效于：
+
+```dart
+sink
+  ..write("Hello");
+  ..write(" Beautiful ");
+  ..write("World");
 ```
 
 ### writeln()
@@ -136,13 +169,13 @@ void writeAll(Iterable<dynamic> objects, [String separator = ""])
 void writeln([Object? obj = ""])
 ```
 
-Writes the string representation of [object] followed by a newline.
+写入 [object] 的字符串表示形式，随后写入一个换行符。
 
-Equivalent to `buffer.write(object)` followed by `buffer.write("\n")`.
+等效于先调用 `buffer.write(object)`，再调用 `buffer.write("\n")`。
 
-The newline is always represented as `"\n"`, and does not use a platform specific line ending, e.g., `"\r\n"` on Windows.
+换行符始终表示为 `"\n"`，不会使用特定平台的行结束符（例如 Windows 上的 `"\r\n"`）。
 
-Notice that calling `buffer.writeln(null)` will write the `"null"` string before the newline. Omitting the argument, or explicitly passing an empty string, is the recommended way to emit just the newline.
+请注意，调用 `buffer.writeln(null)` 会在换行符之前写入字符串 `"null"`。推荐的做法是省略参数，或显式传入空字符串，以仅输出换行符。
 
 ### clear()
 
@@ -150,7 +183,7 @@ Notice that calling `buffer.writeln(null)` will write the `"null"` string before
 void clear()
 ```
 
-Clears the string buffer.
+清空字符串缓冲区。
 
 ### toString()
 
@@ -158,4 +191,4 @@ Clears the string buffer.
 String toString()
 ```
 
-Returns the contents of buffer as a single string.
+将缓冲区的内容作为单个字符串返回。

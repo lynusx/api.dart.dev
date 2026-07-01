@@ -4,17 +4,17 @@
 class Stopwatch {}
 ```
 
-A stopwatch which measures time while it's running.
+用于在运行时测量时间的秒表。
 
-A stopwatch is either running or stopped. It measures the elapsed time that passes while the stopwatch is running.
+秒表要么在运行，要么已停止。它测量秒表运行期间经过的时间。
 
-When a stopwatch is initially created, it is stopped and has measured no elapsed time.
+秒表刚创建时处于停止状态，并且尚未测量任何经过的时间。
 
-The elapsed time can be accessed in various formats using [elapsed], [elapsedMilliseconds], [elapsedMicroseconds] or [elapsedTicks].
+可以使用 [elapsed]、[elapsedMilliseconds]、[elapsedMicroseconds] 或 [elapsedTicks] 以不同格式访问经过的时间。
 
-The stopwatch is started by calling [start].
+通过调用 [start] 启动秒表。
 
-Example:
+示例：
 
 ```dart
 final stopwatch = Stopwatch();
@@ -24,7 +24,7 @@ stopwatch.start();
 print(stopwatch.isRunning); // true
 ```
 
-To stop or pause the stopwatch, use [stop]. Use [start] to continue again when only pausing temporarily.
+要停止或暂停秒表，请使用 [stop]。如果只是暂时暂停，可使用 [start] 继续。
 
 ```
 stopwatch.stop();
@@ -35,7 +35,7 @@ assert(stopwatch.elapsed == elapsed); // No measured time elapsed.
 stopwatch.start(); // Continue measuring.
 ```
 
-The [reset] method sets the elapsed time back to zero. It can be called whether the stopwatch is running or not, and doesn't change whether it's running.
+[reset] 方法将经过的时间重置为零。无论秒表是否在运行都可以调用该方法，且不会改变其运行状态。
 
 ```
 // Do some work.
@@ -45,19 +45,23 @@ stopwatch.reset();
 print(stopwatch.elapsedMilliseconds); // 0
 ```
 
+## 构造函数
+
 ### Stopwatch()
 
 ```dart
 Stopwatch()
 ```
 
-Creates a [Stopwatch] in stopped state with a zero elapsed count.
+创建一个处于停止状态、经过计数为零的 [Stopwatch]。
 
-The following example shows how to start a [Stopwatch] immediately after allocation.
+以下示例展示了如何在分配后立即启动 [Stopwatch]。
 
 ```dart
 final stopwatch = Stopwatch()..start();
 ```
+
+## 属性
 
 ### frequency
 
@@ -65,39 +69,7 @@ final stopwatch = Stopwatch()..start();
 int get frequency
 ```
 
-Frequency of the elapsed counter in Hz.
-
-### start()
-
-```dart
-void start()
-```
-
-Starts the [Stopwatch].
-
-The [elapsed] count increases monotonically. If the [Stopwatch] has been stopped, then calling start again restarts it without resetting the [elapsed] count.
-
-If the [Stopwatch] is currently running, then calling start does nothing.
-
-### stop()
-
-```dart
-void stop()
-```
-
-Stops the [Stopwatch].
-
-The [elapsedTicks] count stops increasing after this call. If the [Stopwatch] is currently not running, then calling this method has no effect.
-
-### reset()
-
-```dart
-void reset()
-```
-
-Resets the [elapsed] count to zero.
-
-This method does not stop or start the [Stopwatch].
+经过计数器的频率，单位为 Hz。
 
 ### elapsedTicks
 
@@ -105,13 +77,13 @@ This method does not stop or start the [Stopwatch].
 int get elapsedTicks
 ```
 
-The elapsed number of clock ticks since calling [start] while the [Stopwatch] is running.
+自调用 [start] 以来，[Stopwatch] 运行期间经过的时钟滴答数。
 
-This is the elapsed number of clock ticks between calling [start] and calling [stop].
+即调用 [start] 和调用 [stop] 之间经过的时钟滴答数。
 
-Is 0 if the [Stopwatch] has never been started.
+如果 [Stopwatch] 从未启动过，则为 0。
 
-The elapsed number of clock ticks increases by [frequency] every second.
+经过的时钟滴答数每秒增加 [frequency]。
 
 ### elapsed
 
@@ -119,7 +91,7 @@ The elapsed number of clock ticks increases by [frequency] every second.
 Duration get elapsed
 ```
 
-The [elapsedTicks] counter converted to a [Duration].
+将 [elapsedTicks] 计数器转换为 [Duration]。
 
 ### elapsedMicroseconds
 
@@ -127,7 +99,7 @@ The [elapsedTicks] counter converted to a [Duration].
 int get elapsedMicroseconds
 ```
 
-The [elapsedTicks] counter converted to microseconds.
+将 [elapsedTicks] 计数器转换为微秒。
 
 ### elapsedMilliseconds
 
@@ -135,7 +107,7 @@ The [elapsedTicks] counter converted to microseconds.
 int get elapsedMilliseconds
 ```
 
-The [elapsedTicks] counter converted to milliseconds.
+将 [elapsedTicks] 计数器转换为毫秒。
 
 ### isRunning
 
@@ -143,4 +115,38 @@ The [elapsedTicks] counter converted to milliseconds.
 bool get isRunning
 ```
 
-Whether the [Stopwatch] is currently running.
+[Stopwatch] 当前是否正在运行。
+
+## 方法
+
+### start()
+
+```dart
+void start()
+```
+
+启动 [Stopwatch]。
+
+[elapsed] 计数单调递增。如果 [Stopwatch] 已停止，再次调用 start 会重新启动它，但不会重置 [elapsed] 计数。
+
+如果 [Stopwatch] 当前正在运行，则调用 start 不会产生任何效果。
+
+### stop()
+
+```dart
+void stop()
+```
+
+停止 [Stopwatch]。
+
+调用此方法后，[elapsedTicks] 计数将停止增加。如果 [Stopwatch] 当前未在运行，则调用此方法不会产生任何效果。
+
+### reset()
+
+```dart
+void reset()
+```
+
+将 [elapsed] 计数重置为零。
+
+此方法不会停止或启动 [Stopwatch]。
