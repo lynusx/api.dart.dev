@@ -4,13 +4,13 @@
 class DateTime implements Comparable<DateTime> {}
 ```
 
-An instant in time, such as July 20, 1969, 8:18pm GMT.
+时间中的一个瞬间，例如 1969 年 7 月 20 日晚上 8:18（GMT）。
 
-DateTimes can represent time values that are at a distance of at most 100,000,000 days from epoch (1970-01-01 UTC): -271821-04-20 to 275760-09-13.
+`DateTime` 可以表示与纪元（1970-01-01 UTC）相距最多 100,000,000 天的时间值：-271821-04-20 到 275760-09-13。
 
-Create a `DateTime` object by using one of the constructors or by parsing a correctly formatted string, which complies with a subset of ISO 8601. **Note:** hours are specified between 0 and 23, as in a 24-hour clock.
+可以使用其中一个构造函数创建 `DateTime` 对象，也可以通过解析符合 ISO 8601 子集格式的字符串来创建。**注意：** 小时的取值范围为 0 到 23，采用 24 小时制。
 
-For example:
+例如：
 
 ```dart
 final now = DateTime.now();
@@ -18,11 +18,11 @@ final berlinWallFell = DateTime.utc(1989, 11, 9);
 final moonLanding = DateTime.parse('1969-07-20 20:18:04Z'); // 8:18pm
 ```
 
-A `DateTime` object is anchored either in the UTC time zone or in the local time zone of the current computer when the object is created.
+`DateTime` 对象要么锚定在 UTC 时区，要么锚定在创建该对象时所在计算机的本地时区。
 
-Once created, neither the value nor the time zone of a `DateTime` object may be changed.
+`DateTime` 对象一旦创建，其值和时区都不可更改。
 
-You can use properties to get the individual units of a `DateTime` object.
+可以使用属性获取 `DateTime` 对象的各个组成部分。
 
 ```
 print(berlinWallFell.year); // 1989
@@ -32,7 +32,7 @@ print(moonLanding.hour); // 20
 print(moonLanding.minute); // 18
 ```
 
-For convenience and readability, the `DateTime` class provides a constant for each `day` and `month` name - for example, [august] and [friday]. You can use these constants to improve code readability:
+为了方便和提高可读性，`DateTime` 类为每个 `day` 和 `month` 名称都提供了一个常量——例如 [august] 和 [friday]。可以使用这些常量来提高代码可读性：
 
 ```dart
 final berlinWallFell = DateTime.utc(1989, DateTime.november, 9);
@@ -41,11 +41,11 @@ assert(berlinWallFell.month == DateTime.november);
 assert(berlinWallFell.weekday == DateTime.thursday);
 ```
 
-`Day` and `month` values begin at 1, and the week starts on `Monday`. That is, the constants [january] and [monday] are both 1.
+`Day` 和 `month` 的取值从 1 开始，且一周从 `Monday` 开始计算。也就是说，常量 [january] 和 [monday] 的值均为 1。
 
-## Working with UTC and local time
+## 使用 UTC 和本地时间
 
-A `DateTime` object is in the local time zone unless explicitly created in the UTC time zone. Use [isUtc] to determine whether a `DateTime` object is based in UTC.
+除非显式在 UTC 时区中创建，否则 `DateTime` 对象将处于本地时区。使用 [isUtc] 可判断某个 `DateTime` 对象是否基于 UTC。
 
 ```dart
 final dDay = DateTime.utc(1944, 6, 6);
@@ -55,7 +55,7 @@ final dDayLocal = DateTime(1944, 6, 6);
 print(dDayLocal.isUtc); // false
 ```
 
-Use the methods [toLocal] and [toUtc] to get the equivalent date/time value specified in the other time zone.
+使用 [toLocal] 和 [toUtc] 方法可获取以另一时区表示的等效日期/时间值。
 
 ```
 final localDay = dDay.toLocal(); // e.g. 1944-06-06 02:00:00.000
@@ -65,23 +65,23 @@ final utcFromLocal = localDay.toUtc(); // 1944-06-06 00:00:00.000Z
 print(utcFromLocal.isUtc); // true
 ```
 
-Use [timeZoneName] to get an abbreviated name of the time zone for the `DateTime` object.
+使用 [timeZoneName] 可获取 `DateTime` 对象所在时区的缩写名称。
 
 ```
 print(dDay.timeZoneName); // UTC
 print(localDay.timeZoneName); // e.g. EET
 ```
 
-To find the difference between UTC and the time zone of a `DateTime` object call [timeZoneOffset].
+要查找 UTC 与 `DateTime` 对象所在时区之间的差值，请调用 [timeZoneOffset]。
 
 ```
 print(dDay.timeZoneOffset); // 0:00:00.000000
 print(localDay.timeZoneOffset); // e.g. 2:00:00.000000
 ```
 
-## Comparing DateTime objects
+## 比较 DateTime 对象
 
-The `DateTime` class contains methods for comparing `DateTime`s chronologically, such as [isAfter], [isBefore], and [isAtSameMomentAs].
+`DateTime` 类包含用于按时间顺序比较 `DateTime` 的方法，例如 [isAfter]、[isBefore] 和 [isAtSameMomentAs]。
 
 ```
 print(berlinWallFell.isAfter(moonLanding)); // true
@@ -89,181 +89,50 @@ print(berlinWallFell.isBefore(moonLanding)); // false
 print(dDay.isAtSameMomentAs(localDay)); // true
 ```
 
-## Using DateTime with Duration
+## 将 DateTime 与 Duration 结合使用
 
-Use the [add] and [subtract] methods with a [Duration] object to create a `DateTime` object based on another. For example, to find the point in time that is 36 hours after now, you can write:
+使用 [add] 和 [subtract] 方法配合 [Duration] 对象，可以基于另一个 `DateTime` 创建新的 `DateTime` 对象。例如，要找到从现在起 36 小时后的时间点，可以这样写：
 
 ```dart
 final now = DateTime.now();
 final later = now.add(const Duration(hours: 36));
 ```
 
-To find out how much time is between two `DateTime` objects use [difference], which returns a [Duration] object:
+要计算两个 `DateTime` 对象之间相隔的时间，请使用 [difference]，它会返回一个 [Duration] 对象：
 
 ```
 final difference = berlinWallFell.difference(moonLanding);
 print(difference.inDays); // 7416
 ```
 
-The difference between two dates in different time zones is just the number of nanoseconds between the two points in time. It doesn't take calendar days into account. That means that the difference between two midnights in local time may be less than 24 hours times the number of days between them, if there is a daylight saving change in between. If the difference above is calculated using Australian local time, the difference is 7415 days and 23 hours, which is only 7415 whole days as reported by `inDays`.
+处于不同时区的两个日期之间的差值，仅仅是两个时间点之间相隔的纳秒数。它不考虑日历天数。这意味着，如果两个日期之间存在夏令时变更，那么以本地时间表示的两个午夜时刻之间的差值，可能小于二者相隔天数乘以 24 小时的结果。如果使用澳大利亚本地时间计算上述差值，结果为 7415 天 23 小时，而 `inDays` 报告的整天数仅为 7415 天。
 
-## Other resources
+## 其他资源
 
-- See [Duration] to represent a span of time.
-- See [Stopwatch] to measure timespans.
-- The `DateTime` class does not provide internationalization. To internationalize your code, use the [intl](https://pub.dev/packages/intl) package.
+- 请参阅 [Duration] 以表示一段时间跨度。
+- 请参阅 [Stopwatch] 以测量时间跨度。
+- `DateTime` 类不提供国际化支持。如需为代码添加国际化支持，请使用 [intl](https://pub.dev/packages/intl) 包。
 
-### monday
-
-```dart
-int monday
-```
-
-### tuesday
-
-```dart
-int tuesday
-```
-
-### wednesday
-
-```dart
-int wednesday
-```
-
-### thursday
-
-```dart
-int thursday
-```
-
-### friday
-
-```dart
-int friday
-```
-
-### saturday
-
-```dart
-int saturday
-```
-
-### sunday
-
-```dart
-int sunday
-```
-
-### daysPerWeek
-
-```dart
-int daysPerWeek
-```
-
-### january
-
-```dart
-int january
-```
-
-### february
-
-```dart
-int february
-```
-
-### march
-
-```dart
-int march
-```
-
-### april
-
-```dart
-int april
-```
-
-### may
-
-```dart
-int may
-```
-
-### june
-
-```dart
-int june
-```
-
-### july
-
-```dart
-int july
-```
-
-### august
-
-```dart
-int august
-```
-
-### september
-
-```dart
-int september
-```
-
-### october
-
-```dart
-int october
-```
-
-### november
-
-```dart
-int november
-```
-
-### december
-
-```dart
-int december
-```
-
-### monthsPerYear
-
-```dart
-int monthsPerYear
-```
-
-### isUtc
-
-```dart
-bool isUtc
-```
-
-True if this [DateTime] is set to UTC time.
-
-```dart
-final dDay = DateTime.utc(1944, 6, 6);
-print(dDay.isUtc); // true
-
-final local = DateTime(1944, 6, 6);
-print(local.isUtc); // false
-```
+## 构造函数
 
 ### DateTime()
 
 ```dart
-DateTime(int year, [int month = 1, int day = 1, int hour = 0, int minute = 0, int second = 0, int millisecond = 0, int microsecond = 0])
+DateTime(
+  int year, [
+  int month = 1,
+  int day = 1,
+  int hour = 0,
+  int minute = 0,
+  int second = 0,
+  int millisecond = 0,
+  int microsecond = 0,
+])
 ```
 
-Constructs a [DateTime] instance specified in the local time zone.
+构造一个以本地时区表示的 [DateTime] 实例。
 
-For example, to create a `DateTime` object representing the 7th of September 2017, 5:30pm
+例如，创建一个表示 2017 年 9 月 7 日下午 5:30 的 `DateTime` 对象：
 
 ```dart
 final dentistAppointment = DateTime(2017, 9, 7, 17, 30);
@@ -272,16 +141,25 @@ final dentistAppointment = DateTime(2017, 9, 7, 17, 30);
 ### DateTime.utc()
 
 ```dart
-DateTime.utc(int year, [int month = 1, int day = 1, int hour = 0, int minute = 0, int second = 0, int millisecond = 0, int microsecond = 0])
+DateTime.utc(
+  int year, [
+  int month = 1,
+  int day = 1,
+  int hour = 0,
+  int minute = 0,
+  int second = 0,
+  int millisecond = 0,
+  int microsecond = 0,
+])
 ```
 
-Constructs a [DateTime] instance specified in the UTC time zone.
+构造一个以 UTC 时区表示的 [DateTime] 实例。
 
 ```dart
 final moonLanding = DateTime.utc(1969, 7, 20, 20, 18, 04);
 ```
 
-When dealing with dates or historic events, preferably use UTC DateTimes, since they are unaffected by daylight-saving changes and are unaffected by the local timezone.
+在处理日期或历史事件时，建议优先使用 UTC 的 `DateTime`，因为它们不受夏令时变更的影响，也不受本地时区的影响。
 
 ### DateTime.now()
 
@@ -289,7 +167,7 @@ When dealing with dates or historic events, preferably use UTC DateTimes, since 
 DateTime.now()
 ```
 
-Constructs a [DateTime] instance with current date and time in the local time zone.
+构造一个表示本地时区当前日期和时间的 [DateTime] 实例。
 
 ```dart
 final now = DateTime.now();
@@ -298,14 +176,92 @@ final now = DateTime.now();
 ### DateTime.timestamp()
 
 ```dart
+@Since.new("3.0")
 DateTime.timestamp()
 ```
 
-Constructs a [DateTime] with the current UTC date and time.
+构造一个表示当前 UTC 日期和时间的 [DateTime]。
 
 ```dart
 final mark = DateTime.timestamp();
 ```
+
+### DateTime.fromMillisecondsSinceEpoch()
+
+```dart
+DateTime.fromMillisecondsSinceEpoch(
+  int millisecondsSinceEpoch, {
+  bool isUtc = false,
+})
+```
+
+根据给定的 [millisecondsSinceEpoch] 构造一个新的 [DateTime] 实例。
+
+如果 [isUtc] 为 false，则该日期处于本地时区。
+
+构造出的 [DateTime] 表示在给定时区（本地或 UTC）中，1970-01-01T00:00:00Z + [millisecondsSinceEpoch] 毫秒所对应的时间。
+
+```dart
+final newYearsDay =
+    DateTime.fromMillisecondsSinceEpoch(1641031200000, isUtc:true);
+print(newYearsDay); // 2022-01-01 10:00:00.000Z
+```
+
+### DateTime.fromMicrosecondsSinceEpoch()
+
+```dart
+DateTime.fromMicrosecondsSinceEpoch(
+  int microsecondsSinceEpoch, {
+  bool isUtc = false,
+})
+```
+
+根据给定的 [microsecondsSinceEpoch] 构造一个新的 [DateTime] 实例。
+
+如果 [isUtc] 为 false，则该日期处于本地时区。
+
+构造出的 [DateTime] 表示在给定时区（本地或 UTC）中，1970-01-01T00:00:00Z + [microsecondsSinceEpoch] 微秒所对应的时间。
+
+```dart
+final newYearsEve =
+    DateTime.fromMicrosecondsSinceEpoch(1640979000000000, isUtc:true);
+print(newYearsEve); // 2021-12-31 19:30:00.000Z
+```
+
+## 静态属性
+
+### 星期常量
+
+```dart
+static const int monday = 1;
+static const int tuesday = 2;
+static const int wednesday = 3;
+static const int thursday = 4;
+static const int friday = 5;
+static const int saturday = 6;
+static const int sunday = 7;
+static const int daysPerWeek = 7;
+```
+
+### 月份常量
+
+```dart
+static const int january = 1;
+static const int february = 2;
+static const int march = 3;
+static const int april = 4;
+static const int may = 5;
+static const int june = 6;
+static const int july = 7;
+static const int august = 8;
+static const int september = 9;
+static const int october = 10;
+static const int november = 11;
+static const int december = 12;
+static const int monthsPerYear = 12;
+```
+
+## 静态方法
 
 ### parse()
 
@@ -313,23 +269,23 @@ final mark = DateTime.timestamp();
 DateTime parse(String formattedString)
 ```
 
-Constructs a new [DateTime] instance based on [formattedString].
+根据 [formattedString] 构造一个新的 [DateTime] 实例。
 
-Throws a [FormatException] if the input string cannot be parsed.
+如果输入字符串无法解析，将抛出 [FormatException]。
 
-The function parses a subset of ISO 8601, which includes the subset accepted by RFC 3339.
+该函数解析 ISO 8601 的一个子集，其中包括 RFC 3339 所接受的子集。
 
-The accepted inputs are currently:
+目前可接受的输入包括：
 
-- A date: A signed four-to-six digit year, two digit month and two digit day, optionally separated by `-` characters. Examples: "19700101", "-0004-12-24", "81030-04-01".
-- An optional time part, separated from the date by either `T` or a space. The time part is a two digit hour, then optionally a two digit minutes value, then optionally a two digit seconds value, and then optionally a '.' or ',' followed by at least a one digit second fraction. The minutes and seconds may be separated from the previous parts by a ':'. Examples: "12", "12:30:24.124", "12:30:24,124", "123010.50".
-- An optional time-zone offset part, possibly separated from the previous by a space. The time zone is either 'z' or 'Z', or it is a signed two digit hour part and an optional two digit minute part. The sign must be either "+" or "-", and cannot be omitted. The minutes may be separated from the hours by a ':'. Examples: "Z", "-10", "+01:30", "+1130".
+- 日期：一个带符号的四到六位年份、两位月份和两位日期，可选地由 `-` 字符分隔。示例："19700101"、"-0004-12-24"、"81030-04-01"。
+- 一个可选的时间部分，与日期部分之间以 `T` 或空格分隔。时间部分为两位数的小时，随后可选地跟两位数的分钟值，再可选地跟两位数的秒值，之后可选地跟一个 `.` 或 `,`，后接至少一位数的秒的小数部分。分钟和秒可以用 `:` 与前面的部分分隔。示例："12"、"12:30:24.124"、"12:30:24,124"、"123010.50"。
+- 一个可选的时区偏移部分，可能与前面部分之间以空格分隔。时区可以是 'z' 或 'Z'，也可以是带符号的两位数小时部分和可选的两位数分钟部分。符号必须为 "+" 或 "-"，且不能省略。分钟部分可以用 `:` 与小时部分分隔。示例："Z"、"-10"、"+01:30"、"+1130"。
 
-This includes the output of both [toString] and [toIso8601String], which will be parsed back into a `DateTime` object with the same time as the original.
+这包括 [toString] 和 [toIso8601String] 的输出，它们都可以被解析回一个与原始时间相同的 `DateTime` 对象。
 
-The result is always in either local time or UTC. If a time zone offset other than UTC is specified, the time is converted to the equivalent UTC time.
+结果始终为本地时间或 UTC 时间。如果指定了非 UTC 的时区偏移，则该时间会被转换为等效的 UTC 时间。
 
-Examples of accepted strings:
+可接受字符串示例：
 
 - `"2012-02-27"`
 - `"2012-02-27 13:27:00"`
@@ -341,12 +297,12 @@ Examples of accepted strings:
 - `"+20120227"`
 - `"2012-02-27T14Z"`
 - `"2012-02-27T14+00:00"`
-- `"-123450101 00:00:00 Z"`: in the year -12345.
-- `"2002-02-27T14:00:00-0500"`: Same as `"2002-02-27T19:00:00Z"`
+- `"-123450101 00:00:00 Z"`：表示公元前 12345 年。
+- `"2002-02-27T14:00:00-0500"`：与 `"2002-02-27T19:00:00Z"` 相同。
 
-This method accepts out-of-range component values and interprets them as overflows into the next larger component. For example, "2020-01-42" will be parsed as 2020-02-11, because the last valid date in that month is 2020-01-31, so 42 days is interpreted as 31 days of that month plus 11 days into the next month.
+该方法接受超出范围的组件值，并将其解释为向下一个更大组件的溢出。例如，"2020-01-42" 将被解析为 2020-02-11，因为该月最后一个有效日期是 2020-01-31，所以 42 天被解释为该月的 31 天加上下个月的 11 天。
 
-To detect and reject invalid component values, use [DateFormat.parseStrict](https://pub.dev/documentation/intl/latest/intl/DateFormat/parseStrict.html) from the [intl](https://pub.dev/packages/intl) package.
+如需检测并拒绝无效的组件值，请使用 [intl](https://pub.dev/packages/intl) 包中的 [DateFormat.parseStrict](https://pub.dev/documentation/intl/latest/intl/DateFormat/parseStrict.html)。
 
 ### tryParse()
 
@@ -354,64 +310,218 @@ To detect and reject invalid component values, use [DateFormat.parseStrict](http
 DateTime? tryParse(String formattedString)
 ```
 
-Constructs a new [DateTime] instance based on [formattedString].
+根据 [formattedString] 构造一个新的 [DateTime] 实例。
 
-Works like [parse] except that this function returns `null` where [parse] would throw a [FormatException].
+其工作方式与 [parse] 类似，不同之处在于，当 [parse] 会抛出 [FormatException] 时，该函数会返回 `null`。
 
-### DateTime.fromMillisecondsSinceEpoch()
+## 属性
 
-```dart
-DateTime.fromMillisecondsSinceEpoch(int millisecondsSinceEpoch, {bool isUtc = false})
-```
-
-Constructs a new [DateTime] instance with the given [millisecondsSinceEpoch].
-
-If [isUtc] is false then the date is in the local time zone.
-
-The constructed [DateTime] represents 1970-01-01T00:00:00Z + [millisecondsSinceEpoch] ms in the given time zone (local or UTC).
+### isUtc
 
 ```dart
-final newYearsDay =
-    DateTime.fromMillisecondsSinceEpoch(1641031200000, isUtc:true);
-print(newYearsDay); // 2022-01-01 10:00:00.000Z
+bool isUtc
 ```
 
-### DateTime.fromMicrosecondsSinceEpoch()
+如果该 [DateTime] 设置为 UTC 时间，则为 true。
 
 ```dart
-DateTime.fromMicrosecondsSinceEpoch(int microsecondsSinceEpoch, {bool isUtc = false})
+final dDay = DateTime.utc(1944, 6, 6);
+print(dDay.isUtc); // true
+
+final local = DateTime(1944, 6, 6);
+print(local.isUtc); // false
 ```
 
-Constructs a new [DateTime] instance with the given [microsecondsSinceEpoch].
-
-If [isUtc] is false, then the date is in the local time zone.
-
-The constructed [DateTime] represents 1970-01-01T00:00:00Z + [microsecondsSinceEpoch] us in the given time zone (local or UTC).
+### millisecondsSinceEpoch
 
 ```dart
-final newYearsEve =
-    DateTime.fromMicrosecondsSinceEpoch(1640979000000000, isUtc:true);
-print(newYearsEve); // 2021-12-31 19:30:00.000Z
+int get millisecondsSinceEpoch
 ```
 
-### operator ==()
+自 "Unix 纪元" 1970-01-01T00:00:00Z（UTC）以来经过的毫秒数。
+
+该值与时区无关。
+
+该值与 Unix 纪元最多相距 8,640,000,000,000,000 毫秒（100,000,000 天）。换句话说：`millisecondsSinceEpoch.abs() <= 8640000000000000`。
+
+### microsecondsSinceEpoch
 
 ```dart
-bool operator ==(Object other)
+int get microsecondsSinceEpoch
 ```
 
-Whether [other] is a [DateTime] at the same moment and in the same time zone (UTC or local).
+自 "Unix 纪元" 1970-01-01T00:00:00Z（UTC）以来经过的微秒数。
+
+该值与时区无关。
+
+该值与 Unix 纪元最多相距 8,640,000,000,000,000,000 微秒（100,000,000 天）。换句话说：`microsecondsSinceEpoch.abs() <= 8640000000000000000`。
+
+请注意，该值并不总能容纳于 53 位（IEEE double 的位数）之内。在 Web JavaScript 平台上，对于距纪元足够远的 DateTime 值，可能存在舍入误差。接近纪元且不会出现舍入误差的年份范围大约为 1685 到 2254 年。
+
+### timeZoneName
 
 ```dart
-final dDayUtc = DateTime.utc(1944, 6, 6);
-final dDayLocal = dDayUtc.toLocal();
-
-// These two dates are at the same moment, but are in different zones.
-assert(dDayUtc != dDayLocal);
-print(dDayUtc != dDayLocal); // true
+String get timeZoneName
 ```
 
-See [isAtSameMomentAs] for a comparison that compares moments in time independently of their zones.
+时区名称。
+
+该值由操作系统提供，可能是缩写或全称。
+
+在浏览器或类 Unix 系统上，通常返回缩写形式，例如 "CET" 或 "CEST"。在 Windows 上则返回全称，例如 "Pacific Standard Time"。
+
+### timeZoneOffset
+
+```dart
+Duration get timeZoneOffset
+```
+
+时区偏移量，即本地时间与 UTC 之间的差值。
+
+对于 UTC 以东的时区，该偏移量为正值。
+
+请注意，JavaScript、Python 和 C 返回的是 UTC 与本地时间之间的差值。而 Java、C# 和 Ruby 返回的是本地时间与 UTC 之间的差值。
+
+例如，使用美国旧金山的本地时间：
+
+```dart
+final dateUS = DateTime.parse('2021-11-01 20:18:04Z').toLocal();
+print(dateUS); // 2021-11-01 13:18:04.000
+print(dateUS.timeZoneName); // PDT ( Pacific Daylight Time )
+print(dateUS.timeZoneOffset.inHours); // -7
+print(dateUS.timeZoneOffset.inMinutes); // -420
+```
+
+例如，使用澳大利亚堪培拉的本地时间：
+
+```dart
+final dateAus = DateTime.parse('2021-11-01 20:18:04Z').toLocal();
+print(dateAus); // 2021-11-02 07:18:04.000
+print(dateAus.timeZoneName); // AEDT ( Australian Eastern Daylight Time )
+print(dateAus.timeZoneOffset.inHours); // 11
+print(dateAus.timeZoneOffset.inMinutes); // 660
+```
+
+### year
+
+```dart
+int get year
+```
+
+年份。
+
+```dart
+final moonLanding = DateTime.parse('1969-07-20 20:18:04Z');
+print(moonLanding.year); // 1969
+```
+
+### month
+
+```dart
+int get month
+```
+
+月份，取值范围 `[1..12]`。
+
+```dart
+final moonLanding = DateTime.parse('1969-07-20 20:18:04Z');
+print(moonLanding.month); // 7
+assert(moonLanding.month == DateTime.july);
+```
+
+### day
+
+```dart
+int get day
+```
+
+月份中的日期，取值范围 `[1..31]`。
+
+```dart
+final moonLanding = DateTime.parse('1969-07-20 20:18:04Z');
+print(moonLanding.day); // 20
+```
+
+### hour
+
+```dart
+int get hour
+```
+
+一天中的小时数，以 24 小时制表示，取值范围 `[0..23]`。
+
+```dart
+final moonLanding = DateTime.parse('1969-07-20 20:18:04Z');
+print(moonLanding.hour); // 20
+```
+
+### minute
+
+```dart
+int get minute
+```
+
+分钟，取值范围 `[0...59]`。
+
+```dart
+final moonLanding = DateTime.parse('1969-07-20 20:18:04Z');
+print(moonLanding.minute); // 18
+```
+
+### second
+
+```dart
+int get second
+```
+
+秒，取值范围 `[0...59]`。
+
+```dart
+final moonLanding = DateTime.parse('1969-07-20 20:18:04Z');
+print(moonLanding.second); // 4
+```
+
+### millisecond
+
+```dart
+int get millisecond
+```
+
+毫秒，取值范围 `[0...999]`。
+
+```dart
+final date = DateTime.parse('1970-01-01 05:01:01.234567Z');
+print(date.millisecond); // 234
+```
+
+### microsecond
+
+```dart
+int get microsecond
+```
+
+微秒，取值范围 `[0...999]`。
+
+```dart
+final date = DateTime.parse('1970-01-01 05:01:01.234567Z');
+print(date.microsecond); // 567
+```
+
+### weekday
+
+```dart
+int get weekday
+```
+
+星期几，取值范围为 [monday] 到 [sunday]。
+
+按照 ISO 8601 的规定，一周从星期一开始，其值为 1。
+
+```dart
+final moonLanding = DateTime.parse('1969-07-20 20:18:04Z');
+print(moonLanding.weekday); // 7
+assert(moonLanding.weekday == DateTime.sunday);
+```
 
 ### hashCode
 
@@ -419,15 +529,17 @@ See [isAtSameMomentAs] for a comparison that compares moments in time independen
 int get hashCode
 ```
 
+## 方法
+
 ### isBefore()
 
 ```dart
 bool isBefore(DateTime other)
 ```
 
-Whether this [DateTime] occurs before [other].
+判断该 [DateTime] 是否发生在 [other] 之前。
 
-The comparison is independent of whether the time is in UTC or in the local time zone.
+该比较与时间是 UTC 还是本地时区无关。
 
 ```dart
 final now = DateTime.now();
@@ -449,9 +561,9 @@ print(!now.isBefore(now.toUtc())); // true
 bool isAfter(DateTime other)
 ```
 
-Whether this [DateTime] occurs after [other].
+判断该 [DateTime] 是否发生在 [other] 之后。
 
-The comparison is independent of whether the time is in UTC or in the local time zone.
+该比较与时间是 UTC 还是本地时区无关。
 
 ```dart
 final now = DateTime.now();
@@ -473,9 +585,9 @@ print(!now.isAfter(now.toUtc())); // true
 bool isAtSameMomentAs(DateTime other)
 ```
 
-Whether this [DateTime] occurs at the same moment as [other].
+判断该 [DateTime] 是否与 [other] 处于同一时刻。
 
-The comparison is independent of whether the time is in UTC or in the local time zone.
+该比较与时间是 UTC 还是本地时区无关。
 
 ```dart
 final now = DateTime.now();
@@ -497,13 +609,13 @@ print(now.isAtSameMomentAs(now.toUtc())); // true
 int compareTo(DateTime other)
 ```
 
-Compares this DateTime object to [other], returning zero if the values are equal.
+将该 DateTime 对象与 [other] 进行比较，若两者值相等，返回零。
 
-A [compareTo] function returns:
+[compareTo] 函数返回：
 
-- a negative value if this DateTime [isBefore] [other].
-- `0` if this DateTime [isAtSameMomentAs] [other], and
-- a positive value otherwise (when this DateTime [isAfter] [other]).
+- 若该 DateTime [isBefore] [other]，返回负值。
+- 若该 DateTime [isAtSameMomentAs] [other]，返回 `0`；
+- 否则（即该 DateTime [isAfter] [other] 时）返回正值。
 
 ```dart
 final now = DateTime.now();
@@ -522,9 +634,9 @@ print(now.compareTo(newDate)); // 0
 DateTime toLocal()
 ```
 
-Returns this DateTime value in the local time zone.
+以本地时区返回该 DateTime 值。
 
-Returns this [DateTime] if it is already in the local time zone. Otherwise this method is equivalent to:
+如果该 [DateTime] 已经处于本地时区，则直接返回该对象本身。否则，该方法等价于：
 
 ```dart template:expression
 DateTime.fromMicrosecondsSinceEpoch(microsecondsSinceEpoch,
@@ -537,9 +649,9 @@ DateTime.fromMicrosecondsSinceEpoch(microsecondsSinceEpoch,
 DateTime toUtc()
 ```
 
-Returns this DateTime value in the UTC time zone.
+以 UTC 时区返回该 DateTime 值。
 
-Returns this [DateTime] if it is already in UTC. Otherwise this method is equivalent to:
+如果该 [DateTime] 已经处于 UTC，则直接返回该对象本身。否则，该方法等价于：
 
 ```dart template:expression
 DateTime.fromMicrosecondsSinceEpoch(microsecondsSinceEpoch,
@@ -552,11 +664,11 @@ DateTime.fromMicrosecondsSinceEpoch(microsecondsSinceEpoch,
 String toString()
 ```
 
-Returns a human-readable string for this instance.
+返回该实例的人类可读字符串表示。
 
-The returned string is constructed for the time zone of this instance. The `toString()` method provides a simply formatted string. It does not support internationalized strings. Use the [intl](https://pub.dev/packages/intl) package at the pub shared packages repo.
+返回的字符串是针对该实例所在的时区构造的。`toString()` 方法提供一种简单的格式化字符串，不支持国际化字符串。请使用 pub 共享包仓库中的 [intl](https://pub.dev/packages/intl) 包。
 
-The resulting string can be parsed back using [parse].
+生成的字符串可以使用 [parse] 重新解析。
 
 ### toIso8601String()
 
@@ -564,20 +676,20 @@ The resulting string can be parsed back using [parse].
 String toIso8601String()
 ```
 
-Returns an ISO-8601 full-precision extended format representation.
+返回 ISO-8601 全精度扩展格式表示。
 
-The format is `yyyy-MM-ddTHH:mm:ss.mmmuuuZ` for UTC time, and `yyyy-MM-ddTHH:mm:ss.mmmuuu` (no trailing "Z") for local/non-UTC time, where:
+对于 UTC 时间，格式为 `yyyy-MM-ddTHH:mm:ss.mmmuuuZ`；对于本地/非 UTC 时间，格式为 `yyyy-MM-ddTHH:mm:ss.mmmuuu`（不带末尾的 "Z"），其中：
 
-- `yyyy` is a, possibly negative, four digit representation of the year, if the year is in the range -9999 to 9999, otherwise it is a signed six digit representation of the year.
-- `MM` is the month in the range 01 to 12,
-- `dd` is the day of the month in the range 01 to 31,
-- `HH` are hours in the range 00 to 23,
-- `mm` are minutes in the range 00 to 59,
-- `ss` are seconds in the range 00 to 59 (no leap seconds),
-- `mmm` are milliseconds in the range 000 to 999, and
-- `uuu` are microseconds in the range 001 to 999. If [microsecond] equals 0, then this part is omitted.
+- `yyyy` 是年份的四位数表示（可能为负数），如果年份在 -9999 到 9999 范围内；否则为带符号的六位数表示。
+- `MM` 是月份，取值范围为 01 到 12，
+- `dd` 是月份中的日期，取值范围为 01 到 31，
+- `HH` 是小时，取值范围为 00 到 23，
+- `mm` 是分钟，取值范围为 00 到 59，
+- `ss` 是秒，取值范围为 00 到 59（不含闰秒），
+- `mmm` 是毫秒，取值范围为 000 到 999，
+- `uuu` 是微秒，取值范围为 001 到 999。如果 [microsecond] 等于 0，则省略该部分。
 
-The resulting string can be parsed back using [parse].
+生成的字符串可以使用 [parse] 重新解析。
 
 ```dart
 final moonLanding = DateTime.utc(1969, 7, 20, 20, 18, 04);
@@ -591,16 +703,16 @@ print(isoDate); // 1969-07-20T20:18:04.000Z
 DateTime add(Duration duration)
 ```
 
-Returns a new [DateTime] instance with [duration] added to this [DateTime].
+返回一个新的 [DateTime] 实例，该实例是在该 [DateTime] 的基础上加上 [duration] 得到的。
 
 ```dart
 final today = DateTime.now();
 final fiftyDaysFromNow = today.add(const Duration(days: 50));
 ```
 
-Notice that the duration being added is actually 50 _ 24 _ 60 \* 60 seconds. If the resulting `DateTime` has a different daylight saving offset than `this`, then the result won't have the same time-of-day as `this`, and may not even hit the calendar date 50 days later.
+请注意，所加上的时间跨度实际上是 50 _ 24 _ 60 \* 60 秒。如果得到的 `DateTime` 与 `this` 的夏令时偏移不同，那么结果将不会与 `this` 具有相同的时刻，甚至可能不会正好落在 50 天后的那个日历日期上。
 
-Be careful when working with dates in local time.
+在处理本地时间的日期时请务必谨慎。
 
 ### subtract()
 
@@ -608,16 +720,16 @@ Be careful when working with dates in local time.
 DateTime subtract(Duration duration)
 ```
 
-Returns a new [DateTime] instance with [duration] subtracted from this [DateTime].
+返回一个新的 [DateTime] 实例，该实例是在该 [DateTime] 的基础上减去 [duration] 得到的。
 
 ```dart
 final today = DateTime.now();
 final fiftyDaysAgo = today.subtract(const Duration(days: 50));
 ```
 
-Notice that the duration being subtracted is actually 50 _ 24 _ 60 \* 60 seconds. If the resulting `DateTime` has a different daylight saving offset than `this`, then the result won't have the same time-of-day as `this`, and may not even hit the calendar date 50 days earlier.
+请注意，所减去的时间跨度实际上是 50 _ 24 _ 60 \* 60 秒。如果得到的 `DateTime` 与 `this` 的夏令时偏移不同，那么结果将不会与 `this` 具有相同的时刻，甚至可能不会正好落在 50 天前的那个日历日期上。
 
-Be careful when working with dates in local time.
+在处理本地时间的日期时请务必谨慎。
 
 ### difference()
 
@@ -625,9 +737,9 @@ Be careful when working with dates in local time.
 Duration difference(DateTime other)
 ```
 
-Returns a [Duration] with the difference when subtracting [other] from this [DateTime].
+返回一个 [Duration]，表示用该 [DateTime] 减去 [other] 所得到的差值。
 
-The returned [Duration] will be negative if [other] occurs after this [DateTime].
+如果 [other] 发生在该 [DateTime] 之后，则返回的 [Duration] 为负值。
 
 ```dart
 final berlinWallFell = DateTime.utc(1989, DateTime.november, 9);
@@ -637,9 +749,9 @@ final difference = berlinWallFell.difference(dDay);
 print(difference.inDays); // 16592
 ```
 
-The difference is measured in seconds and fractions of seconds. The difference above counts the number of fractional seconds between midnight at the beginning of those dates. If the dates above had been in local time, not UTC, then the difference between two midnights may not be a multiple of 24 hours due to daylight saving differences.
+该差值以秒及秒的小数部分来度量。上述差值计算的是这些日期开始时（即午夜）之间相隔的小数秒数。如果上述日期采用的是本地时间而非 UTC，那么由于夏令时的差异，两个午夜之间的差值可能不是 24 小时的整数倍。
 
-For example, in Australia, similar code using local time instead of UTC:
+例如，在澳大利亚，使用本地时间而非 UTC 的类似代码：
 
 ```dart
 final berlinWallFell = DateTime(1989, DateTime.november, 9);
@@ -649,198 +761,28 @@ print(difference.inDays); // 16591
 assert(difference.inDays == 16592);
 ```
 
-will fail because the difference is actually 16591 days and 23 hours, and [Duration.inDays] only returns the number of whole days.
+这段代码会失败，因为实际差值为 16591 天 23 小时，而 [Duration.inDays] 只返回整天数。
 
-### millisecondsSinceEpoch
+## 运算符
 
-```dart
-int get millisecondsSinceEpoch
-```
-
-The number of milliseconds since the "Unix epoch" 1970-01-01T00:00:00Z (UTC).
-
-This value is independent of the time zone.
-
-This value is at most 8,640,000,000,000,000ms (100,000,000 days) from the Unix epoch. In other words: `millisecondsSinceEpoch.abs() <= 8640000000000000`.
-
-### microsecondsSinceEpoch
+### operator ==()
 
 ```dart
-int get microsecondsSinceEpoch
+bool operator ==(Object other)
 ```
 
-The number of microseconds since the "Unix epoch" 1970-01-01T00:00:00Z (UTC).
-
-This value is independent of the time zone.
-
-This value is at most 8,640,000,000,000,000,000us (100,000,000 days) from the Unix epoch. In other words: `microsecondsSinceEpoch.abs() <= 8640000000000000000`.
-
-Note that this value does not always fit into 53 bits (the size of a IEEE double). On the web JavaScript platforms, there may be a rounding error for DateTime values sufficiently far from the epoch. The year range close to the epoch to avoid rounding is approximately 1685..2254.
-
-### timeZoneName
+判断 [other] 是否是与该对象处于同一时刻且位于同一时区（UTC 或本地）的 [DateTime]。
 
 ```dart
-String get timeZoneName
+final dDayUtc = DateTime.utc(1944, 6, 6);
+final dDayLocal = dDayUtc.toLocal();
+
+// These two dates are at the same moment, but are in different zones.
+assert(dDayUtc != dDayLocal);
+print(dDayUtc != dDayLocal); // true
 ```
 
-The time zone name.
-
-This value is provided by the operating system and may be an abbreviation or a full name.
-
-In the browser or on Unix-like systems commonly returns abbreviations, such as "CET" or "CEST". On Windows returns the full name, for example "Pacific Standard Time".
-
-### timeZoneOffset
-
-```dart
-Duration get timeZoneOffset
-```
-
-The time zone offset, which is the difference between local time and UTC.
-
-The offset is positive for time zones east of UTC.
-
-Note, that JavaScript, Python and C return the difference between UTC and local time. Java, C# and Ruby return the difference between local time and UTC.
-
-For example, using local time in San Francisco, United States:
-
-```dart
-final dateUS = DateTime.parse('2021-11-01 20:18:04Z').toLocal();
-print(dateUS); // 2021-11-01 13:18:04.000
-print(dateUS.timeZoneName); // PDT ( Pacific Daylight Time )
-print(dateUS.timeZoneOffset.inHours); // -7
-print(dateUS.timeZoneOffset.inMinutes); // -420
-```
-
-For example, using local time in Canberra, Australia:
-
-```dart
-final dateAus = DateTime.parse('2021-11-01 20:18:04Z').toLocal();
-print(dateAus); // 2021-11-02 07:18:04.000
-print(dateAus.timeZoneName); // AEDT ( Australian Eastern Daylight Time )
-print(dateAus.timeZoneOffset.inHours); // 11
-print(dateAus.timeZoneOffset.inMinutes); // 660
-```
-
-### year
-
-```dart
-int get year
-```
-
-The year.
-
-```dart
-final moonLanding = DateTime.parse('1969-07-20 20:18:04Z');
-print(moonLanding.year); // 1969
-```
-
-### month
-
-```dart
-int get month
-```
-
-The month `[1..12]`.
-
-```dart
-final moonLanding = DateTime.parse('1969-07-20 20:18:04Z');
-print(moonLanding.month); // 7
-assert(moonLanding.month == DateTime.july);
-```
-
-### day
-
-```dart
-int get day
-```
-
-The day of the month `[1..31]`.
-
-```dart
-final moonLanding = DateTime.parse('1969-07-20 20:18:04Z');
-print(moonLanding.day); // 20
-```
-
-### hour
-
-```dart
-int get hour
-```
-
-The hour of the day, expressed as in a 24-hour clock `[0..23]`.
-
-```dart
-final moonLanding = DateTime.parse('1969-07-20 20:18:04Z');
-print(moonLanding.hour); // 20
-```
-
-### minute
-
-```dart
-int get minute
-```
-
-The minute `[0...59]`.
-
-```dart
-final moonLanding = DateTime.parse('1969-07-20 20:18:04Z');
-print(moonLanding.minute); // 18
-```
-
-### second
-
-```dart
-int get second
-```
-
-The second `[0...59]`.
-
-```dart
-final moonLanding = DateTime.parse('1969-07-20 20:18:04Z');
-print(moonLanding.second); // 4
-```
-
-### millisecond
-
-```dart
-int get millisecond
-```
-
-The millisecond `[0...999]`.
-
-```dart
-final date = DateTime.parse('1970-01-01 05:01:01.234567Z');
-print(date.millisecond); // 234
-```
-
-### microsecond
-
-```dart
-int get microsecond
-```
-
-The microsecond `[0...999]`.
-
-```dart
-final date = DateTime.parse('1970-01-01 05:01:01.234567Z');
-print(date.microsecond); // 567
-```
-
-### weekday
-
-```dart
-int get weekday
-```
-
-The day of the week [monday]..[sunday].
-
-In accordance with ISO 8601 a week starts with Monday, which has the value 1.
-
-```dart
-final moonLanding = DateTime.parse('1969-07-20 20:18:04Z');
-print(moonLanding.weekday); // 7
-assert(moonLanding.weekday == DateTime.sunday);
-```
+如需比较两个时刻本身而不考虑其所在时区，请参阅 [isAtSameMomentAs]。
 
 # DateTimeCopyWith
 
@@ -848,19 +790,29 @@ assert(moonLanding.weekday == DateTime.sunday);
 extension DateTimeCopyWith on DateTime {}
 ```
 
-Adds [copyWith] method to [DateTime] objects.
+为 [DateTime] 对象添加 [copyWith] 方法。
 
 ### copyWith()
 
 ```dart
-DateTime copyWith({int? year, int? month, int? day, int? hour, int? minute, int? second, int? millisecond, int? microsecond, bool? isUtc})
+DateTime copyWith({
+  int? year,
+  int? month,
+  int? day,
+  int? hour,
+  int? minute,
+  int? second,
+  int? millisecond,
+  int? microsecond,
+  bool? isUtc,
+})
 ```
 
-Creates a new [DateTime] from this one by updating individual properties.
+通过更新各个属性，基于当前 [DateTime] 创建一个新的 [DateTime]。
 
-The [copyWith] method creates a new [DateTime] object with values for the properties [DateTime.year], [DateTime.hour], etc, provided by similarly named arguments, or using the existing value of the property if no argument, or `null`, is provided.
+[copyWith] 方法会创建一个新的 [DateTime] 对象，其 [DateTime.year]、[DateTime.hour] 等属性的值，由对应名称的参数提供；如果未提供参数或参数为 `null`，则使用该属性的现有值。
 
-Example:
+示例：
 
 ```dart
 final now = DateTime.now();
@@ -868,6 +820,6 @@ final sameTimeOnMoonLandingDay =
     now.copyWith(year: 1969, month: 07, day: 20);
 ```
 
-Like for the [DateTime] and [DateTime.utc] constructors, which this operation uses to create the new value, property values are allowed to overflow or underflow the range of the property (like a [month] outside the 1 to 12 range), which can affect the more significant properties (for example, a month of 13 will result in the month of January of the next year.)
+与 [DateTime] 和 [DateTime.utc] 构造函数（该操作正是使用它们来创建新值）一样，允许属性值超出其范围（例如 [month] 超出 1 到 12 的范围），这可能会影响更高位的属性（例如，月份为 13 会导致结果为次年的 1 月）。
 
-Notice also that if the result is a local-time DateTime, seasonal time-zone adjustments (daylight saving) can cause some combinations of dates, hours and minutes to not exist, or to exist more than once. In the former case, a corresponding time in one of the two adjacent time zones is used instead. In the latter, one of the two options is chosen.
+还需注意，如果结果是本地时间的 DateTime，季节性时区调整（夏令时）可能导致某些日期、小时和分钟的组合不存在，或存在多次。前一种情况下，会使用两个相邻时区中对应的时间代替；后一种情况下，则会从两个选项中选择其一。
