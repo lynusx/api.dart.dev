@@ -95,10 +95,18 @@ print(letters); // {}
 - [LinkedHashSet] objects stored based on insertion order.
 - [SplayTreeSet] iterates the objects in sorted order.
 
+
+
+## 构造函数
+
 ### HashSet()
 
 ```dart
-HashSet({bool Function(E, E)? equals, int Function(E)? hashCode, bool Function(dynamic)? isValidKey})
+HashSet<E>({
+  bool equals( E, E )?,
+  int hashCode( E )?,
+  bool isValidKey( dynamic )?,
+})
 ```
 
 Create a hash set using the provided [equals] as equality.
@@ -125,7 +133,7 @@ Likewise, if `equals` is [identical], `hashCode` is [identityHashCode] and `isVa
 ### HashSet.identity()
 
 ```dart
-HashSet.identity()
+HashSet<E>.identity()
 ```
 
 Creates an unordered identity-based set.
@@ -139,7 +147,7 @@ HashSet<E>(equals: identical, hashCode: identityHashCode)
 ### HashSet.from()
 
 ```dart
-HashSet.from(Iterable<dynamic> elements)
+HashSet<E>.from( Iterable elements )
 ```
 
 Create a hash set containing all [elements].
@@ -165,7 +173,7 @@ print(hashSetFrom); // fx {20, 10, 30}
 ### HashSet.of()
 
 ```dart
-HashSet.of(Iterable<E> elements)
+HashSet<E>.of( Iterable<E> elements )
 ```
 
 Create a hash set containing all [elements].
@@ -177,6 +185,8 @@ final baseSet = <int>{1, 2, 3};
 final hashSetOf = HashSet<num>.of(baseSet);
 print(hashSetOf); // fx {3, 1, 2}
 ```
+
+## 属性
 
 ### iterator
 

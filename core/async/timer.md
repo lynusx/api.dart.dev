@@ -26,6 +26,10 @@ See also:
 
 - [Stopwatch] for measuring elapsed time.
 
+
+
+## 构造函数
+
 ### Timer()
 
 ```dart
@@ -79,6 +83,8 @@ Timer.periodic(const Duration(seconds: 2), (timer) {
 // "Cancel timer"
 ```
 
+## 静态方法
+
 ### run()
 
 ```dart
@@ -95,24 +101,7 @@ Example:
 Timer.run(() => print('timer run'));
 ```
 
-### cancel()
-
-```dart
-void cancel()
-```
-
-Cancels the timer.
-
-Once a [Timer] has been canceled, the callback function will not be called by the timer. Calling [cancel] more than once on a [Timer] is allowed, and will have no further effect.
-
-Example:
-
-```dart
-final timer =
-    Timer(const Duration(seconds: 5), () => print('Timer finished'));
-// Cancel timer, callback never called.
-timer.cancel();
-```
+## 属性
 
 ### tick
 
@@ -157,3 +146,24 @@ Returns whether the timer is still active.
 A non-periodic timer is active if the callback has not been executed, and the timer has not been canceled.
 
 A periodic timer is active if it has not been canceled.
+
+## 方法
+
+### cancel()
+
+```dart
+void cancel()
+```
+
+Cancels the timer.
+
+Once a [Timer] has been canceled, the callback function will not be called by the timer. Calling [cancel] more than once on a [Timer] is allowed, and will have no further effect.
+
+Example:
+
+```dart
+final timer =
+    Timer(const Duration(seconds: 5), () => print('Timer finished'));
+// Cancel timer, callback never called.
+timer.cancel();
+```

@@ -43,16 +43,12 @@ querySelector('#myButton')!.onClick.forEach((_) => print('Click.'));
 
 ## Other resources
 
-- The [dart:async section of the library tour][asynchronous-programming]: A brief overview of asynchronous programming.
+- The [dart:async section of the library tour](https://dart.dev/guides/libraries/library-tour#dartasync---asynchronous-programming): A brief overview of asynchronous programming.
 
-- [Use Future-Based APIs][futures-tutorial]: A closer look at Futures and how to use them to write asynchronous Dart code.
+- [Use Future-Based APIs](https://dart.dev/codelabs/async-await): A closer look at Futures and how to use them to write asynchronous Dart code.
 
-- [Futures and Error Handling][futures-error-handling]: Everything you wanted to know about handling errors and exceptions when working with Futures (but were afraid to ask).
+- [Futures and Error Handling](https://dart.dev/guides/libraries/futures-error-handling): Everything you wanted to know about handling errors and exceptions when working with Futures (but were afraid to ask).
 
 - [The Event Loop and Dart](https://dart.dev/articles/event-loop/): Learn how Dart handles the event queue and microtask queue, so you can write better asynchronous code with fewer surprises.
 
-- [test package: Asynchronous Tests][test-readme]: How to test asynchronous code.
-
-[asynchronous-programming]: https://dart.dev/guides/libraries/library-tour#dartasync---asynchronous-programming [futures-tutorial]: https://dart.dev/codelabs/async-await [futures-error-handling]: https://dart.dev/guides/libraries/futures-error-handling [test-readme]: https://pub.dev/packages/test
-
-{@category Core}
+- [test package: Asynchronous Tests](https://pub.dev/packages/test): How to test asynchronous code.

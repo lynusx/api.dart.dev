@@ -110,10 +110,18 @@ print(planetsByDiameter.isEmpty); // true
 - [HashMap] is unordered (the order of iteration is not guaranteed).
 - [SplayTreeMap] iterates the keys in sorted order.
 
+
+
+## 构造函数
+
 ### LinkedHashMap()
 
 ```dart
-LinkedHashMap({bool Function(K, K)? equals, int Function(K)? hashCode, bool Function(dynamic)? isValidKey})
+LinkedHashMap<K, V>({
+  bool equals( K, K )?,
+  int hashCode( K )?,
+  bool isValidKey( dynamic )?,
+})
 ```
 
 Creates an insertion-ordered hash-table based [Map].
@@ -144,7 +152,7 @@ Likewise, if `equals` is [identical], `hashCode` is [identityHashCode] and `isVa
 ### LinkedHashMap.identity()
 
 ```dart
-LinkedHashMap.identity()
+LinkedHashMap<K, V>.identity()
 ```
 
 Creates an insertion-ordered identity-based map.
@@ -159,7 +167,7 @@ LinkedHashMap<K, V>(equals: identical,
 ### LinkedHashMap.from()
 
 ```dart
-LinkedHashMap.from(Map<dynamic, dynamic> other)
+LinkedHashMap<K, V>.from(Map other )
 ```
 
 Creates a [LinkedHashMap] that contains all key value pairs of [other].
@@ -175,7 +183,7 @@ print(fromBaseMap); // {1: A, 2: B, 3: C}
 ### LinkedHashMap.of()
 
 ```dart
-LinkedHashMap.of(Map<K, V> other)
+LinkedHashMap<K, V>.of(Map<K, V> other )
 ```
 
 Creates a [LinkedHashMap] that contains all key value pairs of [other]. Example:
@@ -189,7 +197,11 @@ print(mapOf); // {3: A, 2: B, 1: C, 4: D}
 ### LinkedHashMap.fromIterable()
 
 ```dart
-LinkedHashMap.fromIterable(Iterable iterable, {K Function(dynamic element)? key, V Function(dynamic element)? value})
+LinkedHashMap<K, V>.fromIterable(
+  Iterable iterable, {
+  K key( dynamic element )?,
+  V value( dynamic element )?,
+})
 ```
 
 Creates a [LinkedHashMap] where the keys and values are computed from the [iterable].
@@ -210,7 +222,7 @@ print(mapFromIterable); // {11: 121, 12: 144, 13: 169, 14: 196}
 ### LinkedHashMap.fromIterables()
 
 ```dart
-LinkedHashMap.fromIterables(Iterable<K> keys, Iterable<V> values)
+LinkedHashMap<K, V>.fromIterables(Iterable<K> keys, Iterable<V> values)
 ```
 
 Creates a [LinkedHashMap] associating the given [keys] to [values].
@@ -232,7 +244,7 @@ print(mapFromIterables);
 ### LinkedHashMap.fromEntries()
 
 ```dart
-LinkedHashMap.fromEntries(Iterable<MapEntry<K, V>> entries)
+LinkedHashMap<K, V>.fromEntries(Iterable<MapEntry<K, V>> entries)
 ```
 
 Creates a [LinkedHashMap] containing the entries of [entries].

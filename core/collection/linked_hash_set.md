@@ -98,10 +98,18 @@ print(planets); // {}
 - [HashSet] the order of the objects in the iteration is not guaranteed.
 - [SplayTreeSet] iterates the objects in sorted order.
 
+
+
+## 构造函数
+
 ### LinkedHashSet()
 
 ```dart
-LinkedHashSet({bool Function(E, E)? equals, int Function(E)? hashCode, bool Function(dynamic)? isValidKey})
+LinkedHashSet<E>({
+  bool equals( E, E )?,
+  int hashCode( E )?,
+  bool isValidKey( dynamic )?,
+})
 ```
 
 Create an insertion-ordered hash set using the provided [equals] and [hashCode].
@@ -126,7 +134,7 @@ Likewise, if `equals` is [identical], `hashCode` is [identityHashCode] and `isVa
 ### LinkedHashSet.identity()
 
 ```dart
-LinkedHashSet.identity()
+LinkedHashSet<E>.identity()
 ```
 
 Creates an insertion-ordered identity-based set.
@@ -140,7 +148,7 @@ LinkedHashSet<E>(equals: identical, hashCode: identityHashCode)
 ### LinkedHashSet.from()
 
 ```dart
-LinkedHashSet.from(Iterable<dynamic> elements)
+LinkedHashSet<E>.from(Iterable elements)
 ```
 
 Create a linked hash set containing all [elements].
@@ -166,7 +174,7 @@ print(setFrom); // {10, 20, 30}
 ### LinkedHashSet.of()
 
 ```dart
-LinkedHashSet.of(Iterable<E> elements)
+LinkedHashSet<E>.of(Iterable<E> elements)
 ```
 
 Create a linked hash set from [elements].
@@ -179,6 +187,18 @@ final setOf = LinkedHashSet<num>.of(baseSet);
 print(setOf); // {1, 2, 3}
 ```
 
+## 属性
+
+### iterator
+
+```dart
+Iterator<E> get iterator
+```
+
+Provides an iterator that iterates over the elements in insertion order.
+
+## 方法
+
 ### forEach()
 
 ```dart
@@ -188,11 +208,3 @@ void forEach(void action(E element))
 Executes a function on each element of the set.
 
 The elements are iterated in insertion order.
-
-### iterator
-
-```dart
-Iterator<E> get iterator
-```
-
-Provides an iterator that iterates over the elements in insertion order.

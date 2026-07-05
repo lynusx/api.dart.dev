@@ -55,16 +55,20 @@ Stream subscriptions always respect "pause" requests. If necessary they need to 
 
 The default implementation of [isBroadcast] returns false. A broadcast stream inheriting from [Stream] must override [isBroadcast] to return `true` if it wants to signal that it behaves like a broadcast stream.
 
+## 构造函数
+
 ### Stream()
 
 ```dart
-Stream()
+const Stream<T>()
 ```
 
 ### Stream.empty()
 
 ```dart
-Stream.empty({bool broadcast})
+const Stream<T>.empty({
+	@Since.new("3.2") bool broadcast,
+})
 ```
 
 Creates an empty broadcast stream.
@@ -92,7 +96,7 @@ The stream can be listened to more than once, whether it reports itself as broad
 ### Stream.value()
 
 ```dart
-Stream.value(T value)
+Stream<T>.value( T value )
 ```
 
 Creates a stream which emits a single data event before closing.
@@ -115,7 +119,7 @@ The returned stream is effectively equivalent to one created by `(() async* { yi
 ### Stream.error()
 
 ```dart
-Stream.error(Object error, [StackTrace? stackTrace])
+Stream<T>.error(Object error, [StackTrace? stackTrace])
 ```
 
 Creates a stream which emits a single error event before completing.
@@ -142,7 +146,7 @@ The returned stream is effectively equivalent to one created by `Future<T>.error
 ### Stream.fromFuture()
 
 ```dart
-Stream.fromFuture(Future<T> future)
+Stream<T>.fromFuture(Future<T> future)
 ```
 
 Creates a new single-subscription stream from the future.
@@ -169,7 +173,7 @@ stream.listen(print,
 ### Stream.fromFutures()
 
 ```dart
-Stream.fromFutures(Iterable<Future<T>> futures)
+Stream<T>.fromFutures(Iterable<Future<T>> futures)
 ```
 
 Create a single-subscription stream from a group of futures.
@@ -207,7 +211,7 @@ stream.listen(print, onDone: () => print('Done'), onError: print);
 ### Stream.fromIterable()
 
 ```dart
-Stream.fromIterable(Iterable<T> elements)
+Stream<T>.fromIterable(Iterable<T> elements)
 ```
 
 Creates a stream that gets its data from [elements].
@@ -228,7 +232,10 @@ final stream = Stream.fromIterable(numbers);
 ### Stream.multi()
 
 ```dart
-Stream.multi(void Function(MultiStreamController<T>) onListen, {bool isBroadcast = false})
+Stream<T>.multi(
+  void Function(MultiStreamController<T>) onListen, {
+  bool isBroadcast = false
+})
 ```
 
 Creates a multi-subscription stream.
@@ -281,7 +288,10 @@ extension StreamRepeatLatestExtension<T extends Object> on Stream<T> {
 ### Stream.periodic()
 
 ```dart
-Stream.periodic(Duration period, [T computation(int computationCount)])
+Stream<T>.periodic(
+  Duration period, [
+  T Function(int)? computation
+])
 ```
 
 Creates a stream that repeatedly emits events at [period] intervals.
@@ -307,7 +317,10 @@ stream.forEach(print); // Outputs event values 0,1,4,9,16.
 ### Stream.eventTransformed()
 
 ```dart
-Stream.eventTransformed(Stream<dynamic> source, EventSink<dynamic> mapSink(EventSink<T> sink))
+Stream<T>.eventTransformed(
+  Stream<dynamic> source, 
+  EventSink<dynamic> Function(EventSink<T>) mapSink
+)
 ```
 
 Creates a stream where all events of an existing stream are piped through a sink-transformation.
@@ -344,6 +357,8 @@ stringStream.transform(DuplicationTransformer());
 
 The resulting stream is a broadcast stream if [source] is.
 
+## 静态方法
+
 ### castFrom()
 
 ```dart
@@ -356,6 +371,8 @@ This allows [source] to be used at the new type, but at run-time it must satisfy
 
 Data events created by the source stream must also be instances of [T].
 
+## 属性
+
 ### isBroadcast
 
 ```dart
@@ -364,10 +381,85 @@ bool get isBroadcast
 
 Whether this stream is a broadcast stream.
 
+### length
+
+```dart
+Future<int> get length
+```
+
+The number of elements in this stream.
+
+Waits for all elements of this stream. When this stream ends, the returned future is completed with the number of elements.
+
+If this stream emits an error, the returned future is completed with that error, and processing stops.
+
+This operation listens to this stream, and a non-broadcast stream cannot be reused after finding its length.
+
+### isEmpty
+
+```dart
+Future<bool> get isEmpty
+```
+
+Whether this stream contains any elements.
+
+Waits for the first element of this stream, then completes the returned future with `false`. If this stream ends without emitting any elements, the returned future is completed with `true`.
+
+If the first event is an error, the returned future is completed with that error.
+
+This operation listens to this stream, and a non-broadcast stream cannot be reused after checking whether it is empty.
+
+### first
+
+```dart
+Future<T> get first
+```
+
+The first element of this stream.
+
+Stops listening to this stream after the first element has been received.
+
+Internally the method cancels its subscription after the first element. This means that single-subscription (non-broadcast) streams are closed and cannot be reused after a call to this getter.
+
+If an error event occurs before the first data event, the returned future is completed with that error.
+
+If this stream is empty (a done event occurs before the first data event), the returned future completes with an error.
+
+Except for the type of the error, this method is equivalent to `this.elementAt(0)`.
+
+### last
+
+```dart
+Future<T> get last
+```
+
+The last element of this stream.
+
+If this stream emits an error event, the returned future is completed with that error and processing stops.
+
+If this stream is empty (the done event is the first event), the returned future completes with an error.
+
+### single
+
+```dart
+Future<T> get single
+```
+
+The single element of this stream.
+
+If this stream emits an error event, the returned future is completed with that error and processing stops.
+
+If this [Stream] is empty or has more than one element, the returned future completes with an error.
+
+## 方法
+
 ### asBroadcastStream()
 
 ```dart
-Stream<T> asBroadcastStream({void onListen(StreamSubscription<T> subscription), void onCancel(StreamSubscription<T> subscription)})
+Stream<T> asBroadcastStream({
+  void Function(StreamSubscription<T>)? onListen, 
+  void Function(StreamSubscription<T>)? onCancel
+})
 ```
 
 Returns a multi-subscription stream that produces the same events as this.
@@ -431,7 +523,12 @@ print(await broadcastStream.first); // "Stream resumed"
 ### listen()
 
 ```dart
-StreamSubscription<T> listen(void onData(T event), {Function? onError, void onDone(), bool? cancelOnError})
+StreamSubscription<T> listen(
+  void onData(T event), {
+  Function? onError, 
+  void onDone(), 
+  bool? cancelOnError
+})
 ```
 
 Adds a subscription to this stream.
@@ -545,7 +642,10 @@ The returned stream is a broadcast stream if this stream is.
 ### handleError()
 
 ```dart
-Stream<T> handleError(Function onError, {bool test(dynamic error)})
+Stream<T> handleError(
+  Function onError, {
+  bool test(dynamic error)
+})
 ```
 
 Creates a wrapper Stream that intercepts some errors from this stream.
@@ -653,7 +753,10 @@ print(result); // 28
 ### fold()
 
 ```dart
-Future<S> fold<S>(S initialValue, S combine(S previous, T element))
+Future<S> fold<S>(
+  S initialValue, 
+  S combine(S previous, T element)
+)
 ```
 
 Combines a sequence of values by repeatedly applying [combine].
@@ -774,34 +877,6 @@ final result =
 
 print(result); // true
 ```
-
-### length
-
-```dart
-Future<int> get length
-```
-
-The number of elements in this stream.
-
-Waits for all elements of this stream. When this stream ends, the returned future is completed with the number of elements.
-
-If this stream emits an error, the returned future is completed with that error, and processing stops.
-
-This operation listens to this stream, and a non-broadcast stream cannot be reused after finding its length.
-
-### isEmpty
-
-```dart
-Future<bool> get isEmpty
-```
-
-Whether this stream contains any elements.
-
-Waits for the first element of this stream, then completes the returned future with `false`. If this stream ends without emitting any elements, the returned future is completed with `true`.
-
-If the first event is an error, the returned future is completed with that error.
-
-This operation listens to this stream, and a non-broadcast stream cannot be reused after checking whether it is empty.
 
 ### cast()
 
@@ -983,59 +1058,20 @@ final stream = Stream.fromIterable([2, 6, 6, 8, 12, 8, 8, 2]).distinct();
 stream.forEach(print); // Outputs events: 2,6,8,12,8,2.
 ```
 
-### first
-
-```dart
-Future<T> get first
-```
-
-The first element of this stream.
-
-Stops listening to this stream after the first element has been received.
-
-Internally the method cancels its subscription after the first element. This means that single-subscription (non-broadcast) streams are closed and cannot be reused after a call to this getter.
-
-If an error event occurs before the first data event, the returned future is completed with that error.
-
-If this stream is empty (a done event occurs before the first data event), the returned future completes with an error.
-
-Except for the type of the error, this method is equivalent to `this.elementAt(0)`.
-
-### last
-
-```dart
-Future<T> get last
-```
-
-The last element of this stream.
-
-If this stream emits an error event, the returned future is completed with that error and processing stops.
-
-If this stream is empty (the done event is the first event), the returned future completes with an error.
-
-### single
-
-```dart
-Future<T> get single
-```
-
-The single element of this stream.
-
-If this stream emits an error event, the returned future is completed with that error and processing stops.
-
-If this [Stream] is empty or has more than one element, the returned future completes with an error.
-
 ### firstWhere()
 
 ```dart
-Future<T> firstWhere(bool test(T element), {T orElse()})
+Future<T> firstWhere(
+  bool test(T element), {
+  T orElse()
+})
 ```
 
 Finds the first element of this stream matching [test].
 
 Returns a future that is completed with the first element of this stream for which [test] returns `true`.
 
-{@template stream_where_or_else} If no such element is found before this stream is done, and an [orElse] function is provided, the result of calling [orElse] becomes the value of the future. If [orElse] throws, the returned future is completed with that error. {@endtemplate}
+If no such element is found before this stream is done, and an [orElse] function is provided, the result of calling [orElse] becomes the value of the future. If [orElse] throws, the returned future is completed with that error. 
 
 If this stream emits an error before the first matching element, the returned future is completed with that error, and processing stops.
 
@@ -1060,14 +1096,17 @@ print(result); // -1
 ### lastWhere()
 
 ```dart
-Future<T> lastWhere(bool test(T element), {T orElse()})
+Future<T> lastWhere(
+  bool test(T element), {
+  T orElse()
+})
 ```
 
 Finds the last element in this stream matching [test].
 
 Returns a future that is completed with the last element of this stream for which [test] returns `true`.
 
-{@macro stream_where_or_else}
+If no such element is found before this stream is done, and an `orElse` function is provided, the result of calling `orElse` becomes the value of the future. If `orElse` throws, the returned future is completed with that error.
 
 If this stream emits an error at any point, the returned future is completed with that error, and the subscription is canceled.
 
@@ -1090,14 +1129,17 @@ print(result); // -1
 ### singleWhere()
 
 ```dart
-Future<T> singleWhere(bool test(T element), {T orElse()})
+Future<T> singleWhere(
+  bool test(T element), {
+  T orElse()
+})
 ```
 
 Finds the single element in this stream matching [test].
 
 Returns a future that is completed with the single element of this stream for which [test] returns `true`.
 
-{@macro stream_where_or_else}
+If no such element is found before this stream is done, and an `orElse` function is provided, the result of calling `orElse` becomes the value of the future. If `orElse` throws, the returned future is completed with that error.
 
 Only one element may match. If more than one matching element is found an error is thrown, regardless of whether [orElse] was passed.
 
@@ -1142,7 +1184,10 @@ If a done event occurs before the value is found, the future completes with a [R
 ### timeout()
 
 ```dart
-Stream<T> timeout(Duration timeLimit, {void onTimeout(EventSink<T> sink)})
+Stream<T> timeout(
+  Duration timeLimit, {
+  void onTimeout(EventSink<T> sink)
+})
 ```
 
 Creates a new stream with the same events as this stream.
@@ -1177,6 +1222,10 @@ stream.listen(print, onDone: () => print('Done'));
 // Done
 ```
 
+---
+
+
+
 # StreamSubscription
 
 ```dart
@@ -1200,7 +1249,7 @@ final subscription = stream.listen(print); // A StreamSubscription<int>.
 
 To pause the subscription, use [pause].
 
-```dart continued
+```dart
 // Do some work.
 subscription.pause();
 print(subscription.isPaused); // true
@@ -1208,7 +1257,7 @@ print(subscription.isPaused); // true
 
 To resume after the pause, use [resume].
 
-```dart continued
+```dart
 // Do some work.
 subscription.resume();
 print(subscription.isPaused); // false
@@ -1216,10 +1265,26 @@ print(subscription.isPaused); // false
 
 To cancel the subscription, use [cancel].
 
-```dart continued
+```dart
 // Do some work.
 subscription.cancel();
 ```
+
+## 属性
+
+### isPaused
+
+```dart
+bool get isPaused
+```
+
+Whether the [StreamSubscription] is currently paused.
+
+If there have been more calls to [pause] than to [resume] on this stream subscription, the subscription is paused, and this getter returns `true`.
+
+Returns `false` if the stream can currently emit events, or if the subscription has completed or been cancelled.
+
+## 方法
 
 ### cancel()
 
@@ -1311,18 +1376,6 @@ This undoes one previous call to [pause]. When all previously calls to [pause] h
 
 It is safe to [resume] even when the subscription is not paused, and the resume will have no effect.
 
-### isPaused
-
-```dart
-bool get isPaused
-```
-
-Whether the [StreamSubscription] is currently paused.
-
-If there have been more calls to [pause] than to [resume] on this stream subscription, the subscription is paused, and this getter returns `true`.
-
-Returns `false` if the stream can currently emit events, or if the subscription has completed or been cancelled.
-
 ### asFuture()
 
 ```dart
@@ -1339,6 +1392,10 @@ In case of a `done` event the future completes with the given [futureValue].
 
 If [futureValue] is omitted, the value `null as E` is used as a default. If `E` is not nullable, this will throw immediately when [asFuture] is called.
 
+---
+
+
+
 # EventSink
 
 ```dart
@@ -1350,6 +1407,8 @@ A [Sink] that supports adding errors.
 This makes it suitable for capturing the results of asynchronous computations, which can complete with a value or an error.
 
 The [EventSink] has been designed to handle asynchronous events from [Stream]s. See, for example, [Stream.eventTransformed] which uses `EventSink`s to transform events.
+
+## 方法
 
 ### add()
 
@@ -1383,6 +1442,10 @@ Calling this method more than once is allowed, but does nothing.
 
 Neither [add] nor [addError] must be called after this method.
 
+---
+
+
+
 # StreamView
 
 ```dart
@@ -1394,26 +1457,17 @@ class StreamView<T> extends Stream<T> {}
 ### StreamView()
 
 ```dart
-StreamView(Stream<T> stream)
+const StreamView<T>( Stream<T> stream )
 ```
 
-### isBroadcast
+* isBroadcast
 
-```dart
-bool get isBroadcast
-```
+* asBroadcastStream()
+* listen()
 
-### asBroadcastStream()
+---
 
-```dart
-Stream<T> asBroadcastStream({void onListen(StreamSubscription<T> subscription), void onCancel(StreamSubscription<T> subscription)})
-```
 
-### listen()
-
-```dart
-StreamSubscription<T> listen(void onData(T value), {Function? onError, void onDone(), bool? cancelOnError})
-```
 
 # StreamConsumer
 
@@ -1426,6 +1480,8 @@ Abstract interface for a "sink" accepting multiple entire streams.
 A consumer can accept a number of consecutive streams using [addStream], and when no further data need to be added, the [close] method tells the consumer to complete its work and shut down.
 
 The [Stream.pipe] accepts a `StreamConsumer` and will pass the stream to the consumer's [addStream] method. When that completes, it will call [close] and then complete its own returned future.
+
+## 方法
 
 ### addStream()
 
@@ -1455,6 +1511,10 @@ This allows the consumer to complete any remaining work and release resources th
 
 Returns a future which is completed when the consumer has shut down. If cleaning up can fail, the error may be reported in the returned future, otherwise it completes with `null`.
 
+---
+
+
+
 # StreamSink
 
 ```dart
@@ -1472,6 +1532,25 @@ If [addStream] is called after any of the [EventSink] methods, it'll be delayed 
 When [EventSink] methods are used, the [done] [Future] can be used to catch any errors.
 
 When [close] is called, it will return the [done] [Future].
+
+## 属性
+
+### done
+
+```dart
+Future get done
+```
+
+Return a future which is completed when the [StreamSink] is finished.
+
+If the `StreamSink` fails with an error, perhaps in response to adding events using [add], [addError] or [close], the [done] future will complete with that error.
+
+Otherwise, the returned future will complete when either:
+
+- all events have been processed and the sink has been closed, or
+- the sink has otherwise been stopped from handling more events (for example by canceling a stream subscription).
+
+## 方法
 
 ### close()
 
@@ -1491,20 +1570,9 @@ The stream sink may close before the [close] method is called, either due to an 
 
 Unifies [StreamConsumer.close] and [EventSink.close] which both mark their object as not expecting any further events.
 
-### done
+---
 
-```dart
-Future get done
-```
 
-Return a future which is completed when the [StreamSink] is finished.
-
-If the `StreamSink` fails with an error, perhaps in response to adding events using [add], [addError] or [close], the [done] future will complete with that error.
-
-Otherwise, the returned future will complete when either:
-
-- all events have been processed and the sink has been closed, or
-- the sink has otherwise been stopped from handling more events (for example by canceling a stream subscription).
 
 # StreamTransformer
 
@@ -1524,10 +1592,14 @@ All other transforming methods on [Stream], such as [Stream.map], [Stream.where]
 
 The [StreamTransformer.fromHandlers] constructor allows passing separate callbacks to react to events, errors, and the end of the stream. The [StreamTransformer.fromBind] constructor creates a `StreamTransformer` whose [bind] method is implemented by calling the function passed to the constructor.
 
+## 构造函数
+
 ### StreamTransformer()
 
 ```dart
-StreamTransformer(StreamSubscription<T> onListen(Stream<S> stream, bool cancelOnError))
+StreamTransformer(
+  StreamSubscription<T> onListen(Stream<S> stream, bool cancelOnError)
+)
 ```
 
 Creates a [StreamTransformer] based on the given [onListen] callback.
@@ -1585,7 +1657,11 @@ intStream.transform(duplicator);
 ### StreamTransformer.fromHandlers()
 
 ```dart
-StreamTransformer.fromHandlers({void handleData(S data, EventSink<T> sink), void handleError(Object error, StackTrace stackTrace, EventSink<T> sink), void handleDone(EventSink<T> sink)})
+StreamTransformer<S, T>.fromHandlers({
+  void Function(S, EventSink<T>)? handleData,
+  void Function(Object, StackTrace, EventSink<T>)? handleError,
+  void Function(EventSink<T>)? handleDone,
+})
 ```
 
 Creates a [StreamTransformer] that delegates events to the given functions.
@@ -1662,6 +1738,8 @@ final splitDecoded = StreamTransformer<List<int>, String>.fromBind(
     (stream) => stream.transform(utf8.decoder).transform(LineSplitter()));
 ```
 
+## 静态方法
+
 ### castFrom()
 
 ```dart
@@ -1673,6 +1751,8 @@ Adapts [source] to be a `StreamTransformer<TS, TT>`.
 This allows [source] to be used at the new type, but at run-time it must satisfy the requirements of both the new type and its original type.
 
 Data events passed into the returned transformer must also be instances of [SS], and data events produced by [source] for those events must also be instances of [TT].
+
+## 方法
 
 ### bind()
 
@@ -1704,6 +1784,10 @@ Provides a `StreamTransformer<RS, RT>` view of this stream transformer.
 
 The resulting transformer will check at run-time that all data events of the stream it transforms are actually instances of [S], and it will check that all data events produced by this transformer are actually instances of [RT].
 
+---
+
+
+
 # StreamTransformerBase
 
 ```dart
@@ -1726,6 +1810,10 @@ StreamTransformerBase()
 StreamTransformer<RS, RT> cast<RS, RT>()
 ```
 
+---
+
+
+
 # StreamIterator
 
 ```dart
@@ -1740,25 +1828,17 @@ The stream may be paused between calls to [moveNext].
 
 The [current] value must only be used after a future returned by [moveNext] has completed with `true`, and only until [moveNext] is called again.
 
+## 构造函数
+
 ### StreamIterator()
 
 ```dart
-StreamIterator(Stream<T> stream)
+StreamIterator<T>(Stream<T> stream)
 ```
 
 Create a [StreamIterator] on [stream].
 
-### moveNext()
-
-```dart
-Future<bool> moveNext()
-```
-
-Wait for the next stream value to be available.
-
-Returns a future which will complete with either `true` or `false`. Completing with `true` means that another event has been received and can be read as [current]. Completing with `false` means that the stream iteration is done and no further events will ever be available. The future may complete with an error, if the stream produces an error, which also ends iteration.
-
-The function must not be called again until the future returned by a previous call is completed.
+## 属性
 
 ### current
 
@@ -1771,6 +1851,20 @@ The current value of the stream.
 When a [moveNext] call completes with `true`, the [current] field holds the most recent event of the stream, and it stays like that until the next call to [moveNext]. This value must only be read after a call to [moveNext] has completed with `true`, and only until the [moveNext] is called again.
 
 If the StreamIterator has not yet been moved to the first element ([moveNext] has not been called and completed yet), or if the StreamIterator has been moved past the last element ([moveNext] has returned `false`), then [current] is unspecified. A [StreamIterator] may either throw or return an iterator-specific default value in that case.
+
+## 方法
+
+### moveNext()
+
+```dart
+Future<bool> moveNext()
+```
+
+Wait for the next stream value to be available.
+
+Returns a future which will complete with either `true` or `false`. Completing with `true` means that another event has been received and can be read as [current]. Completing with `false` means that the stream iteration is done and no further events will ever be available. The future may complete with an error, if the stream produces an error, which also ends iteration.
+
+The function must not be called again until the future returned by a previous call is completed.
 
 ### cancel()
 
@@ -1788,6 +1882,10 @@ If [moveNext] has been called when the iterator is canceled, its returned future
 
 Returns a future which completes when the cancellation is complete. This can be an already completed future if the cancellation happens synchronously.
 
+---
+
+
+
 # MultiStreamController
 
 ```dart
@@ -1797,6 +1895,8 @@ abstract interface class MultiStreamController<T> implements StreamController<T>
 An enhanced stream controller provided by [Stream.multi].
 
 Acts like a normal asynchronous controller, but also allows adding events synchronously. As with any synchronous event delivery, the sender should be very careful to not deliver events at times when a new listener might not be ready to receive them. That usually means only delivering events synchronously in response to other asynchronous events, because that is a time when an asynchronous event could happen.
+
+## 方法
 
 ### addSync()
 

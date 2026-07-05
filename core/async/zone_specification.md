@@ -16,6 +16,59 @@ Handlers have the same signature as the same-named methods on [Zone], but receiv
 
 Handlers can either stop propagating the request (by simply not calling the parent handler), or forward to the parent zone, potentially modifying the arguments on the way.
 
+## 构造函数
+
+### ZoneSpecification()
+
+```dart
+ZoneSpecification({
+  HandleUncaughtErrorHandler? handleUncaughtError, 
+  RunHandler? run, 
+  RunUnaryHandler? runUnary, 
+  RunBinaryHandler? runBinary, 
+  RegisterCallbackHandler? registerCallback, 
+  RegisterUnaryCallbackHandler? registerUnaryCallback, 
+  RegisterBinaryCallbackHandler? registerBinaryCallback, 
+  ErrorCallbackHandler? errorCallback, 
+  ScheduleMicrotaskHandler? scheduleMicrotask, 
+  CreateTimerHandler? createTimer, 
+  CreatePeriodicTimerHandler? createPeriodicTimer, 
+  PrintHandler? print, 
+  ForkHandler? fork
+})
+```
+
+Creates a specification with the provided handlers.
+
+If the [handleUncaughtError] is provided, the new zone will be a new "error zone" which will prevent errors from flowing into other error zones (see [Zone.errorZone], [Zone.inSameErrorZone]).
+
+### ZoneSpecification.from()
+
+```dart
+ZoneSpecification.from(
+  ZoneSpecification other, {
+  HandleUncaughtErrorHandler? handleUncaughtError,
+  RunHandler? run,
+  RunUnaryHandler? runUnary,
+  RunBinaryHandler? runBinary,
+  RegisterCallbackHandler? registerCallback,
+  RegisterUnaryCallbackHandler? registerUnaryCallback,
+  RegisterBinaryCallbackHandler? registerBinaryCallback,
+  ErrorCallbackHandler? errorCallback,
+  ScheduleMicrotaskHandler? scheduleMicrotask,
+  CreateTimerHandler? createTimer,
+  CreatePeriodicTimerHandler? createPeriodicTimer,
+  PrintHandler? print,
+  ForkHandler? fork,
+})
+```
+
+Creates a specification from [other] and provided handlers.
+
+The created zone specification has the handlers of [other] and any individually provided handlers. If a handler is provided both through [other] and individually, the individually provided handler overrides the one from [other].
+
+## 方法
+
 ### handleUncaughtError
 
 ```dart
@@ -120,30 +173,20 @@ ForkHandler? fork
 
 A custom [Zone.handleUncaughtError] implementation for a new zone.
 
-### ZoneSpecification()
+---
 
-```dart
-ZoneSpecification({HandleUncaughtErrorHandler? handleUncaughtError, RunHandler? run, RunUnaryHandler? runUnary, RunBinaryHandler? runBinary, RegisterCallbackHandler? registerCallback, RegisterUnaryCallbackHandler? registerUnaryCallback, RegisterBinaryCallbackHandler? registerBinaryCallback, ErrorCallbackHandler? errorCallback, ScheduleMicrotaskHandler? scheduleMicrotask, CreateTimerHandler? createTimer, CreatePeriodicTimerHandler? createPeriodicTimer, PrintHandler? print, ForkHandler? fork})
-```
 
-Creates a specification with the provided handlers.
-
-If the [handleUncaughtError] is provided, the new zone will be a new "error zone" which will prevent errors from flowing into other error zones (see [Zone.errorZone], [Zone.inSameErrorZone]).
-
-### ZoneSpecification.from()
-
-```dart
-ZoneSpecification.from(ZoneSpecification other, {HandleUncaughtErrorHandler? handleUncaughtError, RunHandler? run, RunUnaryHandler? runUnary, RunBinaryHandler? runBinary, RegisterCallbackHandler? registerCallback, RegisterUnaryCallbackHandler? registerUnaryCallback, RegisterBinaryCallbackHandler? registerBinaryCallback, ErrorCallbackHandler? errorCallback, ScheduleMicrotaskHandler? scheduleMicrotask, CreateTimerHandler? createTimer, CreatePeriodicTimerHandler? createPeriodicTimer, PrintHandler? print, ForkHandler? fork})
-```
-
-Creates a specification from [other] and provided handlers.
-
-The created zone specification has the handlers of [other] and any individually provided handlers. If a handler is provided both through [other] and individually, the individually provided handler overrides the one from [other].
 
 # HandleUncaughtErrorHandler
 
 ```dart
-typedef HandleUncaughtErrorHandler = void Function(Zone self, ZoneDelegate parent, Zone zone, Object error, StackTrace stackTrace)
+typedef HandleUncaughtErrorHandler = void Function(
+  Zone self, 
+  ZoneDelegate parent, 
+  Zone zone, 
+  Object error, 
+  StackTrace stackTrace
+)
 ```
 
 The type of a custom [Zone.handleUncaughtError] implementation function.
@@ -158,10 +201,19 @@ The function must only access zone-related functionality through [self], [parent
 
 If the uncaught error handler throws, the error will be passed to `parent.handleUncaughtError`. If the thrown object is [error], the throw is considered a re-throw and the original [stackTrace] is retained. This allows an asynchronous error to leave the error zone.
 
+---
+
+
+
 # RunHandler
 
 ```dart
-typedef RunHandler = R Function<R>(Zone self, ZoneDelegate parent, Zone zone, R Function() f)
+typedef RunHandler = R Function<R>(
+  Zone self, 
+  ZoneDelegate parent, 
+  Zone zone, 
+  R Function() f
+)
 ```
 
 The type of a custom [Zone.run] implementation function.
@@ -176,10 +228,20 @@ The default behavior of [Zone.run] is to call [f] in the current zone, [zone]. A
 
 The function must only access zone-related functionality through [self], [parent] or [zone]. It should not depend on the current zone ([Zone.current]).
 
+---
+
+
+
 # RunUnaryHandler
 
 ```dart
-typedef RunUnaryHandler = R Function<R, T>(Zone self, ZoneDelegate parent, Zone zone, R Function(T arg) f, T arg)
+typedef RunUnaryHandler = R Function<R, T>(
+  Zone self, 
+  ZoneDelegate parent, 
+  Zone zone, 
+  R Function(T arg) f, 
+  T arg
+)
 ```
 
 The type of a custom [Zone.runUnary] implementation function.
@@ -194,10 +256,21 @@ The default behavior of [Zone.runUnary] is to call [f] with argument [arg] in th
 
 The function must only access zone-related functionality through [self], [parent] or [zone]. It should not depend on the current zone ([Zone.current]).
 
+---
+
+
+
 # RunBinaryHandler
 
 ```dart
-typedef RunBinaryHandler = R Function<R, T1, T2>(Zone self, ZoneDelegate parent, Zone zone, R Function(T1 arg1, T2 arg2) f, T1 arg1, T2 arg2)
+typedef RunBinaryHandler = R Function<R, T1, T2>(
+  Zone self, 
+  ZoneDelegate parent, 
+  Zone zone, 
+  R Function(T1 arg1, T2 arg2) f, 
+  T1 arg1, 
+  T2 arg2
+)
 ```
 
 The type of a custom [Zone.runBinary] implementation function.
@@ -212,10 +285,19 @@ The default behavior of [Zone.runUnary] is to call [f] with arguments [arg1] and
 
 The function must only access zone-related functionality through [self], [parent] or [zone]. It should not depend on the current zone ([Zone.current]).
 
+---
+
+
+
 # RegisterCallbackHandler
 
 ```dart
-typedef RegisterCallbackHandler = ZoneCallback<R> Function<R>(Zone self, ZoneDelegate parent, Zone zone, R Function() f)
+typedef RegisterCallbackHandler = ZoneCallback<R> Function<R>(
+  Zone self, 
+  ZoneDelegate parent, 
+  Zone zone, 
+  R Function() f
+)
 ```
 
 The type of a custom [Zone.registerCallback] implementation function.
@@ -230,10 +312,19 @@ The handler should return either the function [f] or another function replacing 
 
 The function must only access zone-related functionality through [self], [parent] or [zone]. It should not depend on the current zone ([Zone.current]).
 
+---
+
+
+
 # RegisterUnaryCallbackHandler
 
 ```dart
-typedef RegisterUnaryCallbackHandler = ZoneUnaryCallback<R, T> Function<R, T>(Zone self, ZoneDelegate parent, Zone zone, R Function(T arg) f)
+typedef RegisterUnaryCallbackHandler = ZoneUnaryCallback<R, T> Function<R, T>(
+  Zone self, 
+  ZoneDelegate parent, 
+  Zone zone, 
+  R Function(T arg) f
+)
 ```
 
 The type of a custom [Zone.registerUnaryCallback] implementation function.
@@ -248,10 +339,19 @@ The handler should return either the function [f] or another function replacing 
 
 The function must only access zone-related functionality through [self], [parent] or [zone]. It should not depend on the current zone ([Zone.current]).
 
+---
+
+
+
 # RegisterBinaryCallbackHandler
 
 ```dart
-typedef RegisterBinaryCallbackHandler = ZoneBinaryCallback<R, T1, T2> Function<R, T1, T2>(Zone self, ZoneDelegate parent, Zone zone, R Function(T1 arg1, T2 arg2) f)
+typedef RegisterBinaryCallbackHandler = ZoneBinaryCallback<R, T1, T2> Function<R, T1, T2>(
+  Zone self, 
+  ZoneDelegate parent, 
+  Zone zone, 
+  R Function(T1 arg1, T2 arg2) f
+)
 ```
 
 The type of a custom [Zone.registerBinaryCallback] implementation function.
@@ -264,10 +364,20 @@ The function [f] is the function which was passed to the which was passed to the
 
 The handler should return either the function [f] or another function replacing [f], typically by wrapping [f] in a function which does something extra before and after invoking [f]
 
+---
+
+
+
 # ErrorCallbackHandler
 
 ```dart
-typedef ErrorCallbackHandler = AsyncError? Function(Zone self, ZoneDelegate parent, Zone zone, Object error, StackTrace? stackTrace)
+typedef ErrorCallbackHandler = AsyncError? Function(
+  Zone self, 
+  ZoneDelegate parent, 
+  Zone zone, 
+  Object error, 
+  StackTrace? stackTrace
+)
 ```
 
 The type of a custom [Zone.errorCallback] implementation function.
@@ -295,10 +405,19 @@ The error callback handler **must not** throw.
 
 The function must only access zone-related functionality through [self], [parent] or [zone]. It should not depend on the current zone ([Zone.current]).
 
+---
+
+
+
 # ScheduleMicrotaskHandler
 
 ```dart
-typedef ScheduleMicrotaskHandler = void Function(Zone self, ZoneDelegate parent, Zone zone, void Function() f)
+typedef ScheduleMicrotaskHandler = void Function(
+  Zone self, 
+  ZoneDelegate parent, 
+  Zone zone, 
+  void Function() f
+)
 ```
 
 The type of a custom [Zone.scheduleMicrotask] implementation function.
@@ -313,10 +432,20 @@ The custom handler can choose to replace the function [f] with one that does som
 
 The function must only access zone-related functionality through [self], [parent] or [zone]. It should not depend on the current zone ([Zone.current]).
 
+---
+
+
+
 # CreateTimerHandler
 
 ```dart
-typedef CreateTimerHandler = Timer Function(Zone self, ZoneDelegate parent, Zone zone, Duration duration, void Function() f)
+typedef CreateTimerHandler = Timer Function(
+  Zone self, 
+  ZoneDelegate parent, 
+  Zone zone, 
+  Duration duration, 
+  void Function() f
+)
 ```
 
 The type of a custom [Zone.createTimer] implementation function.
@@ -333,10 +462,20 @@ The function should return a [Timer] object which can be used to inspect and con
 
 The function must only access zone-related functionality through [self], [parent] or [zone]. It should not depend on the current zone ([Zone.current]).
 
+---
+
+
+
 # CreatePeriodicTimerHandler
 
 ```dart
-typedef CreatePeriodicTimerHandler = Timer Function(Zone self, ZoneDelegate parent, Zone zone, Duration period, void Function(Timer timer) f)
+typedef CreatePeriodicTimerHandler = Timer Function(
+  Zone self, 
+  ZoneDelegate parent, 
+  Zone zone, 
+  Duration period, 
+  void Function(Timer timer) f
+)
 ```
 
 The type of a custom [Zone.createPeriodicTimer] implementation function.
@@ -353,10 +492,19 @@ The function should return a [Timer] object which can be used to inspect and con
 
 The function must only access zone-related functionality through [self], [parent] or [zone]. It should not depend on the current zone ([Zone.current]).
 
+---
+
+
+
 # PrintHandler
 
 ```dart
-typedef PrintHandler = void Function(Zone self, ZoneDelegate parent, Zone zone, String line)
+typedef PrintHandler = void Function(
+  Zone self, 
+  ZoneDelegate parent, 
+  Zone zone, 
+  String line
+)
 ```
 
 The type of a custom [Zone.print] implementation function.
@@ -371,10 +519,20 @@ The custom handler can intercept print operations and redirect them to other tar
 
 The function must only access zone-related functionality through [self], [parent] or [zone]. It should not depend on the current zone ([Zone.current]).
 
+---
+
+
+
 # ForkHandler
 
 ```dart
-typedef ForkHandler = Zone Function(Zone self, ZoneDelegate parent, Zone zone, ZoneSpecification? specification, Map<Object?, Object?>? zoneValues)
+typedef ForkHandler = Zone Function(
+  Zone self, 
+  ZoneDelegate parent, 
+  Zone zone, 
+  ZoneSpecification? specification, 
+  Map<Object?, Object?>? zoneValues
+)
 ```
 
 The type of a custom [Zone.fork] implementation function.

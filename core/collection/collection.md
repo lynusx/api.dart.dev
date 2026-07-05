@@ -40,4 +40,4 @@ An indexable sequence of objects. Objects can be accessed using their position, 
 
 ## LinkedList
 
-[LinkedList] is a specialized double-linked list of elements that extends [LinkedListEntry]. Each element knows its own place in the linked list, as well as which list it is in. {@category Core}
+[LinkedList] is a specialized double-linked list of elements that extends [LinkedListEntry]. Each element knows its own place in the linked list, as well as which list it is in. 

@@ -19,30 +19,26 @@ print(unmodifiableListView); // [10, 20, 30, 40, 50]
 unmodifiableListView.remove(20); // Throws.
 ```
 
+## 构造函数
+
 ### UnmodifiableListView()
 
 ```dart
-UnmodifiableListView(Iterable<E> source)
+UnmodifiableListView<E>(Iterable<E> source)
 ```
 
 Creates an unmodifiable list backed by [source].
 
 The [source] of the elements may be a [List] or any [Iterable] with efficient [Iterable.length] and [Iterable.elementAt].
 
-### cast()
+## 属性
 
-```dart
-List<R> cast<R>()
-```
+* length
 
-### length
+## 方法
 
-```dart
-int get length
-```
+* cast()
 
-### operator []()
+## 运算符
 
-```dart
-E operator [](int index)
-```
+* operator []

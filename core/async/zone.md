@@ -23,6 +23,8 @@ For convenience, zones provide [bindCallback] (and the corresponding [bindUnaryC
 
 Similarly, zones provide [bindCallbackGuarded] (and the corresponding [bindUnaryCallbackGuarded] and [bindBinaryCallbackGuarded]), when the callback should be invoked through [Zone.runGuarded].
 
+## 静态属性
+
 ### root
 
 ```dart
@@ -43,20 +45,7 @@ Zone get current
 
 The zone that is currently active.
 
-### handleUncaughtError()
-
-```dart
-void handleUncaughtError(Object error, StackTrace stackTrace)
-```
-
-Handles uncaught asynchronous errors.
-
-There are two kind of asynchronous errors that are handled by this function:
-
-1.  Uncaught errors that were thrown in asynchronous callbacks, for example, a `throw` in the function passed to [Timer.run].
-2.  Asynchronous errors that are pushed through [Future] and [Stream] chains, but for which nobody registered an error handler. Most asynchronous classes, like [Future] or [Stream] push errors to their listeners. Errors are propagated this way until either a listener handles the error (for example with [Future.catchError]), or no listener is available anymore. In the latter case, futures and streams invoke the zone's [handleUncaughtError].
-
-By default, when handled by the root zone, uncaught asynchronous errors are treated like uncaught synchronous exceptions.
+## 属性
 
 ### parent
 
@@ -121,6 +110,23 @@ main() {
 }
 ```
 
+## 方法
+
+### handleUncaughtError()
+
+```dart
+void handleUncaughtError(Object error, StackTrace stackTrace)
+```
+
+Handles uncaught asynchronous errors.
+
+There are two kind of asynchronous errors that are handled by this function:
+
+1.  Uncaught errors that were thrown in asynchronous callbacks, for example, a `throw` in the function passed to [Timer.run].
+2.  Asynchronous errors that are pushed through [Future] and [Stream] chains, but for which nobody registered an error handler. Most asynchronous classes, like [Future] or [Stream] push errors to their listeners. Errors are propagated this way until either a listener handles the error (for example with [Future.catchError]), or no listener is available anymore. In the latter case, futures and streams invoke the zone's [handleUncaughtError].
+
+By default, when handled by the root zone, uncaught asynchronous errors are treated like uncaught synchronous exceptions.
+
 ### inSameErrorZone()
 
 ```dart
@@ -134,7 +140,10 @@ Two zones are in the same error zone if they have the same [errorZone].
 ### fork()
 
 ```dart
-Zone fork({ZoneSpecification? specification, Map<Object?, Object?>? zoneValues})
+Zone fork({
+  ZoneSpecification? specification, 
+  Map<Object?, Object?>? zoneValues
+})
 ```
 
 Creates a new zone as a child zone of this zone.
@@ -212,7 +221,11 @@ See [runGuarded].
 ### runBinaryGuarded()
 
 ```dart
-void runBinaryGuarded<T1, T2>(void action(T1 argument1, T2 argument2), T1 argument1, T2 argument2)
+void runBinaryGuarded<T1, T2>(
+  void action(T1 argument1, T2 argument2), 
+  T1 argument1, 
+  T2 argument2
+)
 ```
 
 Executes the given [action] with [argument1] and [argument2] in this zone and catches synchronous errors.
@@ -421,7 +434,9 @@ main() {
 }
 ```
 
-### operator []()
+## 运算符
+
+### operator []
 
 ```dart
 dynamic operator [](Object? key)

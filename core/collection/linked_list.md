@@ -67,13 +67,26 @@ void main() {
 }
 ```
 
+## 构造函数
+
 ### LinkedList()
 
 ```dart
-LinkedList()
+LinkedList<E extends LinkedListEntry<E>>()
 ```
 
 Constructs a new empty linked list.
+
+## 属性
+
+* iterator
+* length
+* first
+* last
+* single
+* isEmpty
+
+## 方法
 
 ### addFirst()
 
@@ -121,18 +134,6 @@ Whether [entry] is a [LinkedListEntry] belonging to this list.
 
 The [entry] is considered as belonging to this list if its [LinkedListEntry.list] is this list.
 
-### iterator
-
-```dart
-Iterator<E> get iterator
-```
-
-### length
-
-```dart
-int get length
-```
-
 ### clear()
 
 ```dart
@@ -140,24 +141,6 @@ void clear()
 ```
 
 Remove all elements from this linked list.
-
-### first
-
-```dart
-E get first
-```
-
-### last
-
-```dart
-E get last
-```
-
-### single
-
-```dart
-E get single
-```
 
 ### forEach()
 
@@ -169,11 +152,9 @@ Call [action] with each entry in this linked list.
 
 It's an error if [action] modifies the linked list.
 
-### isEmpty
+---
 
-```dart
-bool get isEmpty
-```
+
 
 # LinkedListEntry
 
@@ -189,6 +170,8 @@ An entry can be in at most one linked list at a time. While an entry is in a lin
 
 When created, an entry is not in any linked list.
 
+## 属性
+
 ### list
 
 ```dart
@@ -198,16 +181,6 @@ LinkedList<E>? get list
 The linked list containing this element.
 
 The value is `null` if this entry is not currently in any list.
-
-### unlink()
-
-```dart
-void unlink()
-```
-
-Unlink the element from its linked list.
-
-The entry must currently be in a linked list when this method is called.
 
 ### next
 
@@ -228,6 +201,18 @@ E? get previous
 The predecessor of this element in its linked list.
 
 The value is `null` if there is no predecessor in the linked list, or if this entry is not currently in any list.
+
+## 方法
+
+### unlink()
+
+```dart
+void unlink()
+```
+
+Unlink the element from its linked list.
+
+The entry must currently be in a linked list when this method is called.
 
 ### insertAfter()
 

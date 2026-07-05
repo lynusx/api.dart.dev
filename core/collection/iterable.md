@@ -8,6 +8,10 @@ This [Iterable] mixin implements all [Iterable] members except `iterator`.
 
 All other methods are implemented in terms of `iterator`.
 
+---
+
+
+
 # IterableBase
 
 ```dart
@@ -18,6 +22,10 @@ Base class for implementing [Iterable].
 
 This class implements all methods of [Iterable], except [Iterable.iterator], in terms of `iterator`.
 
+---
+
+
+
 # NullableIterableExtensions
 
 ```dart
@@ -25,6 +33,8 @@ extension NullableIterableExtensions<T extends Object> on Iterable<T?> {}
 ```
 
 Operations on iterables with nullable elements.
+
+## 属性
 
 ### nonNulls
 
@@ -36,6 +46,10 @@ The non-`null` elements of this iterable.
 
 The same elements as this iterable, except that `null` values are omitted.
 
+---
+
+
+
 # IterableExtensions
 
 ```dart
@@ -43,6 +57,8 @@ extension IterableExtensions<T> on Iterable<T> {}
 ```
 
 Operations on iterables.
+
+## 属性
 
 ### indexed
 
@@ -85,6 +101,8 @@ T? get singleOrNull
 The single element of this iterator, or `null`.
 
 If the iterator has precisely one element, this is that element. Otherwise, if the iterator has zero elements, or it has two or more, the value is `null`.
+
+## 方法
 
 ### elementAtOrNull()
 

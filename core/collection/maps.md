@@ -15,146 +15,43 @@ A more efficient implementation is usually possible by overriding some of the ot
 ### MapBase()
 
 ```dart
-MapBase()
+const MapBase<K, V>()
 ```
 
-### keys
+## 属性
 
-```dart
-Iterable<K> get keys
-```
+* keys
+* entries
+* length
+* isEmpty
+* isNotEmpty
+* values
 
-### operator []()
+## 方法
 
-```dart
-V? operator [](Object? key)
-```
+* remove()
+* clear()
+* cast()
+* forEach()
+* addAll()
+* containsValue()
+* putIfAbsent()
+* update()
+* updateAll()
+* map()
+* addEntries()
+* removeWhere()
+* containsKey()
+* mapToString()
 
-### operator []=()
+## 运算符
 
-```dart
-operator []=(K key, V value)
-```
+* operator []
+* operator []=
 
-### remove()
+---
 
-```dart
-V? remove(Object? key)
-```
 
-### clear()
-
-```dart
-void clear()
-```
-
-### cast()
-
-```dart
-Map<RK, RV> cast<RK, RV>()
-```
-
-### forEach()
-
-```dart
-void forEach(void action(K key, V value))
-```
-
-### addAll()
-
-```dart
-void addAll(Map<K, V> other)
-```
-
-### containsValue()
-
-```dart
-bool containsValue(Object? value)
-```
-
-### putIfAbsent()
-
-```dart
-V putIfAbsent(K key, V ifAbsent())
-```
-
-### update()
-
-```dart
-V update(K key, V update(V value), {V Function()? ifAbsent})
-```
-
-### updateAll()
-
-```dart
-void updateAll(V update(K key, V value))
-```
-
-### entries
-
-```dart
-Iterable<MapEntry<K, V>> get entries
-```
-
-### map()
-
-```dart
-Map<K2, V2> map<K2, V2>(MapEntry<K2, V2> transform(K key, V value))
-```
-
-### addEntries()
-
-```dart
-void addEntries(Iterable<MapEntry<K, V>> newEntries)
-```
-
-### removeWhere()
-
-```dart
-void removeWhere(bool test(K key, V value))
-```
-
-### containsKey()
-
-```dart
-bool containsKey(Object? key)
-```
-
-### length
-
-```dart
-int get length
-```
-
-### isEmpty
-
-```dart
-bool get isEmpty
-```
-
-### isNotEmpty
-
-```dart
-bool get isNotEmpty
-```
-
-### values
-
-```dart
-Iterable<V> get values
-```
-
-### toString()
-
-```dart
-String toString()
-```
-
-### mapToString()
-
-```dart
-String mapToString(Map<Object?, Object?> m)
-```
 
 # MapMixin
 
@@ -169,6 +66,10 @@ This mixin has a basic implementation of all but five of the members of [Map]. A
 The `keys` iterable should have efficient [Iterable.length] and [Iterable.contains] operations, and it should catch concurrent modifications of the keys while iterating.
 
 A more efficient implementation is usually possible by overriding some of the other members as well.
+
+---
+
+
 
 # UnmodifiableMapBase
 
@@ -186,6 +87,10 @@ The `keys` iterable should have efficient [Iterable.length] and [Iterable.contai
 
 A more efficient implementation is usually possible by overriding some of the other members as well.
 
+---
+
+
+
 # MapView
 
 ```dart
@@ -198,145 +103,51 @@ A simple wrapper that delegates all `Map` members to the map provided in the con
 
 Base for delegating map implementations like [UnmodifiableMapView].
 
+## 构造函数
+
 ### MapView()
 
 ```dart
-MapView(Map<K, V> map)
+const MapView<K, V>(Map<K, V> map)
 ```
 
 Creates a view which forwards operations to [map].
 
-### cast()
+## 属性
 
-```dart
-Map<RK, RV> cast<RK, RV>()
-```
+* isEmpty
+* isNotEmpty
+* length
+* keys
+* values
+* entries
 
-### operator []()
+## 方法
 
-```dart
-V? operator [](Object? key)
-```
+* cast()
+* addAll()
+* clear()
+* putIfAbsent()
+* containsKey()
+* containsValue()
+* forEach()
+* remove()
+* addEntries()
+* map()
+* update()
+* updateAll()
+* removeWhere()
 
-### operator []=()
+## 运算符
 
-```dart
-void operator []=(K key, V value)
-```
+* operator []
+* operator []=
 
-### addAll()
 
-```dart
-void addAll(Map<K, V> other)
-```
 
-### clear()
+---
 
-```dart
-void clear()
-```
 
-### putIfAbsent()
-
-```dart
-V putIfAbsent(K key, V ifAbsent())
-```
-
-### containsKey()
-
-```dart
-bool containsKey(Object? key)
-```
-
-### containsValue()
-
-```dart
-bool containsValue(Object? value)
-```
-
-### forEach()
-
-```dart
-void forEach(void action(K key, V value))
-```
-
-### isEmpty
-
-```dart
-bool get isEmpty
-```
-
-### isNotEmpty
-
-```dart
-bool get isNotEmpty
-```
-
-### length
-
-```dart
-int get length
-```
-
-### keys
-
-```dart
-Iterable<K> get keys
-```
-
-### remove()
-
-```dart
-V? remove(Object? key)
-```
-
-### toString()
-
-```dart
-String toString()
-```
-
-### values
-
-```dart
-Iterable<V> get values
-```
-
-### entries
-
-```dart
-Iterable<MapEntry<K, V>> get entries
-```
-
-### addEntries()
-
-```dart
-void addEntries(Iterable<MapEntry<K, V>> entries)
-```
-
-### map()
-
-```dart
-Map<K2, V2> map<K2, V2>(MapEntry<K2, V2> transform(K key, V value))
-```
-
-### update()
-
-```dart
-V update(K key, V update(V value), {V Function()? ifAbsent})
-```
-
-### updateAll()
-
-```dart
-void updateAll(V update(K key, V value))
-```
-
-### removeWhere()
-
-```dart
-void removeWhere(bool test(K key, V value))
-```
 
 # UnmodifiableMapView
 
@@ -359,14 +170,14 @@ print(unmodifiableMapView); // {1: Mars, 2: Mercury}
 unmodifiableMapView.remove(1); // Throws.
 ```
 
+## 构造函数
+
 ### UnmodifiableMapView()
 
 ```dart
 UnmodifiableMapView(Map<K, V> map)
 ```
 
-### cast()
+## 方法
 
-```dart
-Map<RK, RV> cast<RK, RV>()
-```
+* cast()

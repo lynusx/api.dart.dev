@@ -6,6 +6,10 @@ typedef ControllerCallback = void Function()
 
 Type of a stream controller's `onListen`, `onPause` and `onResume` callbacks.
 
+---
+
+
+
 # ControllerCancelCallback
 
 ```dart
@@ -13,6 +17,10 @@ typedef ControllerCancelCallback = FutureOr<void> Function()
 ```
 
 Type of stream controller `onCancel` callbacks.
+
+---
+
+
 
 # StreamController
 
@@ -80,18 +88,18 @@ await streamController.close();
 isClosed = streamController.isClosed; // true
 ```
 
-### stream
-
-```dart
-Stream<T> get stream
-```
-
-The stream that this controller is controlling.
+## 构造函数
 
 ### StreamController()
 
 ```dart
-StreamController({void onListen(), void onPause(), void onResume(), FutureOr<void> onCancel(), bool sync = false})
+StreamController({
+  void onListen(), 
+  void onPause(), 
+  void onResume(), 
+  FutureOr<void> onCancel(), 
+  bool sync = false
+})
 ```
 
 A controller with a [stream] that supports only one single subscriber.
@@ -117,7 +125,11 @@ If the stream is canceled before the controller needs data the [onResume] call m
 ### StreamController.broadcast()
 
 ```dart
-StreamController.broadcast({void onListen(), void onCancel(), bool sync = false})
+StreamController.broadcast({
+  void onListen(), 
+  void onCancel(), 
+  bool sync = false
+})
 ```
 
 A controller where [stream] can be listened to more than once.
@@ -137,6 +149,16 @@ If [sync] is true, events may be fired directly by the stream's subscriptions du
 If [sync] is false, the event will always be fired at a later time, after the code adding the event has completed. In that case, no guarantees are given with regard to when multiple listeners get the events, except that each listener will get all events in the correct order. Each subscription handles the events individually. If two events are sent on an async controller with two listeners, one of the listeners may get both events before the other listener gets any. A listener must be subscribed both when the event is initiated (that is, when [add] is called) and when the event is later delivered, in order to receive the event.
 
 The [onListen] callback is called when the first listener is subscribed, and the [onCancel] is called when there are no longer any active listeners. If a listener is added again later, after the [onCancel] was called, the [onListen] will be called again.
+
+## 属性
+
+### stream
+
+```dart
+Stream<T> get stream
+```
+
+The stream that this controller is controlling.
 
 ### onListen
 
@@ -222,6 +244,22 @@ bool get hasListener
 
 Whether there is a subscriber on the [Stream].
 
+### done
+
+```dart
+Future get done
+```
+
+A future which is completed when the stream controller is done sending events.
+
+This happens either when the done event has been sent, or if the subscriber on a single-subscription stream is canceled.
+
+A stream controller will not complete the returned future until all listeners present when the done event is sent have stopped listening. A listener will stop listening if it is cancelled, or if it has handled the done event. A paused listener will not process the done even until it is resumed, so completion of the returned Future will be delayed until all paused listeners have been resumed or cancelled.
+
+If there is no listener on a non-broadcast stream, or the listener pauses and never resumes, the done event will not be sent and this future will never complete.
+
+## 方法
+
 ### add()
 
 ```dart
@@ -260,24 +298,13 @@ A stream controller will not complete the returned future until all listeners pr
 
 If no one listens to a non-broadcast stream, or the listener pauses and never resumes, the done event will not be sent and this future will never complete.
 
-### done
-
-```dart
-Future get done
-```
-
-A future which is completed when the stream controller is done sending events.
-
-This happens either when the done event has been sent, or if the subscriber on a single-subscription stream is canceled.
-
-A stream controller will not complete the returned future until all listeners present when the done event is sent have stopped listening. A listener will stop listening if it is cancelled, or if it has handled the done event. A paused listener will not process the done even until it is resumed, so completion of the returned Future will be delayed until all paused listeners have been resumed or cancelled.
-
-If there is no listener on a non-broadcast stream, or the listener pauses and never resumes, the done event will not be sent and this future will never complete.
-
 ### addStream()
 
 ```dart
-Future addStream(Stream<T> source, {bool? cancelOnError})
+Future addStream(
+  Stream<T> source, {
+  bool? cancelOnError
+})
 ```
 
 Receives events from [source] and puts them into this controller's stream.
@@ -289,6 +316,10 @@ Events must not be added directly to this controller using [add], [addError], [c
 Data and error events are forwarded to this controller's stream. A done event on the source will end the `addStream` operation and complete the returned future.
 
 If [cancelOnError] is `true`, only the first error on [source] is forwarded to the controller's stream, and the `addStream` ends after this. If [cancelOnError] is false, all errors are forwarded and only a done event will end the `addStream`. If [cancelOnError] is omitted or `null`, it defaults to `false`.
+
+---
+
+
 
 # SynchronousStreamController
 
@@ -319,6 +350,8 @@ The synchronous broadcast stream controller also has a restrictions that a norma
 This still only guarantees that the event is delivered to the subscription. If the subscription is paused, the actual callback may still happen later, and the event will instead be buffered by the subscription. Barring pausing, and the following buffered events that haven't been delivered yet, callbacks will be called synchronously when an event is added.
 
 Adding an event to a synchronous non-broadcast stream controller while another event is in progress may cause the second event to be delayed and not be delivered synchronously, and until that event is delivered, the controller will not act synchronously.
+
+## 方法
 
 ### add()
 

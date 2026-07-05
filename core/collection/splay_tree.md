@@ -22,7 +22,7 @@ final planetsByMass = SplayTreeMap<double, String>((a, b) => a.compareTo(b));
 
 To add data to a map, use [operator[]=], [addAll] or [addEntries].
 
-```
+```dart
 planetsByMass[0.06] = 'Mercury';
 planetsByMass
     .addAll({0.81: 'Venus', 1.0: 'Earth', 0.11: 'Mars', 317.83: 'Jupiter'});
@@ -30,14 +30,14 @@ planetsByMass
 
 To check if the map is empty, use [isEmpty] or [isNotEmpty]. To find the number of map entries, use [length].
 
-```
+```dart
 print(planetsByMass.isEmpty); // false
 print(planetsByMass.length); // 5
 ```
 
 The [forEach] method calls a function for each key/value entry of the map.
 
-```
+```dart
 planetsByMass.forEach((key, value) {
   print('$key \t $value');
   // 0.06    Mercury
@@ -50,35 +50,35 @@ planetsByMass.forEach((key, value) {
 
 To check whether the map has an entry with a specific key, use [containsKey].
 
-```
+```dart
 final keyOneExists = planetsByMass.containsKey(1.0); // true
 final keyFiveExists = planetsByMass.containsKey(5); // false
 ```
 
 To check whether the map has an entry with a specific value, use [containsValue].
 
-```
+```dart
 final earthExists = planetsByMass.containsValue('Earth'); // true
 final plutoExists = planetsByMass.containsValue('Pluto'); // false
 ```
 
 To remove an entry with a specific key, use [remove].
 
-```
+```dart
 final removedValue = planetsByMass.remove(1.0);
 print(removedValue); // Earth
 ```
 
 To remove multiple entries at the same time, based on their keys and values, use [removeWhere].
 
-```
+```dart
 planetsByMass.removeWhere((key, value) => key <= 1);
 print(planetsByMass); // {317.83: Jupiter}
 ```
 
 To conditionally add or modify a value for a specific key, depending on whether there already is an entry with that key, use [putIfAbsent] or [update].
 
-```
+```dart
 planetsByMass.update(1, (v) => '', ifAbsent: () => 'Earth');
 planetsByMass.putIfAbsent(317.83, () => 'Another Jupiter');
 print(planetsByMass); // {1.0: Earth, 317.83: Jupiter}
@@ -86,14 +86,14 @@ print(planetsByMass); // {1.0: Earth, 317.83: Jupiter}
 
 To update the values of all keys, based on the existing key and value, use [updateAll].
 
-```
+```dart
 planetsByMass.updateAll((key, value) => 'X');
 print(planetsByMass); // {1.0: X, 317.83: X}
 ```
 
 To remove all entries and empty the map, use [clear].
 
-```
+```dart
 planetsByMass.clear();
 print(planetsByMass.isEmpty); // false
 print(planetsByMass); // {}
@@ -105,16 +105,25 @@ print(planetsByMass); // {}
 - [HashMap] is unordered (the order of iteration is not guaranteed).
 - [LinkedHashMap] iterates in key insertion order.
 
+## 构造函数
+
 ### SplayTreeMap()
 
 ```dart
-SplayTreeMap([int Function(K key1, K key2)? compare, bool Function(dynamic potentialKey)? isValidKey])
+SplayTreeMap<K, V>([
+  int Function(K, K)? compare, 
+  bool Function(dynamic)? isValidKey
+])
 ```
 
 ### SplayTreeMap.from()
 
 ```dart
-SplayTreeMap.from(Map<Object?, Object?> other, [int Function(K key1, K key2)? compare, bool Function(dynamic potentialKey)? isValidKey])
+SplayTreeMap<K, V>.from(
+  Map<Object?, Object?> other, [
+  int Function(K, K)? compare,
+  bool Function(dynamic)? isValidKey,
+])
 ```
 
 Creates a [SplayTreeMap] that contains all key/value pairs of [other].
@@ -130,7 +139,11 @@ print(fromBaseMap); // {1: A, 2: B, 3: C}
 ### SplayTreeMap.of()
 
 ```dart
-SplayTreeMap.of(Map<K, V> other, [int Function(K key1, K key2)? compare, bool Function(dynamic potentialKey)? isValidKey])
+SplayTreeMap<K, V>.of(
+  Map<K, V> other, [
+  int Function(K, K)? compare,
+  bool Function(dynamic)? isValidKey,
+])
 ```
 
 Creates a [SplayTreeMap] that contains all key/value pairs of [other]. Example:
@@ -144,7 +157,13 @@ print(mapOf); // {1: C, 2: B, 3: A, 4: D}
 ### SplayTreeMap.fromIterable()
 
 ```dart
-SplayTreeMap.fromIterable(Iterable iterable, {K Function(dynamic element)? key, V Function(dynamic element)? value, int Function(K key1, K key2)? compare, bool Function(dynamic potentialKey)? isValidKey})
+SplayTreeMap<K, V>.fromIterable(
+  Iterable<dynamic> iterable, {
+  K Function(dynamic)? key,
+  V Function(dynamic)? value,
+  int Function(K, K)? compare,
+  bool Function(dynamic)? isValidKey,
+})
 ```
 
 Creates a [SplayTreeMap] where the keys and values are computed from the [iterable].
@@ -166,7 +185,12 @@ print(mapFromIterable); // {11: 121, 12: 144, 13: 169, 14: 196}
 ### SplayTreeMap.fromIterables()
 
 ```dart
-SplayTreeMap.fromIterables(Iterable<K> keys, Iterable<V> values, [int Function(K key1, K key2)? compare, bool Function(dynamic potentialKey)? isValidKey])
+SplayTreeMap<K, V>.fromIterables(
+  Iterable<K> keys,
+  Iterable<V> values, [
+  int Function(K, K)? compare,
+  bool Function(dynamic)? isValidKey,
+])
 ```
 
 Creates a [SplayTreeMap] associating the given [keys] to [values].
@@ -184,107 +208,32 @@ final mapFromIterables = SplayTreeMap.fromIterables(keys, values);
 print(mapFromIterables); // {1: A, 2: B, 3: C, 4: D}
 ```
 
-### operator []()
+## 属性
 
-```dart
-V? operator [](Object? key)
-```
+* isEmpty
+* isNotEmpty
+* length
+* keys
+* values
+* entries
 
-### remove()
+## 运算符
 
-```dart
-V? remove(Object? key)
-```
+* operator []
+* operator []=
+* 
 
-### operator []=()
+## 方法
 
-```dart
-void operator []=(K key, V value)
-```
-
-### putIfAbsent()
-
-```dart
-V putIfAbsent(K key, V ifAbsent())
-```
-
-### update()
-
-```dart
-V update(K key, V update(V value), {V Function()? ifAbsent})
-```
-
-### updateAll()
-
-```dart
-void updateAll(V update(K key, V value))
-```
-
-### addAll()
-
-```dart
-void addAll(Map<K, V> other)
-```
-
-### isEmpty
-
-```dart
-bool get isEmpty
-```
-
-### isNotEmpty
-
-```dart
-bool get isNotEmpty
-```
-
-### forEach()
-
-```dart
-void forEach(void f(K key, V value))
-```
-
-### length
-
-```dart
-int get length
-```
-
-### clear()
-
-```dart
-void clear()
-```
-
-### containsKey()
-
-```dart
-bool containsKey(Object? key)
-```
-
-### containsValue()
-
-```dart
-bool containsValue(Object? value)
-```
-
-### keys
-
-```dart
-Iterable<K> get keys
-```
-
-### values
-
-```dart
-Iterable<V> get values
-```
-
-### entries
-
-```dart
-Iterable<MapEntry<K, V>> get entries
-```
+* remove()
+* putIfAbsent()
+* update()
+* updateAll()
+* addAll()
+* forEach()
+* clear()
+* containsKey()
+* containsValue()
 
 ### firstKey()
 
@@ -324,6 +273,10 @@ K? firstKeyAfter(K key)
 
 Get the first key in the map that is strictly larger than [key]. Returns `null` if such a key was not found.
 
+---
+
+
+
 # SplayTreeSet
 
 ```dart
@@ -348,7 +301,7 @@ final planets = SplayTreeSet<String>((a, b) => a.compareTo(b));
 
 To add data to a set, use [add] or [addAll].
 
-```
+```dart
 planets.add('Neptune');
 planets.addAll({'Venus', 'Mars', 'Earth', 'Jupiter'});
 print(planets); // {Earth, Jupiter, Mars, Neptune, Venus}
@@ -356,55 +309,55 @@ print(planets); // {Earth, Jupiter, Mars, Neptune, Venus}
 
 To check if the set is empty, use [isEmpty] or [isNotEmpty]. To find the number of elements in the set, use [length].
 
-```
+```dart
 final isEmpty = planets.isEmpty; // false
 final length = planets.length; // 5
 ```
 
 To check whether the set contains a specific element, use [contains].
 
-```
+```dart
 final marsExists = planets.contains('Mars'); // true
 ```
 
 To get element value using index, use [elementAt].
 
-```
+```dart
 final elementAt = planets.elementAt(1);
 print(elementAt); // Jupiter
 ```
 
 To make a copy of set, use [toSet].
 
-```
+```dart
 final copySet = planets.toSet(); // a `SplayTreeSet` with the same ordering.
 print(copySet); // {Earth, Jupiter, Mars, Neptune, Venus}
 ```
 
 To remove an element, use [remove].
 
-```
+```dart
 final removedValue = planets.remove('Mars'); // true
 print(planets); // {Earth, Jupiter, Neptune, Venus}
 ```
 
 To remove multiple elements at the same time, use [removeWhere].
 
-```
+```dart
 planets.removeWhere((element) => element.startsWith('J'));
 print(planets); // {Earth, Neptune, Venus}
 ```
 
 To removes all elements in this set that do not meet a condition, use [retainWhere].
 
-```
+```dart
 planets.retainWhere((element) => element.contains('Earth'));
 print(planets); // {Earth}
 ```
 
 To remove all elements and empty the set, use [clear].
 
-```
+```dart
 planets.clear();
 print(planets.isEmpty); // true
 print(planets); // {}
@@ -416,10 +369,15 @@ print(planets); // {}
 - [HashSet] the order of the objects in the iterations is not guaranteed.
 - [LinkedHashSet] objects stored based on insertion order.
 
+## 构造函数
+
 ### SplayTreeSet()
 
 ```dart
-SplayTreeSet([int Function(E key1, E key2)? compare, bool Function(dynamic potentialKey)? isValidKey])
+SplayTreeSet([
+  int Function(E key1, E key2)? compare,
+  bool Function(dynamic potentialKey)? isValidKey,
+])
 ```
 
 Create a new [SplayTreeSet] with the given compare function.
@@ -439,7 +397,11 @@ If omitted, the `isValidKey` function defaults to checking against the type para
 ### SplayTreeSet.from()
 
 ```dart
-SplayTreeSet.from(Iterable elements, [int Function(E key1, E key2)? compare, bool Function(dynamic potentialKey)? isValidKey])
+factory SplayTreeSet.from(
+  Iterable elements, [
+  int Function(E key1, E key2)? compare,
+  bool Function(dynamic potentialKey)? isValidKey,
+])
 ```
 
 Creates a [SplayTreeSet] that contains all [elements].
@@ -465,7 +427,11 @@ print(setFrom); // {10, 20, 30}
 ### SplayTreeSet.of()
 
 ```dart
-SplayTreeSet.of(Iterable<E> elements, [int Function(E key1, E key2)? compare, bool Function(dynamic potentialKey)? isValidKey])
+factory SplayTreeSet.of(
+  Iterable<E> elements, [
+  int Function(E key1, E key2)? compare,
+  bool Function(dynamic potentialKey)? isValidKey,
+])
 ```
 
 Creates a [SplayTreeSet] from [elements].
@@ -480,128 +446,31 @@ final setOf = SplayTreeSet<num>.of(baseSet);
 print(setOf); // {1, 2, 3}
 ```
 
-### cast()
+## 属性
 
-```dart
-Set<R> cast<R>()
-```
+* iterator
+* length
+* isEmpty
+* isNotEmpty
+* first
+* last
+* single
 
-### iterator
 
-```dart
-Iterator<E> get iterator
-```
 
-### length
+## 方法
 
-```dart
-int get length
-```
-
-### isEmpty
-
-```dart
-bool get isEmpty
-```
-
-### isNotEmpty
-
-```dart
-bool get isNotEmpty
-```
-
-### first
-
-```dart
-E get first
-```
-
-### last
-
-```dart
-E get last
-```
-
-### single
-
-```dart
-E get single
-```
-
-### contains()
-
-```dart
-bool contains(Object? element)
-```
-
-### add()
-
-```dart
-bool add(E element)
-```
-
-### remove()
-
-```dart
-bool remove(Object? object)
-```
-
-### addAll()
-
-```dart
-void addAll(Iterable<E> elements)
-```
-
-### removeAll()
-
-```dart
-void removeAll(Iterable<Object?> elements)
-```
-
-### retainAll()
-
-```dart
-void retainAll(Iterable<Object?> elements)
-```
-
-### lookup()
-
-```dart
-E? lookup(Object? object)
-```
-
-### intersection()
-
-```dart
-Set<E> intersection(Set<Object?> other)
-```
-
-### difference()
-
-```dart
-Set<E> difference(Set<Object?> other)
-```
-
-### union()
-
-```dart
-Set<E> union(Set<E> other)
-```
-
-### clear()
-
-```dart
-void clear()
-```
-
-### toSet()
-
-```dart
-Set<E> toSet()
-```
-
-### toString()
-
-```dart
-String toString()
-```
+* cast()
+* contains()
+* add()
+* remove()
+* addAll()
+* removeAll()
+* retainAll()
+* lookup()
+* intersection()
+* difference()
+* union()
+* clear()
+* toSet()
+* toString()

@@ -26,6 +26,8 @@ queue.removeLast();
 print(queue); // {1, 2, 3}
 ```
 
+## 构造函数
+
 ### Queue()
 
 ```dart
@@ -37,7 +39,7 @@ Creates a queue.
 ### Queue.from()
 
 ```dart
-Queue.from(Iterable elements)
+Queue<E>.from(Iterable elements)
 ```
 
 Creates a queue containing all [elements].
@@ -62,6 +64,8 @@ Creates a queue from [elements].
 
 The element order in the queue is as if the elements were added using [addLast] in the order provided by [elements].iterator.
 
+## 静态方法
+
 ### castFrom()
 
 ```dart
@@ -77,6 +81,8 @@ When a [T] value is stored into the adapted queue, the operation will throw unle
 If all accessed elements of [source] are actually instances of [T], and if all elements stored into the returned queue are actually instances of [S], then the returned queue can be used as a `Queue<T>`.
 
 Methods which accept `Object?` as argument, like [contains] and [remove], will pass the argument directly to this queue's method without any checks.
+
+## 方法
 
 ### cast()
 
@@ -182,6 +188,10 @@ void clear()
 
 Removes all elements in the queue. The size of the queue becomes zero.
 
+---
+
+
+
 # DoubleLinkedQueue
 
 ```dart
@@ -192,16 +202,18 @@ A [Queue] implementation based on a double-linked list.
 
 Allows constant time add, remove-at-ends and peek operations.
 
+## 构造函数
+
 ### DoubleLinkedQueue()
 
 ```dart
-DoubleLinkedQueue()
+DoubleLinkedQueue<E>()
 ```
 
 ### DoubleLinkedQueue.from()
 
 ```dart
-DoubleLinkedQueue.from(Iterable<dynamic> elements)
+DoubleLinkedQueue<E>.from(Iterable elements)
 ```
 
 Creates a double-linked queue containing all [elements].
@@ -219,96 +231,36 @@ Queue<SubType> subQueue =
 ### DoubleLinkedQueue.of()
 
 ```dart
-DoubleLinkedQueue.of(Iterable<E> elements)
+DoubleLinkedQueue<E>.of(Iterable<E> elements)
 ```
 
 Creates a double-linked queue from [elements].
 
 The element order in the queue is as if the elements were added using [addLast] in the order provided by [elements].iterator.
 
-### cast()
+## 属性
 
-```dart
-Queue<R> cast<R>()
-```
+* first
+* last
+* single
+* iterator
+* length
+* isEmpty
 
-### length
+## 方法
 
-```dart
-int get length
-```
-
-### addLast()
-
-```dart
-void addLast(E value)
-```
-
-### addFirst()
-
-```dart
-void addFirst(E value)
-```
-
-### add()
-
-```dart
-void add(E value)
-```
-
-### addAll()
-
-```dart
-void addAll(Iterable<E> iterable)
-```
-
-### removeLast()
-
-```dart
-E removeLast()
-```
-
-### removeFirst()
-
-```dart
-E removeFirst()
-```
-
-### remove()
-
-```dart
-bool remove(Object? o)
-```
-
-### removeWhere()
-
-```dart
-void removeWhere(bool test(E element))
-```
-
-### retainWhere()
-
-```dart
-void retainWhere(bool test(E element))
-```
-
-### first
-
-```dart
-E get first
-```
-
-### last
-
-```dart
-E get last
-```
-
-### single
-
-```dart
-E get single
-```
+* cast()
+* addLast()
+* addFirst()
+* add()
+* addAll()
+* removeLast()
+* removeFirst()
+* remove()
+* removeWhere()
+* retainWhere()
+* clear()
+* toString()
 
 ### firstEntry()
 
@@ -338,18 +290,6 @@ Returns the entry object corresponding to the last element of the queue, or `nul
 
 The entry objects can also be accessed using [firstEntry], and they can be iterated using [DoubleLinkedQueueEntry.nextEntry] and [DoubleLinkedQueueEntry.previousEntry].
 
-### isEmpty
-
-```dart
-bool get isEmpty
-```
-
-### clear()
-
-```dart
-void clear()
-```
-
 ### forEachEntry()
 
 ```dart
@@ -364,17 +304,9 @@ The entry objects can also be accessed using [firstEntry] and [lastEntry], and i
 
 The [action] function can use methods on [DoubleLinkedQueueEntry] to remove the entry or it can insert elements before or after the entry. If the current entry is removed, iteration continues with the entry that was following the current entry when [action] was called. Any elements inserted after the current element before it is removed will not be visited by the iteration.
 
-### iterator
+---
 
-```dart
-_DoubleLinkedQueueIterator<E> get iterator
-```
 
-### toString()
-
-```dart
-String toString()
-```
 
 # ListQueue
 
@@ -462,10 +394,12 @@ print(queue.isEmpty); // true
 print(queue); // {}
 ```
 
+## 构造函数
+
 ### ListQueue()
 
 ```dart
-ListQueue([int? initialCapacity])
+ListQueue<E>([int? initialCapacity])
 ```
 
 Create an empty queue.
@@ -475,7 +409,7 @@ If [initialCapacity] is given, prepare the queue for at least that many elements
 ### ListQueue.from()
 
 ```dart
-ListQueue.from(Iterable<dynamic> elements)
+ListQueue<E>.from(Iterable elements)
 ```
 
 Create a `ListQueue` containing all [elements].
@@ -501,7 +435,7 @@ print(queue); // {10, 20, 30}
 ### ListQueue.of()
 
 ```dart
-ListQueue.of(Iterable<E> elements)
+ListQueue<E>.of(Iterable<E> elements)
 ```
 
 Create a `ListQueue` from [elements].
@@ -514,83 +448,32 @@ final numQueue = ListQueue<num>.of(baseQueue);
 print(numQueue); // {1.0, 2.0, 3.0}
 ```
 
-### cast()
+## 属性
 
-```dart
-Queue<R> cast<R>()
-```
+* iterator
+* isEmpty
+* length
+* first
+* last
+* single
 
-### iterator
 
-```dart
-Iterator<E> get iterator
-```
 
-### forEach()
+## 方法
 
-```dart
-void forEach(void f(E element))
-```
-
-### isEmpty
-
-```dart
-bool get isEmpty
-```
-
-### length
-
-```dart
-int get length
-```
-
-### first
-
-```dart
-E get first
-```
-
-### last
-
-```dart
-E get last
-```
-
-### single
-
-```dart
-E get single
-```
-
-### elementAt()
-
-```dart
-E elementAt(int index)
-```
-
-### toList()
-
-```dart
-List<E> toList({bool growable = true})
-```
-
-### add()
-
-```dart
-void add(E value)
-```
-
-### addAll()
-
-```dart
-void addAll(Iterable<E> elements)
-```
-
-### remove()
-
-```dart
-bool remove(Object? value)
-```
+* cast()
+* forEach()
+* elementAt()
+* toList()
+* add()
+* addAll()
+* remove()
+* clear()
+* addLast()
+* addFirst()
+* removeFirst()
+* removeLast()
+* toString()
 
 ### removeWhere()
 
@@ -611,39 +494,3 @@ void retainWhere(bool test(E element))
 Remove all elements not matched by [test].
 
 This method is inefficient since it works by repeatedly removing single elements, each of which can take linear time.
-
-### clear()
-
-```dart
-void clear()
-```
-
-### toString()
-
-```dart
-String toString()
-```
-
-### addLast()
-
-```dart
-void addLast(E value)
-```
-
-### addFirst()
-
-```dart
-void addFirst(E value)
-```
-
-### removeFirst()
-
-```dart
-E removeFirst()
-```
-
-### removeLast()
-
-```dart
-E removeLast()
-```

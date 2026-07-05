@@ -6,6 +6,10 @@ typedef ZoneCallback<R> = R Function()
 
 A no-argument function, like the argument to `Zone.run`.
 
+---
+
+
+
 # ZoneUnaryCallback
 
 ```dart
@@ -13,6 +17,10 @@ typedef ZoneUnaryCallback<R, T> = R Function(T)
 ```
 
 A one-argument function, like the argument to `Zone.runUnary`.
+
+---
+
+
 
 # ZoneBinaryCallback
 
@@ -22,10 +30,19 @@ typedef ZoneBinaryCallback<R, T1, T2> = R Function(T1, T2)
 
 A two-argument function, like the argument to `Zone.runBinary`.
 
+---
+
+
+
 # runZoned()
 
 ```dart
-R runZoned<R>(R body(), {Map<Object?, Object?>? zoneValues, ZoneSpecification? zoneSpecification, Function? onError})
+R runZoned<R>(
+  R body(), {
+  Map<Object?, Object?>? zoneValues, 
+  ZoneSpecification? zoneSpecification, 
+  Function? onError
+})
 ```
 
 Runs [body] in its own zone.
@@ -60,10 +77,19 @@ If the [ZoneSpecification.handleUncaughtError] is set, or the deprecated [onErro
 
 See [runZonedGuarded] in place of using the deprected [onError] argument. If [onError] is provided this function also tries to catch and handle synchronous errors from [body], but may throw an error anyway returning `null` if the generic argument [R] is not nullable.
 
+---
+
+
+
 # runZonedGuarded()
 
 ```dart
-R? runZonedGuarded<R>(R body(), void onError(Object error, StackTrace stack), {Map<Object?, Object?>? zoneValues, ZoneSpecification? zoneSpecification})
+R? runZonedGuarded<R>(
+  R body(), 
+  void onError(Object error, StackTrace stack), {
+  Map<Object?, Object?>? zoneValues, 
+  ZoneSpecification? zoneSpecification
+})
 ```
 
 Runs [body] in its own error zone.

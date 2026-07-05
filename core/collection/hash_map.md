@@ -110,10 +110,18 @@ print(planets.isEmpty); // true
 - [LinkedHashMap] iterates in key insertion order.
 - [SplayTreeMap] iterates the keys in sorted order.
 
+
+
+## 构造函数
+
 ### HashMap()
 
 ```dart
-HashMap({bool Function(K, K)? equals, int Function(K)? hashCode, bool Function(dynamic)? isValidKey})
+HashMap<K, V>({
+  bool equals( K, K )?,
+  int hashCode( K )?,
+  bool isValidKey( dynamic )?,
+})
 ```
 
 Creates an unordered hash-table based [Map].
@@ -146,7 +154,7 @@ Likewise, if `equals` is [identical], `hashCode` is [identityHashCode] and `isVa
 ### HashMap.identity()
 
 ```dart
-HashMap.identity()
+HashMap<K, V>.identity()
 ```
 
 Creates an unordered identity-based map.
@@ -162,7 +170,7 @@ HashMap<K, V>(equals: identical, hashCode: identityHashCode)
 ### HashMap.from()
 
 ```dart
-HashMap.from(Map<dynamic, dynamic> other)
+HashMap<K, V>.from( Map other )
 ```
 
 Creates a [HashMap] that contains all key/value pairs of [other].
@@ -178,7 +186,7 @@ print(fromBaseMap); // {1: A, 2: B, 3: C}
 ### HashMap.of()
 
 ```dart
-HashMap.of(Map<K, V> other)
+HashMap<K, V>.of( Map<K, V> other )
 ```
 
 Creates a [HashMap] that contains all key/value pairs of [other]. Example:
@@ -192,7 +200,11 @@ print(mapOf); // {1: A, 2: B, 3: C}
 ### HashMap.fromIterable()
 
 ```dart
-HashMap.fromIterable(Iterable iterable, {K Function(dynamic element)? key, V Function(dynamic element)? value})
+HashMap<K, V>.fromIterable(
+  Iterable iterable, {
+  K key( dynamic element )?,
+  V value( dynamic element )?,
+})
 ```
 
 Creates a [HashMap] where the keys and values are computed from the [iterable].
@@ -213,7 +225,7 @@ print(mapFromIterable); // {11: 121, 12: 144, 13: 169, 14: 196}
 ### HashMap.fromIterables()
 
 ```dart
-HashMap.fromIterables(Iterable<K> keys, Iterable<V> values)
+HashMap<K, V>.fromIterables(Iterable<K> keys, Iterable<V> values)
 ```
 
 Creates a [HashMap] associating the given [keys] to [values].
@@ -235,7 +247,7 @@ print(mapFromIterables);
 ### HashMap.fromEntries()
 
 ```dart
-HashMap.fromEntries(Iterable<MapEntry<K, V>> entries)
+HashMap<K, V>.fromEntries(Iterable<MapEntry<K, V>> entries)
 ```
 
 Creates a [HashMap] containing the entries of [entries].

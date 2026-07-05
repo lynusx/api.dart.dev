@@ -27,6 +27,10 @@ The `FutureOr<int>` type is actually the "type union" of the types `int` and `Fu
 
 As a corollary, `FutureOr<Object>` is equivalent to `FutureOr<FutureOr<Object>>`, `FutureOr<Future<Object>>` is equivalent to `Future<Object>`.
 
+---
+
+
+
 # Future
 
 ```dart
@@ -148,10 +152,12 @@ Futures can have more than one callback-pair registered. Each successor is treat
 
 A future may also fail to ever complete. In that case, no callbacks are called. That situation should generally be avoided if possible, unless it's very clearly documented.
 
+## 构造函数
+
 ### Future()
 
 ```dart
-Future(FutureOr<T> computation())
+Future<T>(FutureOr<T> computation())
 ```
 
 Creates a future containing the result of calling [computation] asynchronously with [Timer.run].
@@ -165,7 +171,7 @@ If a non-future value is returned, the returned future is completed with that va
 ### Future.microtask()
 
 ```dart
-Future.microtask(FutureOr<T> computation())
+Future<T>.microtask(FutureOr<T> computation())
 ```
 
 Creates a future containing the result of calling [computation] asynchronously with [scheduleMicrotask].
@@ -179,7 +185,7 @@ If calling [computation] returns a non-future value, the returned future is comp
 ### Future.sync()
 
 ```dart
-Future.sync(FutureOr<T> computation())
+Future<T>.sync(FutureOr<T> Function() computation)
 ```
 
 The result of calling [computation] as a future.
@@ -207,7 +213,8 @@ To create a future with a known value, use [Future.syncValue] instead, as `Futur
 ### Future.syncValue()
 
 ```dart
-Future.syncValue(T value)
+@Since.new("3.10")
+Future<T>.syncValue( T value )
 ```
 
 Creates a future completed with [value].
@@ -219,7 +226,7 @@ If a synchronous computation can throw, rather than doing `Future.syncValue(comp
 ### Future.value()
 
 ```dart
-Future.value([FutureOr<T>? value])
+Future<T>.value([FutureOr<T>? value])
 ```
 
 Creates a future completed with [value].
@@ -245,7 +252,7 @@ final result = await getFuture();
 ### Future.error()
 
 ```dart
-Future.error(Object error, [StackTrace? stackTrace])
+Future<T>.error(Object error, [StackTrace? stackTrace])
 ```
 
 Creates a future that completes with an error.
@@ -267,7 +274,7 @@ final error = await getFuture(); // Throws.
 ### Future.delayed()
 
 ```dart
-Future.delayed(Duration duration, [FutureOr<T> Function()? computation])
+Future<T>.delayed(Duration duration, [FutureOr<T> Function()? computation])
 ```
 
 Creates a future that runs its computation after a delay.
@@ -294,6 +301,8 @@ var later = await Future.delayed(const Duration(seconds: 1), () {
 print(now.difference(later)); // At least a second.
 ```
 
+## 静态方法
+
 ### pause()
 
 ```dart
@@ -307,7 +316,11 @@ Like [Future.delayed], but does not perform any action, and cannot complete with
 ### wait()
 
 ```dart
-Future<List<T>> wait<T>(Iterable<Future<T>> futures, {bool eagerError = false, void cleanUp(T successValue)})
+Future<List<T>> wait<T>(
+  Iterable<Future<T>> futures, {
+  bool eagerError = false, 
+  void cleanUp(T successValue)
+})
 ```
 
 Waits for multiple futures to complete and collects their results.
@@ -434,10 +447,15 @@ void main() async {
 // Outputs: 'Finished with 3'
 ```
 
+## 方法
+
 ### then()
 
 ```dart
-Future<R> then<R>(FutureOr<R> onValue(T value), {Function? onError})
+Future<R> then<R>(
+  FutureOr<R> onValue( T value ), {
+  Function? onError,
+})
 ```
 
 Register callbacks to be called when this future completes.
@@ -461,7 +479,10 @@ Note that futures don't delay reporting of errors until listeners are added. If 
 ### catchError()
 
 ```dart
-Future<T> catchError(Function onError, {bool test(Object error)})
+Future<T> catchError(
+  Function onError, {
+  bool test( Object error )?,
+})
 ```
 
 Handles errors emitted by this [Future].
@@ -563,7 +584,10 @@ If the future never completes, the stream will not produce any events.
 ### timeout()
 
 ```dart
-Future<T> timeout(Duration timeLimit, {FutureOr<T> onTimeout()})
+Future<T> timeout(
+  Duration timeLimit, {
+  FutureOr<T> onTimeout()?,
+})
 ```
 
 Stop waiting for this future after [timeLimit] has passed.
@@ -630,10 +654,15 @@ Future<void> waitThrow(String message) async {
 }
 ```
 
+---
+
+
+
 # unawaited()
 
 ```dart
-void unawaited(Future<void>? future)
+@Since.new("2.15")
+void unawaited( Future<void>? future )
 ```
 
 Explicitly ignores a future.
@@ -641,6 +670,10 @@ Explicitly ignores a future.
 Not all futures need to be awaited. The Dart linter has an optional ["unawaited futures" lint](https://dart.dev/lints/unawaited_futures) which enforces that potential futures (expressions with a static type of [Future] or `Future?`) in asynchronous functions are handled _somehow_. If a particular future value doesn't need to be awaited, you can call `unawaited(...)` with it, which will avoid the lint, simply because the expression no longer has type [Future]. Using `unawaited` has no other effect. You should use `unawaited` to convey the _intention_ of deliberately not waiting for the future.
 
 If the future completes with an error, it was likely a mistake to not await it. That error will still occur and will be considered unhandled unless the same future is awaited (or otherwise handled) elsewhere too. Because of that, `unawaited` should only be used for futures that are _expected_ to complete with a value. You can use [FutureExtensions.ignore] if you also don't want to know about errors from this future.
+
+---
+
+
 
 # FutureExtensions
 
@@ -652,10 +685,15 @@ Convenience methods on futures.
 
 Adds functionality to futures which makes it easier to write well-typed asynchronous code.
 
+## 方法
+
 ### onError()
 
 ```dart
-Future<T> onError<E extends Object>(FutureOr<T> handleError(E error, StackTrace stackTrace), {bool test(E error)})
+Future<T> onError<E extends Object>(
+  FutureOr<T> handleError( E error, StackTrace stackTrace ), {
+  bool test( E error )?,
+})
 ```
 
 Handles errors on this future.
@@ -694,6 +732,7 @@ This method is effectively a more precisely typed version of [Future.catchError]
 ### ignore()
 
 ```dart
+@Since.new("2.14")
 void ignore()
 ```
 
@@ -702,6 +741,10 @@ Completely ignores this future and its result.
 Not all futures are important, not even if they contain errors, for example if a request was made, but the response is no longer needed. Simply ignoring a future can result in uncaught asynchronous errors. This method instead handles (and ignores) any values or errors coming from this future, making it safe to otherwise ignore the future.
 
 Use `ignore` to signal that the result of the future is no longer important to the program, not even if it's an error. If you merely want to silence the ["unawaited futures" lint](https://dart.dev/lints/unawaited_futures), use the [unawaited] function instead. That will ensure that an unexpected error is still reported.
+
+---
+
+
 
 # TimeoutException
 
@@ -733,11 +776,9 @@ The duration that was exceeded.
 TimeoutException(String? message, [Duration? duration])
 ```
 
-### toString()
+---
 
-```dart
-String toString()
-```
+
 
 # Completer
 
@@ -786,10 +827,12 @@ class AsyncOperation {
 }
 ```
 
+## 构造函数
+
 ### Completer()
 
 ```dart
-Completer()
+Completer<T>()
 ```
 
 Creates a new completer.
@@ -811,7 +854,7 @@ later: {
 ### Completer.sync()
 
 ```dart
-Completer.sync()
+Completer<T>.sync()
 ```
 
 Completes the future synchronously.
@@ -850,6 +893,8 @@ stream.listen(print, onDone: () {
 });
 ```
 
+## 属性
+
 ### future
 
 ```dart
@@ -859,6 +904,20 @@ Future<T> get future
 The future that is completed by this completer.
 
 The future that is completed when [complete] or [completeError] is called.
+
+### isCompleted
+
+```dart
+bool get isCompleted
+```
+
+Whether the [future] has been completed.
+
+Reflects whether [complete] or [completeError] has been called. A `true` value doesn't necessarily mean that listeners of this future have been invoked yet, either because the completer usually waits until a later microtask to propagate the result, or because [complete] was called with a future that hasn't completed yet.
+
+When this value is `true`, [complete] and [completeError] must not be called again.
+
+## 方法
 
 ### complete()
 
@@ -923,15 +982,3 @@ void doStuff() {
 ```
 
 See the [Zones article](https://dart.dev/articles/archive/zones#handling-uncaught-errors) for details on uncaught errors.
-
-### isCompleted
-
-```dart
-bool get isCompleted
-```
-
-Whether the [future] has been completed.
-
-Reflects whether [complete] or [completeError] has been called. A `true` value doesn't necessarily mean that listeners of this future have been invoked yet, either because the completer usually waits until a later microtask to propagate the result, or because [complete] was called with a future that hasn't completed yet.
-
-When this value is `true`, [complete] and [completeError] must not be called again.
