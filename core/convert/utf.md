@@ -1,23 +1,31 @@
 # unicodeReplacementCharacterRune
 
 ```dart
-int unicodeReplacementCharacterRune
+const int unicodeReplacementCharacterRune = 0xFFFD;
 ```
 
 The Unicode Replacement character `U+FFFD` (�).
 
+---
+
+
+
 # unicodeBomCharacterRune
 
 ```dart
-int unicodeBomCharacterRune
+const int unicodeBomCharacterRune = 0xFEFF;
 ```
 
 The Unicode Byte Order Marker (BOM) character `U+FEFF`.
 
+---
+
+
+
 # utf8
 
 ```dart
-Utf8Codec utf8
+const Utf8Codec utf8 = Utf8Codec();
 ```
 
 An instance of the default implementation of the [Utf8Codec].
@@ -32,6 +40,10 @@ var decoded = utf8.decode([0x62, 0x6c, 0xc3, 0xa5, 0x62, 0xc3, 0xa6,
                            0x72, 0x67, 0x72, 0xc3, 0xb8, 0x64]);
 ```
 
+---
+
+
+
 # Utf8Codec
 
 ```dart
@@ -40,17 +52,21 @@ final class Utf8Codec extends Encoding {}
 
 A [Utf8Codec] encodes strings to utf-8 code units (bytes) and decodes UTF-8 code units to strings.
 
+## 构造函数
+
 ### Utf8Codec()
 
 ```dart
-Utf8Codec({bool _allowMalformed = false})
+Utf8Codec({bool allowMalformed = false})
 ```
 
 Instantiates a new [Utf8Codec].
 
-The optional [_allowMalformed] argument defines how [decoder] (and [decode]) deal with invalid or unterminated character sequences.
+The optional [allowMalformed] argument defines how [decoder] (and [decode]) deal with invalid or unterminated character sequences.
 
 If it is `true` (and not overridden at the method invocation) [decode] and the [decoder] replace invalid (or unterminated) octet sequences with the Unicode Replacement character `U+FFFD` (�). Otherwise they throw a [FormatException].
+
+## 属性
 
 ### name
 
@@ -60,10 +76,27 @@ String get name
 
 The name of this codec is "utf-8".
 
+### encoder
+
+```dart
+Utf8Encoder get encoder
+```
+
+### decoder
+
+```dart
+Utf8Decoder get decoder
+```
+
+## 方法
+
 ### decode()
 
 ```dart
-String decode(List<int> codeUnits, {bool? allowMalformed})
+String decode(
+  List<int> codeUnits, {
+  bool? allowMalformed
+})
 ```
 
 Decodes the UTF-8 [codeUnits] (a list of unsigned 8-bit integers) to the corresponding string.
@@ -82,17 +115,9 @@ Uint8List encode(String string)
 
 Encodes the [string] as UTF-8.
 
-### encoder
+---
 
-```dart
-Utf8Encoder get encoder
-```
 
-### decoder
-
-```dart
-Utf8Decoder get decoder
-```
 
 # Utf8Encoder
 
@@ -111,11 +136,15 @@ final encodedSample = utf8Encoder.convert(sample);
 print(encodedSample);
 ```
 
+## 构造函数
+
 ### Utf8Encoder()
 
 ```dart
-Utf8Encoder()
+const Utf8Encoder()
 ```
+
+## 方法
 
 ### convert()
 
@@ -144,6 +173,10 @@ The converter works more efficiently if the given [sink] is a [ByteConversionSin
 ```dart
 Stream<List<int>> bind(Stream<String> stream)
 ```
+
+---
+
+
 
 # Utf8Decoder
 
@@ -179,17 +212,21 @@ final decodedBytes = utf8Decoder.convert(encodedBytes);
 print(decodedBytes); // �
 ```
 
+## 构造函数
+
 ### Utf8Decoder()
 
 ```dart
-Utf8Decoder({bool _allowMalformed = false})
+Utf8Decoder({bool allowMalformed = false})
 ```
 
 Instantiates a new [Utf8Decoder].
 
-The optional [_allowMalformed] argument defines how [convert] deals with invalid or unterminated character sequences.
+The optional [allowMalformed] argument defines how [convert] deals with invalid or unterminated character sequences.
 
 If it is `true`, [convert] replaces invalid (or unterminated) character sequences with the Unicode Replacement character `U+FFFD` (�). Otherwise it throws a [FormatException].
+
+## 方法
 
 ### convert()
 

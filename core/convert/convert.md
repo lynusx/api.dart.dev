@@ -10,7 +10,7 @@ import 'dart:convert';
 
 Two commonly used converters are the top-level instances of [JsonCodec] and [Utf8Codec], named [json] and [utf8], respectively.
 
-## JSON
+### JSON
 
 JSON is a simple text format for representing structured objects and collections.
 
@@ -27,7 +27,7 @@ var decoded = json.decode('["foo", { "bar": 499 }]');
 
 For more information, see also [JsonEncoder] and [JsonDecoder].
 
-## UTF-8
+### UTF-8
 
 A [Utf8Codec] encodes strings to UTF-8 code units (bytes) and decodes UTF-8 code units to strings.
 
@@ -45,7 +45,7 @@ var decoded = utf8.decode([
 
 For more information, see also [Utf8Encoder] and [Utf8Decoder].
 
-## ASCII
+### ASCII
 
 An [AsciiCodec] encodes strings as ASCII codes stored as bytes and decodes ASCII bytes to strings. Not all characters can be represented as ASCII, so not all strings can be successfully converted.
 
@@ -61,7 +61,7 @@ var decoded = ascii.decode([0x54, 0x68, 0x69, 0x73, 0x20, 0x69, 0x73,
 
 For more information, see also [AsciiEncoder] and [AsciiDecoder].
 
-## Latin-1
+### Latin-1
 
 A [Latin1Codec] encodes strings to ISO Latin-1 (aka ISO-8859-1) bytes and decodes Latin-1 bytes to strings. Not all characters can be represented as Latin-1, so not all strings can be successfully converted.
 
@@ -77,7 +77,7 @@ var decoded = latin1.decode([0x62, 0x6c, 0xe5, 0x62, 0xe6,
 
 For more information, see also [Latin1Encoder] and [Latin1Decoder].
 
-## Base64
+### Base64
 
 A [Base64Codec] encodes bytes using the default base64 alphabet, decodes using both the base64 and base64url alphabets, does not allow invalid characters and requires padding.
 
@@ -93,7 +93,7 @@ var decoded = base64.decode('YmzDpWLDpnJncsO4ZAo=');
 
 For more information, see also [Base64Encoder] and [Base64Decoder].
 
-## Converters
+### Converters
 
 Converters are often used with streams to transform the data that comes through the stream as it becomes available. The following code uses two converters. The first is a UTF-8 decoder, which converts the data from bytes to UTF-8 as it is read from a file, The second is an instance of [LineSplitter], which splits the data on newline boundaries.
 
@@ -114,7 +114,7 @@ stream.transform(utf8.decoder)
 
 See the documentation for the [Codec] and [Converter] classes for information about creating your own converters.
 
-## HTML Escape
+### HTML Escape
 
 [HtmlEscape] converter escapes characters with special meaning in HTML. The converter finds characters that are significant in HTML source and replaces them with corresponding HTML entities.
 
@@ -152,5 +152,3 @@ unescaped = 'Path: /system/';
 escaped = htmlEscape.convert(unescaped);
 print(escaped); // Path: /system/
 ```
-
-{@category Core}

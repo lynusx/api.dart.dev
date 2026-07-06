@@ -34,11 +34,15 @@ for (var i = 0; i < sampleTextLines.length; i++) {
 // 4:  language with C-style syntax
 ```
 
+## 构造函数
+
 ### LineSplitter()
 
 ```dart
-LineSplitter()
+const LineSplitter()
 ```
+
+## 静态方法
 
 ### split()
 

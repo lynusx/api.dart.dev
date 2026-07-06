@@ -1,7 +1,7 @@
 # htmlEscape
 
 ```dart
-HtmlEscape htmlEscape
+HtmlEscape const htmlEscape
 ```
 
 A `String` converter that converts characters to HTML entities.
@@ -13,6 +13,10 @@ The general converter escapes all characters that are meaningful in HTML attribu
 If the context where the text will be inserted is known in more detail, it's possible to omit escaping some characters (like quotes when not inside an attribute value).
 
 The escaped text should only be used inside quoted HTML attributes values or as text content of a normal element. Using the escaped text inside a tag, but not inside a quoted attribute value, is still dangerous.
+
+---
+
+
 
 # HtmlEscapeMode
 
@@ -64,39 +68,27 @@ escaped = htmlEscape.convert(unescaped);
 print(escaped); // Path: /system/
 ```
 
-### escapeLtGt
+## 构造函数
+
+### HtmlEscapeMode()
 
 ```dart
-bool escapeLtGt
+HtmlEscapeMode({
+  String name = "custom",
+  bool escapeLtGt = false,
+  bool escapeQuot = false,
+  bool escapeApos = false,
+  bool escapeSlash = false,
+})
 ```
 
-Whether to escape '<' and '>'.
+Create a custom escaping mode.
 
-### escapeQuot
+The [name] is only used as the result of [toString], and defaults to `'custom'` if not provided.
 
-```dart
-bool escapeQuot
-```
+All modes escape `&`. The mode can further be set to escape `<` and `>` ([escapeLtGt]), `"` ([escapeQuot]), `'` ([escapeApos]), and/or `/` ([escapeSlash]).
 
-Whether to escape '"' (quote).
-
-### escapeApos
-
-```dart
-bool escapeApos
-```
-
-Whether to escape "'" (apostrophe).
-
-### escapeSlash
-
-```dart
-bool escapeSlash
-```
-
-Whether to escape "/" (forward slash, solidus).
-
-Escaping a slash is recommended to avoid cross-site scripting attacks by [the Open Web Application Security Project](<https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet#RULE_.231_-_HTML_Escape_Before_Inserting_Untrusted_Data_into_HTML_Element_Content>)
+## 静态属性
 
 ### unknown
 
@@ -146,23 +138,45 @@ The escaping only works for elements with normal HTML content, and not, for exam
 
 Escapes `<` and `>` characters.
 
-### HtmlEscapeMode()
+## 属性
+
+### escapeLtGt
 
 ```dart
-HtmlEscapeMode({String _name = "custom", bool escapeLtGt = false, bool escapeQuot = false, bool escapeApos = false, bool escapeSlash = false})
+bool escapeLtGt
 ```
 
-Create a custom escaping mode.
+Whether to escape '<' and '>'.
 
-The [_name] is only used as the result of [toString], and defaults to `'custom'` if not provided.
-
-All modes escape `&`. The mode can further be set to escape `<` and `>` ([escapeLtGt]), `"` ([escapeQuot]), `'` ([escapeApos]), and/or `/` ([escapeSlash]).
-
-### toString()
+### escapeQuot
 
 ```dart
-String toString()
+bool escapeQuot
 ```
+
+Whether to escape '"' (quote).
+
+### escapeApos
+
+```dart
+bool escapeApos
+```
+
+Whether to escape "'" (apostrophe).
+
+### escapeSlash
+
+```dart
+bool escapeSlash
+```
+
+Whether to escape "/" (forward slash, solidus).
+
+Escaping a slash is recommended to avoid cross-site scripting attacks by [the Open Web Application Security Project](<https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet#RULE_.231_-_HTML_Escape_Before_Inserting_Untrusted_Data_into_HTML_Element_Content>)
+
+---
+
+
 
 # HtmlEscape
 
@@ -209,13 +223,7 @@ escaped = htmlEscape.convert(unescaped);
 print(escaped); // Path: &#47;system&#47;
 ```
 
-### mode
-
-```dart
-HtmlEscapeMode mode
-```
-
-The [HtmlEscapeMode] used by the converter.
+## 构造函数
 
 ### HtmlEscape()
 
@@ -226,6 +234,18 @@ HtmlEscape([HtmlEscapeMode mode = HtmlEscapeMode.unknown])
 Create converter that escapes HTML characters.
 
 If [mode] is provided as either [HtmlEscapeMode.attribute] or [HtmlEscapeMode.element], only the corresponding subset of HTML characters is escaped. The default is to escape all HTML characters.
+
+## 属性
+
+### mode
+
+```dart
+HtmlEscapeMode mode
+```
+
+The [HtmlEscapeMode] used by the converter.
+
+## 方法
 
 ### convert()
 

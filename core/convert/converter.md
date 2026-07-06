@@ -8,11 +8,15 @@ A [Converter] converts data from one representation into another.
 
 The [Converter] class provides a default implementation for every method other than [convert].
 
+## 构造函数
+
 ### Converter()
 
 ```dart
-Converter()
+const Converter<S, T>()
 ```
+
+## 静态方法
 
 ### castFrom()
 
@@ -25,6 +29,8 @@ Adapts [source] to be a `Converter<TS, TT>`.
 This allows [source] to be used at the new type, but at run-time it must satisfy the requirements of both the new type and its original type.
 
 Conversion input must be both [SS] and [TS] and the output created by [source] for those input must be both [ST] and [TT].
+
+## 方法
 
 ### convert()
 

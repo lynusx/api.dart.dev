@@ -10,11 +10,29 @@ An encoding is a [Codec] encoding strings to lists of byte.
 
 This class provides a default implementation of [decodeStream], which is not incremental. It collects the entire input before decoding. Subclasses can choose to use that implementation, or implement a more efficient stream decoding.
 
+## 构造函数
+
 ### Encoding()
 
 ```dart
-Encoding()
+const Encoding()
 ```
+
+## 静态方法
+
+### getByName()
+
+```dart
+Encoding? getByName(String? name)
+```
+
+Returns an [Encoding] for a named character set.
+
+The names used are the IANA official names for the character set (see [IANA character sets](http://www.iana.org/assignments/character-sets/character-sets.xml)). The names are case insensitive.
+
+If character set is not supported `null` is returned.
+
+## 属性
 
 ### encoder
 
@@ -36,12 +54,6 @@ Returns the decoder of `this`, converting from `List<int>` to `String`.
 
 It may be stateful and should not be reused.
 
-### decodeStream()
-
-```dart
-Future<String> decodeStream(Stream<List<int>> byteStream)
-```
-
 ### name
 
 ```dart
@@ -52,16 +64,10 @@ Name of the encoding.
 
 If the encoding is standardized, this is the lower-case version of one of the IANA official names for the character set (see http://www.iana.org/assignments/character-sets/character-sets.xml)
 
-### getByName()
+## 方法
+
+### decodeStream()
 
 ```dart
-Encoding? getByName(String? name)
+Future<String> decodeStream(Stream<List<int>> byteStream)
 ```
-
-Returns an [Encoding] for a named character set.
-
-The names used are the IANA official names for the character set (see [IANA character sets][]). The names are case insensitive.
-
-[IANA character sets]: http://www.iana.org/assignments/character-sets/character-sets.xml
-
-If character set is not supported `null` is returned.
