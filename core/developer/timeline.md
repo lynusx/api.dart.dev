@@ -4,7 +4,7 @@
 typedef TimelineSyncFunction<T> = T Function()
 ```
 
-A typedef for the function argument to [Timeline.timeSync].
+[Timeline.timeSync] 函数参数的类型定义。
 
 # Flow
 
@@ -12,9 +12,9 @@ A typedef for the function argument to [Timeline.timeSync].
 final class Flow {}
 ```
 
-A class to represent Flow events.
+用于表示 Flow 事件的类。
 
-[Flow] objects are used to thread flow events between timeline slices, for example, those created with the [Timeline] class below. Adding [Flow] objects cause arrows to be drawn between slices in Chrome's trace viewer. The arrows start at e.g [Timeline] events that are passed a [Flow.begin] object, go through [Timeline] events that are passed a [Flow.step] object, and end at [Timeline] events that are passed a [Flow.end] object, all having the same [Flow.id]. For example:
+[Flow] 对象用于在时间线切片（例如下方 [Timeline] 类创建的切片）之间穿引流事件（flow event）。添加 [Flow] 对象会使 Chrome 追踪查看器中的切片之间绘制箭头。箭头起始于传入了 [Flow.begin] 对象的 [Timeline] 事件，经过传入了 [Flow.step] 对象的 [Timeline] 事件，最终结束于传入了 [Flow.end] 对象、且具有相同 [Flow.id] 的事件。例如：
 
 ```dart
 var flow = Flow.begin();
@@ -37,7 +37,7 @@ Timeline.timeSync('flow_test', () {
 int id
 ```
 
-The flow id of the flow event.
+该 flow 事件的 flow id。
 
 ### begin()
 
@@ -45,9 +45,9 @@ The flow id of the flow event.
 Flow begin({int? id})
 ```
 
-A "begin" Flow event.
+一个 “begin” 类型的 Flow 事件。
 
-When passed to a [Timeline] method, generates a "begin" Flow event. If [id] is not provided, an id that conflicts with no other Dart-generated flow id's will be generated.
+当传递给 [Timeline] 的方法时，生成一个 “begin” Flow 事件。如果未提供 [id]，将生成一个不与任何其他 Dart 生成的 flow id 冲突的 id。
 
 ### step()
 
@@ -55,9 +55,9 @@ When passed to a [Timeline] method, generates a "begin" Flow event. If [id] is n
 Flow step(int id)
 ```
 
-A "step" Flow event.
+一个 “step” 类型的 Flow 事件。
 
-When passed to a [Timeline] method, generates a "step" Flow event. The [id] argument is required. It can come either from another [Flow] event, or some id that comes from the environment.
+当传递给 [Timeline] 的方法时，生成一个 “step” Flow 事件。[id] 参数为必需项，可以来自另一个 [Flow] 事件，也可以是来自环境的某个 id。
 
 ### end()
 
@@ -65,9 +65,9 @@ When passed to a [Timeline] method, generates a "step" Flow event. The [id] argu
 Flow end(int id)
 ```
 
-An "end" Flow event.
+一个 “end” 类型的 Flow 事件。
 
-When passed to a [Timeline] method, generates a "end" Flow event. The [id] argument is required. It can come either from another [Flow] event, or some id that comes from the environment.
+当传递给 [Timeline] 的方法时，生成一个 “end” Flow 事件。[id] 参数为必需项，可以来自另一个 [Flow] 事件，也可以是来自环境的某个 id。
 
 # Timeline
 
@@ -75,9 +75,9 @@ When passed to a [Timeline] method, generates a "end" Flow event. The [id] argum
 abstract final class Timeline {}
 ```
 
-Add to the timeline.
+向时间线添加内容。
 
-[Timeline]'s methods add synchronous events to the timeline. When generating a timeline in Chrome's tracing format, using [Timeline] generates "Complete" events. [Timeline]'s [startSync] and [finishSync] can be used explicitly, or implicitly by wrapping a closure in [timeSync]. For example:
+[Timeline] 的方法向时间线添加同步事件。在生成 Chrome 追踪格式的时间线时，使用 [Timeline] 会生成 “Complete” 事件。[Timeline] 的 [startSync] 和 [finishSync] 可以显式调用，也可以通过将闭包包装在 [timeSync] 中隐式调用。例如：
 
 ```dart
 Timeline.startSync("Doing Something");
@@ -85,7 +85,7 @@ doSomething();
 Timeline.finishSync();
 ```
 
-Or:
+或者：
 
 ```dart
 Timeline.timeSync("Doing Something", () {
@@ -99,7 +99,7 @@ Timeline.timeSync("Doing Something", () {
 void startSync(String name, {Map? arguments, Flow? flow})
 ```
 
-Start a synchronous operation labeled [name]. Optionally takes a [Map] of [arguments]. This slice may also optionally be associated with a [Flow] event. This operation must be finished before returning to the event queue.
+开始一个标记为 [name] 的同步操作。可选地接受一个 [arguments] 映射。此切片还可以选择关联一个 [Flow] 事件。此操作必须在返回事件队列之前结束。
 
 ### finishSync()
 
@@ -107,7 +107,7 @@ Start a synchronous operation labeled [name]. Optionally takes a [Map] of [argum
 void finishSync()
 ```
 
-Finish the last synchronous operation that was started.
+结束最后一个已开始的同步操作。
 
 ### instantSync()
 
@@ -115,7 +115,7 @@ Finish the last synchronous operation that was started.
 void instantSync(String name, {Map? arguments})
 ```
 
-Emit an instant event.
+发出一个即时事件。
 
 ### timeSync()
 
@@ -123,7 +123,7 @@ Emit an instant event.
 T timeSync<T>(String name, TimelineSyncFunction<T> function, {Map? arguments, Flow? flow})
 ```
 
-A utility method to time a synchronous [function]. Internally calls [function] bracketed by calls to [startSync] and [finishSync].
+用于为同步函数 [function] 计时的实用方法。内部通过 [startSync] 和 [finishSync] 包裹 [function] 的调用来实现。
 
 ### now
 
@@ -131,9 +131,9 @@ A utility method to time a synchronous [function]. Internally calls [function] b
 int get now
 ```
 
-The current time stamp from the clock used by the timeline. Units are microseconds.
+时间线所用时钟的当前时间戳。单位为微秒。
 
-When run on the Dart VM, uses the same monotonic clock as the embedding API's `Dart_TimelineGetMicros`.
+在 Dart VM 上运行时，使用与嵌入 API 的 `Dart_TimelineGetMicros` 相同的单调时钟。
 
 # TimelineTask
 
@@ -141,7 +141,7 @@ When run on the Dart VM, uses the same monotonic clock as the embedding API's `D
 final class TimelineTask {}
 ```
 
-An asynchronous task on the timeline. An asynchronous task can have many (nested) synchronous operations. Synchronous operations can live longer than the current isolate event. To pass a [TimelineTask] to another isolate, you must first call [pass] to get the task id and then construct a new [TimelineTask] in the other isolate.
+时间线上的一个异步任务。一个异步任务可以包含许多（嵌套的）同步操作。同步操作的存活时间可以长于当前的 isolate 事件。要将 [TimelineTask] 传递给另一个 isolate，必须先调用 [pass] 获取任务 id，然后在另一个 isolate 中构造一个新的 [TimelineTask]。
 
 ### TimelineTask()
 
@@ -149,11 +149,11 @@ An asynchronous task on the timeline. An asynchronous task can have many (nested
 TimelineTask({TimelineTask? parent, String? filterKey})
 ```
 
-Create a task. The task ID will be set by the system.
+创建一个任务。任务 ID 将由系统设置。
 
-If [parent] is provided, the parent's task ID is provided as argument 'parentId' when [start] is called. In DevTools, this argument will result in this [TimelineTask] being linked to the [parent] [TimelineTask].
+如果提供了 [parent]，则在调用 [start] 时会将父任务的任务 ID 作为参数 'parentId' 提供。在 DevTools 中，此参数会使该 [TimelineTask] 与 [parent] [TimelineTask] 建立关联。
 
-If [filterKey] is provided, a property named `filterKey` will be inserted into the arguments of each event associated with this task. The `filterKey` will be set to the value of [filterKey].
+如果提供了 [filterKey]，将在与此任务关联的每个事件的参数中插入一个名为 `filterKey` 的属性，该属性的值将设置为 [filterKey] 的值。
 
 ### TimelineTask.withTaskId()
 
@@ -161,11 +161,11 @@ If [filterKey] is provided, a property named `filterKey` will be inserted into t
 TimelineTask.withTaskId(int taskId, {String? filterKey})
 ```
 
-Create a task with an explicit [taskId]. This is useful if you are passing a task from one isolate to another.
+使用显式的 [taskId] 创建一个任务。当需要将一个任务从一个 isolate 传递到另一个 isolate 时，此方法非常有用。
 
-Important note: only provide task IDs which have been obtained as a result of invoking [TimelineTask.pass]. Specifying a custom ID can lead to ID collisions, resulting in incorrect rendering of timeline events.
+重要提示：仅可提供通过调用 [TimelineTask.pass] 获得的任务 ID。指定自定义 ID 可能导致 ID 冲突，从而导致时间线事件渲染错误。
 
-If [filterKey] is provided, a property named `filterKey` will be inserted into the arguments of each event associated with this task. The `filterKey` will be set to the value of [filterKey].
+如果提供了 [filterKey]，将在与此任务关联的每个事件的参数中插入一个名为 `filterKey` 的属性，该属性的值将设置为 [filterKey] 的值。
 
 ### start()
 
@@ -173,7 +173,7 @@ If [filterKey] is provided, a property named `filterKey` will be inserted into t
 void start(String name, {Map? arguments})
 ```
 
-Start a synchronous operation within this task named [name]. Optionally takes a [Map] of [arguments].
+在此任务中开始一个名为 [name] 的同步操作。可选地接受一个 [arguments] 映射。
 
 ### instant()
 
@@ -181,7 +181,7 @@ Start a synchronous operation within this task named [name]. Optionally takes a 
 void instant(String name, {Map? arguments})
 ```
 
-Emit an instant event for this task. Optionally takes a [Map] of [arguments].
+为此任务发出一个即时事件。可选地接受一个 [arguments] 映射。
 
 ### finish()
 
@@ -189,7 +189,7 @@ Emit an instant event for this task. Optionally takes a [Map] of [arguments].
 void finish({Map? arguments})
 ```
 
-Finish the last synchronous operation that was started. Optionally takes a [Map] of [arguments].
+结束最后一个已开始的同步操作。可选地接受一个 [arguments] 映射。
 
 ### pass()
 
@@ -197,4 +197,4 @@ Finish the last synchronous operation that was started. Optionally takes a [Map]
 int pass()
 ```
 
-Retrieve the [TimelineTask]'s task id. Will throw an exception if the stack is not empty.
+获取该 [TimelineTask] 的任务 id。如果操作栈不为空，将抛出异常。

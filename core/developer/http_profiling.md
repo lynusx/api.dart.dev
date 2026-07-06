@@ -4,9 +4,9 @@
 void addHttpClientProfilingData(Map<String, dynamic> requestProfile)
 ```
 
-Records the data associated with an HTTP request for profiling purposes.
+记录与某个 HTTP 请求相关的数据，用于性能分析。
 
-This function should never be called directly. Instead, use [package:http_profile](https://pub.dev/packages/http_profile).
+不应直接调用此函数，而应使用 [package:http_profile](https://pub.dev/packages/http_profile)。
 
 # getHttpClientProfilingData()
 
@@ -14,6 +14,6 @@ This function should never be called directly. Instead, use [package:http_profil
 List<Map<String, dynamic>> getHttpClientProfilingData()
 ```
 
-Returns the data added through [addHttpClientProfilingData].
+返回通过 [addHttpClientProfilingData] 添加的数据。
 
-This function is only meant for use by networking profilers and the format of the returned data may change over time.
+此函数仅供网络性能分析工具使用，其返回数据的格式可能会随时间变化。

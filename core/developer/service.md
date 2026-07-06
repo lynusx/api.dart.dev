@@ -4,7 +4,7 @@
 final class ServiceProtocolInfo {}
 ```
 
-Service protocol is the protocol that a client like the Observatory could use to access the services provided by the Dart VM for debugging and inspecting Dart programs. This class encapsulates the version number and Uri for accessing this service.
+服务协议（Service protocol）是客户端（如 Observatory）用于访问 Dart VM 为调试和检查 Dart 程序而提供的各项服务的协议。此类封装了访问该服务所需的版本号和 Uri。
 
 ### majorVersion
 
@@ -12,7 +12,7 @@ Service protocol is the protocol that a client like the Observatory could use to
 int majorVersion
 ```
 
-The major version of the protocol. If the running Dart environment does not support the service protocol, this is 0.
+协议的主版本号。如果正在运行的 Dart 环境不支持服务协议，则此值为 0。
 
 ### minorVersion
 
@@ -20,7 +20,7 @@ The major version of the protocol. If the running Dart environment does not supp
 int minorVersion
 ```
 
-The minor version of the protocol. If the running Dart environment does not support the service protocol, this is 0.
+协议的次版本号。如果正在运行的 Dart 环境不支持服务协议，则此值为 0。
 
 ### serverUri
 
@@ -28,7 +28,7 @@ The minor version of the protocol. If the running Dart environment does not supp
 Uri? serverUri
 ```
 
-The Uri to connect to the debugger client hosted by the service. If the web server is not running, this will be null.
+用于连接由服务托管的调试器客户端的 Uri。如果 Web 服务器未运行，则此值为 null。
 
 ### serverWebSocketUri
 
@@ -36,7 +36,7 @@ The Uri to connect to the debugger client hosted by the service. If the web serv
 Uri? get serverWebSocketUri
 ```
 
-The Uri to connect to the service via web socket. If the web server is not running, this will be null.
+用于通过 WebSocket 连接服务的 Uri。如果 Web 服务器未运行，则此值为 null。
 
 ### ServiceProtocolInfo()
 
@@ -56,7 +56,7 @@ String toString()
 final class Service {}
 ```
 
-Access information about the service protocol and control the web server that provides access to the services provided by the Dart VM for debugging and inspecting Dart programs.
+访问有关服务协议的信息，并控制提供 Dart VM 调试和检查服务访问的 Web 服务器。
 
 ### getInfo()
 
@@ -64,7 +64,7 @@ Access information about the service protocol and control the web server that pr
 Future<ServiceProtocolInfo> getInfo()
 ```
 
-Get information about the service protocol (version number and Uri to access the service).
+获取有关服务协议的信息（版本号以及访问该服务所需的 Uri）。
 
 ### controlWebServer()
 
@@ -72,7 +72,7 @@ Get information about the service protocol (version number and Uri to access the
 Future<ServiceProtocolInfo> controlWebServer({bool enable = false, bool? silenceOutput})
 ```
 
-Control the web server that the service protocol is accessed through. [enable] is used as a toggle to enable or disable the web server servicing requests. If [silenceOutput] is provided and is true, the server will not output information to the console.
+控制通过其访问服务协议的 Web 服务器。[enable] 用作开关，用于启用或禁用该 Web 服务器处理请求。如果提供了 [silenceOutput] 且其值为 true，服务器将不会向控制台输出信息。
 
 ### getIsolateId()
 
@@ -80,11 +80,11 @@ Control the web server that the service protocol is accessed through. [enable] i
 String? getIsolateId(Isolate isolate)
 ```
 
-Returns a [String] token representing the ID of [isolate].
+返回代表 [isolate] ID 的 [String] 令牌。
 
-Returns null if the running Dart environment does not support the service protocol.
+如果正在运行的 Dart 环境不支持服务协议，则返回 null。
 
-To get the isolate id of the current isolate, pass [Isolate.current] as the [isolate] parameter.
+要获取当前 isolate 的 ID，请将 [Isolate.current] 作为 [isolate] 参数传入。
 
 ### getIsolateID()
 
@@ -92,9 +92,9 @@ To get the isolate id of the current isolate, pass [Isolate.current] as the [iso
 String? getIsolateID(Isolate isolate)
 ```
 
-Returns a [String] token representing the ID of [isolate].
+返回代表 [isolate] ID 的 [String] 令牌。
 
-Returns null if the running Dart environment does not support the service protocol.
+如果正在运行的 Dart 环境不支持服务协议，则返回 null。
 
 ### getObjectId()
 
@@ -102,6 +102,6 @@ Returns null if the running Dart environment does not support the service protoc
 String? getObjectId(Object object)
 ```
 
-Returns a [String] token representing the ID of [object].
+返回代表 [object] ID 的 [String] 令牌。
 
-Returns null if the running Dart environment does not support the service protocol.
+如果正在运行的 Dart 环境不支持服务协议，则返回 null。

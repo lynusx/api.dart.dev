@@ -4,7 +4,7 @@
 abstract final class UserTag {}
 ```
 
-A UserTag can be used to group samples in the [DevTools CPU profiler](https://docs.flutter.dev/tools/devtools/cpu-profiler).
+UserTag 可用于在 [DevTools CPU 性能分析器](https://docs.flutter.dev/tools/devtools/cpu-profiler)中对样本进行分组。
 
 ### maxUserTags
 
@@ -12,7 +12,7 @@ A UserTag can be used to group samples in the [DevTools CPU profiler](https://do
 dynamic maxUserTags
 ```
 
-The maximum number of UserTag instances that can be created by a program.
+程序可创建的 UserTag 实例的最大数量。
 
 ### UserTag()
 
@@ -26,7 +26,7 @@ UserTag(String label)
 String get label
 ```
 
-Label of this [UserTag].
+此 [UserTag] 的标签。
 
 ### makeCurrent()
 
@@ -34,7 +34,7 @@ Label of this [UserTag].
 UserTag makeCurrent()
 ```
 
-Make this [UserTag] the current tag for the isolate. Returns the current tag before setting.
+将此 [UserTag] 设为该 isolate 的当前标签。返回设置之前的当前标签。
 
 ### defaultTag
 
@@ -42,7 +42,7 @@ Make this [UserTag] the current tag for the isolate. Returns the current tag bef
 UserTag get defaultTag
 ```
 
-The default [UserTag] with label 'Default'.
+标签为 'Default' 的默认 [UserTag]。
 
 # getCurrentTag()
 
@@ -50,4 +50,4 @@ The default [UserTag] with label 'Default'.
 UserTag getCurrentTag()
 ```
 
-Returns the current [UserTag] for the isolate.
+返回该 isolate 的当前 [UserTag]。

@@ -4,9 +4,9 @@
 final class ServiceExtensionResponse {}
 ```
 
-A response to a service protocol extension RPC.
+服务协议扩展 RPC 的响应。
 
-If the RPC was successful, use [ServiceExtensionResponse.result], otherwise use [ServiceExtensionResponse.error].
+如果 RPC 成功，请使用 [ServiceExtensionResponse.result]，否则请使用 [ServiceExtensionResponse.error]。
 
 ### result
 
@@ -14,7 +14,7 @@ If the RPC was successful, use [ServiceExtensionResponse.result], otherwise use 
 String? result
 ```
 
-The result of a successful service protocol extension RPC.
+成功的服务协议扩展 RPC 的结果。
 
 ### errorCode
 
@@ -22,7 +22,7 @@ The result of a successful service protocol extension RPC.
 int? errorCode
 ```
 
-The error code associated with a failed service protocol extension RPC.
+与失败的服务协议扩展 RPC 关联的错误代码。
 
 ### errorDetail
 
@@ -30,7 +30,7 @@ The error code associated with a failed service protocol extension RPC.
 String? errorDetail
 ```
 
-The details of a failed service protocol extension RPC.
+失败的服务协议扩展 RPC 的详细信息。
 
 ### ServiceExtensionResponse.result()
 
@@ -38,9 +38,9 @@ The details of a failed service protocol extension RPC.
 ServiceExtensionResponse.result(String result)
 ```
 
-Creates a successful response to a service protocol extension RPC.
+为成功的服务协议扩展 RPC 创建一个响应。
 
-Requires [result] to be a JSON object encoded as a string. When forming the JSON-RPC message [result] will be inlined directly.
+要求 [result] 是一个编码为字符串的 JSON 对象。构造 JSON-RPC 消息时，[result] 将被直接内联。
 
 ### ServiceExtensionResponse.error()
 
@@ -48,9 +48,9 @@ Requires [result] to be a JSON object encoded as a string. When forming the JSON
 ServiceExtensionResponse.error(int errorCode, String errorDetail)
 ```
 
-Creates an error response to a service protocol extension RPC.
+为失败的服务协议扩展 RPC 创建一个错误响应。
 
-Requires [errorCode] to be [invalidParams] or between [extensionErrorMin] and [extensionErrorMax]. Requires [errorDetail] to be a JSON object encoded as a string. When forming the JSON-RPC message [errorDetail] will be inlined directly.
+要求 [errorCode] 为 [invalidParams]，或介于 [extensionErrorMin] 和 [extensionErrorMax] 之间。要求 [errorDetail] 是一个编码为字符串的 JSON 对象。构造 JSON-RPC 消息时，[errorDetail] 将被直接内联。
 
 ### invalidParams
 
@@ -58,7 +58,7 @@ Requires [errorCode] to be [invalidParams] or between [extensionErrorMin] and [e
 dynamic invalidParams
 ```
 
-Invalid method parameter(s) error code.
+无效方法参数的错误代码。
 
 ### extensionError
 
@@ -66,7 +66,7 @@ Invalid method parameter(s) error code.
 dynamic extensionError
 ```
 
-Generic extension error code.
+通用扩展错误代码。
 
 ### extensionErrorMax
 
@@ -74,7 +74,7 @@ Generic extension error code.
 dynamic extensionErrorMax
 ```
 
-Maximum extension provided error code.
+扩展提供的最大错误代码。
 
 ### extensionErrorMin
 
@@ -82,7 +82,7 @@ Maximum extension provided error code.
 dynamic extensionErrorMin
 ```
 
-Minimum extension provided error code.
+扩展提供的最小错误代码。
 
 ### isError()
 
@@ -90,13 +90,13 @@ Minimum extension provided error code.
 bool isError()
 ```
 
-Determines if this response represents an error.
+判断此响应是否表示一个错误。
 
-A service protocol extension handler. Registered with [registerExtension].
+服务协议扩展处理器。通过 [registerExtension] 注册。
 
-Must complete to a [ServiceExtensionResponse]. [method] is the method name of the service protocol request, and [parameters] is a map holding the parameters to the service protocol request.
+必须以 [ServiceExtensionResponse] 完成。[method] 为服务协议请求的方法名，[parameters] 为保存服务协议请求参数的映射。
 
-_NOTE_: all parameter names and values are encoded as strings.
+_注意_：所有参数名和参数值均以字符串形式编码。
 
 # registerExtension()
 
@@ -104,11 +104,11 @@ _NOTE_: all parameter names and values are encoded as strings.
 void registerExtension(String method, ServiceExtensionHandler handler)
 ```
 
-Register a [ServiceExtensionHandler] that will be invoked in this isolate for [method]. _NOTE_: Service protocol extensions must be registered in each isolate.
+注册一个 [ServiceExtensionHandler]，该处理器将在此 isolate 中针对 [method] 被调用。_注意_：服务协议扩展必须在每个 isolate 中分别注册。
 
-_NOTE_: [method] must begin with 'ext.' and you should use the following structure to avoid conflicts with other packages: 'ext.package.command'. That is, immediately following the 'ext.' prefix, should be the registering package name followed by another period ('.') and then the command name. For example: 'ext.dart.io.getOpenFiles'.
+_注意_：[method] 必须以 'ext.' 开头，建议使用以下结构以避免与其他包冲突：'ext.package.command'。即紧跟在 'ext.' 前缀之后的应为注册包的名称，随后再跟一个句点（'.'）和命令名称。例如：'ext.dart.io.getOpenFiles'。
 
-Because service extensions are isolate specific, clients using extensions must always include an 'isolateId' parameter with each RPC.
+由于服务扩展是特定于 isolate 的，使用扩展的客户端在每次 RPC 调用中都必须包含一个 'isolateId' 参数。
 
 # extensionStreamHasListener
 
@@ -116,11 +116,11 @@ Because service extensions are isolate specific, clients using extensions must a
 bool get extensionStreamHasListener
 ```
 
-Whether the "Extension" stream currently has at least one listener.
+“Extension”流当前是否至少有一个监听者。
 
-A client of the VM service can register as a listener on the extension stream using `listenStream` method. The extension stream has a listener while at least one such client has registered as a listener, and has not yet disconnected again.
+VM 服务的客户端可以使用 `listenStream` 方法注册为扩展流的监听者。只要至少有一个这样的客户端注册为监听者且尚未断开连接，扩展流就处于有监听者的状态。
 
-Calling [postEvent] while the stream has listeners will attempt to deliver that event to all current listeners, although a listener can disconnect before the event is delivered. Calling [postEvent] when the stream has no listener means that no-one will receive the event, and the call is effectively a no-op.
+当流存在监听者时调用 [postEvent] 将尝试把该事件传递给所有当前监听者，尽管某个监听者可能在事件送达前断开连接。当流没有监听者时调用 [postEvent] 意味着没有人会收到该事件，此调用实际上是一个空操作。
 
 # postEvent()
 
@@ -128,6 +128,6 @@ Calling [postEvent] while the stream has listeners will attempt to deliver that 
 void postEvent(String eventKind, Map eventData, {String stream = 'Extension'})
 ```
 
-Post an event of [eventKind] with payload of [eventData] to the "Extension" event stream.
+向 “Extension” 事件流发布一个类型为 [eventKind]、负载为 [eventData] 的事件。
 
-If [extensionStreamHasListener] is false, this method is a no-op. Override [stream] to set the destination stream that the event should be posted to. The [stream] may not start with an underscore or be a core VM Service stream.
+如果 [extensionStreamHasListener] 为 false，此方法为空操作。可通过覆盖 [stream] 设置事件应发布到的目标流。[stream] 不得以下划线开头，也不得是 VM Service 的核心流。

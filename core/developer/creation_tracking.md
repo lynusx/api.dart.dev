@@ -4,35 +4,35 @@
 final class CreationLocation {}
 ```
 
-Holds the source code location where an object was created, when its class was annotated with `@pragma('track-creation-locations')`.
+保存对象创建时的源代码位置，前提是其类已使用 `@pragma('track-creation-locations')` 注解标记。
 
-When a class definition is annotated with `@pragma('track-creation-locations')`, the Dart compiler injects the call-site location into any invocation of that class's or any subclass's constructors and stores it in the created object.
+当一个类定义被标注为 `@pragma('track-creation-locations')` 时，Dart 编译器会将调用点的位置信息注入到该类或其任何子类的构造函数调用中，并将其存储在创建的对象内。
 
-The location of such an object can be read by calling [CreationLocation.of] with the object as the argument.
+可以通过将该对象作为参数调用 [CreationLocation.of] 来读取该对象的创建位置。
 
-## Example
+## 示例
 
 ```dart
 import 'dart:developer';
 
-// Marks this and any subclass to have their constructor call-sites tracked.
+// 标记此类及其任何子类的构造函数调用点将被跟踪。
 @pragma('track-creation-locations')
 class TargetClass {
   TargetClass();
 }
 
 void main() {
-  // The source-code location of this constructor call is injected into the object.
+  // 此构造函数调用的源代码位置将被注入到该对象中。
   final instance = TargetClass();
 
   final location = CreationLocation.of(instance);
-  print(location); // Will print the current file path, line 11, column 20
+  print(location); // 将打印当前文件路径、第 11 行、第 20 列
 }
 ```
 
-## Limitations
+## 限制
 
-The compiler transformation relies on injecting a named parameter into the target class's constructors. Since Dart semantics do not permit a function to have both optional positional parameters and named parameters simultaneously, this transformation **will silently skip** any constructor that declares optional positional parameters. Calling [CreationLocation.of] on an object whose constructor was skipped, will return `null`.
+该编译器转换依赖于向目标类的构造函数注入一个命名参数。由于 Dart 语义不允许函数同时拥有可选位置参数和命名参数，因此该转换**将静默跳过**任何声明了可选位置参数的构造函数。对构造函数被跳过的对象调用 [CreationLocation.of] 将返回 `null`。
 
 ### of()
 
@@ -40,9 +40,9 @@ The compiler transformation relies on injecting a named parameter into the targe
 CreationLocation? of(Object? object)
 ```
 
-Returns the creation location of [object].
+返回 [object] 的创建位置。
 
-The provided object must be an instance of a class annotated with `@pragma('track-creation-locations')`.
+提供的对象必须是已使用 `@pragma('track-creation-locations')` 注解标记的类的实例。
 
 ### file
 
@@ -50,7 +50,7 @@ The provided object must be an instance of a class annotated with `@pragma('trac
 String file
 ```
 
-File path of the location.
+位置的文件路径。
 
 ### line
 
@@ -58,7 +58,7 @@ File path of the location.
 int line
 ```
 
-1-based line number.
+行号（从 1 开始）。
 
 ### column
 
@@ -66,7 +66,7 @@ int line
 int column
 ```
 
-1-based column number.
+列号（从 1 开始）。
 
 ### name
 
@@ -74,7 +74,7 @@ int column
 String? name
 ```
 
-Optional name of the parameter or function at this location.
+此位置处的参数名或函数名（可选）。
 
 ### toJsonMap()
 
@@ -82,7 +82,7 @@ Optional name of the parameter or function at this location.
 Map<String, Object?> toJsonMap()
 ```
 
-JSON representation of this location.
+此位置的 JSON 表示形式。
 
 ### toString()
 
