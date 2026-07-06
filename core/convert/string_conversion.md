@@ -4,11 +4,11 @@
 abstract mixin class StringConversionSink implements ChunkedConversionSink<String> {}
 ```
 
-A sink for converters to efficiently transmit String data.
+用于转换器高效传输 String 数据的 sink。
 
-Instead of limiting the interface to one non-chunked [String] it accepts partial strings or can be transformed into a byte sink that accepts UTF-8 code units.
+不同于将接口限制为单个非分块的 [String]，它可以接受部分字符串，或转换为接受 UTF-8 码元的字节 sink。
 
-The [StringConversionSink] class provides a default implementation of [add], [asUtf8Sink] and [asStringSink].
+[StringConversionSink] 类提供了 [add]、[asUtf8Sink] 和 [asStringSink] 的默认实现。
 
 ## 构造函数
 
@@ -36,9 +36,9 @@ StringConversionSink.from(Sink<String> sink)
 StringConversionSink.fromStringSink(StringSink sink)
 ```
 
-Creates a new instance wrapping the given [sink].
+创建一个包装给定 [sink] 的新实例。
 
-Every string that is added to the returned instance is forwarded to the [sink]. The instance is allowed to buffer and is not required to forward immediately.
+添加到返回实例的每个字符串都会被转发到 [sink]。该实例允许缓冲，且不要求立即转发。
 
 ## 方法
 
@@ -46,18 +46,18 @@ Every string that is added to the returned instance is forwarded to the [sink]. 
 
 ```dart
 void addSlice(
-  String chunk, 
-  int start, 
-  int end, 
+  String chunk,
+  int start,
+  int end,
   bool isLast
 )
 ```
 
-Adds the next [chunk] to `this`.
+将下一个 [chunk] 添加到 `this`。
 
-Adds the substring defined by [start] and [end]-exclusive to `this`.
+添加由 [start] 和 [end]（不包括）定义的子字符串到 `this`。
 
-If [isLast] is `true` closes `this`.
+如果 [isLast] 为 `true`，则关闭 `this`。
 
 ### add()
 
@@ -65,9 +65,9 @@ If [isLast] is `true` closes `this`.
 void add(String str)
 ```
 
-Adds chunked data to this sink.
+将分块数据添加到此 sink。
 
-This method is also used when converters are used as [StreamTransformer](https://api.dart.dev/dart-async/StreamTransformer-class.html)s.
+当转换器用作 [StreamTransformer](https://api.dart.dev/dart-async/StreamTransformer-class.html) 时，也会使用此方法。
 
 ### asUtf8Sink()
 
@@ -75,9 +75,9 @@ This method is also used when converters are used as [StreamTransformer](https:/
 ByteConversionSink asUtf8Sink(bool allowMalformed)
 ```
 
-Returns `this` as a sink that accepts UTF-8 input.
+将 `this` 作为接受 UTF-8 输入的 sink 返回。
 
-If used, this method must be the first and only call to `this`. It invalidates `this`. All further operations must be performed on the result.
+如果使用此方法，必须是对 `this` 的第一次也是唯一一次调用。它会使 `this` 失效。所有后续操作都必须在结果上执行。
 
 ### asStringSink()
 
@@ -85,13 +85,11 @@ If used, this method must be the first and only call to `this`. It invalidates `
 ClosableStringSink asStringSink()
 ```
 
-Returns `this` as a [ClosableStringSink].
+将 `this` 作为 [ClosableStringSink] 返回。
 
-If used, this method must be the first and only call to `this`. It invalidates `this`. All further operations must be performed on the result.
+如果使用此方法，必须是对 `this` 的第一次也是唯一一次调用。它会使 `this` 失效。所有后续操作都必须在结果上执行。
 
 ---
-
-
 
 # ClosableStringSink
 
@@ -99,7 +97,7 @@ If used, this method must be the first and only call to `this`. It invalidates `
 abstract interface class ClosableStringSink implements StringSink {}
 ```
 
-A [ClosableStringSink] extends the [StringSink] interface by adding a `close` method.
+[ClosableStringSink] 通过添加 `close` 方法扩展了 [StringSink] 接口。
 
 ## 构造函数
 
@@ -109,7 +107,7 @@ A [ClosableStringSink] extends the [StringSink] interface by adding a `close` me
 ClosableStringSink.fromStringSink(StringSink sink, void Function() onClose)
 ```
 
-Creates a new instance combining a [StringSink] [sink] and a callback [onClose] which is invoked when the returned instance is closed.
+创建一个组合了 [StringSink] [sink] 和回调 [onClose] 的新实例，该回调会在返回的实例关闭时被调用。
 
 ## 方法
 
@@ -119,11 +117,9 @@ Creates a new instance combining a [StringSink] [sink] and a callback [onClose] 
 void close()
 ```
 
-Closes `this` and flushes any outstanding data.
+关闭 `this` 并刷新所有未处理的数据。
 
 ---
-
-
 
 # StringConversionSinkBase
 
@@ -131,11 +127,9 @@ Closes `this` and flushes any outstanding data.
 typedef StringConversionSinkBase = StringConversionSink
 ```
 
-This class provides a base-class for converters that need to accept String inputs.
+此类为需要接受 String 输入的转换器提供了一个基类。
 
 ---
-
-
 
 # StringConversionSinkMixin
 
@@ -143,4 +137,4 @@ This class provides a base-class for converters that need to accept String input
 typedef StringConversionSinkMixin = StringConversionSink
 ```
 
-This class provides a mixin for converters that need to accept String inputs.
+此类为需要接受 String 输入的转换器提供了一个混入。

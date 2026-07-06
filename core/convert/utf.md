@@ -4,11 +4,9 @@
 const int unicodeReplacementCharacterRune = 0xFFFD;
 ```
 
-The Unicode Replacement character `U+FFFD` (�).
+Unicode 替换字符 `U+FFFD`（�）。
 
 ---
-
-
 
 # unicodeBomCharacterRune
 
@@ -16,11 +14,9 @@ The Unicode Replacement character `U+FFFD` (�).
 const int unicodeBomCharacterRune = 0xFEFF;
 ```
 
-The Unicode Byte Order Marker (BOM) character `U+FEFF`.
+Unicode 字节顺序标记（BOM）字符 `U+FEFF`。
 
 ---
-
-
 
 # utf8
 
@@ -28,11 +24,11 @@ The Unicode Byte Order Marker (BOM) character `U+FEFF`.
 const Utf8Codec utf8 = Utf8Codec();
 ```
 
-An instance of the default implementation of the [Utf8Codec].
+[Utf8Codec] 默认实现的一个实例。
 
-This instance provides a convenient access to the most common UTF-8 use cases.
+该实例便于访问最常见的 UTF-8 使用场景。
 
-Examples:
+示例：
 
 ```dart
 var encoded = utf8.encode("Îñţérñåţîöñåļîžåţîờñ");
@@ -42,15 +38,13 @@ var decoded = utf8.decode([0x62, 0x6c, 0xc3, 0xa5, 0x62, 0xc3, 0xa6,
 
 ---
 
-
-
 # Utf8Codec
 
 ```dart
 final class Utf8Codec extends Encoding {}
 ```
 
-A [Utf8Codec] encodes strings to utf-8 code units (bytes) and decodes UTF-8 code units to strings.
+[Utf8Codec] 将字符串编码为 UTF-8 码元（字节），并将 UTF-8 码元解码为字符串。
 
 ## 构造函数
 
@@ -60,11 +54,11 @@ A [Utf8Codec] encodes strings to utf-8 code units (bytes) and decodes UTF-8 code
 Utf8Codec({bool allowMalformed = false})
 ```
 
-Instantiates a new [Utf8Codec].
+实例化一个新的 [Utf8Codec]。
 
-The optional [allowMalformed] argument defines how [decoder] (and [decode]) deal with invalid or unterminated character sequences.
+可选参数 [allowMalformed] 定义 [decoder]（及 [decode]）如何处理无效或未终止的字符序列。
 
-If it is `true` (and not overridden at the method invocation) [decode] and the [decoder] replace invalid (or unterminated) octet sequences with the Unicode Replacement character `U+FFFD` (�). Otherwise they throw a [FormatException].
+如果为 `true`（且在方法调用时未被覆盖），[decode] 和 [decoder] 会将无效（或未终止）的字节序列替换为 Unicode 替换字符 `U+FFFD`（�）。否则将抛出 [FormatException]。
 
 ## 属性
 
@@ -74,7 +68,7 @@ If it is `true` (and not overridden at the method invocation) [decode] and the [
 String get name
 ```
 
-The name of this codec is "utf-8".
+该编解码器的名称是 "utf-8"。
 
 ### encoder
 
@@ -99,13 +93,13 @@ String decode(
 })
 ```
 
-Decodes the UTF-8 [codeUnits] (a list of unsigned 8-bit integers) to the corresponding string.
+将 UTF-8 编码的 [codeUnits]（一个无符号 8 位整数列表）解码为对应的字符串。
 
-If the [codeUnits] start with the encoding of a [unicodeBomCharacterRune], that character is discarded.
+如果 [codeUnits] 以 [unicodeBomCharacterRune] 的编码开头，该字符将被丢弃。
 
-If [allowMalformed] is `true`, the decoder replaces invalid (or unterminated) character sequences with the Unicode Replacement character `U+FFFD` (�). Otherwise it throws a [FormatException].
+如果 [allowMalformed] 为 `true`，解码器会将无效（或未终止）的字符序列替换为 Unicode 替换字符 `U+FFFD`（�）。否则将抛出 [FormatException]。
 
-If [allowMalformed] is not given, it defaults to the `allowMalformed` that was used to instantiate `this`.
+如果未提供 [allowMalformed]，默认使用实例化 `this` 时使用的 `allowMalformed` 值。
 
 ### encode()
 
@@ -113,11 +107,9 @@ If [allowMalformed] is not given, it defaults to the `allowMalformed` that was u
 Uint8List encode(String string)
 ```
 
-Encodes the [string] as UTF-8.
+将 [string] 编码为 UTF-8。
 
 ---
-
-
 
 # Utf8Encoder
 
@@ -125,9 +117,9 @@ Encodes the [string] as UTF-8.
 final class Utf8Encoder extends Converter<String, List<int>> {}
 ```
 
-This class converts strings to their UTF-8 code units (a list of unsigned 8-bit integers).
+此类将字符串转换为其 UTF-8 码元（无符号 8 位整数列表）。
 
-Example:
+示例：
 
 ```dart
 final utf8Encoder = utf8.encoder;
@@ -152,11 +144,11 @@ const Utf8Encoder()
 Uint8List convert(String string, [int start = 0, int? end])
 ```
 
-Converts [string] to its UTF-8 code units (a list of unsigned 8-bit integers).
+将 [string] 转换为其 UTF-8 码元（无符号 8 位整数列表）。
 
-If [start] and [end] are provided, only the substring `string.substring(start, end)` is converted.
+如果提供了 [start] 和 [end]，则仅转换子字符串 `string.substring(start, end)`。
 
-Any unpaired surrogate character (`U+D800`-`U+DFFF`) in the input string is encoded as a Unicode Replacement character `U+FFFD` (�).
+输入字符串中任何未配对的代理字符（`U+D800`-`U+DFFF`）都会被编码为 Unicode 替换字符 `U+FFFD`（�）。
 
 ### startChunkedConversion()
 
@@ -164,9 +156,9 @@ Any unpaired surrogate character (`U+D800`-`U+DFFF`) in the input string is enco
 StringConversionSink startChunkedConversion(Sink<List<int>> sink)
 ```
 
-Starts a chunked conversion.
+开始一次分块转换。
 
-The converter works more efficiently if the given [sink] is a [ByteConversionSink].
+如果给定的 [sink] 是 [ByteConversionSink]，转换器的工作效率会更高。
 
 ### bind()
 
@@ -176,17 +168,15 @@ Stream<List<int>> bind(Stream<String> stream)
 
 ---
 
-
-
 # Utf8Decoder
 
 ```dart
 final class Utf8Decoder extends Converter<List<int>, String> {}
 ```
 
-This class converts UTF-8 code units (lists of unsigned 8-bit integers) to a string.
+此类将 UTF-8 码元（无符号 8 位整数列表）转换为字符串。
 
-Example:
+示例：
 
 ```dart
 final utf8Decoder = utf8.decoder;
@@ -199,11 +189,11 @@ final decodedBytes = utf8Decoder.convert(encodedBytes);
 print(decodedBytes); // Îñţérñåţîöñåļîžåţîờñ
 ```
 
-Throws a [FormatException] if the encoded input contains invalid UTF-8 byte sequences and [allowMalformed] is `false` (the default).
+如果编码输入包含无效的 UTF-8 字节序列，且 [allowMalformed] 为 `false`（默认值），则抛出 [FormatException]。
 
-If [allowMalformed] is `true`, invalid byte sequences are converted into one or more Unicode replacement characters, U+FFFD ('�').
+如果 [allowMalformed] 为 `true`，无效字节序列会被转换为一个或多个 Unicode 替换字符 U+FFFD（'�'）。
 
-Example with `allowMalformed` set to true:
+设置 `allowMalformed` 为 true 的示例：
 
 ```dart
 const utf8Decoder = Utf8Decoder(allowMalformed: true);
@@ -220,11 +210,11 @@ print(decodedBytes); // �
 Utf8Decoder({bool allowMalformed = false})
 ```
 
-Instantiates a new [Utf8Decoder].
+实例化一个新的 [Utf8Decoder]。
 
-The optional [allowMalformed] argument defines how [convert] deals with invalid or unterminated character sequences.
+可选参数 [allowMalformed] 定义 [convert] 如何处理无效或未终止的字符序列。
 
-If it is `true`, [convert] replaces invalid (or unterminated) character sequences with the Unicode Replacement character `U+FFFD` (�). Otherwise it throws a [FormatException].
+如果为 `true`，[convert] 会将无效（或未终止）的字符序列替换为 Unicode 替换字符 `U+FFFD`（�）。否则将抛出 [FormatException]。
 
 ## 方法
 
@@ -234,11 +224,11 @@ If it is `true`, [convert] replaces invalid (or unterminated) character sequence
 String convert(List<int> codeUnits, [int start = 0, int? end])
 ```
 
-Converts the UTF-8 [codeUnits] (a list of unsigned 8-bit integers) to the corresponding string.
+将 UTF-8 编码的 [codeUnits]（一个无符号 8 位整数列表）转换为对应的字符串。
 
-Uses the code units from [start] to, but not including, [end]. If [end] is omitted, it defaults to `codeUnits.length`.
+使用从 [start] 到（不包括）[end] 的码元。如果省略 [end]，默认为 `codeUnits.length`。
 
-If the [codeUnits] start with the encoding of a [unicodeBomCharacterRune], that character is discarded.
+如果 [codeUnits] 以 [unicodeBomCharacterRune] 的编码开头，该字符将被丢弃。
 
 ### startChunkedConversion()
 
@@ -246,9 +236,9 @@ If the [codeUnits] start with the encoding of a [unicodeBomCharacterRune], that 
 ByteConversionSink startChunkedConversion(Sink<String> sink)
 ```
 
-Starts a chunked conversion.
+开始一次分块转换。
 
-The converter works more efficiently if the given [sink] is a [StringConversionSink].
+如果给定的 [sink] 是 [StringConversionSink]，转换器的工作效率会更高。
 
 ### bind()
 

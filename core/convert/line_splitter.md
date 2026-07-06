@@ -4,18 +4,18 @@
 final class LineSplitter extends StreamTransformerBase<String, String> {}
 ```
 
-A [StreamTransformer] that splits a [String] into individual lines.
+一个将 [String] 拆分为独立行的 [StreamTransformer]。
 
-A line is terminated by either:
+一行以以下之一结束：
 
-- a CR, carriage return: U+000D ('\r')
-- a LF, line feed (Unix line break): U+000A ('\n') or
-- a CR+LF sequence (DOS/Windows line break), and
-- a final non-empty line can be ended by the end of the input.
+- CR，回车符：U+000D（'\r'）
+- LF，换行符（Unix 换行）：U+000A（'\n'）或
+- CR+LF 序列（DOS/Windows 换行），以及
+- 最后一个非空行可以由输入的结尾结束。
 
-The resulting lines do not contain the line terminators.
+结果行中不包含行终止符。
 
-Example:
+示例：
 
 ```dart
 const splitter = LineSplitter();
@@ -50,9 +50,9 @@ const LineSplitter()
 Iterable<String> split(String lines, [int start = 0, int? end])
 ```
 
-Split [lines] into individual lines.
+将 [lines] 拆分为独立的行。
 
-If [start] and [end] are provided, only split the contents of `lines.substring(start, end)`. The [start] and [end] values must specify a valid sub-range of [lines] (`0 <= start <= end <= lines.length`).
+如果提供了 [start] 和 [end]，则仅拆分 `lines.substring(start, end)` 的内容。[start] 和 [end] 值必须指定 [lines] 的有效子范围（`0 <= start <= end <= lines.length`）。
 
 ### convert()
 

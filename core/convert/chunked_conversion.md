@@ -4,9 +4,9 @@
 abstract interface class ChunkedConversionSink<T> implements Sink<T> {}
 ```
 
-A [ChunkedConversionSink] is used to transmit data more efficiently between two converters during chunked conversions.
+[ChunkedConversionSink] 用于在分块转换过程中，在两个转换器之间更高效地传输数据。
 
-The basic `ChunkedConversionSink` is just a [Sink], and converters should work with a plain `Sink`, but may work more efficiently with certain specialized types of `ChunkedConversionSink`.
+基本的 `ChunkedConversionSink` 只是一个 [Sink]，转换器应当能够配合普通的 `Sink` 工作，但对某些特殊类型的 `ChunkedConversionSink` 可能会工作得更高效。
 
 ## 构造函数
 
@@ -24,9 +24,9 @@ ChunkedConversionSink.withCallback(void Function(List<T> accumulated) callback)
 void add(T chunk)
 ```
 
-Adds chunked data to this sink.
+将分块数据添加到此 sink。
 
-This method is also used when converters are used as [StreamTransformer]s.
+当转换器用作 [StreamTransformer] 时，也会使用此方法。
 
 ### close()
 
@@ -34,6 +34,6 @@ This method is also used when converters are used as [StreamTransformer]s.
 void close()
 ```
 
-Closes the sink.
+关闭此 sink。
 
-This signals the end of the chunked conversion. This method is called when converters are used as [StreamTransformer]'s.
+这表示分块转换的结束。当转换器用作 [StreamTransformer] 时，会调用此方法。

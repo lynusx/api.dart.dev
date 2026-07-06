@@ -1,39 +1,39 @@
-Encoders and decoders for converting between different data representations, including JSON and UTF-8.
+用于在不同数据表示形式之间进行转换的编码器和解码器，包括 JSON 和 UTF-8。
 
-In addition to converters for common data representations, this library provides support for implementing converters in a way which makes them easy to chain and to use with streams.
+除了用于常见数据表示形式的转换器外，该库还支持以易于链式调用、并可与流配合使用的方式实现转换器。
 
-To use this library in your code:
+在代码中使用该库：
 
 ```dart
 import 'dart:convert';
 ```
 
-Two commonly used converters are the top-level instances of [JsonCodec] and [Utf8Codec], named [json] and [utf8], respectively.
+两个常用的转换器是 [JsonCodec] 和 [Utf8Codec] 的顶层实例，分别名为 [json] 和 [utf8]。
 
 ### JSON
 
-JSON is a simple text format for representing structured objects and collections.
+JSON 是一种用于表示结构化对象和集合的简单文本格式。
 
-A [JsonCodec] encodes JSON objects to strings and decodes strings to JSON objects. The [json] encoder/decoder transforms between strings and object structures, such as lists and maps, using the JSON format.
+[JsonCodec] 将 JSON 对象编码为字符串，并将字符串解码为 JSON 对象。[json] 编码器/解码器使用 JSON 格式在字符串与对象结构（例如列表和映射）之间进行转换。
 
-The [json] is the default implementation of [JsonCodec].
+[json] 是 [JsonCodec] 的默认实现。
 
-Examples
+示例
 
 ```dart
 var encoded = json.encode([1, 2, { "a": null }]);
 var decoded = json.decode('["foo", { "bar": 499 }]');
 ```
 
-For more information, see also [JsonEncoder] and [JsonDecoder].
+更多信息请参见 [JsonEncoder] 和 [JsonDecoder]。
 
 ### UTF-8
 
-A [Utf8Codec] encodes strings to UTF-8 code units (bytes) and decodes UTF-8 code units to strings.
+[Utf8Codec] 将字符串编码为 UTF-8 编码单元（字节），并将 UTF-8 编码单元解码为字符串。
 
-The [utf8] is the default implementation of [Utf8Codec].
+[utf8] 是 [Utf8Codec] 的默认实现。
 
-Example:
+示例：
 
 ```dart
 var encoded = utf8.encode('Îñţérñåţîöñåļîžåţîờñ');
@@ -43,15 +43,15 @@ var decoded = utf8.decode([
   190, 195, 165, 197, 163, 195, 174, 225, 187, 157, 195, 177]);
 ```
 
-For more information, see also [Utf8Encoder] and [Utf8Decoder].
+更多信息请参见 [Utf8Encoder] 和 [Utf8Decoder]。
 
 ### ASCII
 
-An [AsciiCodec] encodes strings as ASCII codes stored as bytes and decodes ASCII bytes to strings. Not all characters can be represented as ASCII, so not all strings can be successfully converted.
+[AsciiCodec] 将字符串编码为以字节形式存储的 ASCII 编码，并将 ASCII 字节解码为字符串。并非所有字符都可以用 ASCII 表示，因此并非所有字符串都能成功转换。
 
-The [ascii] is the default implementation of [AsciiCodec].
+[ascii] 是 [AsciiCodec] 的默认实现。
 
-Example:
+示例：
 
 ```dart
 var encoded = ascii.encode('This is ASCII!');
@@ -59,15 +59,15 @@ var decoded = ascii.decode([0x54, 0x68, 0x69, 0x73, 0x20, 0x69, 0x73,
                             0x20, 0x41, 0x53, 0x43, 0x49, 0x49, 0x21]);
 ```
 
-For more information, see also [AsciiEncoder] and [AsciiDecoder].
+更多信息请参见 [AsciiEncoder] 和 [AsciiDecoder]。
 
 ### Latin-1
 
-A [Latin1Codec] encodes strings to ISO Latin-1 (aka ISO-8859-1) bytes and decodes Latin-1 bytes to strings. Not all characters can be represented as Latin-1, so not all strings can be successfully converted.
+[Latin1Codec] 将字符串编码为 ISO Latin-1（即 ISO-8859-1）字节，并将 Latin-1 字节解码为字符串。并非所有字符都可以用 Latin-1 表示，因此并非所有字符串都能成功转换。
 
-The [latin1] is the default implementation of [Latin1Codec].
+[latin1] 是 [Latin1Codec] 的默认实现。
 
-Example:
+示例：
 
 ```dart
 var encoded = latin1.encode('blåbærgrød');
@@ -75,15 +75,15 @@ var decoded = latin1.decode([0x62, 0x6c, 0xe5, 0x62, 0xe6,
                              0x72, 0x67, 0x72, 0xf8, 0x64]);
 ```
 
-For more information, see also [Latin1Encoder] and [Latin1Decoder].
+更多信息请参见 [Latin1Encoder] 和 [Latin1Decoder]。
 
 ### Base64
 
-A [Base64Codec] encodes bytes using the default base64 alphabet, decodes using both the base64 and base64url alphabets, does not allow invalid characters and requires padding.
+[Base64Codec] 使用默认的 base64 字母表进行编码，使用 base64 和 base64url 两种字母表进行解码，不允许无效字符，并且要求填充。
 
-The [base64] is the default implementation of [Base64Codec].
+[base64] 是 [Base64Codec] 的默认实现。
 
-Example:
+示例：
 
 ```dart
 var encoded = base64.encode([0x62, 0x6c, 0xc3, 0xa5, 0x62, 0xc3, 0xa6,
@@ -91,11 +91,11 @@ var encoded = base64.encode([0x62, 0x6c, 0xc3, 0xa5, 0x62, 0xc3, 0xa6,
 var decoded = base64.decode('YmzDpWLDpnJncsO4ZAo=');
 ```
 
-For more information, see also [Base64Encoder] and [Base64Decoder].
+更多信息请参见 [Base64Encoder] 和 [Base64Decoder]。
 
-### Converters
+### 转换器（Converters）
 
-Converters are often used with streams to transform the data that comes through the stream as it becomes available. The following code uses two converters. The first is a UTF-8 decoder, which converts the data from bytes to UTF-8 as it is read from a file, The second is an instance of [LineSplitter], which splits the data on newline boundaries.
+转换器常与流一起使用，以便在数据可用时对流中经过的数据进行转换。以下代码使用了两个转换器。第一个是 UTF-8 解码器，用于在从文件读取数据时将数据从字节转换为 UTF-8；第二个是 [LineSplitter] 的实例，用于按换行符对数据进行分割。
 
 ```dart import:io
 const showLineNumbers = true;
@@ -112,15 +112,15 @@ stream.transform(utf8.decoder)
       });
 ```
 
-See the documentation for the [Codec] and [Converter] classes for information about creating your own converters.
+有关创建自定义转换器的信息，请参见 [Codec] 和 [Converter] 类的文档。
 
-### HTML Escape
+### HTML 转义
 
-[HtmlEscape] converter escapes characters with special meaning in HTML. The converter finds characters that are significant in HTML source and replaces them with corresponding HTML entities.
+[HtmlEscape] 转换器用于转义在 HTML 中具有特殊含义的字符。该转换器会找出在 HTML 源码中具有特殊意义的字符，并将其替换为相应的 HTML 实体。
 
-Custom escape modes can be created using the [HtmlEscapeMode.new] constructor.
+可以使用 [HtmlEscapeMode.new] 构造函数创建自定义转义模式。
 
-Example:
+示例：
 
 ```dart
 const htmlEscapeMode = HtmlEscapeMode(

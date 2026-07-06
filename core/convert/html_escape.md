@@ -4,19 +4,17 @@
 HtmlEscape const htmlEscape
 ```
 
-A `String` converter that converts characters to HTML entities.
+一个将字符转换为 HTML 实体的 `String` 转换器。
 
-This is intended to sanitize text before inserting the text into an HTML document. Characters that are meaningful in HTML are converted to HTML entities (like `&amp;` for `&`).
+用于在将文本插入 HTML 文档之前对其进行净化处理。在 HTML 中具有特殊含义的字符会被转换为 HTML 实体（例如 `&` 转换为 `&amp;`）。
 
-The general converter escapes all characters that are meaningful in HTML attributes or normal element context. Elements with special content types (like CSS or JavaScript) may need a more specialized escaping that understands that content type.
+通用转换器会转义所有在 HTML 属性或普通元素上下文中具有特殊含义的字符。具有特殊内容类型的元素（如 CSS 或 JavaScript）可能需要理解该内容类型语法的更专门的转义方式。
 
-If the context where the text will be inserted is known in more detail, it's possible to omit escaping some characters (like quotes when not inside an attribute value).
+如果更详细地了解文本将被插入的上下文，则可以省略对某些字符的转义（例如，当不在属性值内部时可省略引号的转义）。
 
-The escaped text should only be used inside quoted HTML attributes values or as text content of a normal element. Using the escaped text inside a tag, but not inside a quoted attribute value, is still dangerous.
+转义后的文本只应在带引号的 HTML 属性值内部，或作为普通元素的文本内容使用。在标签内部但不在带引号的属性值中使用转义后的文本仍然是危险的。
 
 ---
-
-
 
 # HtmlEscapeMode
 
@@ -24,18 +22,18 @@ The escaped text should only be used inside quoted HTML attributes values or as 
 final class HtmlEscapeMode {}
 ```
 
-HTML escape modes.
+HTML 转义模式。
 
-Allows specifying a mode for HTML escaping that depends on the context where the escaped result is going to be used. The relevant contexts are:
+允许根据转义结果的使用上下文指定转义模式。相关的上下文包括：
 
-- as text content of an HTML element.
-- as value of a (single- or double-) quoted attribute value.
+- 作为 HTML 元素的文本内容。
+- 作为（单引号或双引号）带引号属性值的值。
 
-All modes require escaping of `&` (ampersand) characters, and may enable escaping of more characters.
+所有模式都要求转义 `&`（和号）字符，并可以启用对更多字符的转义。
 
-Custom escape modes can be created using the [HtmlEscapeMode.new] constructor.
+可以使用 [HtmlEscapeMode.new] 构造函数创建自定义转义模式。
 
-Example:
+示例：
 
 ```dart
 const htmlEscapeMode = HtmlEscapeMode(
@@ -82,11 +80,11 @@ HtmlEscapeMode({
 })
 ```
 
-Create a custom escaping mode.
+创建一个自定义转义模式。
 
-The [name] is only used as the result of [toString], and defaults to `'custom'` if not provided.
+[name] 仅用于 [toString] 的返回结果，如果未提供，默认为 `'custom'`。
 
-All modes escape `&`. The mode can further be set to escape `<` and `>` ([escapeLtGt]), `"` ([escapeQuot]), `'` ([escapeApos]), and/or `/` ([escapeSlash]).
+所有模式都会转义 `&`。该模式还可以进一步设置为转义 `<` 和 `>`（[escapeLtGt]）、`"`（[escapeQuot]）、`'`（[escapeApos]）和/或 `/`（[escapeSlash]）。
 
 ## 静态属性
 
@@ -96,11 +94,11 @@ All modes escape `&`. The mode can further be set to escape `<` and `>` ([escape
 HtmlEscapeMode unknown
 ```
 
-Default escaping mode, which escapes all characters.
+默认转义模式，转义所有字符。
 
-The result of such an escaping is usable both in element content and in any attribute value.
+这种转义的结果既可用于元素内容，也可用于任何属性值。
 
-The escaping only works for elements with normal HTML content, and not, for example, for script or style element content, which require escapes matching their particular content syntax.
+该转义仅适用于具有普通 HTML 内容的元素，不适用于例如脚本或样式元素的内容，这些内容需要与其特定内容语法相匹配的转义方式。
 
 ### attribute
 
@@ -108,11 +106,11 @@ The escaping only works for elements with normal HTML content, and not, for exam
 HtmlEscapeMode attribute
 ```
 
-Escaping mode for text going into double-quoted HTML attribute values.
+用于进入双引号 HTML 属性值的文本的转义模式。
 
-The result should not be used as the content of an unquoted or single-quoted attribute value.
+其结果不应用作不带引号或单引号属性值的内容。
 
-Escapes double quotes (`"`) but not single quotes (`'`), and escapes `<` and `>` characters because they are not allowed in strict XHTML attributes
+转义双引号（`"`）但不转义单引号（`'`），并转义 `<` 和 `>` 字符，因为它们在严格的 XHTML 属性中是不允许的。
 
 ### sqAttribute
 
@@ -120,11 +118,11 @@ Escapes double quotes (`"`) but not single quotes (`'`), and escapes `<` and `>`
 HtmlEscapeMode sqAttribute
 ```
 
-Escaping mode for text going into single-quoted HTML attribute values.
+用于进入单引号 HTML 属性值的文本的转义模式。
 
-The result should not be used as the content of an unquoted or double-quoted attribute value.
+其结果不应用作不带引号或双引号属性值的内容。
 
-Escapes single quotes (`'`) but not double quotes (`"`), and escapes `<` and `>` characters because they are not allowed in strict XHTML attributes.
+转义单引号（`'`）但不转义双引号（`"`），并转义 `<` 和 `>` 字符，因为它们在严格的 XHTML 属性中是不允许的。
 
 ### element
 
@@ -132,11 +130,11 @@ Escapes single quotes (`'`) but not double quotes (`"`), and escapes `<` and `>`
 HtmlEscapeMode element
 ```
 
-Escaping mode for text going into HTML element content.
+用于进入 HTML 元素内容的文本的转义模式。
 
-The escaping only works for elements with normal HTML content, and not, for example, for script or style element content, which require escapes matching their particular content syntax.
+该转义仅适用于具有普通 HTML 内容的元素，不适用于例如脚本或样式元素的内容，这些内容需要与其特定内容语法相匹配的转义方式。
 
-Escapes `<` and `>` characters.
+转义 `<` 和 `>` 字符。
 
 ## 属性
 
@@ -146,7 +144,7 @@ Escapes `<` and `>` characters.
 bool escapeLtGt
 ```
 
-Whether to escape '<' and '>'.
+是否转义 '<' 和 '>'。
 
 ### escapeQuot
 
@@ -154,7 +152,7 @@ Whether to escape '<' and '>'.
 bool escapeQuot
 ```
 
-Whether to escape '"' (quote).
+是否转义 '"'（引号）。
 
 ### escapeApos
 
@@ -162,7 +160,7 @@ Whether to escape '"' (quote).
 bool escapeApos
 ```
 
-Whether to escape "'" (apostrophe).
+是否转义 "'"（撇号）。
 
 ### escapeSlash
 
@@ -170,13 +168,11 @@ Whether to escape "'" (apostrophe).
 bool escapeSlash
 ```
 
-Whether to escape "/" (forward slash, solidus).
+是否转义 "/"（正斜杠）。
 
-Escaping a slash is recommended to avoid cross-site scripting attacks by [the Open Web Application Security Project](<https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet#RULE_.231_-_HTML_Escape_Before_Inserting_Untrusted_Data_into_HTML_Element_Content>)
+建议转义斜杠，以避免[开放式Web应用程序安全项目（OWASP）](<https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet#RULE_.231_-_HTML_Escape_Before_Inserting_Untrusted_Data_into_HTML_Element_Content>)所指出的跨站脚本攻击。
 
 ---
-
-
 
 # HtmlEscape
 
@@ -184,21 +180,21 @@ Escaping a slash is recommended to avoid cross-site scripting attacks by [the Op
 final class HtmlEscape extends Converter<String, String> {}
 ```
 
-Converter which escapes characters with special meaning in HTML.
+用于转义 HTML 中具有特殊含义的字符的转换器。
 
-The converter finds characters that are significant in the HTML source and replaces them with corresponding HTML entities.
+该转换器会找出 HTML 源码中具有特殊意义的字符，并将其替换为相应的 HTML 实体。
 
-The characters that need escaping in HTML are:
+在 HTML 中需要转义的字符包括：
 
-- `&` (ampersand) always needs to be escaped.
-- `<` (less than) and `>` (greater than) when inside an element.
-- `"` (quote) when inside a double-quoted attribute value.
-- `'` (apostrophe) when inside a single-quoted attribute value. Apostrophe is escaped as `&#39;` instead of `&apos;` since not all browsers understand `&apos;`.
-- `/` (slash) is recommended to be escaped because it may be used to terminate an element in some HTML dialects.
+- `&`（和号）始终需要转义。
+- `<`（小于号）和 `>`（大于号）在元素内部时需要转义。
+- `"`（引号）在双引号属性值内部时需要转义。
+- `'`（撇号）在单引号属性值内部时需要转义。撇号被转义为 `&#39;` 而不是 `&apos;`，因为并非所有浏览器都能识别 `&apos;`。
+- `/`（斜杠）建议转义，因为在某些 HTML 方言中它可能被用于终止一个元素。
 
-Escaping `>` (greater than) isn't necessary, but the result is often found to be easier to read if greater-than is also escaped whenever less-than is.
+转义 `>`（大于号）并非必需，但当同时转义了小于号时，转义大于号往往会使结果更易读。
 
-Example:
+示例：
 
 ```dart
 const HtmlEscape htmlEscape = HtmlEscape();
@@ -231,9 +227,9 @@ print(escaped); // Path: &#47;system&#47;
 HtmlEscape([HtmlEscapeMode mode = HtmlEscapeMode.unknown])
 ```
 
-Create converter that escapes HTML characters.
+创建一个转义 HTML 字符的转换器。
 
-If [mode] is provided as either [HtmlEscapeMode.attribute] or [HtmlEscapeMode.element], only the corresponding subset of HTML characters is escaped. The default is to escape all HTML characters.
+如果提供的 [mode] 为 [HtmlEscapeMode.attribute] 或 [HtmlEscapeMode.element]，则只转义对应子集的 HTML 字符。默认情况下会转义所有 HTML 字符。
 
 ## 属性
 
@@ -243,7 +239,7 @@ If [mode] is provided as either [HtmlEscapeMode.attribute] or [HtmlEscapeMode.el
 HtmlEscapeMode mode
 ```
 
-The [HtmlEscapeMode] used by the converter.
+转换器使用的 [HtmlEscapeMode]。
 
 ## 方法
 

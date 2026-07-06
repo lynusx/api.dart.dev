@@ -4,13 +4,13 @@
 abstract mixin class Codec<S, T> {}
 ```
 
-A [Codec] encodes and (if supported) decodes data.
+[Codec] 用于编码，并且（如果支持）解码数据。
 
-Codecs can be fused. For example fusing [json] and [utf8] produces an encoder that can convert Json objects directly to bytes, or can decode bytes directly to json objects.
+编解码器（Codec）可以被融合（fuse）。例如，将 [json] 与 [utf8] 融合会生成一个能够将 Json 对象直接转换为字节，或将字节直接解码为 json 对象的编码器。
 
-Fused codecs generally attempt to optimize the operations and can be faster than executing each step of an encoding separately.
+融合后的编解码器通常会尝试对操作进行优化，其速度可能比单独执行每一步编码更快。
 
-The [Codec] class provides a default implementation of [encode], [decode], [fuse] and [inverted]. Subclasses can choose to provide more efficient implementations of these.
+[Codec] 类提供了 [encode]、[decode]、[fuse] 和 [inverted] 的默认实现。子类可以选择提供这些方法更高效的实现。
 
 ## 构造函数
 
@@ -28,9 +28,9 @@ const Codec<S, T>()
 Converter<S, T> get encoder
 ```
 
-Returns the encoder from [S] to [T].
+返回从 [S] 到 [T] 的编码器。
 
-It may be stateful and should not be reused.
+它可能是有状态的，不应被重复使用。
 
 ### decoder
 
@@ -38,9 +38,9 @@ It may be stateful and should not be reused.
 Converter<T, S> get decoder
 ```
 
-Returns the decoder of `this`, converting from [T] to [S].
+返回 `this` 的解码器，用于将 [T] 转换为 [S]。
 
-It may be stateful and should not be reused.
+它可能是有状态的，不应被重复使用。
 
 ### inverted
 
@@ -48,9 +48,9 @@ It may be stateful and should not be reused.
 Codec<T, S> get inverted
 ```
 
-Inverts `this`.
+对 `this` 进行反转。
 
-The [encoder] and [decoder] of the resulting codec are swapped.
+结果编解码器的 [encoder] 与 [decoder] 将互换。
 
 ## 方法
 
@@ -60,9 +60,9 @@ The [encoder] and [decoder] of the resulting codec are swapped.
 T encode(S input)
 ```
 
-Encodes [input].
+对 [input] 进行编码。
 
-The input is encoded as if by `encoder.convert`.
+输入将按照 `encoder.convert` 的方式进行编码。
 
 ### decode()
 
@@ -70,9 +70,9 @@ The input is encoded as if by `encoder.convert`.
 S decode(T encoded)
 ```
 
-Decodes [encoded] data.
+解码 [encoded] 数据。
 
-The input is decoded as if by `decoder.convert`.
+输入将按照 `decoder.convert` 的方式进行解码。
 
 ### fuse()
 
@@ -80,15 +80,15 @@ The input is decoded as if by `decoder.convert`.
 Codec<S, R> fuse<R>(Codec<T, R> other)
 ```
 
-Fuses `this` with `other`.
+将 `this` 与 `other` 融合。
 
-When encoding, the resulting codec encodes with `this` before encoding with [other].
+编码时，融合后的编解码器会先使用 `this` 进行编码，再使用 [other] 进行编码。
 
-When decoding, the resulting codec decodes with [other] before decoding with `this`.
+解码时，融合后的编解码器会先使用 [other] 进行解码，再使用 `this` 进行解码。
 
-In some cases one needs to use the [inverted] codecs to be able to fuse them correctly. That is, the output type of `this` ([T]) must match the input type of the second codec [other].
+在某些情况下，需要使用 [inverted] 编解码器才能正确地进行融合。也就是说，`this` 的输出类型（[T]）必须与第二个编解码器 [other] 的输入类型相匹配。
 
-Examples:
+示例：
 
 ```dart
 final jsonToBytes = json.fuse(utf8);
@@ -101,4 +101,3 @@ var jsonIdentity = json.fuse(inverted);
 var jsonObject = jsonIdentity.encode(["1", 2]);
 assert(jsonObject is List && jsonObject[0] == "1" && jsonObject[1] == 2);
 ```
-

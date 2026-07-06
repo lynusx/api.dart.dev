@@ -4,11 +4,11 @@
 Base64Codec const base64
 ```
 
-A [base64](https://tools.ietf.org/html/rfc4648) encoder and decoder.
+一个 [base64](https://tools.ietf.org/html/rfc4648) 编码器和解码器。
 
-It encodes using the default base64 alphabet, decodes using both the base64 and base64url alphabets, does not allow invalid characters and requires padding.
+它使用默认的 base64 字母表进行编码，使用 base64 和 base64url 两种字母表进行解码，不允许无效字符，并且要求填充（padding）。
 
-Examples:
+示例：
 
 ```dart
 var encoded = base64.encode([0x62, 0x6c, 0xc3, 0xa5, 0x62, 0xc3, 0xa6,
@@ -16,11 +16,9 @@ var encoded = base64.encode([0x62, 0x6c, 0xc3, 0xa5, 0x62, 0xc3, 0xa6,
 var decoded = base64.decode("YmzDpWLDpnJncsO4ZAo=");
 ```
 
-The top-level [base64Encode] and [base64Decode] functions may be used instead if a local variable shadows the [base64] constant.
+如果局部变量遮蔽了 [base64] 常量，可以改用顶层函数 [base64Encode] 和 [base64Decode]。
 
 ---
-
-
 
 # base64Url
 
@@ -28,11 +26,11 @@ The top-level [base64Encode] and [base64Decode] functions may be used instead if
 Base64Codec base64Url
 ```
 
-A [base64url](https://tools.ietf.org/html/rfc4648) encoder and decoder.
+一个 [base64url](https://tools.ietf.org/html/rfc4648) 编码器和解码器。
 
-It encodes and decodes using the base64url alphabet, decodes using both the base64 and base64url alphabets, does not allow invalid characters and requires padding.
+它使用 base64url 字母表进行编码和解码，使用 base64 和 base64url 两种字母表进行解码，不允许无效字符，并且要求填充。
 
-Examples:
+示例：
 
 ```dart
 var encoded = base64Url.encode([0x62, 0x6c, 0xc3, 0xa5, 0x62, 0xc3, 0xa6,
@@ -42,21 +40,17 @@ var decoded = base64Url.decode("YmzDpWLDpnJncsO4ZAo=");
 
 ---
 
-
-
 # base64Encode()
 
 ```dart
 String base64Encode(List<int> bytes)
 ```
 
-Encodes [bytes] using [base64](https://tools.ietf.org/html/rfc4648) encoding.
+使用 [base64](https://tools.ietf.org/html/rfc4648) 编码方式对 [bytes] 进行编码。
 
-Shorthand for `base64.encode(bytes)`. Useful if a local variable shadows the global [base64] constant.
+是 `base64.encode(bytes)` 的简写形式。适用于局部变量遮蔽了全局 [base64] 常量的情况。
 
 ---
-
-
 
 # base64UrlEncode()
 
@@ -64,13 +58,11 @@ Shorthand for `base64.encode(bytes)`. Useful if a local variable shadows the glo
 String base64UrlEncode(List<int> bytes)
 ```
 
-Encodes [bytes] using [base64url](https://tools.ietf.org/html/rfc4648) encoding.
+使用 [base64url](https://tools.ietf.org/html/rfc4648) 编码方式对 [bytes] 进行编码。
 
-Shorthand for `base64url.encode(bytes)`.
+是 `base64url.encode(bytes)` 的简写形式。
 
 ---
-
-
 
 # base64Decode()
 
@@ -78,13 +70,11 @@ Shorthand for `base64url.encode(bytes)`.
 Uint8List base64Decode(String source)
 ```
 
-Decodes [base64](https://tools.ietf.org/html/rfc4648) or [base64url](https://tools.ietf.org/html/rfc4648) encoded bytes.
+解码 [base64](https://tools.ietf.org/html/rfc4648) 或 [base64url](https://tools.ietf.org/html/rfc4648) 编码的字节。
 
-Shorthand for `base64.decode(bytes)`. Useful if a local variable shadows the global [base64] constant.
+是 `base64.decode(bytes)` 的简写形式。适用于局部变量遮蔽了全局 [base64] 常量的情况。
 
 ---
-
-
 
 # Base64Codec
 
@@ -92,11 +82,11 @@ Shorthand for `base64.decode(bytes)`. Useful if a local variable shadows the glo
 final class Base64Codec extends Codec<List<int>, String> {}
 ```
 
-A [base64](https://tools.ietf.org/html/rfc4648) encoder and decoder.
+一个 [base64](https://tools.ietf.org/html/rfc4648) 编码器和解码器。
 
-A [Base64Codec] allows base64 encoding bytes into ASCII strings and decoding valid encodings back to bytes.
+[Base64Codec] 支持将字节以 base64 方式编码为 ASCII 字符串，并将有效的编码结果解码回字节。
 
-This implementation only handles the simplest RFC 4648 base64 and base64url encodings. It does not allow invalid characters when decoding and it requires, and generates, padding so that the input is always a multiple of four characters.
+此实现仅处理最简单的 RFC 4648 base64 及 base64url 编码。解码时不允许出现无效字符，并且要求（同时也会生成）填充，以使输入始终为 4 个字符的整数倍。
 
 ## 构造函数
 
@@ -120,9 +110,9 @@ const Base64Codec.urlSafe()
 Base64Encoder get encoder
 ```
 
-Returns the encoder from `S` to `T`.
+返回从 `S` 到 `T` 的编码器。
 
-It may be stateful and should not be reused.
+它可能是有状态的，不应被重复使用。
 
 ### decoder
 
@@ -130,9 +120,9 @@ It may be stateful and should not be reused.
 Base64Decoder get decoder
 ```
 
-Returns the decoder of `this`, converting from `T` to `S`.
+返回 `this` 的解码器，用于将 `T` 转换为 `S`。
 
-It may be stateful and should not be reused.
+它可能是有状态的，不应被重复使用。
 
 ## 方法
 
@@ -142,11 +132,11 @@ It may be stateful and should not be reused.
 Uint8List decode(String encoded)
 ```
 
-Decodes [encoded].
+解码 [encoded]。
 
-The input is decoded as if by `decoder.convert`.
+输入将按照 `decoder.convert` 的方式进行解码。
 
-The returned [Uint8List] contains exactly the decoded bytes, so the [Uint8List.length] is precisely the number of decoded bytes. The [Uint8List.buffer] may be larger than the decoded bytes.
+返回的 [Uint8List] 恰好包含解码后的字节，因此 [Uint8List.length] 正是解码后字节的数量。[Uint8List.buffer] 可能比解码后的字节更大。
 
 ### normalize()
 
@@ -154,22 +144,20 @@ The returned [Uint8List] contains exactly the decoded bytes, so the [Uint8List.l
 String normalize(String source, [int start = 0, int? end])
 ```
 
-Validates and normalizes the base64 encoded data in [source].
+验证并规范化 [source] 中的 base64 编码数据。
 
-Only acts on the substring from [start] to [end], with [end] defaulting to the end of the string.
+仅对从 [start] 到 [end] 的子字符串进行处理，[end] 默认为字符串末尾。
 
-Normalization will:
+规范化将执行以下操作：
 
-- Unescape any `%`-escapes.
-- Only allow valid characters (`A`-`Z`, `a`-`z`, `0`-`9`, `/` and `+`).
-- Normalize a `_` or `-` character to `/` or `+`.
-- Validate that existing padding (trailing `=` characters) is correct.
-- If no padding exists, add correct padding if necessary and possible.
-- Validate that the length is correct (a multiple of four).
+- 反转义任何 `%` 转义序列。
+- 仅允许有效字符（`A`-`Z`、`a`-`z`、`0`-`9`、`/` 和 `+`）。
+- 将 `_` 或 `-` 字符规范化为 `/` 或 `+`。
+- 验证现有填充（末尾的 `=` 字符）是否正确。
+- 如果不存在填充，则在必要且可行的情况下添加正确的填充。
+- 验证长度是否正确（是 4 的整数倍）。
 
 ---
-
-
 
 # Base64Encoder
 
@@ -177,13 +165,13 @@ Normalization will:
 final class Base64Encoder extends Converter<List<int>, String> {}
 ```
 
-Base64 and base64url encoding converter.
+Base64 与 base64url 编码转换器。
 
-Encodes lists of bytes using base64 or base64url encoding.
+使用 base64 或 base64url 编码方式对字节列表进行编码。
 
-The results are ASCII strings using a restricted alphabet.
+结果为使用受限字母表的 ASCII 字符串。
 
-Example:
+示例：
 
 ```dart
 final base64Encoder = base64.encoder;
@@ -214,7 +202,7 @@ const Base64Encoder.urlSafe()
 String convert(List<int> input)
 ```
 
-Converts `input` and returns the result of the conversion.
+转换 `input` 并返回转换结果。
 
 ### startChunkedConversion()
 
@@ -222,13 +210,11 @@ Converts `input` and returns the result of the conversion.
 ByteConversionSink startChunkedConversion(Sink<String> sink)
 ```
 
-Starts a chunked conversion.
+启动分块转换。
 
-The returned sink serves as input for the long-running conversion. The given `sink` serves as output.
+返回的 sink 作为长时间运行转换过程的输入。给定的 `sink` 作为输出。
 
 ---
-
-
 
 # Base64Decoder
 
@@ -236,15 +222,15 @@ The returned sink serves as input for the long-running conversion. The given `si
 final class Base64Decoder extends Converter<String, List<int>> {}
 ```
 
-Decoder for base64 encoded data.
+base64 编码数据的解码器。
 
-This decoder accepts both base64 and base64url ("url-safe") encodings.
+此解码器同时接受 base64 和 base64url（"URL 安全"）两种编码方式。
 
-The encoding is required to be properly padded.
+要求编码内容具有正确的填充。
 
-Throws a [FormatException] if the input is not valid base64 data.
+如果输入不是有效的 base64 数据，将抛出 [FormatException]。
 
-Example:
+示例：
 
 ```dart
 final base64Decoder = base64.decoder;
@@ -253,7 +239,7 @@ final decodedBytes = base64Decoder.convert(base64Bytes);
 // decodedBytes: [68, 97, 114, 116, 32, 105, 115, 32, 111, 112, 101, 110,
 // 32, 115, 111, 117, 114, 99, 101]
 
-// Print as string using UTF-8 decoder
+// 使用 UTF-8 解码器打印为字符串
 print(utf8.decode(decodedBytes)); // Dart is open source
 ```
 
@@ -273,11 +259,11 @@ const Base64Decoder()
 Uint8List convert(String input, [int start = 0, int? end])
 ```
 
-Decodes the characters of [input] from [start] to [end] as base64.
+将 [input] 中从 [start] 到 [end] 的字符解码为 base64。
 
-If [start] is omitted, it defaults to the start of [input]. If [end] is omitted, it defaults to the end of [input].
+如果省略 [start]，默认为 [input] 的起始位置。如果省略 [end]，默认为 [input] 的结束位置。
 
-The returned [Uint8List] contains exactly the decoded bytes, so the [Uint8List.length] is precisely the number of decoded bytes. The [Uint8List.buffer] may be larger than the decoded bytes.
+返回的 [Uint8List] 恰好包含解码后的字节，因此 [Uint8List.length] 正是解码后字节的数量。[Uint8List.buffer] 可能比解码后的字节更大。
 
 ### startChunkedConversion()
 
@@ -285,6 +271,6 @@ The returned [Uint8List] contains exactly the decoded bytes, so the [Uint8List.l
 StringConversionSink startChunkedConversion(Sink<List<int>> sink)
 ```
 
-Starts a chunked conversion.
+启动分块转换。
 
-The returned sink serves as input for the long-running conversion. The given `sink` serves as output.
+返回的 sink 作为长时间运行转换过程的输入。给定的 `sink` 作为输出。

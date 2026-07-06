@@ -4,11 +4,11 @@
 abstract class Encoding extends Codec<String, List<int>> {}
 ```
 
-Open-ended set of encodings.
+开放式的编码集合。
 
-An encoding is a [Codec] encoding strings to lists of byte.
+一种编码（encoding）是将字符串编码为字节列表的 [Codec]。
 
-This class provides a default implementation of [decodeStream], which is not incremental. It collects the entire input before decoding. Subclasses can choose to use that implementation, or implement a more efficient stream decoding.
+此类提供了 [decodeStream] 的默认实现，该实现不是增量式的，它会先收集全部输入，然后再进行解码。子类可以选择使用该默认实现，也可以实现更高效的流式解码。
 
 ## 构造函数
 
@@ -26,11 +26,11 @@ const Encoding()
 Encoding? getByName(String? name)
 ```
 
-Returns an [Encoding] for a named character set.
+返回指定名称字符集对应的 [Encoding]。
 
-The names used are the IANA official names for the character set (see [IANA character sets](http://www.iana.org/assignments/character-sets/character-sets.xml)). The names are case insensitive.
+使用的名称为 IANA 官方字符集名称（参见 [IANA character sets](http://www.iana.org/assignments/character-sets/character-sets.xml)）。名称不区分大小写。
 
-If character set is not supported `null` is returned.
+如果不支持该字符集，则返回 `null`。
 
 ## 属性
 
@@ -40,9 +40,9 @@ If character set is not supported `null` is returned.
 Converter<String, List<int>> get encoder
 ```
 
-Returns the encoder from `String` to `List<int>`.
+返回从 `String` 到 `List<int>` 的编码器。
 
-It may be stateful and should not be reused.
+它可能是有状态的，不应被重复使用。
 
 ### decoder
 
@@ -50,9 +50,9 @@ It may be stateful and should not be reused.
 Converter<List<int>, String> get decoder
 ```
 
-Returns the decoder of `this`, converting from `List<int>` to `String`.
+返回 `this` 的解码器，用于将 `List<int>` 转换为 `String`。
 
-It may be stateful and should not be reused.
+它可能是有状态的，不应被重复使用。
 
 ### name
 
@@ -60,9 +60,9 @@ It may be stateful and should not be reused.
 String get name
 ```
 
-Name of the encoding.
+编码的名称。
 
-If the encoding is standardized, this is the lower-case version of one of the IANA official names for the character set (see http://www.iana.org/assignments/character-sets/character-sets.xml)
+如果该编码是标准化的，则此名称为其 IANA 官方字符集名称（参见 http://www.iana.org/assignments/character-sets/character-sets.xml ）之一的小写形式。
 
 ## 方法
 

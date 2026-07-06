@@ -4,11 +4,11 @@
 Latin1Codec latin1
 ```
 
-An instance of the default implementation of the [Latin1Codec].
+[Latin1Codec] 默认实现的一个实例。
 
-This instance provides a convenient access to the most common ISO Latin 1 use cases.
+该实例便于访问最常见的 ISO Latin 1 使用场景。
 
-Examples:
+示例：
 
 ```dart
 var encoded = latin1.encode("blåbærgrød");
@@ -18,15 +18,13 @@ var decoded = latin1.decode([0x62, 0x6c, 0xe5, 0x62, 0xe6,
 
 ---
 
-
-
 # Latin1Codec
 
 ```dart
 final class Latin1Codec extends Encoding {}
 ```
 
-A [Latin1Codec] encodes strings to ISO Latin-1 (aka ISO-8859-1) bytes and decodes Latin-1 bytes to strings.
+[Latin1Codec] 将字符串编码为 ISO Latin-1（即 ISO-8859-1）字节，并将 Latin-1 字节解码为字符串。
 
 ## 构造函数
 
@@ -36,11 +34,11 @@ A [Latin1Codec] encodes strings to ISO Latin-1 (aka ISO-8859-1) bytes and decode
 Latin1Codec({bool allowInvalid = false})
 ```
 
-Instantiates a new [Latin1Codec].
+实例化一个新的 [Latin1Codec]。
 
-If [allowInvalid] is true, the [decode] method and the converter returned by [decoder] will default to allowing invalid values. Invalid values are decoded into the Unicode Replacement character (U+FFFD). Calls to the [decode] method can override this default.
+如果 [allowInvalid] 为 true，则 [decode] 方法以及 [decoder] 返回的转换器默认将允许无效值。无效值会被解码为 Unicode 替换字符（U+FFFD）。调用 [decode] 方法时可以覆盖此默认设置。
 
-Encoders will not accept invalid (non Latin-1) characters.
+编码器不会接受无效（非 Latin-1）字符。
 
 ## 属性
 
@@ -50,7 +48,7 @@ Encoders will not accept invalid (non Latin-1) characters.
 String get name
 ```
 
-The name of this codec, "iso-8859-1".
+该编解码器的名称，"iso-8859-1"。
 
 ### encoder
 
@@ -78,15 +76,13 @@ Uint8List encode(String source)
 String decode(List<int> bytes, {bool? allowInvalid})
 ```
 
-Decodes the Latin-1 [bytes] (a list of unsigned 8-bit integers) to the corresponding string.
+将 Latin-1 编码的 [bytes]（一个无符号 8 位整数列表）解码为对应的字符串。
 
-If [bytes] contains values that are not in the range 0 .. 255, the decoder will eventually throw a [FormatException].
+如果 [bytes] 包含不在 0 到 255 范围内的值，解码器最终会抛出 [FormatException]。
 
-If [allowInvalid] is not provided, it defaults to the value used to create this [Latin1Codec].
+如果未提供 [allowInvalid]，其默认值为创建此 [Latin1Codec] 时使用的值。
 
 ---
-
-
 
 # Latin1Encoder
 
@@ -94,9 +90,9 @@ If [allowInvalid] is not provided, it defaults to the value used to create this 
 final class Latin1Encoder extends _UnicodeSubsetEncoder {}
 ```
 
-This class converts strings of only ISO Latin-1 characters to bytes.
+此类将仅包含 ISO Latin-1 字符的字符串转换为字节。
 
-Example:
+示例：
 
 ```dart
 final latin1Encoder = latin1.encoder;
@@ -114,17 +110,15 @@ const Latin1Encoder()
 
 ---
 
-
-
 # Latin1Decoder
 
 ```dart
 final class Latin1Decoder extends _UnicodeSubsetDecoder {}
 ```
 
-This class converts Latin-1 bytes (lists of unsigned 8-bit integers) to a string.
+此类将 Latin-1 字节（无符号 8 位整数列表）转换为字符串。
 
-Example:
+示例：
 
 ```dart
 final latin1Decoder = latin1.decoder;
@@ -133,17 +127,17 @@ const encodedBytes = [224, 225, 226, 227, 228, 229];
 final decoded = latin1Decoder.convert(encodedBytes);
 print(decoded); // àáâãäå
 
-// Hexadecimal values as source
+// 使用十六进制值作为输入
 const hexBytes = [0xe0, 0xe1, 0xe2, 0xe3, 0xe4, 0xe5];
 final decodedHexBytes = latin1Decoder.convert(hexBytes);
 print(decodedHexBytes); // àáâãäå
 ```
 
-Throws a [FormatException] if the encoded input contains values that are not in the range 0 .. 255 and [allowInvalid] is false ( the default ).
+如果编码输入包含不在 0 到 255 范围内的值，且 [allowInvalid] 为 false（默认值），则抛出 [FormatException]。
 
-If [allowInvalid] is true, invalid bytes are converted to Unicode Replacement character U+FFFD (�).
+如果 [allowInvalid] 为 true，无效字节将被转换为 Unicode 替换字符 U+FFFD（�）。
 
-Example with `allowInvalid` set to true:
+设置 `allowInvalid` 为 true 的示例：
 
 ```dart
 const latin1Decoder = Latin1Decoder(allowInvalid: true);
@@ -160,11 +154,11 @@ print(decoded); // �
 Latin1Decoder({bool allowInvalid = false})
 ```
 
-Instantiates a new [Latin1Decoder].
+实例化一个新的 [Latin1Decoder]。
 
-The optional [allowInvalid] argument defines how [convert] deals with invalid bytes.
+可选参数 [allowInvalid] 定义 [convert] 如何处理无效字节。
 
-If it is `true`, [convert] replaces invalid bytes with the Unicode Replacement character `U+FFFD` (�). Otherwise it throws a [FormatException].
+如果为 `true`，[convert] 将无效字节替换为 Unicode 替换字符 `U+FFFD`（�）。否则将抛出 [FormatException]。
 
 ## 方法
 
@@ -174,6 +168,6 @@ If it is `true`, [convert] replaces invalid bytes with the Unicode Replacement c
 ByteConversionSink startChunkedConversion(Sink<String> sink)
 ```
 
-Starts a chunked conversion.
+开始一次分块转换。
 
-The converter works more efficiently if the given [sink] is a [StringConversionSink].
+如果给定的 [sink] 是 [StringConversionSink]，转换器的工作效率会更高。

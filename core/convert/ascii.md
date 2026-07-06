@@ -4,11 +4,11 @@
 AsciiCodec const ascii
 ```
 
-An instance of the default implementation of the [AsciiCodec].
+[AsciiCodec] 默认实现的一个实例。
 
-This instance provides a convenient access to the most common ASCII use cases.
+该实例为最常见的 ASCII 使用场景提供了便捷的访问方式。
 
-Examples:
+示例：
 
 ```dart
 var encoded = ascii.encode("This is ASCII!");
@@ -22,11 +22,11 @@ var decoded = ascii.decode([0x54, 0x68, 0x69, 0x73, 0x20, 0x69, 0x73,
 final class AsciiCodec extends Encoding {}
 ```
 
-Encoding and decoding of ASCII characters.
+ASCII 字符的编码与解码。
 
-An [Encoding] (conversion between strings and bytes) that converts ASCII characters (U+0000..U+007F) to and from their corresponding byte values.
+一个 [Encoding]（字符串与字节之间的转换）实现，用于将 ASCII 字符（U+0000..U+007F）与其对应的字节值相互转换。
 
-Treats any non-ASCII character (U+0080..U+10FFFF) as an invalid input to endcoding, and any byte &ge; 128 as an invalid input to decoding.
+将任何非 ASCII 字符（U+0080..U+10FFFF）视为编码的无效输入，将任何大于等于 128 的字节视为解码的无效输入。
 
 ## 构造函数
 
@@ -36,11 +36,11 @@ Treats any non-ASCII character (U+0080..U+10FFFF) as an invalid input to endcodi
 AsciiCodec({bool allowInvalid = false})
 ```
 
-Instantiates a new [AsciiCodec].
+实例化一个新的 [AsciiCodec]。
 
-If [allowInvalid] is `true`, the [decode] method and the converter returned by [decoder] will default to allowing invalid values, which are byte values greater than 127. If allowing invalid values, invalid values will be decoded to the Unicode Replacement character (U+FFFD). If not, a [FormatException] is be thrown. Calls to the [decode] method can choose to override this default.
+如果 [allowInvalid] 为 `true`，则 [decode] 方法以及由 [decoder] 返回的转换器默认允许无效值（即大于 127 的字节值）。如果允许无效值，无效值将被解码为 Unicode 替换字符（U+FFFD）。否则将抛出 [FormatException]。调用 [decode] 方法时可以选择覆盖此默认设置。
 
-Encoders will not accept invalid (non-ASCII) characters.
+编码器不接受无效（非 ASCII）字符。
 
 ## 属性
 
@@ -50,7 +50,7 @@ Encoders will not accept invalid (non-ASCII) characters.
 String get name
 ```
 
-The name of this codec is "us-ascii".
+该编解码器的名称为 "us-ascii"。
 
 ### encoder
 
@@ -58,9 +58,9 @@ The name of this codec is "us-ascii".
 AsciiEncoder get encoder
 ```
 
-Returns the encoder from `String` to `List<int>`.
+返回从 `String` 到 `List<int>` 的编码器。
 
-It may be stateful and should not be reused.
+它可能是有状态的，不应被重复使用。
 
 ### decoder
 
@@ -68,9 +68,9 @@ It may be stateful and should not be reused.
 AsciiDecoder get decoder
 ```
 
-Returns the decoder of `this`, converting from `List<int>` to `String`.
+返回 `this` 的解码器，用于将 `List<int>` 转换为 `String`。
 
-It may be stateful and should not be reused.
+它可能是有状态的，不应被重复使用。
 
 ## 方法
 
@@ -80,9 +80,9 @@ It may be stateful and should not be reused.
 Uint8List encode(String source)
 ```
 
-Encodes `input`.
+对 `input` 进行编码。
 
-The input is encoded as if by `encoder.convert`.
+输入将按照 `encoder.convert` 的方式进行编码。
 
 ### decode()
 
@@ -93,15 +93,13 @@ String decode(
 })
 ```
 
-Decodes the ASCII [bytes] (a list of unsigned 7-bit integers) to the corresponding string.
+将 ASCII 字节 [bytes]（一个由无符号 7 位整数组成的列表）解码为对应的字符串。
 
-If [bytes] contains values that are not in the range 0 .. 127, the decoder will eventually throw a [FormatException].
+如果 [bytes] 中包含不在 0 到 127 范围内的值，解码器最终将抛出 [FormatException]。
 
-If [allowInvalid] is not provided, it defaults to the value used to create this [AsciiCodec].
+如果未提供 [allowInvalid]，则默认使用创建此 [AsciiCodec] 时所用的值。
 
 ---
-
-
 
 # AsciiEncoder
 
@@ -109,9 +107,9 @@ If [allowInvalid] is not provided, it defaults to the value used to create this 
 final class AsciiEncoder extends _UnicodeSubsetEncoder {}
 ```
 
-Converts strings of only ASCII characters to bytes.
+将仅包含 ASCII 字符的字符串转换为字节。
 
-Example:
+示例：
 
 ```dart
 const asciiEncoder = AsciiEncoder();
@@ -122,17 +120,15 @@ print(asciiValues); // [68, 97, 114, 116]
 
 ---
 
-
-
 # AsciiDecoder
 
 ```dart
 final class AsciiDecoder extends _UnicodeSubsetDecoder {}
 ```
 
-Converts ASCII bytes to string.
+将 ASCII 字节转换为字符串。
 
-Example:
+示例：
 
 ```dart
 const asciiDecoder = AsciiDecoder();
@@ -141,11 +137,11 @@ final result = asciiDecoder.convert(asciiValues);
 print(result); // Dart
 ```
 
-Throws a [FormatException] if [bytes] contains values that are not in the range 0 .. 127, and [allowInvalid] is `false` (the default).
+如果 [bytes] 中包含不在 0 到 127 范围内的值，且 [allowInvalid] 为 `false`（默认值），则抛出 [FormatException]。
 
-If [allowInvalid] is `true`, any byte outside the range 0..127 is replaced by the Unicode replacement character, U+FFFD ('�').
+如果 [allowInvalid] 为 `true`，任何超出 0 到 127 范围的字节都将被替换为 Unicode 替换字符 U+FFFD（'�'）。
 
-Example with `allowInvalid` set to true:
+设置 `allowInvalid` 为 true 的示例：
 
 ```dart
 const asciiDecoder = AsciiDecoder(allowInvalid: true);
@@ -155,8 +151,6 @@ print(result); // Dart �
 print(result.codeUnits.last.toRadixString(16)); // fffd
 ```
 
-
-
 ## 方法
 
 ### startChunkedConversion()
@@ -165,6 +159,6 @@ print(result.codeUnits.last.toRadixString(16)); // fffd
 ByteConversionSink startChunkedConversion(Sink<String> sink)
 ```
 
-Starts a chunked conversion.
+启动分块转换。
 
-The converter works more efficiently if the given [sink] is a [StringConversionSink].
+如果给定的 [sink] 是 [StringConversionSink]，转换器的工作效率会更高。
