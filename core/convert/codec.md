@@ -12,31 +12,15 @@ Fused codecs generally attempt to optimize the operations and can be faster than
 
 The [Codec] class provides a default implementation of [encode], [decode], [fuse] and [inverted]. Subclasses can choose to provide more efficient implementations of these.
 
+## 构造函数
+
 ### Codec()
 
 ```dart
-Codec()
+const Codec<S, T>()
 ```
 
-### encode()
-
-```dart
-T encode(S input)
-```
-
-Encodes [input].
-
-The input is encoded as if by `encoder.convert`.
-
-### decode()
-
-```dart
-S decode(T encoded)
-```
-
-Decodes [encoded] data.
-
-The input is decoded as if by `decoder.convert`.
+## 属性
 
 ### encoder
 
@@ -57,6 +41,38 @@ Converter<T, S> get decoder
 Returns the decoder of `this`, converting from [T] to [S].
 
 It may be stateful and should not be reused.
+
+### inverted
+
+```dart
+Codec<T, S> get inverted
+```
+
+Inverts `this`.
+
+The [encoder] and [decoder] of the resulting codec are swapped.
+
+## 方法
+
+### encode()
+
+```dart
+T encode(S input)
+```
+
+Encodes [input].
+
+The input is encoded as if by `encoder.convert`.
+
+### decode()
+
+```dart
+S decode(T encoded)
+```
+
+Decodes [encoded] data.
+
+The input is decoded as if by `decoder.convert`.
 
 ### fuse()
 
@@ -86,12 +102,3 @@ var jsonObject = jsonIdentity.encode(["1", 2]);
 assert(jsonObject is List && jsonObject[0] == "1" && jsonObject[1] == 2);
 ```
 
-### inverted
-
-```dart
-Codec<T, S> get inverted
-```
-
-Inverts `this`.
-
-The [encoder] and [decoder] of the resulting codec are swapped.

@@ -8,10 +8,12 @@ The [ByteConversionSink] provides an interface for converters to efficiently tra
 
 Instead of limiting the interface to one non-chunked list of bytes it accepts its input in chunks (themselves being lists of bytes).
 
+## 构造函数
+
 ### ByteConversionSink()
 
 ```dart
-ByteConversionSink()
+const ByteConversionSink()
 ```
 
 ### ByteConversionSink.withCallback()
@@ -26,10 +28,17 @@ ByteConversionSink.withCallback(void Function(List<int> accumulated) callback)
 ByteConversionSink.from(Sink<List<int>> sink)
 ```
 
+## 方法
+
 ### addSlice()
 
 ```dart
-void addSlice(List<int> chunk, int start, int end, bool isLast)
+void addSlice(
+  List<int> chunk, 
+  int start, 
+  int end, 
+  bool isLast
+)
 ```
 
 Adds the next [chunk] to `this`.
@@ -39,6 +48,10 @@ Adds the bytes defined by [start] and [end]-exclusive to `this`.
 If [isLast] is `true` closes `this`.
 
 Contrary to `add` the given [chunk] must not be held onto. Once the method returns, it is safe to overwrite the data in it.
+
+---
+
+
 
 # ByteConversionSinkBase
 

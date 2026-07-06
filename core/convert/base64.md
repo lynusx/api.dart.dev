@@ -1,7 +1,7 @@
 # base64
 
 ```dart
-Base64Codec base64
+Base64Codec const base64
 ```
 
 A [base64](https://tools.ietf.org/html/rfc4648) encoder and decoder.
@@ -17,6 +17,10 @@ var decoded = base64.decode("YmzDpWLDpnJncsO4ZAo=");
 ```
 
 The top-level [base64Encode] and [base64Decode] functions may be used instead if a local variable shadows the [base64] constant.
+
+---
+
+
 
 # base64Url
 
@@ -36,6 +40,10 @@ var encoded = base64Url.encode([0x62, 0x6c, 0xc3, 0xa5, 0x62, 0xc3, 0xa6,
 var decoded = base64Url.decode("YmzDpWLDpnJncsO4ZAo=");
 ```
 
+---
+
+
+
 # base64Encode()
 
 ```dart
@@ -45,6 +53,10 @@ String base64Encode(List<int> bytes)
 Encodes [bytes] using [base64](https://tools.ietf.org/html/rfc4648) encoding.
 
 Shorthand for `base64.encode(bytes)`. Useful if a local variable shadows the global [base64] constant.
+
+---
+
+
 
 # base64UrlEncode()
 
@@ -56,6 +68,10 @@ Encodes [bytes] using [base64url](https://tools.ietf.org/html/rfc4648) encoding.
 
 Shorthand for `base64url.encode(bytes)`.
 
+---
+
+
+
 # base64Decode()
 
 ```dart
@@ -65,6 +81,10 @@ Uint8List base64Decode(String source)
 Decodes [base64](https://tools.ietf.org/html/rfc4648) or [base64url](https://tools.ietf.org/html/rfc4648) encoded bytes.
 
 Shorthand for `base64.decode(bytes)`. Useful if a local variable shadows the global [base64] constant.
+
+---
+
+
 
 # Base64Codec
 
@@ -78,17 +98,21 @@ A [Base64Codec] allows base64 encoding bytes into ASCII strings and decoding val
 
 This implementation only handles the simplest RFC 4648 base64 and base64url encodings. It does not allow invalid characters when decoding and it requires, and generates, padding so that the input is always a multiple of four characters.
 
+## 构造函数
+
 ### Base64Codec()
 
 ```dart
-Base64Codec()
+const Base64Codec()
 ```
 
 ### Base64Codec.urlSafe()
 
 ```dart
-Base64Codec.urlSafe()
+const Base64Codec.urlSafe()
 ```
+
+## 属性
 
 ### encoder
 
@@ -96,11 +120,21 @@ Base64Codec.urlSafe()
 Base64Encoder get encoder
 ```
 
+Returns the encoder from `S` to `T`.
+
+It may be stateful and should not be reused.
+
 ### decoder
 
 ```dart
 Base64Decoder get decoder
 ```
+
+Returns the decoder of `this`, converting from `T` to `S`.
+
+It may be stateful and should not be reused.
+
+## 方法
 
 ### decode()
 
@@ -133,6 +167,10 @@ Normalization will:
 - If no padding exists, add correct padding if necessary and possible.
 - Validate that the length is correct (a multiple of four).
 
+---
+
+
+
 # Base64Encoder
 
 ```dart
@@ -154,17 +192,21 @@ final encodedSample = base64Encoder.convert(sample.codeUnits);
 print(encodedSample); // RGFydCBpcyBvcGVuIHNvdXJjZQ==
 ```
 
+## 构造函数
+
 ### Base64Encoder()
 
 ```dart
-Base64Encoder()
+const Base64Encoder()
 ```
 
 ### Base64Encoder.urlSafe()
 
 ```dart
-Base64Encoder.urlSafe()
+const Base64Encoder.urlSafe()
 ```
+
+## 方法
 
 ### convert()
 
@@ -172,11 +214,21 @@ Base64Encoder.urlSafe()
 String convert(List<int> input)
 ```
 
+Converts `input` and returns the result of the conversion.
+
 ### startChunkedConversion()
 
 ```dart
 ByteConversionSink startChunkedConversion(Sink<String> sink)
 ```
+
+Starts a chunked conversion.
+
+The returned sink serves as input for the long-running conversion. The given `sink` serves as output.
+
+---
+
+
 
 # Base64Decoder
 
@@ -205,11 +257,15 @@ final decodedBytes = base64Decoder.convert(base64Bytes);
 print(utf8.decode(decodedBytes)); // Dart is open source
 ```
 
+## 构造函数
+
 ### Base64Decoder()
 
 ```dart
-Base64Decoder()
+const Base64Decoder()
 ```
+
+## 方法
 
 ### convert()
 
@@ -228,3 +284,7 @@ The returned [Uint8List] contains exactly the decoded bytes, so the [Uint8List.l
 ```dart
 StringConversionSink startChunkedConversion(Sink<List<int>> sink)
 ```
+
+Starts a chunked conversion.
+
+The returned sink serves as input for the long-running conversion. The given `sink` serves as output.

@@ -1,7 +1,7 @@
 # ascii
 
 ```dart
-AsciiCodec ascii
+AsciiCodec const ascii
 ```
 
 An instance of the default implementation of the [AsciiCodec].
@@ -28,17 +28,21 @@ An [Encoding] (conversion between strings and bytes) that converts ASCII charact
 
 Treats any non-ASCII character (U+0080..U+10FFFF) as an invalid input to endcoding, and any byte &ge; 128 as an invalid input to decoding.
 
+## 构造函数
+
 ### AsciiCodec()
 
 ```dart
-AsciiCodec({bool _allowInvalid = false})
+AsciiCodec({bool allowInvalid = false})
 ```
 
 Instantiates a new [AsciiCodec].
 
-If [_allowInvalid] is `true`, the [decode] method and the converter returned by [decoder] will default to allowing invalid values, which are byte values greater than 127. If allowing invalid values, invalid values will be decoded to the Unicode Replacement character (U+FFFD). If not, a [FormatException] is be thrown. Calls to the [decode] method can choose to override this default.
+If [allowInvalid] is `true`, the [decode] method and the converter returned by [decoder] will default to allowing invalid values, which are byte values greater than 127. If allowing invalid values, invalid values will be decoded to the Unicode Replacement character (U+FFFD). If not, a [FormatException] is be thrown. Calls to the [decode] method can choose to override this default.
 
 Encoders will not accept invalid (non-ASCII) characters.
+
+## 属性
 
 ### name
 
@@ -48,16 +52,45 @@ String get name
 
 The name of this codec is "us-ascii".
 
+### encoder
+
+```dart
+AsciiEncoder get encoder
+```
+
+Returns the encoder from `String` to `List<int>`.
+
+It may be stateful and should not be reused.
+
+### decoder
+
+```dart
+AsciiDecoder get decoder
+```
+
+Returns the decoder of `this`, converting from `List<int>` to `String`.
+
+It may be stateful and should not be reused.
+
+## 方法
+
 ### encode()
 
 ```dart
 Uint8List encode(String source)
 ```
 
+Encodes `input`.
+
+The input is encoded as if by `encoder.convert`.
+
 ### decode()
 
 ```dart
-String decode(List<int> bytes, {bool? allowInvalid})
+String decode(
+  List<int> bytes, {
+  bool? allowInvalid
+})
 ```
 
 Decodes the ASCII [bytes] (a list of unsigned 7-bit integers) to the corresponding string.
@@ -66,17 +99,9 @@ If [bytes] contains values that are not in the range 0 .. 127, the decoder will 
 
 If [allowInvalid] is not provided, it defaults to the value used to create this [AsciiCodec].
 
-### encoder
+---
 
-```dart
-AsciiEncoder get encoder
-```
 
-### decoder
-
-```dart
-AsciiDecoder get decoder
-```
 
 # AsciiEncoder
 
@@ -88,18 +113,16 @@ Converts strings of only ASCII characters to bytes.
 
 Example:
 
-```dart import:typed_data
+```dart
 const asciiEncoder = AsciiEncoder();
 const sample = 'Dart';
 final asciiValues = asciiEncoder.convert(sample);
 print(asciiValues); // [68, 97, 114, 116]
 ```
 
-### AsciiEncoder()
+---
 
-```dart
-AsciiEncoder()
-```
+
 
 # AsciiDecoder
 
@@ -132,11 +155,9 @@ print(result); // Dart �
 print(result.codeUnits.last.toRadixString(16)); // fffd
 ```
 
-### AsciiDecoder()
 
-```dart
-AsciiDecoder({bool allowInvalid = false})
-```
+
+## 方法
 
 ### startChunkedConversion()
 

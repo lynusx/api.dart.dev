@@ -4,21 +4,21 @@
 class Point<T extends num> {}
 ```
 
-A utility class for representing two-dimensional positions.
+用于表示二维位置的实用工具类。
 
-Example:
+示例：
 
 ```dart
 var leftTop = const Point(0, 0);
 var rightBottom = const Point(200, 400);
 ```
 
-**Legacy:** New usages of [Point] are discouraged.
+**遗留特性：** 不建议在新代码中使用 [Point]。
 
-- If you are using the `Point` class with `dart:html`, we recommend migrating to `package:web`. To learn how and why to migrate, check out the [migration guide](https://dart.dev/go/package-web).
-- If you want to combine an `x` and `y` coordinate, consider using a [record](https://dart.dev/language/records). Depending on how you will use it, this could look like `var point = (x, y)` or `var point = (x: x, y: y)`.
-- If you want to perform vector operations, like vector addition or scalar multiplication, consider using a dedicated vector math library, such as [`package:vector_math`](https://pub.dev/packages/vector_math).
-- If you are developing a Flutter application or package, consider using the [`Offset`](https://api.flutter.dev/flutter/dart-ui/Offset-class.html) type from `dart:ui`.
+- 如果你正在将 `Point` 类与 `dart:html` 一起使用，建议迁移到 `package:web`。要了解如何迁移及原因，请查看[迁移指南](https://dart.dev/go/package-web)。
+- 如果你想组合 `x` 和 `y` 坐标，可以考虑使用[记录（record）](https://dart.dev/language/records)。根据具体用法，可以写成 `var point = (x, y)` 或 `var point = (x: x, y: y)`。
+- 如果你想执行向量运算，例如向量加法或标量乘法，可以考虑使用专门的向量数学库，例如 [`package:vector_math`](https://pub.dev/packages/vector_math)。
+- 如果你正在开发 Flutter 应用或包，可以考虑使用 `dart:ui` 中的 [`Offset`](https://api.flutter.dev/flutter/dart-ui/Offset-class.html) 类型。
 
 ## 构造函数
 
@@ -28,9 +28,9 @@ var rightBottom = const Point(200, 400);
 Point(T x, T y)
 ```
 
-Creates a point with the provided [x] and [y] coordinates.
+使用提供的 [x] 和 [y] 坐标创建一个点。
 
-**Legacy:** New usages of [Point] are discouraged. To learn more, check out the [Point] class API docs.
+**遗留特性：** 不建议在新代码中使用 [Point]。要了解更多信息，请查看 [Point] 类的 API 文档。
 
 ## 属性
 
@@ -40,9 +40,9 @@ Creates a point with the provided [x] and [y] coordinates.
 double get magnitude
 ```
 
-Get the straight line (Euclidean) distance between the origin (0, 0) and this point.
+获取原点 (0, 0) 与该点之间的直线（欧几里得）距离。
 
-Example:
+示例：
 
 ```dart
 var magnitude = const Point(0, 0).magnitude; // 0.0
@@ -59,7 +59,7 @@ magnitude = const Point(10, 10).magnitude;  // 14.142135623730951
 double distanceTo(Point<T> other)
 ```
 
-Returns the distance between `this` and [other].
+返回 `this` 与 [other] 之间的距离。
 
 ```dart
 var distanceTo = const Point(0, 0).distanceTo(const Point(0, 0)); // 0.0
@@ -74,11 +74,11 @@ distanceTo = const Point(-10, 0).distanceTo(const Point(100, 0)); // 110.0
 T squaredDistanceTo(Point<T> other)
 ```
 
-Returns the squared distance between `this` and [other].
+返回 `this` 与 [other] 之间的平方距离。
 
-Squared distances can be used for comparisons when the actual value is not required.
+当不需要实际值时，平方距离可用于比较。
 
-Example:
+示例：
 
 ```dart
 var squaredDistance =
@@ -99,11 +99,11 @@ squaredDistance =
 bool operator ==(Object other)
 ```
 
-Whether [other] is a point with the same coordinates as this point.
+判断 [other] 是否为与该点坐标相同的点。
 
-Returns `true` if [other] is a [Point] with [x] and [y] coordinates equal to the corresponding coordinates of this point, and `false` otherwise.
+如果 [other] 是一个 [Point]，且其 [x] 和 [y] 坐标与该点对应的坐标相等，则返回 `true`；否则返回 `false`。
 
-Example:
+示例：
 
 ```dart
 var result = const Point(0, 0) == const Point(0, 0); // true
@@ -116,11 +116,11 @@ result = const Point(1.0, 0) == const Point(-1.0, 0); // false
 Point<T> operator +(Point<T> other)
 ```
 
-Add [other] to `this`, as if both points were vectors.
+将 [other] 与 `this` 相加，如同两者都是向量一样。
 
-Returns the resulting "vector" as a Point.
+将得到的“向量”结果作为 Point 返回。
 
-Example:
+示例：
 
 ```dart
 var point = const Point(10, 100) + const Point(10, 10); // Point(20, 110)
@@ -133,11 +133,11 @@ point = const Point(-10, -20) + const Point(10, 100); // Point(0, 80)
 Point<T> operator -(Point<T> other)
 ```
 
-Subtract [other] from `this`, as if both points were vectors.
+从 `this` 中减去 [other]，如同两者都是向量一样。
 
-Returns the resulting "vector" as a Point.
+将得到的“向量”结果作为 Point 返回。
 
-Example:
+示例：
 
 ```dart
 var point = const Point(10, 100) - const Point(10, 10); // Point(0, 90)
@@ -150,18 +150,18 @@ point = const Point(-10, -20) - const Point(100, 100); // Point(-110, -120)
 Point<T> operator *(num factor)
 ```
 
-Scale this point by [factor] as if it were a vector.
+将该点按 [factor] 缩放，如同它是一个向量一样。
 
-**Important Note**: This function accepts a `num` as its argument only so that you can scale `Point<double>` objects by an `int` factor. Because the `*` operator always returns the same type of `Point` as it is called on, passing in a double [factor] on a `Point<int>` _causes_ _a_ _runtime_ _error_.
+**重要说明**：该函数接受 `num` 作为参数，仅是为了让你可以用 `int` 类型的因子缩放 `Point<double>` 对象。由于 `*` 运算符始终返回与调用者相同类型的 `Point`，因此在 `Point<int>` 上传入 double 类型的 [factor] 会**导致运行时错误**。
 
-Example:
+示例：
 
 ```dart
-// Integer values.
+// 整数值。
 var point = const Point(10, 100) * 10; // Point(100, 1000)
 point = const Point(-10, -100) * 5; // Point(-50, -500)
-// Double values.
+// 浮点数值。
 var doublePoint = Point(10.0, 100.0) * 1.5; // Point(15.0, 150.0)
-// Runtime error due the invalid type cast.
+// 由于类型转换无效而引发的运行时错误。
 var newPoint = const Point(10, 100) * 1.5; // Throws.
 ```

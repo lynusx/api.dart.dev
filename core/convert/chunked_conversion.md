@@ -8,17 +8,15 @@ A [ChunkedConversionSink] is used to transmit data more efficiently between two 
 
 The basic `ChunkedConversionSink` is just a [Sink], and converters should work with a plain `Sink`, but may work more efficiently with certain specialized types of `ChunkedConversionSink`.
 
-### ChunkedConversionSink()
-
-```dart
-ChunkedConversionSink()
-```
+## 构造函数
 
 ### ChunkedConversionSink.withCallback()
 
 ```dart
 ChunkedConversionSink.withCallback(void Function(List<T> accumulated) callback)
 ```
+
+## 方法
 
 ### add()
 
