@@ -1,6 +1,6 @@
-Lists that efficiently handle fixed sized data (for example, unsigned 8 byte integers) and SIMD numeric types.
+高效处理固定大小数据（例如无符号 8 字节整数）和 SIMD 数值类型的列表。
 
-To use this library in your code:
+在代码中使用此库：
 
 ```dart
 import 'dart:typed_data';
@@ -12,9 +12,9 @@ import 'dart:typed_data';
 abstract final class TypedData {}
 ```
 
-A typed view of a sequence of bytes.
+字节序列的类型化视图。
 
-It is a compile-time error for a class to attempt to extend or implement `TypedData`.
+类尝试继承或实现 `TypedData` 是编译时错误。
 
 ## 属性
 
@@ -24,7 +24,7 @@ It is a compile-time error for a class to attempt to extend or implement `TypedD
 int get elementSizeInBytes
 ```
 
-The number of bytes in the representation of each element in this list.
+此列表中每个元素的表示所占的字节数。
 
 ### offsetInBytes
 
@@ -32,7 +32,7 @@ The number of bytes in the representation of each element in this list.
 int get offsetInBytes
 ```
 
-The offset of this view into the underlying byte buffer, in bytes.
+此视图相对于底层字节缓冲区的偏移量，以字节为单位。
 
 ### lengthInBytes
 
@@ -40,7 +40,7 @@ The offset of this view into the underlying byte buffer, in bytes.
 int get lengthInBytes
 ```
 
-The length of this view, in bytes.
+此视图的长度，以字节为单位。
 
 ### buffer
 
@@ -48,7 +48,7 @@ The length of this view, in bytes.
 ByteBuffer get buffer
 ```
 
-The byte buffer associated with this object.
+与此对象关联的字节缓冲区。
 
 ---
 
@@ -58,7 +58,7 @@ The byte buffer associated with this object.
 abstract final class TypedDataList<E> implements TypedData, List<E> {}
 ```
 
-A [TypedData] fixed-length [List]-view on the bytes of [buffer].
+[buffer] 字节上的 [TypedData] 固定长度 [List] 视图。
 
 ---
 
@@ -68,17 +68,17 @@ A [TypedData] fixed-length [List]-view on the bytes of [buffer].
 final class Endian {}
 ```
 
-Endianness of number representation.
+数字表示的字节序。
 
-The order of bytes in memory of a number representation, with [little] endian having the least significant byte first, and [big] endian (aka. network byte order) having the most significant byte first.
+数字表示在内存中的字节顺序，[little] 字节序为最低有效字节在前，[big] 字节序（即网络字节序）为最高有效字节在前。
 
-The [host] endian is the native endianness of the underlying platform, and the default endianness used by typed-data lists, like [Uint16List], on this platform. Always one of [little] or [big] endian.
+[host] 字节序是底层平台的原生字节序，也是该平台上类型化数据列表（如 [Uint16List]）使用的默认字节序。始终为 [little] 或 [big] 字节序之一。
 
-Can be specified when accessing or updating a sequence of bytes using a [ByteData] view. The host endianness can be used if accessing larger numbers by their bytes, for example through a [Uint8List] view on a buffer written using an [Int64List] view of the same buffer..
+在使用 [ByteData] 视图访问或更新字节序列时可以指定字节序。若通过较大数字的字节来访问它们，例如通过对使用 [Int64List] 视图写入的同一缓冲区建立的 [Uint8List] 视图进行访问，则可以使用主机字节序。
 
-It is a compile-time error for a class to attempt to extend or implement `Endian`.
+类尝试继承或实现 `Endian` 是编译时错误。
 
-## constant
+## 常量
 
 ### big
 
@@ -108,13 +108,13 @@ Endian host
 abstract final class Int8List implements _TypedIntList {}
 ```
 
-A fixed-length list of 8-bit signed integers.
+8 位有符号整数的固定长度列表。
 
-For long lists, this implementation can be considerably more space- and time-efficient than the default [List] implementation.
+对于长列表，此实现比默认的 [List] 实现在空间和时间上都可能更高效。
 
-Integers stored in the list are truncated to their low eight bits, interpreted as a signed 8-bit two's complement integer with values in the range -128 to +127.
+列表中存储的整数会被截断为其低 8 位，并被解释为取值范围 -128 到 +127 的有符号 8 位二进制补码整数。
 
-It is a compile-time error for a class to attempt to extend or implement `Int8List`.
+类尝试继承或实现 `Int8List` 是编译时错误。
 
 ## 构造函数
 
@@ -124,9 +124,9 @@ It is a compile-time error for a class to attempt to extend or implement `Int8Li
 Int8List(int length)
 ```
 
-Creates an [Int8List] of the specified length (in elements), all of whose elements are initially zero.
+创建一个指定长度（以元素为单位）的 [Int8List]，其所有元素初始值均为零。
 
-The list is backed by a [ByteBuffer] containing precisely [length] bytes.
+该列表由一个恰好包含 [length] 个字节的 [ByteBuffer] 支持。
 
 ### Int8List.fromList()
 
@@ -134,11 +134,11 @@ The list is backed by a [ByteBuffer] containing precisely [length] bytes.
 Int8List.fromList(List<int> elements)
 ```
 
-Creates a [Int8List] with the same length as the [elements] list and copies over the elements.
+创建一个与 [elements] 列表长度相同的 [Int8List]，并复制其中的元素。
 
-Values are truncated to fit in the list when they are copied, the same way storing values truncates them.
+复制值时会将其截断以适配列表，方式与存储值时的截断方式相同。
 
-The list is backed by a [ByteBuffer] containing precisely `elements.length` bytes.
+该列表由一个恰好包含 `elements.length` 个字节的 [ByteBuffer] 支持。
 
 ### Int8List.view()
 
@@ -146,25 +146,25 @@ The list is backed by a [ByteBuffer] containing precisely `elements.length` byte
 Int8List.view(ByteBuffer buffer, [int offsetInBytes = 0, int? length])
 ```
 
-Creates an [Int8List] _view_ of the specified region in [buffer].
+创建 [buffer] 中指定区域的 [Int8List] _视图_。
 
-Changes in the [Int8List] will be visible in the byte buffer and vice versa. If the [offsetInBytes] index of the region is not specified, it defaults to zero (the first byte in the byte buffer). If the length is not provided, the view extends to the end of the byte buffer.
+对 [Int8List] 的更改将在字节缓冲区中可见，反之亦然。如果未指定该区域的 [offsetInBytes] 索引，则默认为零（字节缓冲区中的第一个字节）。如果未提供 length，则视图会延伸至字节缓冲区的末尾。
 
-The [offsetInBytes] and [length] must be non-negative, and [offsetInBytes] + ([length] \* [bytesPerElement]) must be less than or equal to the length of [buffer].
+[offsetInBytes] 和 [length] 必须为非负数，且 [offsetInBytes] + ([length] \* [bytesPerElement]) 必须小于或等于 [buffer] 的长度。
 
-Note that when creating a view from a [TypedData] list or byte data, that list or byte data may itself be a view on a larger buffer with a [TypedData.offsetInBytes] greater than zero. Merely doing `Int8List.view(other.buffer, 0, count)` may not point to the bytes you intended. Instead you may need to do:
+请注意，从 [TypedData] 列表或字节数据创建视图时，该列表或字节数据本身可能是对更大缓冲区的视图，其 [TypedData.offsetInBytes] 大于零。仅执行 `Int8List.view(other.buffer, 0, count)` 可能无法指向你期望的字节位置。因此你可能需要执行：
 
 ```dart
 Int8List.view(other.buffer, other.offsetInBytes, count)
 ```
 
-Alternatively, use [Int8List.sublistView] which includes this computation:
+或者，使用包含此计算的 [Int8List.sublistView]：
 
 ```dart
 Int8List.sublistView(other, 0, count);
 ```
 
-(The third argument is an end index rather than a length, so if you start from a position greater than zero, you need not reduce the count correspondingly).
+（第三个参数是结束索引而非长度，因此如果起始位置大于零，也无需相应地减少 count）。
 
 ### Int8List.sublistView()
 
@@ -172,17 +172,17 @@ Int8List.sublistView(other, 0, count);
 Int8List.sublistView(TypedData data, [int start = 0, int? end])
 ```
 
-Creates an [Int8List] view on a range of elements of [data].
+在 [data] 的某个元素范围上创建一个 [Int8List] 视图。
 
-Creates a view on the range of `data.buffer` which corresponds to the elements of [data] from [start] until [end]. If [data] is a typed data list, like [Uint16List], then the view is on the bytes of the elements with indices from [start] until [end]. If [data] is a [ByteData], it's treated like a list of bytes.
+在 `data.buffer` 上创建一个视图，该视图对应于 [data] 中从 [start] 到 [end] 的元素所在的字节范围。如果 [data] 是类型化数据列表（如 [Uint16List]），则该视图基于索引从 [start] 到 [end] 的元素所占的字节。如果 [data] 是 [ByteData]，则将其视为字节列表处理。
 
-If provided, [start] and [end] must satisfy
+若提供了 [start] 和 [end]，二者必须满足
 
 0 &le; `start` &le; `end` &le; _elementCount_
 
-where _elementCount_ is the number of elements in [data], which is the same as the [List.length] of a typed data list.
+其中 _elementCount_ 是 [data] 中的元素个数，与类型化数据列表的 [List.length] 相同。
 
-If omitted, [start] defaults to zero and [end] to _elementCount_.
+如果省略，则 [start] 默认为零，[end] 默认为 _elementCount_。
 
 ## 静态常量
 
@@ -201,7 +201,7 @@ static const int bytesPerElement = 1;
 Int8List asUnmodifiableView()
 ```
 
-A read-only view of this [Int8List];
+此 [Int8List] 的只读视图。
 
 ### sublist()
 
@@ -209,9 +209,9 @@ A read-only view of this [Int8List];
 Int8List sublist(int start, [int? end])
 ```
 
-Creates a new list containing the elements between [start] and [end].
+创建一个包含 [start] 和 [end] 之间元素的新列表。
 
-The new list is an `Int8List` containing the elements of this list at positions greater than or equal to [start] and less than [end] in the same order as they occur in this list.
+新列表是一个 `Int8List`，按此列表中出现的顺序，包含位置大于等于 [start] 且小于 [end] 的元素。
 
 ```dart
 var numbers = Int8List.fromList([0, 1, 2, 3, 4]);
@@ -219,13 +219,13 @@ print(numbers.sublist(1, 3)); // [1, 2]
 print(numbers.sublist(1, 3).runtimeType); // Int8List
 ```
 
-If [end] is omitted, it defaults to the [length] of this list.
+如果省略 [end]，则默认为此列表的 [length]。
 
 ```dart
 print(numbers.sublist(1)); // [1, 2, 3, 4]
 ```
 
-The `start` and `end` positions must satisfy the relations 0 ≤ `start` ≤ `end` ≤ `this.length`. If `end` is equal to `start`, then the returned list is empty.
+`start` 和 `end` 的位置必须满足关系 0 ≤ `start` ≤ `end` ≤ `this.length`。如果 `end` 等于 `start`，则返回的列表为空。
 
 ---
 
@@ -235,13 +235,13 @@ The `start` and `end` positions must satisfy the relations 0 ≤ `start` ≤ `en
 abstract final class Uint8List implements _TypedIntList {}
 ```
 
-A fixed-length list of 8-bit unsigned integers.
+8 位无符号整数的固定长度列表。
 
-For long lists, this implementation can be considerably more space- and time-efficient than the default [List] implementation.
+对于长列表，此实现比默认的 [List] 实现在空间和时间上都可能更高效。
 
-Integers stored in the list are truncated to their low eight bits, interpreted as an unsigned 8-bit integer with values in the range 0 to 255.
+列表中存储的整数会被截断为其低 8 位，并被解释为取值范围 0 到 255 的无符号 8 位整数。
 
-It is a compile-time error for a class to attempt to extend or implement `Uint8List`.
+类尝试继承或实现 `Uint8List` 是编译时错误。
 
 ## 构造函数
 
@@ -251,9 +251,9 @@ It is a compile-time error for a class to attempt to extend or implement `Uint8L
 Uint8List(int length)
 ```
 
-Creates a [Uint8List] of the specified length (in elements), all of whose elements are initially zero.
+创建一个指定长度（以元素为单位）的 [Uint8List]，其所有元素初始值均为零。
 
-The list is backed by a [ByteBuffer] containing precisely [length] bytes.
+该列表由一个恰好包含 [length] 个字节的 [ByteBuffer] 支持。
 
 ### Uint8List.fromList()
 
@@ -261,11 +261,11 @@ The list is backed by a [ByteBuffer] containing precisely [length] bytes.
 Uint8List.fromList(List<int> elements)
 ```
 
-Creates a [Uint8List] with the same length as the [elements] list and copies over the elements.
+创建一个与 [elements] 列表长度相同的 [Uint8List]，并复制其中的元素。
 
-Values are truncated to fit in the list when they are copied, the same way storing values truncates them.
+复制值时会将其截断以适配列表，方式与存储值时的截断方式相同。
 
-The list is backed by a [ByteBuffer] containing precisely `elements.length` bytes.
+该列表由一个恰好包含 `elements.length` 个字节的 [ByteBuffer] 支持。
 
 ### Uint8List.view()
 
@@ -273,25 +273,25 @@ The list is backed by a [ByteBuffer] containing precisely `elements.length` byte
 Uint8List.view(ByteBuffer buffer, [int offsetInBytes = 0, int? length])
 ```
 
-Creates a [Uint8List] _view_ of the specified region in [buffer].
+创建 [buffer] 中指定区域的 [Uint8List] _视图_。
 
-Changes in the [Uint8List] will be visible in the byte buffer and vice versa. If the [offsetInBytes] index of the region is not specified, it defaults to zero (the first byte in the byte buffer). If the length is not provided, the view extends to the end of the byte buffer.
+对 [Uint8List] 的更改将在字节缓冲区中可见，反之亦然。如果未指定该区域的 [offsetInBytes] 索引，则默认为零（字节缓冲区中的第一个字节）。如果未提供 length，则视图会延伸至字节缓冲区的末尾。
 
-The [offsetInBytes] and [length] must be non-negative, and [offsetInBytes] + ([length] \* [bytesPerElement]) must be less than or equal to the length of [buffer].
+[offsetInBytes] 和 [length] 必须为非负数，且 [offsetInBytes] + ([length] \* [bytesPerElement]) 必须小于或等于 [buffer] 的长度。
 
-Note that when creating a view from a [TypedData] list or byte data, that list or byte data may itself be a view on a larger buffer with a [TypedData.offsetInBytes] greater than zero. Merely doing `Uint8List.view(other.buffer, 0, count)` may not point to the bytes you intended. Instead you may need to do:
+请注意，从 [TypedData] 列表或字节数据创建视图时，该列表或字节数据本身可能是对更大缓冲区的视图，其 [TypedData.offsetInBytes] 大于零。仅执行 `Uint8List.view(other.buffer, 0, count)` 可能无法指向你期望的字节位置。因此你可能需要执行：
 
 ```dart
 Uint8List.view(other.buffer, other.offsetInBytes, count)
 ```
 
-Alternatively, use [Uint8List.sublistView] which includes this computation:
+或者，使用包含此计算的 [Uint8List.sublistView]：
 
 ```dart
 Uint8List.sublistView(other, 0, count);
 ```
 
-(The third argument is an end index rather than a length, so if you start from a position greater than zero, you need not reduce the count correspondingly).
+（第三个参数是结束索引而非长度，因此如果起始位置大于零，也无需相应地减少 count）。
 
 ### Uint8List.sublistView()
 
@@ -299,17 +299,17 @@ Uint8List.sublistView(other, 0, count);
 Uint8List.sublistView(TypedData data, [int start = 0, int? end])
 ```
 
-Creates a [Uint8List] view on a range of elements of [data].
+在 [data] 的某个元素范围上创建一个 [Uint8List] 视图。
 
-Creates a view on the range of `data.buffer` which corresponds to the elements of [data] from [start] until [end]. If [data] is a typed data list, like [Uint16List], then the view is on the bytes of the elements with indices from [start] until [end]. If [data] is a [ByteData], it's treated like a list of bytes.
+在 `data.buffer` 上创建一个视图，该视图对应于 [data] 中从 [start] 到 [end] 的元素所在的字节范围。如果 [data] 是类型化数据列表（如 [Uint16List]），则该视图基于索引从 [start] 到 [end] 的元素所占的字节。如果 [data] 是 [ByteData]，则将其视为字节列表处理。
 
-If provided, [start] and [end] must satisfy
+若提供了 [start] 和 [end]，二者必须满足
 
 0 &le; `start` &le; `end` &le; _elementCount_
 
-where _elementCount_ is the number of elements in [data], which is the same as the [List.length] of a typed data list.
+其中 _elementCount_ 是 [data] 中的元素个数，与类型化数据列表的 [List.length] 相同。
 
-If omitted, [start] defaults to zero and [end] to _elementCount_.
+如果省略，则 [start] 默认为零，[end] 默认为 _elementCount_。
 
 ## 静态属性
 
@@ -328,7 +328,7 @@ static const int bytesPerElement = 1;
 Uint8List asUnmodifiableView()
 ```
 
-A read-only view of this [Uint8List].
+此 [Uint8List] 的只读视图。
 
 ### sublist()
 
@@ -336,9 +336,9 @@ A read-only view of this [Uint8List].
 Uint8List sublist(int start, [int? end])
 ```
 
-Creates a new list containing the elements between [start] and [end].
+创建一个包含 [start] 和 [end] 之间元素的新列表。
 
-The new list is a `Uint8List` containing the elements of this list at positions greater than or equal to [start] and less than [end] in the same order as they occur in this list.
+新列表是一个 `Uint8List`，按此列表中出现的顺序，包含位置大于等于 [start] 且小于 [end] 的元素。
 
 ```dart
 var numbers = Uint8List.fromList([0, 1, 2, 3, 4]);
@@ -346,13 +346,13 @@ print(numbers.sublist(1, 3)); // [1, 2]
 print(numbers.sublist(1, 3).runtimeType); // Uint8List
 ```
 
-If [end] is omitted, it defaults to the [length] of this list.
+如果省略 [end]，则默认为此列表的 [length]。
 
 ```dart
 print(numbers.sublist(1)); // [1, 2, 3, 4]
 ```
 
-The `start` and `end` positions must satisfy the relations 0 ≤ `start` ≤ `end` ≤ `this.length`. If `end` is equal to `start`, then the returned list is empty.
+`start` 和 `end` 的位置必须满足关系 0 ≤ `start` ≤ `end` ≤ `this.length`。如果 `end` 等于 `start`，则返回的列表为空。
 
 ## 运算符
 
@@ -362,9 +362,9 @@ The `start` and `end` positions must satisfy the relations 0 ≤ `start` ≤ `en
 List<int> operator +(List<int> other)
 ```
 
-Returns a concatenation of this list and [other].
+返回此列表与 [other] 的连接结果。
 
-If [other] is also a typed-data list, then the return list will be a typed data list capable of holding both unsigned 8-bit integers and the elements of [other], otherwise it'll be a normal list of integers.
+如果 [other] 也是类型化数据列表，则返回的列表将是一个能够同时容纳无符号 8 位整数和 [other] 中元素的类型化数据列表；否则将返回一个普通的整数列表。
 
 ---
 
@@ -374,13 +374,13 @@ If [other] is also a typed-data list, then the return list will be a typed data 
 abstract final class Uint8ClampedList implements _TypedIntList {}
 ```
 
-A fixed-length list of 8-bit unsigned integers.
+8 位无符号整数的固定长度列表。
 
-For long lists, this implementation can be considerably more space- and time-efficient than the default [List] implementation.
+对于长列表，此实现比默认的 [List] 实现在空间和时间上都可能更高效。
 
-Integers stored in the list are clamped to an unsigned eight bit value. That is, all values below zero are stored as zero and all values above 255 are stored as 255.
+列表中存储的整数会被限制在无符号 8 位值范围内，即所有低于零的值都存储为零，所有高于 255 的值都存储为 255。
 
-It is a compile-time error for a class to attempt to extend or implement `Uint8ClampedList`.
+类尝试继承或实现 `Uint8ClampedList` 是编译时错误。
 
 ## 构造函数
 
@@ -390,9 +390,9 @@ It is a compile-time error for a class to attempt to extend or implement `Uint8C
 Uint8ClampedList(int length)
 ```
 
-Creates a [Uint8ClampedList] of the specified length (in elements), all of whose elements are initially zero.
+创建一个指定长度（以元素为单位）的 [Uint8ClampedList]，其所有元素初始值均为零。
 
-The list is backed by a [ByteBuffer] containing precisely [length] bytes.
+该列表由一个恰好包含 [length] 个字节的 [ByteBuffer] 支持。
 
 ### Uint8ClampedList.fromList()
 
@@ -400,11 +400,11 @@ The list is backed by a [ByteBuffer] containing precisely [length] bytes.
 Uint8ClampedList.fromList(List<int> elements)
 ```
 
-Creates a [Uint8ClampedList] of the same size as the [elements] list and copies over the values clamping when needed.
+创建一个与 [elements] 列表大小相同的 [Uint8ClampedList]，并在需要时对值进行限制后复制。
 
-Values are clamped to fit in the list when they are copied, the same way storing values clamps them.
+复制值时会根据需要进行限制以适配列表，方式与存储值时的限制方式相同。
 
-The list is backed by a [ByteBuffer] containing precisely `elements.length` bytes.
+该列表由一个恰好包含 `elements.length` 个字节的 [ByteBuffer] 支持。
 
 ### Uint8ClampedList.view()
 
@@ -412,25 +412,25 @@ The list is backed by a [ByteBuffer] containing precisely `elements.length` byte
 Uint8ClampedList.view(ByteBuffer buffer, [int offsetInBytes = 0, int? length])
 ```
 
-Creates a [Uint8ClampedList] _view_ of the specified region in the specified byte [buffer].
+在指定的字节 [buffer] 中创建指定区域的 [Uint8ClampedList] _视图_。
 
-Changes in the [Uint8List] will be visible in the byte buffer and vice versa. If the [offsetInBytes] index of the region is not specified, it defaults to zero (the first byte in the byte buffer). If the length is not provided, the view extends to the end of the byte buffer.
+对 [Uint8List] 的更改将在字节缓冲区中可见，反之亦然。如果未指定该区域的 [offsetInBytes] 索引，则默认为零（字节缓冲区中的第一个字节）。如果未提供 length，则视图会延伸至字节缓冲区的末尾。
 
-The [offsetInBytes] and [length] must be non-negative, and [offsetInBytes] + ([length] \* [bytesPerElement]) must be less than or equal to the length of [buffer].
+[offsetInBytes] 和 [length] 必须为非负数，且 [offsetInBytes] + ([length] \* [bytesPerElement]) 必须小于或等于 [buffer] 的长度。
 
-Note that when creating a view from a [TypedData] list or byte data, that list or byte data may itself be a view on a larger buffer with a [TypedData.offsetInBytes] greater than zero. Merely doing `Uint8ClampedList.view(other.buffer, 0, count)` may not point to the bytes you intended. Instead you may need to do:
+请注意，从 [TypedData] 列表或字节数据创建视图时，该列表或字节数据本身可能是对更大缓冲区的视图，其 [TypedData.offsetInBytes] 大于零。仅执行 `Uint8ClampedList.view(other.buffer, 0, count)` 可能无法指向你期望的字节位置。因此你可能需要执行：
 
 ```dart
 Uint8ClampedList.view(other.buffer, other.offsetInBytes, count)
 ```
 
-Alternatively, use [Uint8ClampedList.sublistView] which includes this computation:
+或者，使用包含此计算的 [Uint8ClampedList.sublistView]：
 
 ```dart
 Uint8ClampedList.sublistView(other, 0, count);
 ```
 
-(The third argument is an end index rather than a length, so if you start from a position greater than zero, you need not reduce the count correspondingly).
+（第三个参数是结束索引而非长度，因此如果起始位置大于零，也无需相应地减少 count）。
 
 ### Uint8ClampedList.sublistView()
 
@@ -439,17 +439,17 @@ Uint8ClampedList.sublistView(other, 0, count);
 Uint8ClampedList.sublistView( TypedData data, [int start = 0, int? end])
 ```
 
-Creates a [Uint8ClampedList] view on a range of elements of [data].
+在 [data] 的某个元素范围上创建一个 [Uint8ClampedList] 视图。
 
-Creates a view on the range of `data.buffer` which corresponds to the elements of [data] from [start] until [end]. If [data] is a typed data list, like [Uint16List], then the view is on the bytes of the elements with indices from [start] until [end]. If [data] is a [ByteData], it's treated like a list of bytes.
+在 `data.buffer` 上创建一个视图，该视图对应于 [data] 中从 [start] 到 [end] 的元素所在的字节范围。如果 [data] 是类型化数据列表（如 [Uint16List]），则该视图基于索引从 [start] 到 [end] 的元素所占的字节。如果 [data] 是 [ByteData]，则将其视为字节列表处理。
 
-If provided, [start] and [end] must satisfy
+若提供了 [start] 和 [end]，二者必须满足
 
 0 &le; `start` &le; `end` &le; _elementCount_
 
-where _elementCount_ is the number of elements in [data], which is the same as the [List.length] of a typed data list.
+其中 _elementCount_ 是 [data] 中的元素个数，与类型化数据列表的 [List.length] 相同。
 
-If omitted, [start] defaults to zero and [end] to _elementCount_.
+如果省略，则 [start] 默认为零，[end] 默认为 _elementCount_。
 
 ## 静态属性
 
@@ -468,7 +468,7 @@ static const int bytesPerElement = 1;
 Uint8ClampedList asUnmodifiableView()
 ```
 
-A read-only view of this [Uint8ClampedList].
+此 [Uint8ClampedList] 的只读视图。
 
 ### sublist()
 
@@ -476,9 +476,9 @@ A read-only view of this [Uint8ClampedList].
 Uint8ClampedList sublist(int start, [int? end])
 ```
 
-Creates a new list containing the elements between [start] and [end].
+创建一个包含 [start] 和 [end] 之间元素的新列表。
 
-The new list is a `Uint8ClampedList` containing the elements of this list at positions greater than or equal to [start] and less than [end] in the same order as they occur in this list.
+新列表是一个 `Uint8ClampedList`，按此列表中出现的顺序，包含位置大于等于 [start] 且小于 [end] 的元素。
 
 ```dart
 var numbers = Uint8ClampedList.fromList([0, 1, 2, 3, 4]);
@@ -486,13 +486,13 @@ print(numbers.sublist(1, 3)); // [1, 2]
 print(numbers.sublist(1, 3).runtimeType); // Uint8ClampedList
 ```
 
-If [end] is omitted, it defaults to the [length] of this list.
+如果省略 [end]，则默认为此列表的 [length]。
 
 ```dart
 print(numbers.sublist(1)); // [1, 2, 3, 4]
 ```
 
-The `start` and `end` positions must satisfy the relations 0 ≤ `start` ≤ `end` ≤ `this.length`. If `end` is equal to `start`, then the returned list is empty.
+`start` 和 `end` 的位置必须满足关系 0 ≤ `start` ≤ `end` ≤ `this.length`。如果 `end` 等于 `start`，则返回的列表为空。
 
 ---
 
@@ -502,13 +502,13 @@ The `start` and `end` positions must satisfy the relations 0 ≤ `start` ≤ `en
 abstract final class Int16List implements _TypedIntList {}
 ```
 
-A fixed-length list of 16-bit signed integers that is viewable as a [TypedData].
+可作为 [TypedData] 查看的 16 位有符号整数固定长度列表。
 
-For long lists, this implementation can be considerably more space- and time-efficient than the default [List] implementation.
+对于长列表，此实现比默认的 [List] 实现在空间和时间上都可能更高效。
 
-Integers stored in the list are truncated to their low 16 bits, interpreted as a signed 16-bit two's complement integer with values in the range -32768 to +32767.
+列表中存储的整数会被截断为其低 16 位，并被解释为取值范围 -32768 到 +32767 的有符号 16 位二进制补码整数。
 
-It is a compile-time error for a class to attempt to extend or implement `Int16List`.
+类尝试继承或实现 `Int16List` 是编译时错误。
 
 ## 构造函数
 
@@ -518,9 +518,9 @@ It is a compile-time error for a class to attempt to extend or implement `Int16L
 Int16List(int length)
 ```
 
-Creates an [Int16List] of the specified length (in elements), all of whose elements are initially zero.
+创建一个指定长度（以元素为单位）的 [Int16List]，其所有元素初始值均为零。
 
-The list is backed by a [ByteBuffer] containing precisely [length] times 2 bytes.
+该列表由一个恰好包含 [length] 乘以 2 个字节的 [ByteBuffer] 支持。
 
 ### Int16List.fromList()
 
@@ -528,11 +528,11 @@ The list is backed by a [ByteBuffer] containing precisely [length] times 2 bytes
 Int16List.fromList(List<int> elements)
 ```
 
-Creates a [Int16List] with the same length as the [elements] list and copies over the elements.
+创建一个与 [elements] 列表长度相同的 [Int16List]，并复制其中的元素。
 
-Values are truncated to fit in the list when they are copied, the same way storing values truncates them.
+复制值时会将其截断以适配列表，方式与存储值时的截断方式相同。
 
-The list is backed by a [ByteBuffer] containing precisely `elements.length` times 2 bytes.
+该列表由一个恰好包含 `elements.length` 乘以 2 个字节的 [ByteBuffer] 支持。
 
 ### Int16List.view()
 
@@ -540,27 +540,27 @@ The list is backed by a [ByteBuffer] containing precisely `elements.length` time
 Int16List.view(ByteBuffer buffer, [int offsetInBytes = 0, int? length])
 ```
 
-Creates an [Int16List] _view_ of the specified region in [buffer].
+创建 [buffer] 中指定区域的 [Int16List] _视图_。
 
-Changes in the [Int16List] will be visible in the byte buffer and vice versa. If the [offsetInBytes] index of the region is not specified, it defaults to zero (the first byte in the byte buffer). If the length is not provided, the view extends to the end of the byte buffer.
+对 [Int16List] 的更改将在字节缓冲区中可见，反之亦然。如果未指定该区域的 [offsetInBytes] 索引，则默认为零（字节缓冲区中的第一个字节）。如果未提供 length，则视图会延伸至字节缓冲区的末尾。
 
-The [offsetInBytes] and [length] must be non-negative, and [offsetInBytes] + ([length] \* [bytesPerElement]) must be less than or equal to the length of [buffer].
+[offsetInBytes] 和 [length] 必须为非负数，且 [offsetInBytes] + ([length] \* [bytesPerElement]) 必须小于或等于 [buffer] 的长度。
 
-The [offsetInBytes] must be a multiple of [bytesPerElement].
+[offsetInBytes] 必须是 [bytesPerElement] 的整数倍。
 
-Note that when creating a view from a [TypedData] list or byte data, that list or byte data may itself be a view on a larger buffer with a [TypedData.offsetInBytes] greater than zero. Merely doing `Int16List.view(other.buffer, 0, count)` may not point to the bytes you intended. Instead you may need to do:
+请注意，从 [TypedData] 列表或字节数据创建视图时，该列表或字节数据本身可能是对更大缓冲区的视图，其 [TypedData.offsetInBytes] 大于零。仅执行 `Int16List.view(other.buffer, 0, count)` 可能无法指向你期望的字节位置。因此你可能需要执行：
 
 ```dart
 Int16List.view(other.buffer, other.offsetInBytes, count)
 ```
 
-Alternatively, use [Int16List.sublistView] which includes this computation:
+或者，使用包含此计算的 [Int16List.sublistView]：
 
 ```dart
 Int16List.sublistView(other, 0, count);
 ```
 
-(The third argument is an end index rather than a length, so if you start from a position greater than zero, you need not reduce the count correspondingly).
+（第三个参数是结束索引而非长度，因此如果起始位置大于零，也无需相应地减少 count）。
 
 ### Int16List.sublistView()
 
@@ -568,19 +568,19 @@ Int16List.sublistView(other, 0, count);
 Int16List.sublistView(TypedData data, [int start = 0, int? end])
 ```
 
-Creates an [Int16List] view on a range of elements of [data].
+在 [data] 的某个元素范围上创建一个 [Int16List] 视图。
 
-Creates a view on the range of `data.buffer` which corresponds to the elements of [data] from [start] until [end]. If [data] is a typed data list, like [Uint16List], then the view is on the bytes of the elements with indices from [start] until [end]. If [data] is a [ByteData], it's treated like a list of bytes.
+在 `data.buffer` 上创建一个视图，该视图对应于 [data] 中从 [start] 到 [end] 的元素所在的字节范围。如果 [data] 是类型化数据列表（如 [Uint16List]），则该视图基于索引从 [start] 到 [end] 的元素所占的字节。如果 [data] 是 [ByteData]，则将其视为字节列表处理。
 
-If provided, [start] and [end] must satisfy
+若提供了 [start] 和 [end]，二者必须满足
 
 0 &le; `start` &le; `end` &le; _elementCount_
 
-where _elementCount_ is the number of elements in [data], which is the same as the [List.length] of a typed data list.
+其中 _elementCount_ 是 [data] 中的元素个数，与类型化数据列表的 [List.length] 相同。
 
-If omitted, [start] defaults to zero and [end] to _elementCount_.
+如果省略，则 [start] 默认为零，[end] 默认为 _elementCount_。
 
-The start and end indices of the range of bytes being viewed must be multiples of two.
+所查看字节范围的起始和结束索引必须是 2 的整数倍。
 
 ## 静态属性
 
@@ -598,7 +598,7 @@ static const int bytesPerElement = 2;
 Int16List asUnmodifiableView()
 ```
 
-A read-only view of this [Int16List].
+此 [Int16List] 的只读视图。
 
 ### sublist()
 
@@ -606,9 +606,9 @@ A read-only view of this [Int16List].
 Int16List sublist(int start, [int? end])
 ```
 
-Creates a new list containing the elements between [start] and [end].
+创建一个包含 [start] 和 [end] 之间元素的新列表。
 
-The new list is an `Int16List` containing the elements of this list at positions greater than or equal to [start] and less than [end] in the same order as they occur in this list.
+新列表是一个 `Int16List`，按此列表中出现的顺序，包含位置大于等于 [start] 且小于 [end] 的元素。
 
 ```dart
 var numbers = Int16List.fromList([0, 1, 2, 3, 4]);
@@ -616,13 +616,13 @@ print(numbers.sublist(1, 3)); // [1, 2]
 print(numbers.sublist(1, 3).runtimeType); // Int16List
 ```
 
-If [end] is omitted, it defaults to the [length] of this list.
+如果省略 [end]，则默认为此列表的 [length]。
 
 ```dart
 print(numbers.sublist(1)); // [1, 2, 3, 4]
 ```
 
-The `start` and `end` positions must satisfy the relations 0 ≤ `start` ≤ `end` ≤ `this.length`. If `end` is equal to `start`, then the returned list is empty.
+`start` 和 `end` 的位置必须满足关系 0 ≤ `start` ≤ `end` ≤ `this.length`。如果 `end` 等于 `start`，则返回的列表为空。
 
 ---
 
@@ -632,13 +632,13 @@ The `start` and `end` positions must satisfy the relations 0 ≤ `start` ≤ `en
 abstract final class Uint16List implements _TypedIntList {}
 ```
 
-A fixed-length list of 16-bit unsigned integers that is viewable as a [TypedData].
+可作为 [TypedData] 查看的 16 位无符号整数固定长度列表。
 
-For long lists, this implementation can be considerably more space- and time-efficient than the default [List] implementation.
+对于长列表，此实现比默认的 [List] 实现在空间和时间上都可能更高效。
 
-Integers stored in the list are truncated to their low 16 bits, interpreted as an unsigned 16-bit integer with values in the range 0 to 65535.
+列表中存储的整数会被截断为其低 16 位，并被解释为取值范围 0 到 65535 的无符号 16 位整数。
 
-It is a compile-time error for a class to attempt to extend or implement `Uint16List`.
+类尝试继承或实现 `Uint16List` 是编译时错误。
 
 ## 构造函数
 
@@ -648,9 +648,9 @@ It is a compile-time error for a class to attempt to extend or implement `Uint16
 Uint16List(int length)
 ```
 
-Creates a [Uint16List] of the specified length (in elements), all of whose elements are initially zero.
+创建一个指定长度（以元素为单位）的 [Uint16List]，其所有元素初始值均为零。
 
-The list is backed by a [ByteBuffer] containing precisely [length] times 2 bytes.
+该列表由一个恰好包含 [length] 乘以 2 个字节的 [ByteBuffer] 支持。
 
 ### Uint16List.fromList()
 
@@ -658,11 +658,11 @@ The list is backed by a [ByteBuffer] containing precisely [length] times 2 bytes
 Uint16List.fromList(List<int> elements)
 ```
 
-Creates a [Uint16List] with the same length as the [elements] list and copies over the elements.
+创建一个与 [elements] 列表长度相同的 [Uint16List]，并复制其中的元素。
 
-Values are truncated to fit in the list when they are copied, the same way storing values truncates them.
+复制值时会将其截断以适配列表，方式与存储值时的截断方式相同。
 
-The list is backed by a [ByteBuffer] containing precisely `elements.length` times 2 bytes.
+该列表由一个恰好包含 `elements.length` 乘以 2 个字节的 [ByteBuffer] 支持。
 
 ### Uint16List.view()
 
@@ -670,27 +670,27 @@ The list is backed by a [ByteBuffer] containing precisely `elements.length` time
 Uint16List.view(ByteBuffer buffer, [int offsetInBytes = 0, int? length])
 ```
 
-Creates a [Uint16List] _view_ of the specified region in the specified byte buffer.
+在指定的字节缓冲区中创建指定区域的 [Uint16List] _视图_。
 
-Changes in the [Uint16List] will be visible in the byte buffer and vice versa. If the [offsetInBytes] index of the region is not specified, it defaults to zero (the first byte in the byte buffer). If the length is not provided, the view extends to the end of the byte buffer.
+对 [Uint16List] 的更改将在字节缓冲区中可见，反之亦然。如果未指定该区域的 [offsetInBytes] 索引，则默认为零（字节缓冲区中的第一个字节）。如果未提供 length，则视图会延伸至字节缓冲区的末尾。
 
-The [offsetInBytes] and [length] must be non-negative, and [offsetInBytes] + ([length] \* [bytesPerElement]) must be less than or equal to the length of [buffer].
+[offsetInBytes] 和 [length] 必须为非负数，且 [offsetInBytes] + ([length] \* [bytesPerElement]) 必须小于或等于 [buffer] 的长度。
 
-The [offsetInBytes] must be a multiple of [bytesPerElement].
+[offsetInBytes] 必须是 [bytesPerElement] 的整数倍。
 
-Note that when creating a view from a [TypedData] list or byte data, that list or byte data may itself be a view on a larger buffer with a [TypedData.offsetInBytes] greater than zero. Merely doing `Uint16List.view(other.buffer, 0, count)` may not point to the bytes you intended. Instead you may need to do:
+请注意，从 [TypedData] 列表或字节数据创建视图时，该列表或字节数据本身可能是对更大缓冲区的视图，其 [TypedData.offsetInBytes] 大于零。仅执行 `Uint16List.view(other.buffer, 0, count)` 可能无法指向你期望的字节位置。因此你可能需要执行：
 
 ```dart
 Uint16List.view(other.buffer, other.offsetInBytes, count)
 ```
 
-Alternatively, use [Uint16List.sublistView] which includes this computation:
+或者，使用包含此计算的 [Uint16List.sublistView]：
 
 ```dart
 Uint16List.sublistView(other, 0, count);
 ```
 
-(The third argument is an end index rather than a length, so if you start from a position greater than zero, you need not reduce the count correspondingly).
+（第三个参数是结束索引而非长度，因此如果起始位置大于零，也无需相应地减少 count）。
 
 ### Uint16List.sublistView()
 
@@ -698,19 +698,19 @@ Uint16List.sublistView(other, 0, count);
 Uint16List.sublistView(TypedData data, [int start = 0, int? end])
 ```
 
-Creates a [Uint16List] view on a range of elements of [data].
+在 [data] 的某个元素范围上创建一个 [Uint16List] 视图。
 
-Creates a view on the range of `data.buffer` which corresponds to the elements of [data] from [start] until [end]. If [data] is a typed data list, like [Uint16List], then the view is on the bytes of the elements with indices from [start] until [end]. If [data] is a [ByteData], it's treated like a list of bytes.
+在 `data.buffer` 上创建一个视图，该视图对应于 [data] 中从 [start] 到 [end] 的元素所在的字节范围。如果 [data] 是类型化数据列表（如 [Uint16List]），则该视图基于索引从 [start] 到 [end] 的元素所占的字节。如果 [data] 是 [ByteData]，则将其视为字节列表处理。
 
-If provided, [start] and [end] must satisfy
+若提供了 [start] 和 [end]，二者必须满足
 
 0 &le; `start` &le; `end` &le; _elementCount_
 
-where _elementCount_ is the number of elements in [data], which is the same as the [List.length] of a typed data list.
+其中 _elementCount_ 是 [data] 中的元素个数，与类型化数据列表的 [List.length] 相同。
 
-If omitted, [start] defaults to zero and [end] to _elementCount_.
+如果省略，则 [start] 默认为零，[end] 默认为 _elementCount_。
 
-The start and end indices of the range of bytes being viewed must be multiples of two.
+所查看字节范围的起始和结束索引必须是 2 的整数倍。
 
 ## 静态属性
 
@@ -729,7 +729,7 @@ static const int bytesPerElement = 2;
 Uint16List asUnmodifiableView()
 ```
 
-A read-only view of this [Uint16List].
+此 [Uint16List] 的只读视图。
 
 ### sublist()
 
@@ -737,9 +737,9 @@ A read-only view of this [Uint16List].
 Uint16List sublist(int start, [int? end])
 ```
 
-Creates a new list containing the elements between [start] and [end].
+创建一个包含 [start] 和 [end] 之间元素的新列表。
 
-The new list is a `Uint16List` containing the elements of this list at positions greater than or equal to [start] and less than [end] in the same order as they occur in this list.
+新列表是一个 `Uint16List`，按此列表中出现的顺序，包含位置大于等于 [start] 且小于 [end] 的元素。
 
 ```dart
 var numbers = Uint16List.fromList([0, 1, 2, 3, 4]);
@@ -747,13 +747,13 @@ print(numbers.sublist(1, 3)); // [1, 2]
 print(numbers.sublist(1, 3).runtimeType); // Uint16List
 ```
 
-If [end] is omitted, it defaults to the [length] of this list.
+如果省略 [end]，则默认为此列表的 [length]。
 
 ```dart
 print(numbers.sublist(1)); // [1, 2, 3, 4]
 ```
 
-The `start` and `end` positions must satisfy the relations 0 ≤ `start` ≤ `end` ≤ `this.length`. If `end` is equal to `start`, then the returned list is empty.
+`start` 和 `end` 的位置必须满足关系 0 ≤ `start` ≤ `end` ≤ `this.length`。如果 `end` 等于 `start`，则返回的列表为空。
 
 ---
 
@@ -763,13 +763,13 @@ The `start` and `end` positions must satisfy the relations 0 ≤ `start` ≤ `en
 abstract final class Int32List implements _TypedIntList {}
 ```
 
-A fixed-length list of 32-bit signed integers that is viewable as a [TypedData].
+可作为 [TypedData] 查看的 32 位有符号整数固定长度列表。
 
-For long lists, this implementation can be considerably more space- and time-efficient than the default [List] implementation.
+对于长列表，此实现比默认的 [List] 实现在空间和时间上都可能更高效。
 
-Integers stored in the list are truncated to their low 32 bits, interpreted as a signed 32-bit two's complement integer with values in the range -2147483648 to 2147483647.
+列表中存储的整数会被截断为其低 32 位，并被解释为取值范围 -2147483648 到 2147483647 的有符号 32 位二进制补码整数。
 
-It is a compile-time error for a class to attempt to extend or implement `Int32List`.
+类尝试继承或实现 `Int32List` 是编译时错误。
 
 ## 构造函数
 
@@ -779,9 +779,9 @@ It is a compile-time error for a class to attempt to extend or implement `Int32L
 Int32List(int length)
 ```
 
-Creates an [Int32List] of the specified length (in elements), all of whose elements are initially zero.
+创建一个指定长度（以元素为单位）的 [Int32List]，其所有元素初始值均为零。
 
-The list is backed by a [ByteBuffer] containing precisely [length] times 4 bytes.
+该列表由一个恰好包含 [length] 乘以 4 个字节的 [ByteBuffer] 支持。
 
 ### Int32List.fromList()
 
@@ -789,11 +789,11 @@ The list is backed by a [ByteBuffer] containing precisely [length] times 4 bytes
 Int32List.fromList(List<int> elements)
 ```
 
-Creates a [Int32List] with the same length as the [elements] list and copies over the elements.
+创建一个与 [elements] 列表长度相同的 [Int32List]，并复制其中的元素。
 
-Values are truncated to fit in the list when they are copied, the same way storing values truncates them.
+复制值时会将其截断以适配列表，方式与存储值时的截断方式相同。
 
-The list is backed by a [ByteBuffer] containing precisely `elements.length` times 4 bytes.
+该列表由一个恰好包含 `elements.length` 乘以 4 个字节的 [ByteBuffer] 支持。
 
 ### Int32List.view()
 
@@ -801,27 +801,27 @@ The list is backed by a [ByteBuffer] containing precisely `elements.length` time
 Int32List.view(ByteBuffer buffer, [int offsetInBytes = 0, int? length])
 ```
 
-Creates an [Int32List] _view_ of the specified region in [buffer].
+创建 [buffer] 中指定区域的 [Int32List] _视图_。
 
-Changes in the [Int32List] will be visible in the byte buffer and vice versa. If the [offsetInBytes] index of the region is not specified, it defaults to zero (the first byte in the byte buffer). If the length is not provided, the view extends to the end of the byte buffer.
+对 [Int32List] 的更改将在字节缓冲区中可见，反之亦然。如果未指定该区域的 [offsetInBytes] 索引，则默认为零（字节缓冲区中的第一个字节）。如果未提供 length，则视图会延伸至字节缓冲区的末尾。
 
-The [offsetInBytes] and [length] must be non-negative, and [offsetInBytes] + ([length] \* [bytesPerElement]) must be less than or equal to the length of [buffer].
+[offsetInBytes] 和 [length] 必须为非负数，且 [offsetInBytes] + ([length] \* [bytesPerElement]) 必须小于或等于 [buffer] 的长度。
 
-The [offsetInBytes] must be a multiple of [bytesPerElement].
+[offsetInBytes] 必须是 [bytesPerElement] 的整数倍。
 
-Note that when creating a view from a [TypedData] list or byte data, that list or byte data may itself be a view on a larger buffer with a [TypedData.offsetInBytes] greater than zero. Merely doing `Int32List.view(other.buffer, 0, count)` may not point to the bytes you intended. Instead you may need to do:
+请注意，从 [TypedData] 列表或字节数据创建视图时，该列表或字节数据本身可能是对更大缓冲区的视图，其 [TypedData.offsetInBytes] 大于零。仅执行 `Int32List.view(other.buffer, 0, count)` 可能无法指向你期望的字节位置。因此你可能需要执行：
 
 ```dart
 Int32List.view(other.buffer, other.offsetInBytes, count)
 ```
 
-Alternatively, use [Int32List.sublistView] which includes this computation:
+或者，使用包含此计算的 [Int32List.sublistView]：
 
 ```dart
 Int32List.sublistView(other, 0, count);
 ```
 
-(The third argument is an end index rather than a length, so if you start from a position greater than zero, you need not reduce the count correspondingly).
+（第三个参数是结束索引而非长度，因此如果起始位置大于零，也无需相应地减少 count）。
 
 ### Int32List.sublistView()
 
@@ -829,19 +829,19 @@ Int32List.sublistView(other, 0, count);
 Int32List.sublistView(TypedData data, [int start = 0, int? end])
 ```
 
-Creates an [Int32List] view on a range of elements of [data].
+在 [data] 的某个元素范围上创建一个 [Int32List] 视图。
 
-Creates a view on the range of `data.buffer` which corresponds to the elements of [data] from [start] until [end]. If [data] is a typed data list, like [Uint16List], then the view is on the bytes of the elements with indices from [start] until [end]. If [data] is a [ByteData], it's treated like a list of bytes.
+在 `data.buffer` 上创建一个视图，该视图对应于 [data] 中从 [start] 到 [end] 的元素所在的字节范围。如果 [data] 是类型化数据列表（如 [Uint16List]），则该视图基于索引从 [start] 到 [end] 的元素所占的字节。如果 [data] 是 [ByteData]，则将其视为字节列表处理。
 
-If provided, [start] and [end] must satisfy
+若提供了 [start] 和 [end]，二者必须满足
 
 0 &le; `start` &le; `end` &le; _elementCount_
 
-where _elementCount_ is the number of elements in [data], which is the same as the [List.length] of a typed data list.
+其中 _elementCount_ 是 [data] 中的元素个数，与类型化数据列表的 [List.length] 相同。
 
-If omitted, [start] defaults to zero and [end] to _elementCount_.
+如果省略，则 [start] 默认为零，[end] 默认为 _elementCount_。
 
-The start and end indices of the range of bytes being viewed must be multiples of four.
+所查看字节范围的起始和结束索引必须是 4 的整数倍。
 
 ## 静态属性
 
@@ -860,7 +860,7 @@ static const int bytesPerElement = 4;
 Int32List asUnmodifiableView()
 ```
 
-A read-only view of this [Int32List].
+此 [Int32List] 的只读视图。
 
 ### sublist()
 
@@ -868,9 +868,9 @@ A read-only view of this [Int32List].
 Int32List sublist(int start, [int? end])
 ```
 
-Creates a new list containing the elements between [start] and [end].
+创建一个包含 [start] 和 [end] 之间元素的新列表。
 
-The new list is an `Int32List` containing the elements of this list at positions greater than or equal to [start] and less than [end] in the same order as they occur in this list.
+新列表是一个 `Int32List`，按此列表中出现的顺序，包含位置大于等于 [start] 且小于 [end] 的元素。
 
 ```dart
 var numbers = Int32List.fromList([0, 1, 2, 3, 4]);
@@ -878,13 +878,13 @@ print(numbers.sublist(1, 3)); // [1, 2]
 print(numbers.sublist(1, 3).runtimeType); // Int32List
 ```
 
-If [end] is omitted, it defaults to the [length] of this list.
+如果省略 [end]，则默认为此列表的 [length]。
 
 ```dart
 print(numbers.sublist(1)); // [1, 2, 3, 4]
 ```
 
-The `start` and `end` positions must satisfy the relations 0 ≤ `start` ≤ `end` ≤ `this.length`. If `end` is equal to `start`, then the returned list is empty.
+`start` 和 `end` 的位置必须满足关系 0 ≤ `start` ≤ `end` ≤ `this.length`。如果 `end` 等于 `start`，则返回的列表为空。
 
 ---
 
@@ -894,13 +894,13 @@ The `start` and `end` positions must satisfy the relations 0 ≤ `start` ≤ `en
 abstract final class Uint32List implements _TypedIntList {}
 ```
 
-A fixed-length list of 32-bit unsigned integers that is viewable as a [TypedData].
+可作为 [TypedData] 查看的 32 位无符号整数固定长度列表。
 
-For long lists, this implementation can be considerably more space- and time-efficient than the default [List] implementation.
+对于长列表，此实现比默认的 [List] 实现在空间和时间上都可能更高效。
 
-Integers stored in the list are truncated to their low 32 bits, interpreted as an unsigned 32-bit integer with values in the range 0 to 4294967295.
+列表中存储的整数会被截断为其低 32 位，并被解释为取值范围 0 到 4294967295 的无符号 32 位整数。
 
-It is a compile-time error for a class to attempt to extend or implement `Uint32List`.
+类尝试继承或实现 `Uint32List` 是编译时错误。
 
 ## 构造函数
 
@@ -910,9 +910,9 @@ It is a compile-time error for a class to attempt to extend or implement `Uint32
 Uint32List(int length)
 ```
 
-Creates a [Uint32List] of the specified length (in elements), all of whose elements are initially zero.
+创建一个指定长度（以元素为单位）的 [Uint32List]，其所有元素初始值均为零。
 
-The list is backed by a [ByteBuffer] containing precisely [length] times 4 bytes.
+该列表由一个恰好包含 [length] 乘以 4 个字节的 [ByteBuffer] 支持。
 
 ### Uint32List.fromList()
 
@@ -920,11 +920,11 @@ The list is backed by a [ByteBuffer] containing precisely [length] times 4 bytes
 Uint32List.fromList(List<int> elements)
 ```
 
-Creates a [Uint32List] with the same length as the [elements] list and copies over the elements.
+创建一个与 [elements] 列表长度相同的 [Uint32List]，并复制其中的元素。
 
-Values are truncated to fit in the list when they are copied, the same way storing values truncates them.
+复制值时会将其截断以适配列表，方式与存储值时的截断方式相同。
 
-The list is backed by a [ByteBuffer] containing precisely `elements.length` times 4 bytes.
+该列表由一个恰好包含 `elements.length` 乘以 4 个字节的 [ByteBuffer] 支持。
 
 ### Uint32List.view()
 
@@ -932,27 +932,27 @@ The list is backed by a [ByteBuffer] containing precisely `elements.length` time
 Uint32List.view(ByteBuffer buffer, [int offsetInBytes = 0, int? length])
 ```
 
-Creates a [Uint32List] _view_ of the specified region in the specified byte buffer.
+在指定的字节缓冲区中创建指定区域的 [Uint32List] _视图_。
 
-Changes in the [Uint32List] will be visible in the byte buffer and vice versa. If the [offsetInBytes] index of the region is not specified, it defaults to zero (the first byte in the byte buffer). If the length is not provided, the view extends to the end of the byte buffer.
+对 [Uint32List] 的更改将在字节缓冲区中可见，反之亦然。如果未指定该区域的 [offsetInBytes] 索引，则默认为零（字节缓冲区中的第一个字节）。如果未提供 length，则视图会延伸至字节缓冲区的末尾。
 
-The [offsetInBytes] and [length] must be non-negative, and [offsetInBytes] + ([length] \* [bytesPerElement]) must be less than or equal to the length of [buffer].
+[offsetInBytes] 和 [length] 必须为非负数，且 [offsetInBytes] + ([length] \* [bytesPerElement]) 必须小于或等于 [buffer] 的长度。
 
-The [offsetInBytes] must be a multiple of [bytesPerElement].
+[offsetInBytes] 必须是 [bytesPerElement] 的整数倍。
 
-Note that when creating a view from a [TypedData] list or byte data, that list or byte data may itself be a view on a larger buffer with a [TypedData.offsetInBytes] greater than zero. Merely doing `Uint32List.view(other.buffer, 0, count)` may not point to the bytes you intended. Instead you may need to do:
+请注意，从 [TypedData] 列表或字节数据创建视图时，该列表或字节数据本身可能是对更大缓冲区的视图，其 [TypedData.offsetInBytes] 大于零。仅执行 `Uint32List.view(other.buffer, 0, count)` 可能无法指向你期望的字节位置。因此你可能需要执行：
 
 ```dart
 Uint32List.view(other.buffer, other.offsetInBytes, count)
 ```
 
-Alternatively, use [Uint32List.sublistView] which includes this computation:
+或者，使用包含此计算的 [Uint32List.sublistView]：
 
 ```dart
 Uint32List.sublistView(other, 0, count);
 ```
 
-(The third argument is an end index rather than a length, so if you start from a position greater than zero, you need not reduce the count correspondingly).
+（第三个参数是结束索引而非长度，因此如果起始位置大于零，也无需相应地减少 count）。
 
 ### Uint32List.sublistView()
 
@@ -960,19 +960,19 @@ Uint32List.sublistView(other, 0, count);
 Uint32List.sublistView(TypedData data, [int start = 0, int? end])
 ```
 
-Creates a [Uint32List] view on a range of elements of [data].
+在 [data] 的某个元素范围上创建一个 [Uint32List] 视图。
 
-Creates a view on the range of `data.buffer` which corresponds to the elements of [data] from [start] until [end]. If [data] is a typed data list, like [Uint16List], then the view is on the bytes of the elements with indices from [start] until [end]. If [data] is a [ByteData], it's treated like a list of bytes.
+在 `data.buffer` 上创建一个视图，该视图对应于 [data] 中从 [start] 到 [end] 的元素所在的字节范围。如果 [data] 是类型化数据列表（如 [Uint16List]），则该视图基于索引从 [start] 到 [end] 的元素所占的字节。如果 [data] 是 [ByteData]，则将其视为字节列表处理。
 
-If provided, [start] and [end] must satisfy
+若提供了 [start] 和 [end]，二者必须满足
 
 0 &le; `start` &le; `end` &le; _elementCount_
 
-where _elementCount_ is the number of elements in [data], which is the same as the [List.length] of a typed data list.
+其中 _elementCount_ 是 [data] 中的元素个数，与类型化数据列表的 [List.length] 相同。
 
-If omitted, [start] defaults to zero and [end] to _elementCount_.
+如果省略，则 [start] 默认为零，[end] 默认为 _elementCount_。
 
-The start and end indices of the range of bytes being viewed must be multiples of four.
+所查看字节范围的起始和结束索引必须是 4 的整数倍。
 
 ## 静态属性
 
@@ -990,7 +990,7 @@ static const int bytesPerElement = 4;
 Uint32List asUnmodifiableView()
 ```
 
-A read-only view of this [Uint32List].
+此 [Uint32List] 的只读视图。
 
 ### sublist()
 
@@ -998,9 +998,9 @@ A read-only view of this [Uint32List].
 Uint32List sublist(int start, [int? end])
 ```
 
-Creates a new list containing the elements between [start] and [end].
+创建一个包含 [start] 和 [end] 之间元素的新列表。
 
-The new list is a `Uint32List` containing the elements of this list at positions greater than or equal to [start] and less than [end] in the same order as they occur in this list.
+新列表是一个 `Uint32List`，按此列表中出现的顺序，包含位置大于等于 [start] 且小于 [end] 的元素。
 
 ```dart
 var numbers = Uint32List.fromList([0, 1, 2, 3, 4]);
@@ -1008,13 +1008,13 @@ print(numbers.sublist(1, 3)); // [1, 2]
 print(numbers.sublist(1, 3).runtimeType); // Uint32List
 ```
 
-If [end] is omitted, it defaults to the [length] of this list.
+如果省略 [end]，则默认为此列表的 [length]。
 
 ```dart
 print(numbers.sublist(1)); // [1, 2, 3, 4]
 ```
 
-The `start` and `end` positions must satisfy the relations 0 ≤ `start` ≤ `end` ≤ `this.length`. If `end` is equal to `start`, then the returned list is empty.
+`start` 和 `end` 的位置必须满足关系 0 ≤ `start` ≤ `end` ≤ `this.length`。如果 `end` 等于 `start`，则返回的列表为空。
 
 ---
 
@@ -1024,13 +1024,13 @@ The `start` and `end` positions must satisfy the relations 0 ≤ `start` ≤ `en
 abstract final class Int64List implements _TypedIntList {}
 ```
 
-A fixed-length list of 64-bit signed integers that is viewable as a [TypedData].
+可作为 [TypedData] 查看的 64 位有符号整数固定长度列表。
 
-For long lists, this implementation can be considerably more space- and time-efficient than the default [List] implementation.
+对于长列表，此实现比默认的 [List] 实现在空间和时间上都可能更高效。
 
-Integers stored in the list are truncated to their low 64 bits, interpreted as a signed 64-bit two's complement integer with values in the range -9223372036854775808 to +9223372036854775807.
+列表中存储的整数会被截断为其低 64 位，并被解释为取值范围 -9223372036854775808 到 +9223372036854775807 的有符号 64 位二进制补码整数。
 
-It is a compile-time error for a class to attempt to extend or implement `Int64List`.
+类尝试继承或实现 `Int64List` 是编译时错误。
 
 ## 构造函数
 
@@ -1040,9 +1040,9 @@ It is a compile-time error for a class to attempt to extend or implement `Int64L
 Int64List(int length)
 ```
 
-Creates an [Int64List] of the specified length (in elements), all of whose elements are initially zero.
+创建一个指定长度（以元素为单位）的 [Int64List]，其所有元素初始值均为零。
 
-The list is backed by a [ByteBuffer] containing precisely [length] times 8 bytes.
+该列表由一个恰好包含 [length] 乘以 8 个字节的 [ByteBuffer] 支持。
 
 ### Int64List.fromList()
 
@@ -1050,11 +1050,11 @@ The list is backed by a [ByteBuffer] containing precisely [length] times 8 bytes
 Int64List.fromList(List<int> elements)
 ```
 
-Creates a [Int64List] with the same length as the [elements] list and copies over the elements.
+创建一个与 [elements] 列表长度相同的 [Int64List]，并复制其中的元素。
 
-Values are truncated to fit in the list when they are copied, the same way storing values truncates them.
+复制值时会将其截断以适配列表，方式与存储值时的截断方式相同。
 
-The list is backed by a [ByteBuffer] containing precisely `elements.length` times 8 bytes.
+该列表由一个恰好包含 `elements.length` 乘以 8 个字节的 [ByteBuffer] 支持。
 
 ### Int64List.view()
 
@@ -1062,27 +1062,27 @@ The list is backed by a [ByteBuffer] containing precisely `elements.length` time
 Int64List.view(ByteBuffer buffer, [int offsetInBytes = 0, int? length])
 ```
 
-Creates an [Int64List] _view_ of the specified region in [buffer].
+创建 [buffer] 中指定区域的 [Int64List] _视图_。
 
-Changes in the [Int64List] will be visible in the byte buffer and vice versa. If the [offsetInBytes] index of the region is not specified, it defaults to zero (the first byte in the byte buffer). If the length is not provided, the view extends to the end of the byte buffer.
+对 [Int64List] 的更改将在字节缓冲区中可见，反之亦然。如果未指定该区域的 [offsetInBytes] 索引，则默认为零（字节缓冲区中的第一个字节）。如果未提供 length，则视图会延伸至字节缓冲区的末尾。
 
-The [offsetInBytes] and [length] must be non-negative, and [offsetInBytes] + ([length] \* [bytesPerElement]) must be less than or equal to the length of [buffer].
+[offsetInBytes] 和 [length] 必须为非负数，且 [offsetInBytes] + ([length] \* [bytesPerElement]) 必须小于或等于 [buffer] 的长度。
 
-The [offsetInBytes] must be a multiple of [bytesPerElement].
+[offsetInBytes] 必须是 [bytesPerElement] 的整数倍。
 
-Note that when creating a view from a [TypedData] list or byte data, that list or byte data may itself be a view on a larger buffer with a [TypedData.offsetInBytes] greater than zero. Merely doing `Int64List.view(other.buffer, 0, count)` may not point to the bytes you intended. Instead you may need to do:
+请注意，从 [TypedData] 列表或字节数据创建视图时，该列表或字节数据本身可能是对更大缓冲区的视图，其 [TypedData.offsetInBytes] 大于零。仅执行 `Int64List.view(other.buffer, 0, count)` 可能无法指向你期望的字节位置。因此你可能需要执行：
 
 ```dart
 Int64List.view(other.buffer, other.offsetInBytes, count)
 ```
 
-Alternatively, use [Int64List.sublistView] which includes this computation:
+或者，使用包含此计算的 [Int64List.sublistView]：
 
 ```dart
 Int64List.sublistView(other, 0, count);
 ```
 
-(The third argument is an end index rather than a length, so if you start from a position greater than zero, you need not reduce the count correspondingly).
+（第三个参数是结束索引而非长度，因此如果起始位置大于零，也无需相应地减少 count）。
 
 ### Int64List.sublistView()
 
@@ -1090,19 +1090,19 @@ Int64List.sublistView(other, 0, count);
 Int64List.sublistView(TypedData data, [int start = 0, int? end])
 ```
 
-Creates an [Int64List] view on a range of elements of [data].
+在 [data] 的某个元素范围上创建一个 [Int64List] 视图。
 
-Creates a view on the range of `data.buffer` which corresponds to the elements of [data] from [start] until [end]. If [data] is a typed data list, like [Uint16List], then the view is on the bytes of the elements with indices from [start] until [end]. If [data] is a [ByteData], it's treated like a list of bytes.
+在 `data.buffer` 上创建一个视图，该视图对应于 [data] 中从 [start] 到 [end] 的元素所在的字节范围。如果 [data] 是类型化数据列表（如 [Uint16List]），则该视图基于索引从 [start] 到 [end] 的元素所占的字节。如果 [data] 是 [ByteData]，则将其视为字节列表处理。
 
-If provided, [start] and [end] must satisfy
+若提供了 [start] 和 [end]，二者必须满足
 
 0 &le; `start` &le; `end` &le; _elementCount_
 
-where _elementCount_ is the number of elements in [data], which is the same as the [List.length] of a typed data list.
+其中 _elementCount_ 是 [data] 中的元素个数，与类型化数据列表的 [List.length] 相同。
 
-If omitted, [start] defaults to zero and [end] to _elementCount_.
+如果省略，则 [start] 默认为零，[end] 默认为 _elementCount_。
 
-The start and end indices of the range of bytes being viewed must be multiples of eight.
+所查看字节范围的起始和结束索引必须是 8 的整数倍。
 
 ## 静态属性
 
@@ -1120,7 +1120,7 @@ static const int bytesPerElement = 8;
 Int64List asUnmodifiableView()
 ```
 
-A read-only view of this [Int64List].
+此 [Int64List] 的只读视图。
 
 ### sublist()
 
@@ -1128,9 +1128,9 @@ A read-only view of this [Int64List].
 Int64List sublist(int start, [int? end])
 ```
 
-Creates a new list containing the elements between [start] and [end].
+创建一个包含 [start] 和 [end] 之间元素的新列表。
 
-The new list is an `Int64List` containing the elements of this list at positions greater than or equal to [start] and less than [end] in the same order as they occur in this list.
+新列表是一个 `Int64List`，按此列表中出现的顺序，包含位置大于等于 [start] 且小于 [end] 的元素。
 
 ```dart
 var numbers = Int64List.fromList([0, 1, 2, 3, 4]);
@@ -1138,13 +1138,13 @@ print(numbers.sublist(1, 3)); // [1, 2]
 print(numbers.sublist(1, 3).runtimeType); // Int64List
 ```
 
-If [end] is omitted, it defaults to the [length] of this list.
+如果省略 [end]，则默认为此列表的 [length]。
 
 ```dart
 print(numbers.sublist(1)); // [1, 2, 3, 4]
 ```
 
-The `start` and `end` positions must satisfy the relations 0 ≤ `start` ≤ `end` ≤ `this.length`. If `end` is equal to `start`, then the returned list is empty.
+`start` 和 `end` 的位置必须满足关系 0 ≤ `start` ≤ `end` ≤ `this.length`。如果 `end` 等于 `start`，则返回的列表为空。
 
 ---
 
@@ -1154,13 +1154,13 @@ The `start` and `end` positions must satisfy the relations 0 ≤ `start` ≤ `en
 abstract final class Uint64List implements _TypedIntList {}
 ```
 
-A fixed-length list of 64-bit unsigned integers that is viewable as a [TypedData].
+可作为 [TypedData] 查看的 64 位无符号整数固定长度列表。
 
-For long lists, this implementation can be considerably more space- and time-efficient than the default [List] implementation.
+对于长列表，此实现比默认的 [List] 实现在空间和时间上都可能更高效。
 
-Integers stored in the list are truncated to their low 64 bits, interpreted as an unsigned 64-bit integer with values in the range 0 to 18446744073709551615.
+列表中存储的整数会被截断为其低 64 位，并被解释为取值范围 0 到 18446744073709551615 的无符号 64 位整数。
 
-It is a compile-time error for a class to attempt to extend or implement `Uint64List`.
+类尝试继承或实现 `Uint64List` 是编译时错误。
 
 ## 构造函数
 
@@ -1170,9 +1170,9 @@ It is a compile-time error for a class to attempt to extend or implement `Uint64
 Uint64List(int length)
 ```
 
-Creates a [Uint64List] of the specified length (in elements), all of whose elements are initially zero.
+创建一个指定长度（以元素为单位）的 [Uint64List]，其所有元素初始值均为零。
 
-The list is backed by a [ByteBuffer] containing precisely [length] times 8 bytes.
+该列表由一个恰好包含 [length] 乘以 8 个字节的 [ByteBuffer] 支持。
 
 ### Uint64List.fromList()
 
@@ -1180,11 +1180,11 @@ The list is backed by a [ByteBuffer] containing precisely [length] times 8 bytes
 Uint64List.fromList(List<int> elements)
 ```
 
-Creates a [Uint64List] with the same length as the [elements] list and copies over the elements.
+创建一个与 [elements] 列表长度相同的 [Uint64List]，并复制其中的元素。
 
-Values are truncated to fit in the list when they are copied, the same way storing values truncates them.
+复制值时会将其截断以适配列表，方式与存储值时的截断方式相同。
 
-The list is backed by a [ByteBuffer] containing precisely `elements.length` times 8 bytes.
+该列表由一个恰好包含 `elements.length` 乘以 8 个字节的 [ByteBuffer] 支持。
 
 ### Uint64List.view()
 
@@ -1192,27 +1192,27 @@ The list is backed by a [ByteBuffer] containing precisely `elements.length` time
 Uint64List.view(ByteBuffer buffer, [int offsetInBytes = 0, int? length])
 ```
 
-Creates an [Uint64List] _view_ of the specified region in the specified byte buffer.
+在指定的字节缓冲区中创建指定区域的 [Uint64List] _视图_。
 
-Changes in the [Uint64List] will be visible in the byte buffer and vice versa. If the [offsetInBytes] index of the region is not specified, it defaults to zero (the first byte in the byte buffer). If the length is not provided, the view extends to the end of the byte buffer.
+对 [Uint64List] 的更改将在字节缓冲区中可见，反之亦然。如果未指定该区域的 [offsetInBytes] 索引，则默认为零（字节缓冲区中的第一个字节）。如果未提供 length，则视图会延伸至字节缓冲区的末尾。
 
-The [offsetInBytes] and [length] must be non-negative, and [offsetInBytes] + ([length] \* [bytesPerElement]) must be less than or equal to the length of [buffer].
+[offsetInBytes] 和 [length] 必须为非负数，且 [offsetInBytes] + ([length] \* [bytesPerElement]) 必须小于或等于 [buffer] 的长度。
 
-The [offsetInBytes] must be a multiple of [bytesPerElement].
+[offsetInBytes] 必须是 [bytesPerElement] 的整数倍。
 
-Note that when creating a view from a [TypedData] list or byte data, that list or byte data may itself be a view on a larger buffer with a [TypedData.offsetInBytes] greater than zero. Merely doing `Uint64List.view(other.buffer, 0, count)` may not point to the bytes you intended. Instead you may need to do:
+请注意，从 [TypedData] 列表或字节数据创建视图时，该列表或字节数据本身可能是对更大缓冲区的视图，其 [TypedData.offsetInBytes] 大于零。仅执行 `Uint64List.view(other.buffer, 0, count)` 可能无法指向你期望的字节位置。因此你可能需要执行：
 
 ```dart
 Uint64List.view(other.buffer, other.offsetInBytes, count)
 ```
 
-Alternatively, use [Uint64List.sublistView] which includes this computation:
+或者，使用包含此计算的 [Uint64List.sublistView]：
 
 ```dart
 Uint64List.sublistView(other, 0, count);
 ```
 
-(The third argument is an end index rather than a length, so if you start from a position greater than zero, you need not reduce the count correspondingly).
+（第三个参数是结束索引而非长度，因此如果起始位置大于零，也无需相应地减少 count）。
 
 ### Uint64List.sublistView()
 
@@ -1220,19 +1220,19 @@ Uint64List.sublistView(other, 0, count);
 Uint64List.sublistView(TypedData data, [int start = 0, int? end])
 ```
 
-Creates a [Uint64List] view on a range of elements of [data].
+在 [data] 的某个元素范围上创建一个 [Uint64List] 视图。
 
-Creates a view on the range of `data.buffer` which corresponds to the elements of [data] from [start] until [end]. If [data] is a typed data list, like [Uint16List], then the view is on the bytes of the elements with indices from [start] until [end]. If [data] is a [ByteData], it's treated like a list of bytes.
+在 `data.buffer` 上创建一个视图，该视图对应于 [data] 中从 [start] 到 [end] 的元素所在的字节范围。如果 [data] 是类型化数据列表（如 [Uint16List]），则该视图基于索引从 [start] 到 [end] 的元素所占的字节。如果 [data] 是 [ByteData]，则将其视为字节列表处理。
 
-If provided, [start] and [end] must satisfy
+若提供了 [start] 和 [end]，二者必须满足
 
 0 &le; `start` &le; `end` &le; _elementCount_
 
-where _elementCount_ is the number of elements in [data], which is the same as the [List.length] of a typed data list.
+其中 _elementCount_ 是 [data] 中的元素个数，与类型化数据列表的 [List.length] 相同。
 
-If omitted, [start] defaults to zero and [end] to _elementCount_.
+如果省略，则 [start] 默认为零，[end] 默认为 _elementCount_。
 
-The start and end indices of the range of bytes being viewed must be multiples of eight.
+所查看字节范围的起始和结束索引必须是 8 的整数倍。
 
 ## 静态属性
 
@@ -1250,7 +1250,7 @@ static const int bytesPerElement = 8;
 Uint64List asUnmodifiableView()
 ```
 
-A read-only view of this [Uint64List].
+此 [Uint64List] 的只读视图。
 
 ### sublist()
 
@@ -1258,9 +1258,9 @@ A read-only view of this [Uint64List].
 Uint64List sublist(int start, [int? end])
 ```
 
-Creates a new list containing the elements between [start] and [end].
+创建一个包含 [start] 和 [end] 之间元素的新列表。
 
-The new list is a `Uint64List` containing the elements of this list at positions greater than or equal to [start] and less than [end] in the same order as they occur in this list.
+新列表是一个 `Uint64List`，按此列表中出现的顺序，包含位置大于等于 [start] 且小于 [end] 的元素。
 
 ```dart
 var numbers = Uint64List.fromList([0, 1, 2, 3, 4]);
@@ -1268,13 +1268,13 @@ print(numbers.sublist(1, 3)); // [1, 2]
 print(numbers.sublist(1, 3).runtimeType); // Uint64List
 ```
 
-If [end] is omitted, it defaults to the [length] of this list.
+如果省略 [end]，则默认为此列表的 [length]。
 
 ```dart
 print(numbers.sublist(1)); // [1, 2, 3, 4]
 ```
 
-The `start` and `end` positions must satisfy the relations 0 ≤ `start` ≤ `end` ≤ `this.length`. If `end` is equal to `start`, then the returned list is empty.
+`start` 和 `end` 的位置必须满足关系 0 ≤ `start` ≤ `end` ≤ `this.length`。如果 `end` 等于 `start`，则返回的列表为空。
 
 ---
 
@@ -1284,13 +1284,13 @@ The `start` and `end` positions must satisfy the relations 0 ≤ `start` ≤ `en
 abstract final class Float32List implements _TypedFloatList {}
 ```
 
-A fixed-length list of IEEE 754 single-precision binary floating-point numbers that is viewable as a [TypedData].
+可作为 [TypedData] 查看的 IEEE 754 单精度二进制浮点数固定长度列表。
 
-For long lists, this implementation can be considerably more space- and time-efficient than the default [List] implementation.
+对于长列表，此实现比默认的 [List] 实现在空间和时间上都可能更高效。
 
-Double values stored in the list are converted to the nearest single-precision value. Values read are converted to a double value with the same value.
+存储在列表中的 double 值会被转换为最接近的单精度值。读取的值会被转换为具有相同值的 double 值。
 
-It is a compile-time error for a class to attempt to extend or implement `Float32List`.
+类尝试继承或实现 `Float32List` 是编译时错误。
 
 ## 构造函数
 
@@ -1300,9 +1300,9 @@ It is a compile-time error for a class to attempt to extend or implement `Float3
 Float32List(int length)
 ```
 
-Creates a [Float32List] of the specified length (in elements), all of whose elements are initially zero.
+创建一个指定长度（以元素为单位）的 [Float32List]，其所有元素初始值均为零。
 
-The list is backed by a [ByteBuffer] containing precisely [length] times 4 bytes.
+该列表由一个恰好包含 [length] 乘以 4 个字节的 [ByteBuffer] 支持。
 
 ### Float32List.fromList()
 
@@ -1310,11 +1310,11 @@ The list is backed by a [ByteBuffer] containing precisely [length] times 4 bytes
 Float32List.fromList(List<double> elements)
 ```
 
-Creates a [Float32List] with the same length as the [elements] list and copies over the elements.
+创建一个与 [elements] 列表长度相同的 [Float32List]，并复制其中的元素。
 
-Values are truncated to fit in the list when they are copied, the same way storing values truncates them.
+复制值时会将其截断以适配列表，方式与存储值时的截断方式相同。
 
-The list is backed by a [ByteBuffer] containing precisely `elements.length` times 4 bytes.
+该列表由一个恰好包含 `elements.length` 乘以 4 个字节的 [ByteBuffer] 支持。
 
 ### Float32List.view()
 
@@ -1322,27 +1322,27 @@ The list is backed by a [ByteBuffer] containing precisely `elements.length` time
 Float32List.view(ByteBuffer buffer, [int offsetInBytes = 0, int? length])
 ```
 
-Creates a [Float32List] _view_ of the specified region in [buffer].
+创建 [buffer] 中指定区域的 [Float32List] _视图_。
 
-Changes in the [Float32List] will be visible in the byte buffer and vice versa. If the [offsetInBytes] index of the region is not specified, it defaults to zero (the first byte in the byte buffer). If the length is not provided, the view extends to the end of the byte buffer.
+对 [Float32List] 的更改将在字节缓冲区中可见，反之亦然。如果未指定该区域的 [offsetInBytes] 索引，则默认为零（字节缓冲区中的第一个字节）。如果未提供 length，则视图会延伸至字节缓冲区的末尾。
 
-The [offsetInBytes] and [length] must be non-negative, and [offsetInBytes] + ([length] \* [bytesPerElement]) must be less than or equal to the length of [buffer].
+[offsetInBytes] 和 [length] 必须为非负数，且 [offsetInBytes] + ([length] \* [bytesPerElement]) 必须小于或等于 [buffer] 的长度。
 
-The [offsetInBytes] must be a multiple of [bytesPerElement].
+[offsetInBytes] 必须是 [bytesPerElement] 的整数倍。
 
-Note that when creating a view from a [TypedData] list or byte data, that list or byte data may itself be a view on a larger buffer with a [TypedData.offsetInBytes] greater than zero. Merely doing `Float32List.view(other.buffer, 0, count)` may not point to the bytes you intended. Instead you may need to do:
+请注意，从 [TypedData] 列表或字节数据创建视图时，该列表或字节数据本身可能是对更大缓冲区的视图，其 [TypedData.offsetInBytes] 大于零。仅执行 `Float32List.view(other.buffer, 0, count)` 可能无法指向你期望的字节位置。因此你可能需要执行：
 
 ```dart
 Float32List.view(other.buffer, other.offsetInBytes, count)
 ```
 
-Alternatively, use [Float32List.sublistView] which includes this computation:
+或者，使用包含此计算的 [Float32List.sublistView]：
 
 ```dart
 Float32List.sublistView(other, 0, count);
 ```
 
-(The third argument is an end index rather than a length, so if you start from a position greater than zero, you need not reduce the count correspondingly).
+（第三个参数是结束索引而非长度，因此如果起始位置大于零，也无需相应地减少 count）。
 
 ### Float32List.sublistView()
 
@@ -1350,19 +1350,19 @@ Float32List.sublistView(other, 0, count);
 Float32List.sublistView(TypedData data, [int start = 0, int? end])
 ```
 
-Creates an [Float32List] view on a range of elements of [data].
+在 [data] 的某个元素范围上创建一个 [Float32List] 视图。
 
-Creates a view on the range of `data.buffer` which corresponds to the elements of [data] from [start] until [end]. If [data] is a typed data list, like [Uint16List], then the view is on the bytes of the elements with indices from [start] until [end]. If [data] is a [ByteData], it's treated like a list of bytes.
+在 `data.buffer` 上创建一个视图，该视图对应于 [data] 中从 [start] 到 [end] 的元素所在的字节范围。如果 [data] 是类型化数据列表（如 [Uint16List]），则该视图基于索引从 [start] 到 [end] 的元素所占的字节。如果 [data] 是 [ByteData]，则将其视为字节列表处理。
 
-If provided, [start] and [end] must satisfy
+若提供了 [start] 和 [end]，二者必须满足
 
 0 &le; `start` &le; `end` &le; _elementCount_
 
-where _elementCount_ is the number of elements in [data], which is the same as the [List.length] of a typed data list.
+其中 _elementCount_ 是 [data] 中的元素个数，与类型化数据列表的 [List.length] 相同。
 
-If omitted, [start] defaults to zero and [end] to _elementCount_.
+如果省略，则 [start] 默认为零，[end] 默认为 _elementCount_。
 
-The start and end indices of the range of bytes being viewed must be multiples of four.
+所查看字节范围的起始和结束索引必须是 4 的整数倍。
 
 ### asUnmodifiableView()
 
@@ -1370,7 +1370,7 @@ The start and end indices of the range of bytes being viewed must be multiples o
 Float32List asUnmodifiableView()
 ```
 
-A read-only view of this [Float32List].
+此 [Float32List] 的只读视图。
 
 ### sublist()
 
@@ -1378,9 +1378,9 @@ A read-only view of this [Float32List].
 Float32List sublist(int start, [int? end])
 ```
 
-Creates a new list containing the elements between [start] and [end].
+创建一个包含 [start] 和 [end] 之间元素的新列表。
 
-The new list is a `Float32List` containing the elements of this list at positions greater than or equal to [start] and less than [end] in the same order as they occur in this list.
+新列表是一个 `Float32List`，按此列表中出现的顺序，包含位置大于等于 [start] 且小于 [end] 的元素。
 
 ```dart
 var numbers = Float32List.fromList([0.0, 1.0, 2.0, 3.0, 4.0]);
@@ -1388,13 +1388,13 @@ print(numbers.sublist(1, 3)); // [1.0, 2.0]
 print(numbers.sublist(1, 3).runtimeType); // Float32List
 ```
 
-If [end] is omitted, it defaults to the [length] of this list.
+如果省略 [end]，则默认为此列表的 [length]。
 
 ```dart
 print(numbers.sublist(1)); // [1.0, 2.0, 3.0, 4.0]
 ```
 
-The `start` and `end` positions must satisfy the relations 0 ≤ `start` ≤ `end` ≤ `this.length`. If `end` is equal to `start`, then the returned list is empty.
+`start` 和 `end` 的位置必须满足关系 0 ≤ `start` ≤ `end` ≤ `this.length`。如果 `end` 等于 `start`，则返回的列表为空。
 
 ### bytesPerElement
 
@@ -1408,11 +1408,11 @@ int bytesPerElement
 abstract final class Float64List implements _TypedFloatList {}
 ```
 
-A fixed-length list of IEEE 754 double-precision binary floating-point numbers that is viewable as a [TypedData].
+可作为 [TypedData] 查看的 IEEE 754 双精度二进制浮点数固定长度列表。
 
-For long lists, this implementation can be considerably more space- and time-efficient than the default [List] implementation.
+对于长列表，此实现比默认的 [List] 实现在空间和时间上都可能更高效。
 
-It is a compile-time error for a class to attempt to extend or implement `Float64List`.
+类尝试继承或实现 `Float64List` 是编译时错误。
 
 ### Float64List()
 
@@ -1420,9 +1420,9 @@ It is a compile-time error for a class to attempt to extend or implement `Float6
 Float64List(int length)
 ```
 
-Creates a [Float64List] of the specified length (in elements), all of whose elements are initially zero.
+创建一个指定长度（以元素为单位）的 [Float64List]，其所有元素初始值均为零。
 
-The list is backed by a [ByteBuffer] containing precisely [length] times 8 bytes.
+该列表由一个恰好包含 [length] 乘以 8 个字节的 [ByteBuffer] 支持。
 
 ### Float64List.fromList()
 
@@ -1430,9 +1430,9 @@ The list is backed by a [ByteBuffer] containing precisely [length] times 8 bytes
 Float64List.fromList(List<double> elements)
 ```
 
-Creates a [Float64List] with the same length as the [elements] list and copies over the elements.
+创建一个与 [elements] 列表长度相同的 [Float64List]，并复制其中的元素。
 
-The list is backed by a [ByteBuffer] containing precisely `elements.length` times 8 bytes.
+该列表由一个恰好包含 `elements.length` 乘以 8 个字节的 [ByteBuffer] 支持。
 
 ### Float64List.view()
 
@@ -1440,27 +1440,27 @@ The list is backed by a [ByteBuffer] containing precisely `elements.length` time
 Float64List.view(ByteBuffer buffer, [int offsetInBytes = 0, int? length])
 ```
 
-Creates a [Float64List] _view_ of the specified region in [buffer].
+创建 [buffer] 中指定区域的 [Float64List] _视图_。
 
-Changes in the [Float64List] will be visible in the byte buffer and vice versa. If the [offsetInBytes] index of the region is not specified, it defaults to zero (the first byte in the byte buffer). If the length is not provided, the view extends to the end of the byte buffer.
+对 [Float64List] 的更改将在字节缓冲区中可见，反之亦然。如果未指定该区域的 [offsetInBytes] 索引，则默认为零（字节缓冲区中的第一个字节）。如果未提供 length，则视图会延伸至字节缓冲区的末尾。
 
-The [offsetInBytes] and [length] must be non-negative, and [offsetInBytes] + ([length] \* [bytesPerElement]) must be less than or equal to the length of [buffer].
+[offsetInBytes] 和 [length] 必须为非负数，且 [offsetInBytes] + ([length] \* [bytesPerElement]) 必须小于或等于 [buffer] 的长度。
 
-The [offsetInBytes] must be a multiple of [bytesPerElement].
+[offsetInBytes] 必须是 [bytesPerElement] 的整数倍。
 
-Note that when creating a view from a [TypedData] list or byte data, that list or byte data may itself be a view on a larger buffer with a [TypedData.offsetInBytes] greater than zero. Merely doing `Float64List.view(other.buffer, 0, count)` may not point to the bytes you intended. Instead you may need to do:
+请注意，从 [TypedData] 列表或字节数据创建视图时，该列表或字节数据本身可能是对更大缓冲区的视图，其 [TypedData.offsetInBytes] 大于零。仅执行 `Float64List.view(other.buffer, 0, count)` 可能无法指向你期望的字节位置。因此你可能需要执行：
 
 ```dart
 Float64List.view(other.buffer, other.offsetInBytes, count)
 ```
 
-Alternatively, use [Float64List.sublistView] which includes this computation:
+或者，使用包含此计算的 [Float64List.sublistView]：
 
 ```dart
 Float64List.sublistView(other, 0, count);
 ```
 
-(The third argument is an end index rather than a length, so if you start from a position greater than zero, you need not reduce the count correspondingly).
+（第三个参数是结束索引而非长度，因此如果起始位置大于零，也无需相应地减少 count）。
 
 ### Float64List.sublistView()
 
@@ -1468,19 +1468,19 @@ Float64List.sublistView(other, 0, count);
 Float64List.sublistView(TypedData data, [int start = 0, int? end])
 ```
 
-Creates a [Float64List] view on a range of elements of [data].
+在 [data] 的某个元素范围上创建一个 [Float64List] 视图。
 
-Creates a view on the range of `data.buffer` which corresponds to the elements of [data] from [start] until [end]. If [data] is a typed data list, like [Uint16List], then the view is on the bytes of the elements with indices from [start] until [end]. If [data] is a [ByteData], it's treated like a list of bytes.
+在 `data.buffer` 上创建一个视图，该视图对应于 [data] 中从 [start] 到 [end] 的元素所在的字节范围。如果 [data] 是类型化数据列表（如 [Uint16List]），则该视图基于索引从 [start] 到 [end] 的元素所占的字节。如果 [data] 是 [ByteData]，则将其视为字节列表处理。
 
-If provided, [start] and [end] must satisfy
+若提供了 [start] 和 [end]，二者必须满足
 
 0 &le; `start` &le; `end` &le; _elementCount_
 
-where _elementCount_ is the number of elements in [data], which is the same as the [List.length] of a typed data list.
+其中 _elementCount_ 是 [data] 中的元素个数，与类型化数据列表的 [List.length] 相同。
 
-If omitted, [start] defaults to zero and [end] to _elementCount_.
+如果省略，则 [start] 默认为零，[end] 默认为 _elementCount_。
 
-The start and end indices of the range of bytes being viewed must be multiples of eight.
+所查看字节范围的起始和结束索引必须是 8 的整数倍。
 
 ### asUnmodifiableView()
 
@@ -1488,7 +1488,7 @@ The start and end indices of the range of bytes being viewed must be multiples o
 Float64List asUnmodifiableView()
 ```
 
-A read-only view of this [Float64List].
+此 [Float64List] 的只读视图。
 
 ### sublist()
 
@@ -1496,9 +1496,9 @@ A read-only view of this [Float64List].
 Float64List sublist(int start, [int? end])
 ```
 
-Creates a new list containing the elements between [start] and [end].
+创建一个包含 [start] 和 [end] 之间元素的新列表。
 
-The new list is a `Float64List` containing the elements of this list at positions greater than or equal to [start] and less than [end] in the same order as they occur in this list.
+新列表是一个 `Float64List`，按此列表中出现的顺序，包含位置大于等于 [start] 且小于 [end] 的元素。
 
 ```dart
 var numbers = Float64List.fromList([0.0, 1.0, 2.0, 3.0, 4.0]);
@@ -1506,13 +1506,13 @@ print(numbers.sublist(1, 3)); // [1.0, 2.0]
 print(numbers.sublist(1, 3).runtimeType); // Float64List
 ```
 
-If [end] is omitted, it defaults to the [length] of this list.
+如果省略 [end]，则默认为此列表的 [length]。
 
 ```dart
 print(numbers.sublist(1)); // [1.0, 2.0, 3.0, 4.0]
 ```
 
-The `start` and `end` positions must satisfy the relations 0 ≤ `start` ≤ `end` ≤ `this.length`. If `end` is equal to `start`, then the returned list is empty.
+`start` 和 `end` 的位置必须满足关系 0 ≤ `start` ≤ `end` ≤ `this.length`。如果 `end` 等于 `start`，则返回的列表为空。
 
 ### bytesPerElement
 
@@ -1526,11 +1526,11 @@ int bytesPerElement
 abstract final class Float32x4List implements TypedDataList<Float32x4>, TypedData {}
 ```
 
-A fixed-length list of [Float32x4] numbers that is viewable as a [TypedData].
+可作为 [TypedData] 查看的 [Float32x4] 数值固定长度列表。
 
-For long lists, this implementation will be considerably more space- and time-efficient than the default [List] implementation.
+对于长列表，此实现将比默认的 [List] 实现在空间和时间上都更高效。
 
-It is a compile-time error for a class to attempt to extend or implement `Float32x4List`.
+类尝试继承或实现 `Float32x4List` 是编译时错误。
 
 ### Float32x4List()
 
@@ -1538,9 +1538,9 @@ It is a compile-time error for a class to attempt to extend or implement `Float3
 Float32x4List(int length)
 ```
 
-Creates a [Float32x4List] of the specified length (in elements), all of whose elements are initially zero.
+创建一个指定长度（以元素为单位）的 [Float32x4List]，其所有元素初始值均为零。
 
-The list is backed by a [ByteBuffer] containing precisely [length] times 16 bytes.
+该列表由一个恰好包含 [length] 乘以 16 个字节的 [ByteBuffer] 支持。
 
 ### Float32x4List.fromList()
 
@@ -1548,9 +1548,9 @@ The list is backed by a [ByteBuffer] containing precisely [length] times 16 byte
 Float32x4List.fromList(List<Float32x4> elements)
 ```
 
-Creates a [Float32x4List] with the same length as the [elements] list and copies over the elements.
+创建一个与 [elements] 列表长度相同的 [Float32x4List]，并复制其中的元素。
 
-The list is backed by a [ByteBuffer] containing precisely `elements.length` times 16 bytes.
+该列表由一个恰好包含 `elements.length` 乘以 16 个字节的 [ByteBuffer] 支持。
 
 ### Float32x4List.view()
 
@@ -1558,27 +1558,27 @@ The list is backed by a [ByteBuffer] containing precisely `elements.length` time
 Float32x4List.view(ByteBuffer buffer, [int offsetInBytes = 0, int? length])
 ```
 
-Creates a [Float32x4List] _view_ of the specified region in [buffer].
+创建 [buffer] 中指定区域的 [Float32x4List] _视图_。
 
-Changes in the [Float32x4List] will be visible in the byte buffer and vice versa. If the [offsetInBytes] index of the region is not specified, it defaults to zero (the first byte in the byte buffer). If the length is not provided, the view extends to the end of the byte buffer.
+对 [Float32x4List] 的更改将在字节缓冲区中可见，反之亦然。如果未指定该区域的 [offsetInBytes] 索引，则默认为零（字节缓冲区中的第一个字节）。如果未提供 length，则视图会延伸至字节缓冲区的末尾。
 
-The [offsetInBytes] and [length] must be non-negative, and [offsetInBytes] + ([length] \* [bytesPerElement]) must be less than or equal to the length of [buffer].
+[offsetInBytes] 和 [length] 必须为非负数，且 [offsetInBytes] + ([length] \* [bytesPerElement]) 必须小于或等于 [buffer] 的长度。
 
-The [offsetInBytes] must be a multiple of [bytesPerElement].
+[offsetInBytes] 必须是 [bytesPerElement] 的整数倍。
 
-Note that when creating a view from a [TypedData] list or byte data, that list or byte data may itself be a view on a larger buffer with a [TypedData.offsetInBytes] greater than zero. Merely doing `Float32x4List.view(other.buffer, 0, count)` may not point to the bytes you intended. Instead you may need to do:
+请注意，从 [TypedData] 列表或字节数据创建视图时，该列表或字节数据本身可能是对更大缓冲区的视图，其 [TypedData.offsetInBytes] 大于零。仅执行 `Float32x4List.view(other.buffer, 0, count)` 可能无法指向你期望的字节位置。因此你可能需要执行：
 
 ```dart
 Float32x4List.view(other.buffer, other.offsetInBytes, count)
 ```
 
-Alternatively, use [Float32x4List.sublistView] which includes this computation:
+或者，使用包含此计算的 [Float32x4List.sublistView]：
 
 ```dart
 Float32x4List.sublistView(other, 0, count);
 ```
 
-(The third argument is an end index rather than a length, so if you start from a position greater than zero, you need not reduce the count correspondingly).
+（第三个参数是结束索引而非长度，因此如果起始位置大于零，也无需相应地减少 count）。
 
 ### Float32x4List.sublistView()
 
@@ -1586,19 +1586,19 @@ Float32x4List.sublistView(other, 0, count);
 Float32x4List.sublistView(TypedData data, [int start = 0, int? end])
 ```
 
-Creates a [Float32x4List] view on a range of elements of [data].
+在 [data] 的某个元素范围上创建一个 [Float32x4List] 视图。
 
-Creates a view on the range of `data.buffer` which corresponds to the elements of [data] from [start] until [end]. If [data] is a typed data list, like [Uint16List], then the view is on the bytes of the elements with indices from [start] until [end]. If [data] is a [ByteData], it's treated like a list of bytes.
+在 `data.buffer` 上创建一个视图，该视图对应于 [data] 中从 [start] 到 [end] 的元素所在的字节范围。如果 [data] 是类型化数据列表（如 [Uint16List]），则该视图基于索引从 [start] 到 [end] 的元素所占的字节。如果 [data] 是 [ByteData]，则将其视为字节列表处理。
 
-If provided, [start] and [end] must satisfy
+若提供了 [start] 和 [end]，二者必须满足
 
 0 &le; `start` &le; `end` &le; _elementCount_
 
-where _elementCount_ is the number of elements in [data], which is the same as the [List.length] of a typed data list.
+其中 _elementCount_ 是 [data] 中的元素个数，与类型化数据列表的 [List.length] 相同。
 
-If omitted, [start] defaults to zero and [end] to _elementCount_.
+如果省略，则 [start] 默认为零，[end] 默认为 _elementCount_。
 
-The start and end indices of the range of bytes being viewed must be multiples of sixteen.
+所查看字节范围的起始和结束索引必须是 16 的整数倍。
 
 ### asUnmodifiableView()
 
@@ -1606,7 +1606,7 @@ The start and end indices of the range of bytes being viewed must be multiples o
 Float32x4List asUnmodifiableView()
 ```
 
-A read-only view of this [Float32x4List].
+此 [Float32x4List] 的只读视图。
 
 ### operator +()
 
@@ -1614,9 +1614,9 @@ A read-only view of this [Float32x4List].
 List<Float32x4> operator +(List<Float32x4> other)
 ```
 
-The concatenation of this list and [other].
+此列表与 [other] 的连接结果。
 
-If [other] is also a [Float32x4List], the result is a new [Float32x4List], otherwise the result is a normal growable `List<Float32x4>`.
+如果 [other] 也是 [Float32x4List]，则结果是一个新的 [Float32x4List]；否则结果是一个普通的可增长 `List<Float32x4>`。
 
 ### sublist()
 
@@ -1624,9 +1624,9 @@ If [other] is also a [Float32x4List], the result is a new [Float32x4List], other
 Float32x4List sublist(int start, [int? end])
 ```
 
-Creates a new list containing the elements between [start] and [end].
+创建一个包含 [start] 和 [end] 之间元素的新列表。
 
-The new list is a `Float32x4List` containing the elements of this list at positions greater than or equal to [start] and less than [end] in the same order as they occur in this list.
+新列表是一个 `Float32x4List`，按此列表中出现的顺序，包含位置大于等于 [start] 且小于 [end] 的元素。
 
 ```dart
 var numbers = Float32x4List.fromList([
@@ -1640,13 +1640,13 @@ print(numbers.sublist(1, 2)); // [Float32x4(1, 2, 3, 4)]
 print(numbers.sublist(1, 2).runtimeType); // Float32x4List
 ```
 
-If [end] is omitted, it defaults to the [length] of this list.
+如果省略 [end]，则默认为此列表的 [length]。
 
 ```dart
 print(numbers.sublist(4)); // [Float32x4(4, 5, 6, 7)]
 ```
 
-The `start` and `end` positions must satisfy the relations 0 ≤ `start` ≤ `end` ≤ `this.length`. If `end` is equal to `start`, then the returned list is empty.
+`start` 和 `end` 的位置必须满足关系 0 ≤ `start` ≤ `end` ≤ `this.length`。如果 `end` 等于 `start`，则返回的列表为空。
 
 ### bytesPerElement
 
@@ -1660,9 +1660,9 @@ int bytesPerElement
 abstract final class Int32x4List implements TypedDataList<Int32x4>, TypedData {}
 ```
 
-A fixed-length list of [Int32x4] numbers that is viewable as a [TypedData].
+可作为 [TypedData] 查看的 [Int32x4] 数值固定长度列表。
 
-For long lists, this implementation will be considerably more space- and time-efficient than the default [List] implementation.
+对于长列表，此实现将比默认的 [List] 实现在空间和时间上都更高效。
 
 ### Int32x4List()
 
@@ -1670,9 +1670,9 @@ For long lists, this implementation will be considerably more space- and time-ef
 Int32x4List(int length)
 ```
 
-Creates a [Int32x4List] of the specified length (in elements), all of whose elements are initially zero.
+创建一个指定长度（以元素为单位）的 [Int32x4List]，其所有元素初始值均为零。
 
-The list is backed by a [ByteBuffer] containing precisely [length] times 16 bytes.
+该列表由一个恰好包含 [length] 乘以 16 个字节的 [ByteBuffer] 支持。
 
 ### Int32x4List.fromList()
 
@@ -1680,9 +1680,9 @@ The list is backed by a [ByteBuffer] containing precisely [length] times 16 byte
 Int32x4List.fromList(List<Int32x4> elements)
 ```
 
-Creates a [Int32x4List] with the same length as the [elements] list and copies over the elements.
+创建一个与 [elements] 列表长度相同的 [Int32x4List]，并复制其中的元素。
 
-The list is backed by a [ByteBuffer] containing precisely `elements.length` times 16 bytes.
+该列表由一个恰好包含 `elements.length` 乘以 16 个字节的 [ByteBuffer] 支持。
 
 ### Int32x4List.view()
 
@@ -1690,27 +1690,27 @@ The list is backed by a [ByteBuffer] containing precisely `elements.length` time
 Int32x4List.view(ByteBuffer buffer, [int offsetInBytes = 0, int? length])
 ```
 
-Creates a [Int32x4List] _view_ of the specified region in [buffer].
+创建 [buffer] 中指定区域的 [Int32x4List] _视图_。
 
-Changes in the [Int32x4List] will be visible in the byte buffer and vice versa. If the [offsetInBytes] index of the region is not specified, it defaults to zero (the first byte in the byte buffer). If the length is not provided, the view extends to the end of the byte buffer.
+对 [Int32x4List] 的更改将在字节缓冲区中可见，反之亦然。如果未指定该区域的 [offsetInBytes] 索引，则默认为零（字节缓冲区中的第一个字节）。如果未提供 length，则视图会延伸至字节缓冲区的末尾。
 
-The [offsetInBytes] and [length] must be non-negative, and [offsetInBytes] + ([length] \* [bytesPerElement]) must be less than or equal to the length of [buffer].
+[offsetInBytes] 和 [length] 必须为非负数，且 [offsetInBytes] + ([length] \* [bytesPerElement]) 必须小于或等于 [buffer] 的长度。
 
-The [offsetInBytes] must be a multiple of [bytesPerElement].
+[offsetInBytes] 必须是 [bytesPerElement] 的整数倍。
 
-Note that when creating a view from a [TypedData] list or byte data, that list or byte data may itself be a view on a larger buffer with a [TypedData.offsetInBytes] greater than zero. Merely doing `Int32x4List.view(other.buffer, 0, count)` may not point to the bytes you intended. Instead you may need to do:
+请注意，从 [TypedData] 列表或字节数据创建视图时，该列表或字节数据本身可能是对更大缓冲区的视图，其 [TypedData.offsetInBytes] 大于零。仅执行 `Int32x4List.view(other.buffer, 0, count)` 可能无法指向你期望的字节位置。因此你可能需要执行：
 
 ```dart
 Int32x4List.view(other.buffer, other.offsetInBytes, count)
 ```
 
-Alternatively, use [Int32x4List.sublistView] which includes this computation:
+或者，使用包含此计算的 [Int32x4List.sublistView]：
 
 ```dart
 Int32x4List.sublistView(other, 0, count);
 ```
 
-(The third argument is an end index rather than a length, so if you start from a position greater than zero, you need not reduce the count correspondingly).
+（第三个参数是结束索引而非长度，因此如果起始位置大于零，也无需相应地减少 count）。
 
 ### Int32x4List.sublistView()
 
@@ -1718,19 +1718,19 @@ Int32x4List.sublistView(other, 0, count);
 Int32x4List.sublistView(TypedData data, [int start = 0, int? end])
 ```
 
-Creates an [Int32x4List] view on a range of elements of [data].
+在 [data] 的某个元素范围上创建一个 [Int32x4List] 视图。
 
-Creates a view on the range of `data.buffer` which corresponds to the elements of [data] from [start] until [end]. If [data] is a typed data list, like [Uint16List], then the view is on the bytes of the elements with indices from [start] until [end]. If [data] is a [ByteData], it's treated like a list of bytes.
+在 `data.buffer` 上创建一个视图，该视图对应于 [data] 中从 [start] 到 [end] 的元素所在的字节范围。如果 [data] 是类型化数据列表（如 [Uint16List]），则该视图基于索引从 [start] 到 [end] 的元素所占的字节。如果 [data] 是 [ByteData]，则将其视为字节列表处理。
 
-If provided, [start] and [end] must satisfy
+若提供了 [start] 和 [end]，二者必须满足
 
 0 &le; `start` &le; `end` &le; _elementCount_
 
-where _elementCount_ is the number of elements in [data], which is the same as the [List.length] of a typed data list.
+其中 _elementCount_ 是 [data] 中的元素个数，与类型化数据列表的 [List.length] 相同。
 
-If omitted, [start] defaults to zero and [end] to _elementCount_.
+如果省略，则 [start] 默认为零，[end] 默认为 _elementCount_。
 
-The start and end indices of the range of bytes being viewed must be multiples of sixteen.
+所查看字节范围的起始和结束索引必须是 16 的整数倍。
 
 ### asUnmodifiableView()
 
@@ -1738,7 +1738,7 @@ The start and end indices of the range of bytes being viewed must be multiples o
 Int32x4List asUnmodifiableView()
 ```
 
-A read-only view of this [Int32x4List].
+此 [Int32x4List] 的只读视图。
 
 ### operator +()
 
@@ -1746,9 +1746,9 @@ A read-only view of this [Int32x4List].
 List<Int32x4> operator +(List<Int32x4> other)
 ```
 
-The concatenation of this list and [other].
+此列表与 [other] 的连接结果。
 
-If [other] is also a [Int32x4List], the result is a new [Int32x4List], otherwise the result is a normal growable `List<Int32x4>`.
+如果 [other] 也是 [Int32x4List]，则结果是一个新的 [Int32x4List]；否则结果是一个普通的可增长 `List<Int32x4>`。
 
 ### sublist()
 
@@ -1756,9 +1756,9 @@ If [other] is also a [Int32x4List], the result is a new [Int32x4List], otherwise
 Int32x4List sublist(int start, [int? end])
 ```
 
-Creates a new list containing the elements between [start] and [end].
+创建一个包含 [start] 和 [end] 之间元素的新列表。
 
-The new list is an `Int32x4List` containing the elements of this list at positions greater than or equal to [start] and less than [end] in the same order as they occur in this list.
+新列表是一个 `Int32x4List`，按此列表中出现的顺序，包含位置大于等于 [start] 且小于 [end] 的元素。
 
 ```dart
 var numbers = Int32x4List.fromList([
@@ -1772,13 +1772,13 @@ print(numbers.sublist(1, 2)); // [Int32x4(1, 2, 3, 4)]
 print(numbers.sublist(1, 2).runtimeType); // Int32x4List
 ```
 
-If [end] is omitted, it defaults to the [length] of this list.
+如果省略 [end]，则默认为此列表的 [length]。
 
 ```dart
 print(numbers.sublist(3)); // [Int32x4(3, 4, 5, 6), Int32x4(4, 5, 6, 7)]
 ```
 
-The `start` and `end` positions must satisfy the relations 0 ≤ `start` ≤ `end` ≤ `this.length`. If `end` is equal to `start`, then the returned list is empty.
+`start` 和 `end` 的位置必须满足关系 0 ≤ `start` ≤ `end` ≤ `this.length`。如果 `end` 等于 `start`，则返回的列表为空。
 
 ### bytesPerElement
 
@@ -1792,11 +1792,11 @@ int bytesPerElement
 abstract final class Float64x2List implements TypedDataList<Float64x2>, TypedData {}
 ```
 
-A fixed-length list of [Float64x2] numbers that is viewable as a [TypedData].
+可作为 [TypedData] 查看的 [Float64x2] 数值固定长度列表。
 
-For long lists, this implementation will be considerably more space- and time-efficient than the default [List] implementation.
+对于长列表，此实现将比默认的 [List] 实现在空间和时间上都更高效。
 
-It is a compile-time error for a class to attempt to extend or implement `Float64x2List`.
+类尝试继承或实现 `Float64x2List` 是编译时错误。
 
 ### Float64x2List()
 
@@ -1804,9 +1804,9 @@ It is a compile-time error for a class to attempt to extend or implement `Float6
 Float64x2List(int length)
 ```
 
-Creates a [Float64x2List] of the specified length (in elements), all of whose elements have all lanes set to zero.
+创建一个指定长度（以元素为单位）的 [Float64x2List]，其所有元素的所有分量（lane）均设为零。
 
-The list is backed by a [ByteBuffer] containing precisely [length] times 16 bytes.
+该列表由一个恰好包含 [length] 乘以 16 个字节的 [ByteBuffer] 支持。
 
 ### Float64x2List.fromList()
 
@@ -1814,9 +1814,9 @@ The list is backed by a [ByteBuffer] containing precisely [length] times 16 byte
 Float64x2List.fromList(List<Float64x2> elements)
 ```
 
-Creates a [Float64x2List] with the same length as the [elements] list and copies over the elements.
+创建一个与 [elements] 列表长度相同的 [Float64x2List]，并复制其中的元素。
 
-The list is backed by a [ByteBuffer] containing precisely `elements.length` times 16 bytes.
+该列表由一个恰好包含 `elements.length` 乘以 16 个字节的 [ByteBuffer] 支持。
 
 ### operator +()
 
@@ -1824,9 +1824,9 @@ The list is backed by a [ByteBuffer] containing precisely `elements.length` time
 List<Float64x2> operator +(List<Float64x2> other)
 ```
 
-The concatenation of this list and [other].
+此列表与 [other] 的连接结果。
 
-If [other] is also a [Float64x2List], the result is a new [Float64x2List], otherwise the result is a normal growable `List<Float64x2>`.
+如果 [other] 也是 [Float64x2List]，则结果是一个新的 [Float64x2List]；否则结果是一个普通的可增长 `List<Float64x2>`。
 
 ### Float64x2List.view()
 
@@ -1834,27 +1834,27 @@ If [other] is also a [Float64x2List], the result is a new [Float64x2List], other
 Float64x2List.view(ByteBuffer buffer, [int offsetInBytes = 0, int? length])
 ```
 
-Creates a [Float64x2List] _view_ of the specified region in [buffer].
+创建 [buffer] 中指定区域的 [Float64x2List] _视图_。
 
-Changes in the [Float64x2List] will be visible in the byte buffer and vice versa. If the [offsetInBytes] index of the region is not specified, it defaults to zero (the first byte in the byte buffer). If the length is not provided, the view extends to the end of the byte buffer.
+对 [Float64x2List] 的更改将在字节缓冲区中可见，反之亦然。如果未指定该区域的 [offsetInBytes] 索引，则默认为零（字节缓冲区中的第一个字节）。如果未提供 length，则视图会延伸至字节缓冲区的末尾。
 
-The [offsetInBytes] and [length] must be non-negative, and [offsetInBytes] + ([length] \* [bytesPerElement]) must be less than or equal to the length of [buffer].
+[offsetInBytes] 和 [length] 必须为非负数，且 [offsetInBytes] + ([length] \* [bytesPerElement]) 必须小于或等于 [buffer] 的长度。
 
-The [offsetInBytes] must be a multiple of [bytesPerElement].
+[offsetInBytes] 必须是 [bytesPerElement] 的整数倍。
 
-Note that when creating a view from a [TypedData] list or byte data, that list or byte data may itself be a view on a larger buffer with a [TypedData.offsetInBytes] greater than zero. Merely doing `Float64x2List.view(other.buffer, 0, count)` may not point to the bytes you intended. Instead you may need to do:
+请注意，从 [TypedData] 列表或字节数据创建视图时，该列表或字节数据本身可能是对更大缓冲区的视图，其 [TypedData.offsetInBytes] 大于零。仅执行 `Float64x2List.view(other.buffer, 0, count)` 可能无法指向你期望的字节位置。因此你可能需要执行：
 
 ```dart
 Float64x2List.view(other.buffer, other.offsetInBytes, count)
 ```
 
-Alternatively, use [Float64x2List.sublistView] which includes this computation:
+或者，使用包含此计算的 [Float64x2List.sublistView]：
 
 ```dart
 Float64x2List.sublistView(other, 0, count);
 ```
 
-(The third argument is an end index rather than a length, so if you start from a position greater than zero, you need not reduce the count correspondingly).
+（第三个参数是结束索引而非长度，因此如果起始位置大于零，也无需相应地减少 count）。
 
 ### Float64x2List.sublistView()
 
@@ -1862,19 +1862,19 @@ Float64x2List.sublistView(other, 0, count);
 Float64x2List.sublistView(TypedData data, [int start = 0, int? end])
 ```
 
-Creates an [Float64x2List] view on a range of elements of [data].
+在 [data] 的某个元素范围上创建一个 [Float64x2List] 视图。
 
-Creates a view on the range of `data.buffer` which corresponds to the elements of [data] from [start] until [end]. If [data] is a typed data list, like [Uint16List], then the view is on the bytes of the elements with indices from [start] until [end]. If [data] is a [ByteData], it's treated like a list of bytes.
+在 `data.buffer` 上创建一个视图，该视图对应于 [data] 中从 [start] 到 [end] 的元素所在的字节范围。如果 [data] 是类型化数据列表（如 [Uint16List]），则该视图基于索引从 [start] 到 [end] 的元素所占的字节。如果 [data] 是 [ByteData]，则将其视为字节列表处理。
 
-If provided, [start] and [end] must satisfy
+若提供了 [start] 和 [end]，二者必须满足
 
 0 &le; `start` &le; `end` &le; _elementCount_
 
-where _elementCount_ is the number of elements in [data], which is the same as the [List.length] of a typed data list.
+其中 _elementCount_ 是 [data] 中的元素个数，与类型化数据列表的 [List.length] 相同。
 
-If omitted, [start] defaults to zero and [end] to _elementCount_.
+如果省略，则 [start] 默认为零，[end] 默认为 _elementCount_。
 
-The start and end indices of the range of bytes being viewed must be multiples of sixteen.
+所查看字节范围的起始和结束索引必须是 16 的整数倍。
 
 ### asUnmodifiableView()
 
@@ -1882,7 +1882,7 @@ The start and end indices of the range of bytes being viewed must be multiples o
 Float64x2List asUnmodifiableView()
 ```
 
-A read-only view of this [Float64x2List].
+此 [Float64x2List] 的只读视图。
 
 ### sublist()
 
@@ -1890,9 +1890,9 @@ A read-only view of this [Float64x2List].
 Float64x2List sublist(int start, [int? end])
 ```
 
-Creates a new list containing the elements between [start] and [end].
+创建一个包含 [start] 和 [end] 之间元素的新列表。
 
-The new list is a `Float64x2List` containing the elements of this list at positions greater than or equal to [start] and less than [end] in the same order as they occur in this list.
+新列表是一个 `Float64x2List`，按此列表中出现的顺序，包含位置大于等于 [start] 且小于 [end] 的元素。
 
 ```dart
 var numbers = Float64x2List.fromList([
@@ -1906,13 +1906,13 @@ print(numbers.sublist(1, 3)); // [Float64x2(1, 2), Float64x2(2, 3)]
 print(numbers.sublist(1, 3).runtimeType); // Float64x2List
 ```
 
-If [end] is omitted, it defaults to the [length] of this list.
+如果省略 [end]，则默认为此列表的 [length]。
 
 ```dart
 print(numbers.sublist(3)); // [Float64x2(3, 4), Float64x2(4, 5)]
 ```
 
-The `start` and `end` positions must satisfy the relations 0 ≤ `start` ≤ `end` ≤ `this.length`. If `end` is equal to `start`, then the returned list is empty.
+`start` 和 `end` 的位置必须满足关系 0 ≤ `start` ≤ `end` ≤ `this.length`。如果 `end` 等于 `start`，则返回的列表为空。
 
 ### bytesPerElement
 

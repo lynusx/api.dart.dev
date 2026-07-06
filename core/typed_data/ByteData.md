@@ -4,11 +4,11 @@
 abstract final class ByteData implements TypedData {}
 ```
 
-A fixed-length, random-access sequence of bytes that also provides random and unaligned access to the fixed-width integers and floating point numbers represented by those bytes.
+一个固定长度、支持随机访问的字节序列，同时提供对这些字节所表示的定宽整数和浮点数的随机及非对齐访问。
 
-`ByteData` may be used to pack and unpack data from external sources (such as networks or files systems), and to process large quantities of numerical data more efficiently than would be possible with ordinary [List] implementations. `ByteData` can save space, by eliminating the need for object headers, and time, by eliminating the need for data copies.
+`ByteData` 可用于打包和解包来自外部源（如网络或文件系统）的数据，并且比使用普通的 [List] 实现更高效地处理大量数值数据。`ByteData` 可以通过消除对象头的需要来节省空间，并通过消除数据复制的需要来节省时间。
 
-If data comes in as bytes, they can be converted to `ByteData` by sharing the same buffer.
+如果数据以字节形式传入，可以通过共享相同的缓冲区将其转换为 `ByteData`。
 
 ```dart
 Uint8List bytes = ...;
@@ -18,7 +18,7 @@ if (blob.getUint32(0, Endian.little) == 0x04034b50) { // Zip file marker
 }
 ```
 
-Finally, `ByteData` may be used to intentionally reinterpret the bytes representing one arithmetic type as another. For example this code fragment determine what 32-bit signed integer is represented by the bytes of a 32-bit floating point number (both stored as big endian):
+最后，`ByteData` 还可用于有意地将表示一种算术类型的字节重新解释为另一种类型。例如，以下代码片段确定一个 32 位浮点数（以大端序存储）的字节所表示的 32 位有符号整数是什么（同样以大端序存储）：
 
 ```dart
 var bdata = ByteData(8);
@@ -26,7 +26,7 @@ bdata.setFloat32(0, 3.04);
 int huh = bdata.getInt32(0); // 0x40428f5c
 ```
 
-It is a compile-time error for a class to attempt to extend or implement `ByteData`.
+类尝试继承或实现 `ByteData` 是编译时错误。
 
 ### ByteData()
 
@@ -34,7 +34,7 @@ It is a compile-time error for a class to attempt to extend or implement `ByteDa
 ByteData(int length)
 ```
 
-Creates a [ByteData] of the specified length (in elements), all of whose bytes are initially zero.
+创建一个指定长度（以元素为单位）的 [ByteData]，其所有字节初始均为零。
 
 ### ByteData.view()
 
@@ -42,25 +42,25 @@ Creates a [ByteData] of the specified length (in elements), all of whose bytes a
 ByteData.view(ByteBuffer buffer, [int offsetInBytes = 0, int? length])
 ```
 
-Creates an [ByteData] _view_ of the specified region in [buffer].
+创建 [buffer] 中指定区域的 [ByteData] _视图_。
 
-Changes in the [ByteData] will be visible in the byte buffer and vice versa. If the [offsetInBytes] index of the region is not specified, it defaults to zero (the first byte in the byte buffer). If the length is not provided, the view extends to the end of the byte buffer.
+对 [ByteData] 的更改将在字节缓冲区中可见，反之亦然。如果未指定该区域的 [offsetInBytes] 索引，则默认为零（字节缓冲区中的第一个字节）。如果未提供长度，则视图将延伸到字节缓冲区的末尾。
 
-The [offsetInBytes] and [length] must be non-negative, and [offsetInBytes] + [length] must be less than or equal to the length of [buffer].
+[offsetInBytes] 和 [length] 必须为非负数，且 [offsetInBytes] + [length] 必须小于或等于 [buffer] 的长度。
 
-Note that when creating a view from a [TypedData] list or byte data, that list or byte data may itself be a view on a larger buffer with a [TypedData.offsetInBytes] greater than zero. Merely doing `ByteData.view(other.buffer, 0, count)` may not point to the bytes you intended. Instead you may need to do:
+请注意，当从 [TypedData] 列表或字节数据创建视图时，该列表或字节数据本身可能是一个更大缓冲区上的视图，其 [TypedData.offsetInBytes] 大于零。仅仅执行 `ByteData.view(other.buffer, 0, count)` 可能不会指向你预期的字节。相反，你可能需要执行：
 
 ```dart
 ByteData.view(other.buffer, other.offsetInBytes, count)
 ```
 
-Alternatively, use [ByteData.sublistView] which includes this computation:
+或者，使用 [ByteData.sublistView]，它包含了这个计算过程：
 
 ```dart
 ByteData.sublistView(other, 0, count);
 ```
 
-(The third argument is an end index rather than a length, so if you start from a position greater than zero, you need not reduce the count correspondingly).
+（第三个参数是结束索引而不是长度，因此如果从大于零的位置开始，则不需要相应地减少计数。）
 
 ### ByteData.sublistView()
 
@@ -68,17 +68,17 @@ ByteData.sublistView(other, 0, count);
 ByteData.sublistView(TypedData data, [int start = 0, int? end])
 ```
 
-Creates a [ByteData] view on a range of elements of [data].
+在 [data] 的元素范围上创建一个 [ByteData] 视图。
 
-Creates a view on the range of `data.buffer` which corresponds to the elements of [data] from [start] until [end]. If [data] is a typed data list, like [Uint16List], then the view is on the bytes of the elements with indices from [start] until [end]. If [data] is a [ByteData], it's treated like a list of bytes.
+在与 [data] 从 [start] 到 [end] 的元素相对应的 `data.buffer` 范围上创建一个视图。如果 [data] 是一个类型化数据列表，如 [Uint16List]，则该视图基于索引从 [start] 到 [end] 的元素所对应的字节。如果 [data] 是一个 [ByteData]，则将其视为字节列表处理。
 
-If provided, [start] and [end] must satisfy
+如果提供了 [start] 和 [end]，它们必须满足
 
 0 &le; `start` &le; `end` &le; _elementCount_
 
-where _elementCount_ is the number of elements in [data], which is the same as the [List.length] of a typed data list.
+其中 _elementCount_ 是 [data] 中的元素个数，对于类型化数据列表，它与 [List.length] 相同。
 
-If omitted, [start] defaults to zero and [end] to _elementCount_.
+如果省略，[start] 默认为零，[end] 默认为 _elementCount_。
 
 ### asUnmodifiableView()
 
@@ -86,7 +86,7 @@ If omitted, [start] defaults to zero and [end] to _elementCount_.
 ByteData asUnmodifiableView()
 ```
 
-A read-only view of this [ByteData].
+此 [ByteData] 的一个只读视图。
 
 ### getInt8()
 
@@ -94,11 +94,11 @@ A read-only view of this [ByteData].
 int getInt8(int byteOffset)
 ```
 
-The (possibly negative) integer represented by the byte at the specified [byteOffset] in this object, in two's complement binary representation.
+此对象中指定 [byteOffset] 处的字节所表示的（可能为负的）整数，采用二进制补码表示。
 
-The return value will be between -128 and 127, inclusive.
+返回值将介于 -128 到 127 之间（包含两端）。
 
-The [byteOffset] must be non-negative, and less than the length of this object.
+[byteOffset] 必须为非负数，且小于此对象的长度。
 
 ### setInt8()
 
@@ -106,11 +106,11 @@ The [byteOffset] must be non-negative, and less than the length of this object.
 void setInt8(int byteOffset, int value)
 ```
 
-Sets the byte at the specified [byteOffset] in this object to the two's complement binary representation of the specified [value], which must fit in a single byte.
+将此对象中指定 [byteOffset] 处的字节设置为指定 [value] 的二进制补码表示，该值必须能放入一个字节中。
 
-In other words, [value] must be between -128 and 127, inclusive.
+换句话说，[value] 必须介于 -128 到 127 之间（包含两端）。
 
-The [byteOffset] must be non-negative, and less than the length of this object.
+[byteOffset] 必须为非负数，且小于此对象的长度。
 
 ### getUint8()
 
@@ -118,11 +118,11 @@ The [byteOffset] must be non-negative, and less than the length of this object.
 int getUint8(int byteOffset)
 ```
 
-The positive integer represented by the byte at the specified [byteOffset] in this object, in unsigned binary form.
+此对象中指定 [byteOffset] 处的字节所表示的正整数，采用无符号二进制形式。
 
-The return value will be between 0 and 255, inclusive.
+返回值将介于 0 到 255 之间（包含两端）。
 
-The [byteOffset] must be non-negative, and less than the length of this object.
+[byteOffset] 必须为非负数，且小于此对象的长度。
 
 ### setUint8()
 
@@ -130,11 +130,11 @@ The [byteOffset] must be non-negative, and less than the length of this object.
 void setUint8(int byteOffset, int value)
 ```
 
-Sets the byte at the specified [byteOffset] in this object to the unsigned binary representation of the specified [value], which must fit in a single byte.
+将此对象中指定 [byteOffset] 处的字节设置为指定 [value] 的无符号二进制表示，该值必须能放入一个字节中。
 
-In other words, [value] must be between 0 and 255, inclusive.
+换句话说，[value] 必须介于 0 到 255 之间（包含两端）。
 
-The [byteOffset] must be non-negative, and less than the length of this object.
+[byteOffset] 必须为非负数，且小于此对象的长度。
 
 ### getInt16()
 
@@ -142,11 +142,11 @@ The [byteOffset] must be non-negative, and less than the length of this object.
 int getInt16(int byteOffset, [Endian endian = Endian.big])
 ```
 
-The (possibly negative) integer represented by the two bytes at the specified [byteOffset] in this object, in two's complement binary form.
+此对象中从指定 [byteOffset] 开始的两个字节所表示的（可能为负的）整数，采用二进制补码形式。
 
-The return value will be between -2<sup>15</sup> and 2<sup>15</sup> - 1, inclusive.
+返回值将介于 -2<sup>15</sup> 到 2<sup>15</sup> - 1 之间（包含两端）。
 
-The [byteOffset] must be non-negative, and `byteOffset + 2` must be less than or equal to the length of this object.
+[byteOffset] 必须为非负数，且 `byteOffset + 2` 必须小于或等于此对象的长度。
 
 ### setInt16()
 
@@ -154,11 +154,11 @@ The [byteOffset] must be non-negative, and `byteOffset + 2` must be less than or
 void setInt16(int byteOffset, int value, [Endian endian = Endian.big])
 ```
 
-Sets the two bytes starting at the specified [byteOffset] in this object to the two's complement binary representation of the specified [value], which must fit in two bytes.
+将此对象中从指定 [byteOffset] 开始的两个字节设置为指定 [value] 的二进制补码表示，该值必须能放入两个字节中。
 
-In other words, [value] must lie between -2<sup>15</sup> and 2<sup>15</sup> - 1, inclusive.
+换句话说，[value] 必须介于 -2<sup>15</sup> 到 2<sup>15</sup> - 1 之间（包含两端）。
 
-The [byteOffset] must be non-negative, and `byteOffset + 2` must be less than or equal to the length of this object.
+[byteOffset] 必须为非负数，且 `byteOffset + 2` 必须小于或等于此对象的长度。
 
 ### getUint16()
 
@@ -166,11 +166,11 @@ The [byteOffset] must be non-negative, and `byteOffset + 2` must be less than or
 int getUint16(int byteOffset, [Endian endian = Endian.big])
 ```
 
-The positive integer represented by the two bytes starting at the specified [byteOffset] in this object, in unsigned binary form.
+此对象中从指定 [byteOffset] 开始的两个字节所表示的正整数，采用无符号二进制形式。
 
-The return value will be between 0 and 2<sup>16</sup> - 1, inclusive.
+返回值将介于 0 到 2<sup>16</sup> - 1 之间（包含两端）。
 
-The [byteOffset] must be non-negative, and `byteOffset + 2` must be less than or equal to the length of this object.
+[byteOffset] 必须为非负数，且 `byteOffset + 2` 必须小于或等于此对象的长度。
 
 ### setUint16()
 
@@ -178,11 +178,11 @@ The [byteOffset] must be non-negative, and `byteOffset + 2` must be less than or
 void setUint16(int byteOffset, int value, [Endian endian = Endian.big])
 ```
 
-Sets the two bytes starting at the specified [byteOffset] in this object to the unsigned binary representation of the specified [value], which must fit in two bytes.
+将此对象中从指定 [byteOffset] 开始的两个字节设置为指定 [value] 的无符号二进制表示。
 
-In other words, [value] must be between 0 and 2<sup>16</sup> - 1, inclusive.
+换句话说，[value] 必须介于 0 到 2<sup>16</sup> - 1 之间（包含两端）。
 
-The [byteOffset] must be non-negative, and `byteOffset + 2` must be less than or equal to the length of this object.
+[byteOffset] 必须为非负数，且 `byteOffset + 2` 必须小于或等于此对象的长度。
 
 ### getInt32()
 
@@ -190,11 +190,11 @@ The [byteOffset] must be non-negative, and `byteOffset + 2` must be less than or
 int getInt32(int byteOffset, [Endian endian = Endian.big])
 ```
 
-The (possibly negative) integer represented by the four bytes at the specified [byteOffset] in this object, in two's complement binary form.
+此对象中从指定 [byteOffset] 开始的四个字节所表示的（可能为负的）整数，采用二进制补码形式。
 
-The return value will be between -2<sup>31</sup> and 2<sup>31</sup> - 1, inclusive.
+返回值将介于 -2<sup>31</sup> 到 2<sup>31</sup> - 1 之间（包含两端）。
 
-The [byteOffset] must be non-negative, and `byteOffset + 4` must be less than or equal to the length of this object.
+[byteOffset] 必须为非负数，且 `byteOffset + 4` 必须小于或等于此对象的长度。
 
 ### setInt32()
 
@@ -202,11 +202,11 @@ The [byteOffset] must be non-negative, and `byteOffset + 4` must be less than or
 void setInt32(int byteOffset, int value, [Endian endian = Endian.big])
 ```
 
-Sets the four bytes starting at the specified [byteOffset] in this object to the two's complement binary representation of the specified [value], which must fit in four bytes.
+将此对象中从指定 [byteOffset] 开始的四个字节设置为指定 [value] 的二进制补码表示，该值必须能放入四个字节中。
 
-In other words, [value] must lie between -2<sup>31</sup> and 2<sup>31</sup> - 1, inclusive.
+换句话说，[value] 必须介于 -2<sup>31</sup> 到 2<sup>31</sup> - 1 之间（包含两端）。
 
-The [byteOffset] must be non-negative, and `byteOffset + 4` must be less than or equal to the length of this object.
+[byteOffset] 必须为非负数，且 `byteOffset + 4` 必须小于或等于此对象的长度。
 
 ### getUint32()
 
@@ -214,11 +214,11 @@ The [byteOffset] must be non-negative, and `byteOffset + 4` must be less than or
 int getUint32(int byteOffset, [Endian endian = Endian.big])
 ```
 
-The positive integer represented by the four bytes starting at the specified [byteOffset] in this object, in unsigned binary form.
+此对象中从指定 [byteOffset] 开始的四个字节所表示的正整数，采用无符号二进制形式。
 
-The return value will be between 0 and 2<sup>32</sup> - 1, inclusive.
+返回值将介于 0 到 2<sup>32</sup> - 1 之间（包含两端）。
 
-The [byteOffset] must be non-negative, and `byteOffset + 4` must be less than or equal to the length of this object.
+[byteOffset] 必须为非负数，且 `byteOffset + 4` 必须小于或等于此对象的长度。
 
 ### setUint32()
 
@@ -226,11 +226,11 @@ The [byteOffset] must be non-negative, and `byteOffset + 4` must be less than or
 void setUint32(int byteOffset, int value, [Endian endian = Endian.big])
 ```
 
-Sets the four bytes starting at the specified [byteOffset] in this object to the unsigned binary representation of the specified [value], which must fit in four bytes.
+将此对象中从指定 [byteOffset] 开始的四个字节设置为指定 [value] 的无符号二进制表示，该值必须能放入四个字节中。
 
-In other words, [value] must be between 0 and 2<sup>32</sup> - 1, inclusive.
+换句话说，[value] 必须介于 0 到 2<sup>32</sup> - 1 之间（包含两端）。
 
-The [byteOffset] must be non-negative, and `byteOffset + 4` must be less than or equal to the length of this object.
+[byteOffset] 必须为非负数，且 `byteOffset + 4` 必须小于或等于此对象的长度。
 
 ### getInt64()
 
@@ -238,11 +238,11 @@ The [byteOffset] must be non-negative, and `byteOffset + 4` must be less than or
 int getInt64(int byteOffset, [Endian endian = Endian.big])
 ```
 
-The (possibly negative) integer represented by the eight bytes at the specified [byteOffset] in this object, in two's complement binary form.
+此对象中从指定 [byteOffset] 开始的八个字节所表示的（可能为负的）整数，采用二进制补码形式。
 
-The return value will be between -2<sup>63</sup> and 2<sup>63</sup> - 1, inclusive.
+返回值将介于 -2<sup>63</sup> 到 2<sup>63</sup> - 1 之间（包含两端）。
 
-The [byteOffset] must be non-negative, and `byteOffset + 8` must be less than or equal to the length of this object.
+[byteOffset] 必须为非负数，且 `byteOffset + 8` 必须小于或等于此对象的长度。
 
 ### setInt64()
 
@@ -250,11 +250,11 @@ The [byteOffset] must be non-negative, and `byteOffset + 8` must be less than or
 void setInt64(int byteOffset, int value, [Endian endian = Endian.big])
 ```
 
-Sets the eight bytes starting at the specified [byteOffset] in this object to the two's complement binary representation of the specified [value], which must fit in eight bytes.
+将此对象中从指定 [byteOffset] 开始的八个字节设置为指定 [value] 的二进制补码表示，该值必须能放入八个字节中。
 
-In other words, [value] must lie between -2<sup>63</sup> and 2<sup>63</sup> - 1, inclusive.
+换句话说，[value] 必须介于 -2<sup>63</sup> 到 2<sup>63</sup> - 1 之间（包含两端）。
 
-The [byteOffset] must be non-negative, and `byteOffset + 8` must be less than or equal to the length of this object.
+[byteOffset] 必须为非负数，且 `byteOffset + 8` 必须小于或等于此对象的长度。
 
 ### getUint64()
 
@@ -262,11 +262,11 @@ The [byteOffset] must be non-negative, and `byteOffset + 8` must be less than or
 int getUint64(int byteOffset, [Endian endian = Endian.big])
 ```
 
-The positive integer represented by the eight bytes starting at the specified [byteOffset] in this object, in unsigned binary form.
+此对象中从指定 [byteOffset] 开始的八个字节所表示的正整数，采用无符号二进制形式。
 
-The return value will be between 0 and 2<sup>64</sup> - 1, inclusive.
+返回值将介于 0 到 2<sup>64</sup> - 1 之间（包含两端）。
 
-The [byteOffset] must be non-negative, and `byteOffset + 8` must be less than or equal to the length of this object.
+[byteOffset] 必须为非负数，且 `byteOffset + 8` 必须小于或等于此对象的长度。
 
 ### setUint64()
 
@@ -274,11 +274,11 @@ The [byteOffset] must be non-negative, and `byteOffset + 8` must be less than or
 void setUint64(int byteOffset, int value, [Endian endian = Endian.big])
 ```
 
-Sets the eight bytes starting at the specified [byteOffset] in this object to the unsigned binary representation of the specified [value], which must fit in eight bytes.
+将此对象中从指定 [byteOffset] 开始的八个字节设置为指定 [value] 的无符号二进制表示，该值必须能放入八个字节中。
 
-In other words, [value] must be between 0 and 2<sup>64</sup> - 1, inclusive.
+换句话说，[value] 必须介于 0 到 2<sup>64</sup> - 1 之间（包含两端）。
 
-The [byteOffset] must be non-negative, and `byteOffset + 8` must be less than or equal to the length of this object.
+[byteOffset] 必须为非负数，且 `byteOffset + 8` 必须小于或等于此对象的长度。
 
 ### getFloat32()
 
@@ -286,9 +286,9 @@ The [byteOffset] must be non-negative, and `byteOffset + 8` must be less than or
 double getFloat32(int byteOffset, [Endian endian = Endian.big])
 ```
 
-The floating point number represented by the four bytes at the specified [byteOffset] in this object, in IEEE 754 single-precision binary floating-point format (binary32).
+此对象中指定 [byteOffset] 处的四个字节所表示的浮点数，采用 IEEE 754 单精度二进制浮点格式（binary32）。
 
-The [byteOffset] must be non-negative, and `byteOffset + 4` must be less than or equal to the length of this object.
+[byteOffset] 必须为非负数，且 `byteOffset + 4` 必须小于或等于此对象的长度。
 
 ### setFloat32()
 
@@ -296,11 +296,11 @@ The [byteOffset] must be non-negative, and `byteOffset + 4` must be less than or
 void setFloat32(int byteOffset, double value, [Endian endian = Endian.big])
 ```
 
-Sets the four bytes starting at the specified [byteOffset] in this object to the IEEE 754 single-precision binary floating-point (binary32) representation of the specified [value].
+将此对象中从指定 [byteOffset] 开始的四个字节设置为指定 [value] 的 IEEE 754 单精度二进制浮点（binary32）表示。
 
-**Note that this method can lose precision.** The input [value] is a 64-bit floating point value, which will be converted to 32-bit floating point value by IEEE 754 rounding rules before it is stored. If [value] cannot be represented exactly as a binary32, it will be converted to the nearest binary32 value. If two binary32 values are equally close, the one whose least significant bit is zero will be used. Note that finite (but large) values can be converted to infinity, and small non-zero values can be converted to zero.
+**请注意，此方法可能会丢失精度。** 输入的 [value] 是一个 64 位浮点值，在存储之前将根据 IEEE 754 舍入规则转换为 32 位浮点值。如果 [value] 不能精确地表示为 binary32，它将被转换为最接近的 binary32 值。如果两个 binary32 值同样接近，则使用最低有效位为零的那个。请注意，有限（但很大）的值可能会被转换为无穷大，而较小的非零值可能会被转换为零。
 
-The [byteOffset] must be non-negative, and `byteOffset + 4` must be less than or equal to the length of this object.
+[byteOffset] 必须为非负数，且 `byteOffset + 4` 必须小于或等于此对象的长度。
 
 ### getFloat64()
 
@@ -308,9 +308,9 @@ The [byteOffset] must be non-negative, and `byteOffset + 4` must be less than or
 double getFloat64(int byteOffset, [Endian endian = Endian.big])
 ```
 
-The floating point number represented by the eight bytes at the specified [byteOffset] in this object, in IEEE 754 double-precision binary floating-point format (binary64).
+此对象中指定 [byteOffset] 处的八个字节所表示的浮点数，采用 IEEE 754 双精度二进制浮点格式（binary64）。
 
-The [byteOffset] must be non-negative, and `byteOffset + 8` must be less than or equal to the length of this object.
+[byteOffset] 必须为非负数，且 `byteOffset + 8` 必须小于或等于此对象的长度。
 
 ### setFloat64()
 
@@ -318,6 +318,6 @@ The [byteOffset] must be non-negative, and `byteOffset + 8` must be less than or
 void setFloat64(int byteOffset, double value, [Endian endian = Endian.big])
 ```
 
-Sets the eight bytes starting at the specified [byteOffset] in this object to the IEEE 754 double-precision binary floating-point (binary64) representation of the specified [value].
+将此对象中从指定 [byteOffset] 开始的八个字节设置为指定 [value] 的 IEEE 754 双精度二进制浮点（binary64）表示。
 
-The [byteOffset] must be non-negative, and `byteOffset + 8` must be less than or equal to the length of this object.
+[byteOffset] 必须为非负数，且 `byteOffset + 8` 必须小于或等于此对象的长度。

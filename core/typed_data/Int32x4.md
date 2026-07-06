@@ -4,9 +4,9 @@
 abstract final class Int32x4 {}
 ```
 
-Int32x4 and operations.
+Int32x4 及其操作。
 
-Int32x4 stores 4 32-bit bit-masks in "lanes". The lanes are "x", "y", "z", and "w" respectively.
+Int32x4 在“通道（lane）”中存储 4 个 32 位位掩码。这些通道分别为 "x"、"y"、"z" 和 "w"。
 
 ### Int32x4()
 
@@ -32,7 +32,7 @@ Int32x4.fromFloat32x4Bits(Float32x4 x)
 Int32x4 operator |(Int32x4 other)
 ```
 
-The bit-wise or operator.
+按位或运算符。
 
 ### operator &()
 
@@ -40,7 +40,7 @@ The bit-wise or operator.
 Int32x4 operator &(Int32x4 other)
 ```
 
-The bit-wise and operator.
+按位与运算符。
 
 ### operator ^()
 
@@ -48,7 +48,7 @@ The bit-wise and operator.
 Int32x4 operator ^(Int32x4 other)
 ```
 
-The bit-wise xor operator.
+按位异或运算符。
 
 ### operator +()
 
@@ -56,7 +56,7 @@ The bit-wise xor operator.
 Int32x4 operator +(Int32x4 other)
 ```
 
-Addition operator.
+加法运算符。
 
 ### operator -()
 
@@ -64,7 +64,7 @@ Addition operator.
 Int32x4 operator -(Int32x4 other)
 ```
 
-Subtraction operator.
+减法运算符。
 
 ### x
 
@@ -72,7 +72,7 @@ Subtraction operator.
 int get x
 ```
 
-Extract 32-bit mask from x lane.
+从 x 通道提取 32 位掩码。
 
 ### y
 
@@ -80,7 +80,7 @@ Extract 32-bit mask from x lane.
 int get y
 ```
 
-Extract 32-bit mask from y lane.
+从 y 通道提取 32 位掩码。
 
 ### z
 
@@ -88,7 +88,7 @@ Extract 32-bit mask from y lane.
 int get z
 ```
 
-Extract 32-bit mask from z lane.
+从 z 通道提取 32 位掩码。
 
 ### w
 
@@ -96,7 +96,7 @@ Extract 32-bit mask from z lane.
 int get w
 ```
 
-Extract 32-bit mask from w lane.
+从 w 通道提取 32 位掩码。
 
 ### signMask
 
@@ -104,7 +104,7 @@ Extract 32-bit mask from w lane.
 int get signMask
 ```
 
-Extract the top bit from each lane return them in the first 4 bits. "x" lane is bit 0. "y" lane is bit 1. "z" lane is bit 2. "w" lane is bit 3.
+从每个通道提取最高位，并将它们放入前 4 位中返回。"x" 通道为第 0 位。"y" 通道为第 1 位。"z" 通道为第 2 位。"w" 通道为第 3 位。
 
 ### xxxx
 
@@ -112,7 +112,7 @@ Extract the top bit from each lane return them in the first 4 bits. "x" lane is 
 int xxxx
 ```
 
-Mask passed to [shuffle] or [shuffleMix].
+传递给 [shuffle] 或 [shuffleMix] 的掩码。
 
 ### shuffle()
 
@@ -120,7 +120,7 @@ Mask passed to [shuffle] or [shuffleMix].
 Int32x4 shuffle(int mask)
 ```
 
-Shuffle the lane values. [mask] must be one of the 256 shuffle constants.
+对通道值进行重排（shuffle）。[mask] 必须是 256 个重排常量之一。
 
 ### shuffleMix()
 
@@ -128,7 +128,7 @@ Shuffle the lane values. [mask] must be one of the 256 shuffle constants.
 Int32x4 shuffleMix(Int32x4 other, int mask)
 ```
 
-Shuffle the lane values in this [Int32x4] and [other]. The returned Int32x4 will have XY lanes from this [Int32x4] and ZW lanes from [other]. Uses the same [mask] as [shuffle].
+对此 [Int32x4] 和 [other] 中的通道值进行重排。返回的 Int32x4 的 XY 通道来自此 [Int32x4]，ZW 通道来自 [other]。使用与 [shuffle] 相同的 [mask]。
 
 ### withX()
 
@@ -136,7 +136,7 @@ Shuffle the lane values in this [Int32x4] and [other]. The returned Int32x4 will
 Int32x4 withX(int x)
 ```
 
-Returns a new [Int32x4] copied from this [Int32x4] with a new x value.
+返回一个从此 [Int32x4] 复制而来、具有新 x 值的新 [Int32x4]。
 
 ### withY()
 
@@ -144,7 +144,7 @@ Returns a new [Int32x4] copied from this [Int32x4] with a new x value.
 Int32x4 withY(int y)
 ```
 
-Returns a new [Int32x4] copied from this [Int32x4] with a new y value.
+返回一个从此 [Int32x4] 复制而来、具有新 y 值的新 [Int32x4]。
 
 ### withZ()
 
@@ -152,7 +152,7 @@ Returns a new [Int32x4] copied from this [Int32x4] with a new y value.
 Int32x4 withZ(int z)
 ```
 
-Returns a new [Int32x4] copied from this [Int32x4] with a new z value.
+返回一个从此 [Int32x4] 复制而来、具有新 z 值的新 [Int32x4]。
 
 ### withW()
 
@@ -160,7 +160,7 @@ Returns a new [Int32x4] copied from this [Int32x4] with a new z value.
 Int32x4 withW(int w)
 ```
 
-Returns a new [Int32x4] copied from this [Int32x4] with a new w value.
+返回一个从此 [Int32x4] 复制而来、具有新 w 值的新 [Int32x4]。
 
 ### flagX
 
@@ -168,7 +168,7 @@ Returns a new [Int32x4] copied from this [Int32x4] with a new w value.
 bool get flagX
 ```
 
-Extracted x value. Returns false for 0, true for any other value.
+提取的 x 值。0 返回 false，其他任何值返回 true。
 
 ### flagY
 
@@ -176,7 +176,7 @@ Extracted x value. Returns false for 0, true for any other value.
 bool get flagY
 ```
 
-Extracted y value. Returns false for 0, true for any other value.
+提取的 y 值。0 返回 false，其他任何值返回 true。
 
 ### flagZ
 
@@ -184,7 +184,7 @@ Extracted y value. Returns false for 0, true for any other value.
 bool get flagZ
 ```
 
-Extracted z value. Returns false for 0, true for any other value.
+提取的 z 值。0 返回 false，其他任何值返回 true。
 
 ### flagW
 
@@ -192,7 +192,7 @@ Extracted z value. Returns false for 0, true for any other value.
 bool get flagW
 ```
 
-Extracted w value. Returns false for 0, true for any other value.
+提取的 w 值。0 返回 false，其他任何值返回 true。
 
 ### withFlagX()
 
@@ -200,7 +200,7 @@ Extracted w value. Returns false for 0, true for any other value.
 Int32x4 withFlagX(bool x)
 ```
 
-Returns a new [Int32x4] copied from this [Int32x4] with a new x value.
+返回一个从此 [Int32x4] 复制而来、具有新 x 值的新 [Int32x4]。
 
 ### withFlagY()
 
@@ -208,7 +208,7 @@ Returns a new [Int32x4] copied from this [Int32x4] with a new x value.
 Int32x4 withFlagY(bool y)
 ```
 
-Returns a new [Int32x4] copied from this [Int32x4] with a new y value.
+返回一个从此 [Int32x4] 复制而来、具有新 y 值的新 [Int32x4]。
 
 ### withFlagZ()
 
@@ -216,7 +216,7 @@ Returns a new [Int32x4] copied from this [Int32x4] with a new y value.
 Int32x4 withFlagZ(bool z)
 ```
 
-Returns a new [Int32x4] copied from this [Int32x4] with a new z value.
+返回一个从此 [Int32x4] 复制而来、具有新 z 值的新 [Int32x4]。
 
 ### withFlagW()
 
@@ -224,7 +224,7 @@ Returns a new [Int32x4] copied from this [Int32x4] with a new z value.
 Int32x4 withFlagW(bool w)
 ```
 
-Returns a new [Int32x4] copied from this [Int32x4] with a new w value.
+返回一个从此 [Int32x4] 复制而来、具有新 w 值的新 [Int32x4]。
 
 ### select()
 
@@ -232,4 +232,4 @@ Returns a new [Int32x4] copied from this [Int32x4] with a new w value.
 Float32x4 select(Float32x4 trueValue, Float32x4 falseValue)
 ```
 
-Merge [trueValue] and [falseValue] based on this [Int32x4] bit mask: Select bit from [trueValue] when bit in this [Int32x4] is on. Select bit from [falseValue] when bit in this [Int32x4] is off.
+根据此 [Int32x4] 位掩码合并 [trueValue] 和 [falseValue]：当此 [Int32x4] 中的位为开启状态时，选择 [trueValue] 中的位；当此 [Int32x4] 中的位为关闭状态时，选择 [falseValue] 中的位。

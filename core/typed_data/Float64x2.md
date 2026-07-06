@@ -4,11 +4,11 @@
 abstract final class Float64x2 {}
 ```
 
-Float64x2 immutable value type and operations.
+Float64x2 不可变值类型及其操作。
 
-Float64x2 stores 2 64-bit floating point values in "lanes". The lanes are "x" and "y" respectively.
+Float64x2 在“通道（lane）”中存储 2 个 64 位浮点值。这些通道分别为 "x" 和 "y"。
 
-It is a compile-time error for a class to attempt to extend or implement `Float64x2`.
+类尝试继承或实现 `Float64x2` 是编译时错误。
 
 ### Float64x2()
 
@@ -34,7 +34,7 @@ Float64x2.zero()
 Float64x2.fromFloat32x4(Float32x4 v)
 ```
 
-Uses the "x" and "y" lanes from [v].
+使用 [v] 中的 "x" 和 "y" 通道。
 
 ### operator +()
 
@@ -42,7 +42,7 @@ Uses the "x" and "y" lanes from [v].
 Float64x2 operator +(Float64x2 other)
 ```
 
-Addition operator.
+加法运算符。
 
 ### operator -()
 
@@ -50,7 +50,7 @@ Addition operator.
 Float64x2 operator -()
 ```
 
-Negate operator.
+取负运算符。
 
 ### operator -()
 
@@ -58,7 +58,7 @@ Negate operator.
 Float64x2 operator -(Float64x2 other)
 ```
 
-Subtraction operator.
+减法运算符。
 
 ### operator \*()
 
@@ -66,7 +66,7 @@ Subtraction operator.
 Float64x2 operator *(Float64x2 other)
 ```
 
-Multiplication operator.
+乘法运算符。
 
 ### operator /()
 
@@ -74,7 +74,7 @@ Multiplication operator.
 Float64x2 operator /(Float64x2 other)
 ```
 
-Division operator.
+除法运算符。
 
 ### scale()
 
@@ -82,7 +82,7 @@ Division operator.
 Float64x2 scale(double s)
 ```
 
-Returns a copy of this [Float64x2] each lane being scaled by [s]. Equivalent to this \* new Float64x2.splat(s)
+返回此 [Float64x2] 的一个副本，其中每个通道都按 [s] 缩放。等价于 this \* new Float64x2.splat(s)
 
 ### abs()
 
@@ -90,7 +90,7 @@ Returns a copy of this [Float64x2] each lane being scaled by [s]. Equivalent to 
 Float64x2 abs()
 ```
 
-The lane-wise absolute value of this [Float64x2].
+此 [Float64x2] 按通道计算的绝对值。
 
 ### clamp()
 
@@ -98,7 +98,7 @@ The lane-wise absolute value of this [Float64x2].
 Float64x2 clamp(Float64x2 lowerLimit, Float64x2 upperLimit)
 ```
 
-Lane-wise clamp this [Float64x2] to be in the range [lowerLimit]-[upperLimit].
+按通道将此 [Float64x2] 限制在 [lowerLimit]-[upperLimit] 范围内。
 
 ### x
 
@@ -106,7 +106,7 @@ Lane-wise clamp this [Float64x2] to be in the range [lowerLimit]-[upperLimit].
 double get x
 ```
 
-Extracted x value.
+提取的 x 值。
 
 ### y
 
@@ -114,7 +114,7 @@ Extracted x value.
 double get y
 ```
 
-Extracted y value.
+提取的 y 值。
 
 ### signMask
 
@@ -122,7 +122,7 @@ Extracted y value.
 int get signMask
 ```
 
-Extract the sign bits from each lane return them in the first 2 bits. "x" lane is bit 0. "y" lane is bit 1.
+从每个通道提取符号位，并将它们放入前 2 位中返回。"x" 通道为第 0 位。"y" 通道为第 1 位。
 
 ### withX()
 
@@ -130,7 +130,7 @@ Extract the sign bits from each lane return them in the first 2 bits. "x" lane i
 Float64x2 withX(double x)
 ```
 
-Returns a new [Float64x2] copied from this [Float64x2] with a new x value.
+返回一个从此 [Float64x2] 复制而来、具有新 x 值的新 [Float64x2]。
 
 ### withY()
 
@@ -138,7 +138,7 @@ Returns a new [Float64x2] copied from this [Float64x2] with a new x value.
 Float64x2 withY(double y)
 ```
 
-Returns a new [Float64x2] copied from this [Float64x2] with a new y value.
+返回一个从此 [Float64x2] 复制而来、具有新 y 值的新 [Float64x2]。
 
 ### min()
 
@@ -146,7 +146,7 @@ Returns a new [Float64x2] copied from this [Float64x2] with a new y value.
 Float64x2 min(Float64x2 other)
 ```
 
-The lane-wise minimum value in this [Float64x2] or [other].
+此 [Float64x2] 与 [other] 中按通道的最小值。
 
 ### max()
 
@@ -154,7 +154,7 @@ The lane-wise minimum value in this [Float64x2] or [other].
 Float64x2 max(Float64x2 other)
 ```
 
-The lane-wise maximum value in this [Float64x2] or [other].
+此 [Float64x2] 与 [other] 中按通道的最大值。
 
 ### sqrt()
 
@@ -162,4 +162,4 @@ The lane-wise maximum value in this [Float64x2] or [other].
 Float64x2 sqrt()
 ```
 
-The lane-wise square root of this [Float64x2].
+此 [Float64x2] 按通道计算的平方根。

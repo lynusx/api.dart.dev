@@ -4,11 +4,11 @@
 abstract final class ByteBuffer {}
 ```
 
-A sequence of bytes underlying a typed data object.
+一个底层字节序列，是类型化数据对象的基础。
 
-Used to process large quantities of binary or numerical data more efficiently using a typed view.
+用于通过类型化视图更高效地处理大量二进制或数值数据。
 
-It is a compile-time error for a class to attempt to extend or implement `ByteBuffer`.
+类尝试继承或实现 `ByteBuffer` 是编译时错误。
 
 ### lengthInBytes
 
@@ -16,7 +16,7 @@ It is a compile-time error for a class to attempt to extend or implement `ByteBu
 int get lengthInBytes
 ```
 
-The length of this byte buffer, in bytes.
+此字节缓冲区的长度（以字节为单位）。
 
 ### asUint8List()
 
@@ -24,17 +24,17 @@ The length of this byte buffer, in bytes.
 Uint8List asUint8List([int offsetInBytes = 0, int? length])
 ```
 
-Creates a [Uint8List] _view_ of a region of this byte buffer.
+创建此字节缓冲区某个区域的 [Uint8List] _视图_。
 
-The view is backed by the bytes of this byte buffer. Any changes made to the `Uint8List` will also change the buffer, and vice versa.
+该视图由此字节缓冲区的字节支持。对 `Uint8List` 所做的任何更改也会更改缓冲区，反之亦然。
 
-The viewed region start at [offsetInBytes] and contains [length] bytes. If [length] is omitted, the range extends to the end of the buffer.
+被查看的区域从 [offsetInBytes] 开始，包含 [length] 个字节。如果省略 [length]，范围将延伸到缓冲区末尾。
 
-The start index and length must describe a valid range of the buffer:
+起始索引和长度必须描述缓冲区的一个有效范围：
 
-- `offsetInBytes` must not be negative,
-- `length` must not be negative, and
-- `offsetInBytes + length` must not be greater than [lengthInBytes].
+- `offsetInBytes` 不能为负数，
+- `length` 不能为负数，且
+- `offsetInBytes + length` 不能大于 [lengthInBytes]。
 
 ### asInt8List()
 
@@ -42,17 +42,17 @@ The start index and length must describe a valid range of the buffer:
 Int8List asInt8List([int offsetInBytes = 0, int? length])
 ```
 
-Creates a [Int8List] _view_ of a region of this byte buffer.
+创建此字节缓冲区某个区域的 [Int8List] _视图_。
 
-The view is backed by the bytes of this byte buffer. Any changes made to the `Int8List` will also change the buffer, and vice versa.
+该视图由此字节缓冲区的字节支持。对 `Int8List` 所做的任何更改也会更改缓冲区，反之亦然。
 
-The viewed region start at [offsetInBytes] and contains [length] bytes. If [length] is omitted, the range extends to the end of the buffer.
+被查看的区域从 [offsetInBytes] 开始，包含 [length] 个字节。如果省略 [length]，范围将延伸到缓冲区末尾。
 
-The start index and length must describe a valid range of the buffer:
+起始索引和长度必须描述缓冲区的一个有效范围：
 
-- `offsetInBytes` must not be negative,
-- `length` must not be negative, and
-- `offsetInBytes + length` must not be greater than [lengthInBytes].
+- `offsetInBytes` 不能为负数，
+- `length` 不能为负数，且
+- `offsetInBytes + length` 不能大于 [lengthInBytes]。
 
 ### asUint8ClampedList()
 
@@ -60,17 +60,17 @@ The start index and length must describe a valid range of the buffer:
 Uint8ClampedList asUint8ClampedList([int offsetInBytes = 0, int? length])
 ```
 
-Creates a [Uint8ClampedList] _view_ of a region of this byte buffer.
+创建此字节缓冲区某个区域的 [Uint8ClampedList] _视图_。
 
-The view is backed by the bytes of this byte buffer. Any changes made to the `Uint8ClampedList` will also change the buffer, and vice versa.
+该视图由此字节缓冲区的字节支持。对 `Uint8ClampedList` 所做的任何更改也会更改缓冲区，反之亦然。
 
-The viewed region start at [offsetInBytes] and contains [length] bytes. If [length] is omitted, the range extends to the end of the buffer.
+被查看的区域从 [offsetInBytes] 开始，包含 [length] 个字节。如果省略 [length]，范围将延伸到缓冲区末尾。
 
-The start index and length must describe a valid range of the buffer:
+起始索引和长度必须描述缓冲区的一个有效范围：
 
-- `offsetInBytes` must not be negative,
-- `length` must not be negative, and
-- `offsetInBytes + length` must not be greater than [lengthInBytes].
+- `offsetInBytes` 不能为负数，
+- `length` 不能为负数，且
+- `offsetInBytes + length` 不能大于 [lengthInBytes]。
 
 ### asUint16List()
 
@@ -78,18 +78,18 @@ The start index and length must describe a valid range of the buffer:
 Uint16List asUint16List([int offsetInBytes = 0, int? length])
 ```
 
-Creates a [Uint16List] _view_ of a region of this byte buffer.
+创建此字节缓冲区某个区域的 [Uint16List] _视图_。
 
-The view is backed by the bytes of this byte buffer. Any changes made to the `Uint16List` will also change the buffer, and vice versa.
+该视图由此字节缓冲区的字节支持。对 `Uint16List` 所做的任何更改也会更改缓冲区，反之亦然。
 
-The viewed region start at [offsetInBytes], which must be 16-bit aligned, and contains [length] 16-bit integers with the same endianness as the host ([Endian.host]). If [length] is omitted, the range extends as far towards the end of the buffer as possible - if [lengthInBytes] is not even, the last byte can't be part of the view.
+被查看的区域从 [offsetInBytes]（必须为 16 位对齐）开始，包含 [length] 个与主机字节序（[Endian.host]）相同的 16 位整数。如果省略 [length]，范围将尽可能向缓冲区末尾延伸——如果 [lengthInBytes] 不是偶数，则最后一个字节不能作为视图的一部分。
 
-The start index and length must describe a valid 16-bit aligned range of the buffer:
+起始索引和长度必须描述缓冲区的一个有效的 16 位对齐范围：
 
-- `offsetInBytes` must not be negative,
-- `offsetInBytes` must be divisible by two,
-- `length` must not be negative, and
-- `offsetInBytes + length * 2` must not be greater than [lengthInBytes].
+- `offsetInBytes` 不能为负数，
+- `offsetInBytes` 必须能被 2 整除，
+- `length` 不能为负数，且
+- `offsetInBytes + length * 2` 不能大于 [lengthInBytes]。
 
 ### asInt16List()
 
@@ -97,18 +97,18 @@ The start index and length must describe a valid 16-bit aligned range of the buf
 Int16List asInt16List([int offsetInBytes = 0, int? length])
 ```
 
-Creates a [Int16List] _view_ of a region of this byte buffer.
+创建此字节缓冲区某个区域的 [Int16List] _视图_。
 
-The view is backed by the bytes of this byte buffer. Any changes made to the `Int16List` will also change the buffer, and vice versa.
+该视图由此字节缓冲区的字节支持。对 `Int16List` 所做的任何更改也会更改缓冲区，反之亦然。
 
-The viewed region start at [offsetInBytes], which must be 16-bit aligned, and contains [length] 16-bit integers with the same endianness as the host ([Endian.host]). If [length] is omitted, the range extends as far towards the end of the buffer as possible - if [lengthInBytes] is not even, the last byte can't be part of the view.
+被查看的区域从 [offsetInBytes]（必须为 16 位对齐）开始，包含 [length] 个与主机字节序（[Endian.host]）相同的 16 位整数。如果省略 [length]，范围将尽可能向缓冲区末尾延伸——如果 [lengthInBytes] 不是偶数，则最后一个字节不能作为视图的一部分。
 
-The start index and length must describe a valid 16-bit aligned range of the buffer:
+起始索引和长度必须描述缓冲区的一个有效的 16 位对齐范围：
 
-- `offsetInBytes` must not be negative,
-- `offsetInBytes` must be divisible by two,
-- `length` must not be negative, and
-- `offsetInBytes + length * 2` must not be greater than [lengthInBytes].
+- `offsetInBytes` 不能为负数，
+- `offsetInBytes` 必须能被 2 整除，
+- `length` 不能为负数，且
+- `offsetInBytes + length * 2` 不能大于 [lengthInBytes]。
 
 ### asUint32List()
 
@@ -116,18 +116,18 @@ The start index and length must describe a valid 16-bit aligned range of the buf
 Uint32List asUint32List([int offsetInBytes = 0, int? length])
 ```
 
-Creates a [Uint32List] _view_ of a region of this byte buffer.
+创建此字节缓冲区某个区域的 [Uint32List] _视图_。
 
-The view is backed by the bytes of this byte buffer. Any changes made to the `Uint32List` will also change the buffer, and vice versa.
+该视图由此字节缓冲区的字节支持。对 `Uint32List` 所做的任何更改也会更改缓冲区，反之亦然。
 
-The viewed region start at [offsetInBytes], which must be 32-bit aligned, and contains [length] 32-bit integers with the same endianness as the host ([Endian.host]). If [length] is omitted, the range extends as far towards the end of the buffer as possible - if [lengthInBytes] is not divisible by four, the last bytes can't be part of the view.
+被查看的区域从 [offsetInBytes]（必须为 32 位对齐）开始，包含 [length] 个与主机字节序（[Endian.host]）相同的 32 位整数。如果省略 [length]，范围将尽可能向缓冲区末尾延伸——如果 [lengthInBytes] 不能被 4 整除，则最后几个字节不能作为视图的一部分。
 
-The start index and length must describe a valid 32-bit aligned range of the buffer:
+起始索引和长度必须描述缓冲区的一个有效的 32 位对齐范围：
 
-- `offsetInBytes` must not be negative,
-- `offsetInBytes` must be divisible by four,
-- `length` must not be negative, and
-- `offsetInBytes + length * 4` must not be greater than [lengthInBytes].
+- `offsetInBytes` 不能为负数，
+- `offsetInBytes` 必须能被 4 整除，
+- `length` 不能为负数，且
+- `offsetInBytes + length * 4` 不能大于 [lengthInBytes]。
 
 ### asInt32List()
 
@@ -135,18 +135,18 @@ The start index and length must describe a valid 32-bit aligned range of the buf
 Int32List asInt32List([int offsetInBytes = 0, int? length])
 ```
 
-Creates a [Int32List] _view_ of a region of this byte buffer.
+创建此字节缓冲区某个区域的 [Int32List] _视图_。
 
-The view is backed by the bytes of this byte buffer. Any changes made to the `Int32List` will also change the buffer, and vice versa.
+该视图由此字节缓冲区的字节支持。对 `Int32List` 所做的任何更改也会更改缓冲区，反之亦然。
 
-The viewed region start at [offsetInBytes], which must be 32-bit aligned, and contains [length] 32-bit integers with the same endianness as the host ([Endian.host]). If [length] is omitted, the range extends as far towards the end of the buffer as possible - if [lengthInBytes] is not divisible by four, the last bytes can't be part of the view.
+被查看的区域从 [offsetInBytes]（必须为 32 位对齐）开始，包含 [length] 个与主机字节序（[Endian.host]）相同的 32 位整数。如果省略 [length]，范围将尽可能向缓冲区末尾延伸——如果 [lengthInBytes] 不能被 4 整除，则最后几个字节不能作为视图的一部分。
 
-The start index and length must describe a valid 32-bit aligned range of the buffer:
+起始索引和长度必须描述缓冲区的一个有效的 32 位对齐范围：
 
-- `offsetInBytes` must not be negative,
-- `offsetInBytes` must be divisible by four,
-- `length` must not be negative, and
-- `offsetInBytes + length * 4` must not be greater than [lengthInBytes].
+- `offsetInBytes` 不能为负数，
+- `offsetInBytes` 必须能被 4 整除，
+- `length` 不能为负数，且
+- `offsetInBytes + length * 4` 不能大于 [lengthInBytes]。
 
 ### asUint64List()
 
@@ -154,18 +154,18 @@ The start index and length must describe a valid 32-bit aligned range of the buf
 Uint64List asUint64List([int offsetInBytes = 0, int? length])
 ```
 
-Creates a [Uint64List] _view_ of a region of this byte buffer.
+创建此字节缓冲区某个区域的 [Uint64List] _视图_。
 
-The view is backed by the bytes of this byte buffer. Any changes made to the `Uint64List` will also change the buffer, and vice versa.
+该视图由此字节缓冲区的字节支持。对 `Uint64List` 所做的任何更改也会更改缓冲区，反之亦然。
 
-The viewed region start at [offsetInBytes], which must be 64-bit aligned, and contains [length] 64-bit integers with the same endianness as the host ([Endian.host]). If [length] is omitted, the range extends as far towards the end of the buffer as possible - if [lengthInBytes] is not divisible by eight, the last bytes can't be part of the view.
+被查看的区域从 [offsetInBytes]（必须为 64 位对齐）开始，包含 [length] 个与主机字节序（[Endian.host]）相同的 64 位整数。如果省略 [length]，范围将尽可能向缓冲区末尾延伸——如果 [lengthInBytes] 不能被 8 整除，则最后几个字节不能作为视图的一部分。
 
-The start index and length must describe a valid 64-bit aligned range of the buffer:
+起始索引和长度必须描述缓冲区的一个有效的 64 位对齐范围：
 
-- `offsetInBytes` must not be negative,
-- `offsetInBytes` must be divisible by eight,
-- `length` must not be negative, and
-- `offsetInBytes + length * 8` must not be greater than [lengthInBytes].
+- `offsetInBytes` 不能为负数，
+- `offsetInBytes` 必须能被 8 整除，
+- `length` 不能为负数，且
+- `offsetInBytes + length * 8` 不能大于 [lengthInBytes]。
 
 ### asInt64List()
 
@@ -173,18 +173,18 @@ The start index and length must describe a valid 64-bit aligned range of the buf
 Int64List asInt64List([int offsetInBytes = 0, int? length])
 ```
 
-Creates a [Int64List] _view_ of a region of this byte buffer.
+创建此字节缓冲区某个区域的 [Int64List] _视图_。
 
-The view is backed by the bytes of this byte buffer. Any changes made to the `Int64List` will also change the buffer, and vice versa.
+该视图由此字节缓冲区的字节支持。对 `Int64List` 所做的任何更改也会更改缓冲区，反之亦然。
 
-The viewed region start at [offsetInBytes], which must be 64-bit aligned, and contains [length] 64-bit integers with the same endianness as the host ([Endian.host]). If [length] is omitted, the range extends as far towards the end of the buffer as possible - if [lengthInBytes] is not divisible by eight, the last bytes can't be part of the view.
+被查看的区域从 [offsetInBytes]（必须为 64 位对齐）开始，包含 [length] 个与主机字节序（[Endian.host]）相同的 64 位整数。如果省略 [length]，范围将尽可能向缓冲区末尾延伸——如果 [lengthInBytes] 不能被 8 整除，则最后几个字节不能作为视图的一部分。
 
-The start index and length must describe a valid 64-bit aligned range of the buffer:
+起始索引和长度必须描述缓冲区的一个有效的 64 位对齐范围：
 
-- `offsetInBytes` must not be negative,
-- `offsetInBytes` must be divisible by eight,
-- `length` must not be negative, and
-- `offsetInBytes + length * 8` must not be greater than [lengthInBytes].
+- `offsetInBytes` 不能为负数，
+- `offsetInBytes` 必须能被 8 整除，
+- `length` 不能为负数，且
+- `offsetInBytes + length * 8` 不能大于 [lengthInBytes]。
 
 ### asInt32x4List()
 
@@ -192,18 +192,18 @@ The start index and length must describe a valid 64-bit aligned range of the buf
 Int32x4List asInt32x4List([int offsetInBytes = 0, int? length])
 ```
 
-Creates a [Int32x4List] _view_ of a region of this byte buffer.
+创建此字节缓冲区某个区域的 [Int32x4List] _视图_。
 
-The view is backed by the bytes of this byte buffer. Any changes made to the `Int32x4List` will also change the buffer, and vice versa.
+该视图由此字节缓冲区的字节支持。对 `Int32x4List` 所做的任何更改也会更改缓冲区，反之亦然。
 
-The viewed region start at [offsetInBytes], which must be 128-bit aligned, and contains [length] 128-bit integers. If [length] is omitted, the range extends as far towards the end of the buffer as possible - if [lengthInBytes] is not divisible by 16, the last bytes can't be part of the view.
+被查看的区域从 [offsetInBytes]（必须为 128 位对齐）开始，包含 [length] 个 128 位整数。如果省略 [length]，范围将尽可能向缓冲区末尾延伸——如果 [lengthInBytes] 不能被 16 整除，则最后几个字节不能作为视图的一部分。
 
-The start index and length must describe a valid 128-bit aligned range of the buffer:
+起始索引和长度必须描述缓冲区的一个有效的 128 位对齐范围：
 
-- `offsetInBytes` must not be negative,
-- `offsetInBytes` must be divisible by sixteen,
-- `length` must not be negative, and
-- `offsetInBytes + length * 16` must not be greater than [lengthInBytes].
+- `offsetInBytes` 不能为负数，
+- `offsetInBytes` 必须能被 16 整除，
+- `length` 不能为负数，且
+- `offsetInBytes + length * 16` 不能大于 [lengthInBytes]。
 
 ### asFloat32List()
 
@@ -211,18 +211,18 @@ The start index and length must describe a valid 128-bit aligned range of the bu
 Float32List asFloat32List([int offsetInBytes = 0, int? length])
 ```
 
-Creates a [Float32List] _view_ of a region of this byte buffer.
+创建此字节缓冲区某个区域的 [Float32List] _视图_。
 
-The view is backed by the bytes of this byte buffer. Any changes made to the `Float32List` will also change the buffer, and vice versa.
+该视图由此字节缓冲区的字节支持。对 `Float32List` 所做的任何更改也会更改缓冲区，反之亦然。
 
-The viewed region start at [offsetInBytes], which must be 32-bit aligned, and contains [length] 32-bit integers. If [length] is omitted, the range extends as far towards the end of the buffer as possible - if [lengthInBytes] is not divisible by four, the last bytes can't be part of the view.
+被查看的区域从 [offsetInBytes]（必须为 32 位对齐）开始，包含 [length] 个 32 位整数。如果省略 [length]，范围将尽可能向缓冲区末尾延伸——如果 [lengthInBytes] 不能被 4 整除，则最后几个字节不能作为视图的一部分。
 
-The start index and length must describe a valid 32-bit aligned range of the buffer:
+起始索引和长度必须描述缓冲区的一个有效的 32 位对齐范围：
 
-- `offsetInBytes` must not be negative,
-- `offsetInBytes` must be divisible by four,
-- `length` must not be negative, and
-- `offsetInBytes + length * 4` must not be greater than [lengthInBytes].
+- `offsetInBytes` 不能为负数，
+- `offsetInBytes` 必须能被 4 整除，
+- `length` 不能为负数，且
+- `offsetInBytes + length * 4` 不能大于 [lengthInBytes]。
 
 ### asFloat64List()
 
@@ -230,18 +230,18 @@ The start index and length must describe a valid 32-bit aligned range of the buf
 Float64List asFloat64List([int offsetInBytes = 0, int? length])
 ```
 
-Creates a [Float64List] _view_ of a region of this byte buffer.
+创建此字节缓冲区某个区域的 [Float64List] _视图_。
 
-The view is backed by the bytes of this byte buffer. Any changes made to the `Float64List` will also change the buffer, and vice versa.
+该视图由此字节缓冲区的字节支持。对 `Float64List` 所做的任何更改也会更改缓冲区，反之亦然。
 
-The viewed region start at [offsetInBytes], which must be 64-bit aligned, and contains [length] 64-bit integers. If [length] is omitted, the range extends as far towards the end of the buffer as possible - if [lengthInBytes] is not divisible by eight, the last bytes can't be part of the view.
+被查看的区域从 [offsetInBytes]（必须为 64 位对齐）开始，包含 [length] 个 64 位整数。如果省略 [length]，范围将尽可能向缓冲区末尾延伸——如果 [lengthInBytes] 不能被 8 整除，则最后几个字节不能作为视图的一部分。
 
-The start index and length must describe a valid 64-bit aligned range of the buffer:
+起始索引和长度必须描述缓冲区的一个有效的 64 位对齐范围：
 
-- `offsetInBytes` must not be negative,
-- `offsetInBytes` must be divisible by eight,
-- `length` must not be negative, and
-- `offsetInBytes + length * 8` must not be greater than [lengthInBytes].
+- `offsetInBytes` 不能为负数，
+- `offsetInBytes` 必须能被 8 整除，
+- `length` 不能为负数，且
+- `offsetInBytes + length * 8` 不能大于 [lengthInBytes]。
 
 ### asFloat32x4List()
 
@@ -249,18 +249,18 @@ The start index and length must describe a valid 64-bit aligned range of the buf
 Float32x4List asFloat32x4List([int offsetInBytes = 0, int? length])
 ```
 
-Creates a [Float32x4List] _view_ of a region of this byte buffer.
+创建此字节缓冲区某个区域的 [Float32x4List] _视图_。
 
-The view is backed by the bytes of this byte buffer. Any changes made to the `Float32x4List` will also change the buffer, and vice versa.
+该视图由此字节缓冲区的字节支持。对 `Float32x4List` 所做的任何更改也会更改缓冲区，反之亦然。
 
-The viewed region start at [offsetInBytes], which must be 128-bit aligned, and contains [length] 128-bit integers. If [length] is omitted, the range extends as far towards the end of the buffer as possible - if [lengthInBytes] is not divisible by 16, the last bytes can't be part of the view.
+被查看的区域从 [offsetInBytes]（必须为 128 位对齐）开始，包含 [length] 个 128 位整数。如果省略 [length]，范围将尽可能向缓冲区末尾延伸——如果 [lengthInBytes] 不能被 16 整除，则最后几个字节不能作为视图的一部分。
 
-The start index and length must describe a valid 128-bit aligned range of the buffer:
+起始索引和长度必须描述缓冲区的一个有效的 128 位对齐范围：
 
-- `offsetInBytes` must not be negative,
-- `offsetInBytes` must be divisible by sixteen,
-- `length` must not be negative, and
-- `offsetInBytes + length * 16` must not be greater than [lengthInBytes].
+- `offsetInBytes` 不能为负数，
+- `offsetInBytes` 必须能被 16 整除，
+- `length` 不能为负数，且
+- `offsetInBytes + length * 16` 不能大于 [lengthInBytes]。
 
 ### asFloat64x2List()
 
@@ -268,18 +268,18 @@ The start index and length must describe a valid 128-bit aligned range of the bu
 Float64x2List asFloat64x2List([int offsetInBytes = 0, int? length])
 ```
 
-Creates a [Float64x2List] _view_ of a region of this byte buffer.
+创建此字节缓冲区某个区域的 [Float64x2List] _视图_。
 
-The view is backed by the bytes of this byte buffer. Any changes made to the `Float64x2List` will also change the buffer, and vice versa.
+该视图由此字节缓冲区的字节支持。对 `Float64x2List` 所做的任何更改也会更改缓冲区，反之亦然。
 
-The viewed region start at [offsetInBytes], which must be 128-bit aligned, and contains [length] 128-bit integers. If [length] is omitted, the range extends as far towards the end of the buffer as possible - if [lengthInBytes] is not divisible by 16, the last bytes can't be part of the view.
+被查看的区域从 [offsetInBytes]（必须为 128 位对齐）开始，包含 [length] 个 128 位整数。如果省略 [length]，范围将尽可能向缓冲区末尾延伸——如果 [lengthInBytes] 不能被 16 整除，则最后几个字节不能作为视图的一部分。
 
-The start index and length must describe a valid 128-bit aligned range of the buffer:
+起始索引和长度必须描述缓冲区的一个有效的 128 位对齐范围：
 
-- `offsetInBytes` must not be negative,
-- `offsetInBytes` must be divisible by sixteen,
-- `length` must not be negative, and
-- `offsetInBytes + length * 16` must not be greater than [lengthInBytes].
+- `offsetInBytes` 不能为负数，
+- `offsetInBytes` 必须能被 16 整除，
+- `length` 不能为负数，且
+- `offsetInBytes + length * 16` 不能大于 [lengthInBytes]。
 
 ### asByteData()
 
@@ -287,14 +287,14 @@ The start index and length must describe a valid 128-bit aligned range of the bu
 ByteData asByteData([int offsetInBytes = 0, int? length])
 ```
 
-Creates a [ByteData] _view_ of a region of this byte buffer.
+创建此字节缓冲区某个区域的 [ByteData] _视图_。
 
-The view is backed by the bytes of this byte buffer. Any changes made to the `ByteData` will also change the buffer, and vice versa.
+该视图由此字节缓冲区的字节支持。对 `ByteData` 所做的任何更改也会更改缓冲区，反之亦然。
 
-The viewed region start at [offsetInBytes] and contains [length] bytes. If [length] is omitted, the range extends to the end of the buffer.
+被查看的区域从 [offsetInBytes] 开始，包含 [length] 个字节。如果省略 [length]，范围将延伸到缓冲区末尾。
 
-The start index and length must describe a valid range of the buffer:
+起始索引和长度必须描述缓冲区的一个有效范围：
 
-- `offsetInBytes` must not be negative,
-- `length` must not be negative, and
-- `offsetInBytes + length` must not be greater than [lengthInBytes].
+- `offsetInBytes` 不能为负数，
+- `length` 不能为负数，且
+- `offsetInBytes + length` 不能大于 [lengthInBytes]。
