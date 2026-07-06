@@ -13,34 +13,17 @@ A class for representing two-dimensional rectangles whose properties are immutab
 - If you need to perform intersection calculations or containment checks, consider using a dedicated library, such as [`package:vector_math`](https://pub.dev/packages/vector_math).
 - If you are developing a Flutter application or package, consider using the [`Rect`](https://api.flutter.dev/flutter/dart-ui/Rect-class.html) type from `dart:ui`.
 
-### left
-
-```dart
-T left
-```
-
-### top
-
-```dart
-T top
-```
-
-### width
-
-```dart
-T width
-```
-
-### height
-
-```dart
-T height
-```
+## 构造函数
 
 ### Rectangle()
 
 ```dart
-Rectangle(T left, T top, T width, T height)
+Rectangle<T extends num>(
+  T left,
+  T top,
+  T width,
+  T height,
+)
 ```
 
 Create a rectangle spanned by `(left, top)` and `(left+width, top+height)`.
@@ -66,7 +49,7 @@ print(rectangle.bottom); // 650
 ### Rectangle.fromPoints()
 
 ```dart
-Rectangle.fromPoints(Point<T> a, Point<T> b)
+Rectangle<T extends num>.fromPoints(Point<T> a, Point<T> b)
 ```
 
 Create a rectangle spanned by the points [a] and [b];
@@ -89,6 +72,42 @@ print(rectangle.right); // 300
 print(rectangle.bottom); // 600
 ```
 
+## 属性
+
+### left
+
+```dart
+T left
+```
+
+The x-coordinate of the left edge.
+
+### top
+
+```dart
+T top
+```
+
+The y-coordinate of the top edge.
+
+### width
+
+```dart
+T width
+```
+
+The width of the rectangle.
+
+### height
+
+```dart
+T height
+```
+
+The height of the rectangle.
+
+---
+
 # MutableRectangle
 
 ```dart
@@ -104,30 +123,17 @@ A class for representing two-dimensional axis-aligned rectangles with mutable pr
 - If you need to perform intersection calculations or containment checks, consider using a dedicated library, such as [`package:vector_math`](https://pub.dev/packages/vector_math).
 - If you are developing a Flutter application or package, consider using the [`Rect`](https://api.flutter.dev/flutter/dart-ui/Rect-class.html) type from `dart:ui`.
 
-### left
-
-```dart
-T left
-```
-
-The x-coordinate of the left edge.
-
-Setting the value will move the rectangle without changing its width.
-
-### top
-
-```dart
-T top
-```
-
-The y-coordinate of the left edge.
-
-Setting the value will move the rectangle without changing its height.
+## 构造函数
 
 ### MutableRectangle()
 
 ```dart
-MutableRectangle(T left, T top, T width, T height)
+MutableRectangle<T extends num>(
+  T left,
+  T top,
+  T width,
+  T height,
+)
 ```
 
 Create a mutable rectangle spanned by `(left, top)` and `(left+width, top+height)`.
@@ -164,7 +170,7 @@ print(rectangle.bottom); // 150
 ### MutableRectangle.fromPoints()
 
 ```dart
-MutableRectangle.fromPoints(Point<T> a, Point<T> b)
+MutableRectangle<T extends num>.fromPoints(Point<T> a, Point<T> b)
 ```
 
 Create a mutable rectangle spanned by the points [a] and [b];
@@ -186,11 +192,27 @@ print(rectangle.right); // 300
 print(rectangle.bottom); // 600
 ```
 
-### width
+## 属性
+
+### left
 
 ```dart
-T get width
+T left
 ```
+
+The x-coordinate of the left edge.
+
+Setting the value will move the rectangle without changing its width.
+
+### top
+
+```dart
+T top
+```
+
+The y-coordinate of the left edge.
+
+Setting the value will move the rectangle without changing its height.
 
 ### width
 
@@ -203,12 +225,6 @@ Sets the width of the rectangle.
 The width must be non-negative. If a negative width is supplied, it is clamped to zero.
 
 Setting the value will change the right edge of the rectangle, but will not change [left].
-
-### height
-
-```dart
-T get height
-```
 
 ### height
 

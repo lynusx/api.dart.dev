@@ -30,6 +30,8 @@ To create a random Boolean value, use [nextBool].
 var boolValue = Random().nextBool(); // true or false, with equal chance.
 ```
 
+## 构造函数
+
 ### Random()
 
 ```dart
@@ -49,6 +51,8 @@ Random.secure()
 Creates a cryptographically secure random number generator.
 
 If the program cannot provide a cryptographically secure source of random numbers, it throws an [UnsupportedError].
+
+## 方法
 
 ### nextInt()
 
