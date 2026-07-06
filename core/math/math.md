@@ -75,79 +75,83 @@ print(rectangle.right); // 220
 print(rectangle.bottom); // 150
 ```
 
-{@category Core}
+## Constants
 
-# e
+### e
 
 ```dart
-double e
+const double e = 2.718281828459045;
 ```
 
 Base of the natural logarithms.
 
 Typically written as "e".
 
-# ln10
+### ln10
 
 ```dart
-double ln10
+const double ln10 = 2.302585092994046;
 ```
 
 Natural logarithm of 10.
 
 The natural logarithm of 10 is the number such that `pow(E, LN10) == 10`. This value is not exact, but it is the closest representable double to the exact mathematical value.
 
-# ln2
+### ln2
 
 ```dart
-double ln2
+const double ln2 = 0.6931471805599453;
 ```
 
 Natural logarithm of 2.
 
 The natural logarithm of 2 is the number such that `pow(E, LN2) == 2`. This value is not exact, but it is the closest representable double to the exact mathematical value.
 
-# log2e
+### log2e
 
 ```dart
-double log2e
+const double log2e = 1.4426950408889634;
 ```
 
 Base-2 logarithm of [e].
 
-# log10e
+### log10e
 
 ```dart
-double log10e
+const double log10e = 0.4342944819032518;
 ```
 
 Base-10 logarithm of [e].
 
-# pi
+### pi
 
 ```dart
-double pi
+const double pi = 3.1415926535897932;
 ```
 
 The PI constant.
 
-# sqrt1_2
+### sqrt1_2
 
 ```dart
-double sqrt1_2
+const double sqrt1_2 = 0.7071067811865476;
 ```
 
 Square root of 1/2.
 
-# sqrt2
+### sqrt2
 
 ```dart
-double sqrt2
+const double sqrt2 = 1.4142135623730951;
 ```
 
 Square root of 2.
 
-# min()
+
+
+## Functions
+
+### min()
 
 ```dart
 T min<T extends num>(T a, T b)
@@ -157,7 +161,7 @@ Returns the lesser of two numbers.
 
 Returns NaN if either argument is NaN. The lesser of `-0.0` and `0.0` is `-0.0`. If the arguments are otherwise equal (including int and doubles with the same mathematical value) then it is unspecified which of the two arguments is returned.
 
-# max()
+### max()
 
 ```dart
 T max<T extends num>(T a, T b)
@@ -167,7 +171,7 @@ Returns the larger of two numbers.
 
 Returns NaN if either argument is NaN. The larger of `-0.0` and `0.0` is `0.0`. If the arguments are otherwise equal (including int and doubles with the same mathematical value) then it is unspecified which of the two arguments is returned.
 
-# atan2()
+### atan2()
 
 ```dart
 double atan2(num a, num b)
@@ -187,7 +191,7 @@ If [a] is equal to zero, the vector ([b],[a]) is considered parallel to the x-ax
 
 Returns NaN if either argument is NaN.
 
-# pow()
+### pow()
 
 ```dart
 num pow(num x, num exponent)
@@ -220,7 +224,7 @@ This corresponds to the `pow` function defined in the IEEE Standard 754-2008.
 
 Notice that the result may overflow. If integers are represented as 64-bit numbers, an integer result may be truncated, and a double result may overflow to positive or negative [double.infinity].
 
-# sin()
+### sin()
 
 ```dart
 double sin(num radians)
@@ -230,7 +234,7 @@ Converts [radians] to a [double] and returns the sine of the value.
 
 If [radians] is not a finite number, the result is NaN.
 
-# cos()
+### cos()
 
 ```dart
 double cos(num radians)
@@ -240,7 +244,7 @@ Converts [radians] to a [double] and returns the cosine of the value.
 
 If [radians] is not a finite number, the result is NaN.
 
-# tan()
+### tan()
 
 ```dart
 double tan(num radians)
@@ -250,7 +254,7 @@ Converts [radians] to a [double] and returns the tangent of the value.
 
 The tangent function is equivalent to `sin(radians)/cos(radians)` and may be infinite (positive or negative) when `cos(radians)` is equal to zero. If [radians] is not a finite number, the result is NaN.
 
-# acos()
+### acos()
 
 ```dart
 double acos(num x)
@@ -260,7 +264,7 @@ Converts [x] to a [double] and returns its arc cosine in radians.
 
 Returns a value in the range 0..PI, or NaN if [x] is outside the range -1..1.
 
-# asin()
+### asin()
 
 ```dart
 double asin(num x)
@@ -270,7 +274,7 @@ Converts [x] to a [double] and returns its arc sine in radians.
 
 Returns a value in the range -PI/2..PI/2, or NaN if [x] is outside the range -1..1.
 
-# atan()
+### atan()
 
 ```dart
 double atan(num x)
@@ -280,7 +284,7 @@ Converts [x] to a [double] and returns its arc tangent in radians.
 
 Returns a value in the range -PI/2..PI/2, or NaN if [x] is NaN.
 
-# sqrt()
+### sqrt()
 
 ```dart
 double sqrt(num x)
@@ -301,7 +305,7 @@ result = sqrt(-2.2);
 print(result); // NaN
 ```
 
-# exp()
+### exp()
 
 ```dart
 double exp(num x)
@@ -311,7 +315,7 @@ Converts [x] to a [double] and returns the natural exponent, [e], to the power [
 
 Returns NaN if [x] is NaN.
 
-# log()
+### log()
 
 ```dart
 double log(num x)

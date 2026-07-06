@@ -4,4 +4,4 @@
 final class DeferredLoadException implements Exception {}
 ```
 
-Thrown when a deferred library fails to load.
+当延迟加载的库加载失败时抛出。
