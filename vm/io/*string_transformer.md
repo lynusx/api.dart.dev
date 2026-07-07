@@ -4,11 +4,11 @@
 SystemEncoding systemEncoding
 ```
 
-The current system encoding.
+当前的系统编码。
 
-This is used for converting from bytes to and from Strings when communicating on stdin, stdout and stderr.
+用于在 stdin、stdout 和 stderr 上进行通信时，实现字节与字符串之间的相互转换。
 
-On Windows this will use the currently active code page for the conversion. On all other systems it will always use UTF-8.
+在 Windows 上，此转换将使用当前激活的代码页。在其他所有系统上，始终使用 UTF-8。
 
 # SystemEncoding
 
@@ -16,7 +16,7 @@ On Windows this will use the currently active code page for the conversion. On a
 final class SystemEncoding extends Encoding {}
 ```
 
-The system encoding is the current code page on Windows and UTF-8 on Linux and Mac.
+系统编码在 Windows 上是当前的代码页，在 Linux 和 Mac 上是 UTF-8。
 
 ### SystemEncoding()
 
@@ -24,9 +24,9 @@ The system encoding is the current code page on Windows and UTF-8 on Linux and M
 SystemEncoding()
 ```
 
-Creates a const SystemEncoding.
+创建一个 const 的 SystemEncoding。
 
-Users should use the top-level constant, [systemEncoding].
+用户应使用顶层常量 [systemEncoding]。
 
 ### name
 
