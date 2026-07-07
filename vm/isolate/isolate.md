@@ -1,8 +1,8 @@
-Concurrent programming using _isolates_: independent workers that are similar to threads but don't share memory, communicating only via messages.
+使用 _isolate_ 进行并发编程：isolate 是独立的工作单元，类似于线程，但不共享内存，仅通过消息进行通信。
 
-_NOTE_: The `dart:isolate` library is currently only supported by the [Dart Native](https://dart.dev/overview#platform) platform.
+_注意_：`dart:isolate` 库目前仅受 [Dart Native](https://dart.dev/overview#platform) 平台支持。
 
-To use this library in your code:
+在代码中使用该库：
 
 ```dart
 import 'dart:isolate';
@@ -16,7 +16,7 @@ import 'dart:isolate';
 class IsolateSpawnException implements Exception {}
 ```
 
-Thrown when an isolate cannot be created.
+当无法创建 isolate 时抛出。
 
 ### message
 
@@ -24,7 +24,7 @@ Thrown when an isolate cannot be created.
 String message
 ```
 
-Error message reported by the spawn operation.
+spawn 操作报告的错误消息。
 
 ### IsolateSpawnException()
 
@@ -44,23 +44,23 @@ String toString()
 final class Isolate {}
 ```
 
-An isolated Dart execution context.
+一个隔离的 Dart 执行上下文。
 
-All Dart code runs in an isolate, and code can access classes and values only from the same isolate. Different isolates can communicate by sending values through ports (see [ReceivePort], [SendPort]).
+所有 Dart 代码都运行在某个 isolate 中，代码只能访问同一 isolate 内的类和值。不同的 isolate 可以通过端口（port）发送值来进行通信（参见 [ReceivePort]、[SendPort]）。
 
-An `Isolate` object is a reference to an isolate, usually different from the current isolate. It represents, and can be used to control, the other isolate.
+`Isolate` 对象是对某个 isolate 的引用，通常不同于当前 isolate。它代表另一个 isolate，并可用于控制该 isolate。
 
-When spawning a new isolate, the spawning isolate receives an `Isolate` object representing the new isolate when the spawn operation succeeds.
+创建新 isolate 时，如果 spawn 操作成功，发起方 isolate 会收到一个代表新 isolate 的 `Isolate` 对象。
 
-Isolates run code in its own event loop, and each event may run smaller tasks in a nested microtask queue.
+每个 isolate 都在自己的事件循环（event loop）中运行代码，每个事件还可能在嵌套的微任务队列（microtask queue）中运行更小的任务。
 
-An `Isolate` object allows other isolates to control the event loop of the isolate that it represents, and to inspect the isolate, for example by pausing the isolate or by getting events when the isolate has an uncaught error.
+`Isolate` 对象允许其他 isolate 控制它所代表的 isolate 的事件循环，并对该 isolate 进行检查，例如暂停该 isolate，或在其发生未捕获错误时获取事件通知。
 
-The [controlPort] identifies and gives access to controlling the isolate, and the [pauseCapability] and [terminateCapability] guard access to some control operations. For example, calling [pause] on an `Isolate` object created without a [pauseCapability], has no effect.
+[controlPort] 用于标识 isolate 并提供对其的控制权限，[pauseCapability] 和 [terminateCapability] 则用于保护部分控制操作的访问权限。例如，对一个未提供 [pauseCapability] 的 `Isolate` 对象调用 [pause] 不会产生任何效果。
 
-The `Isolate` object provided by a spawn operation will have the control port and capabilities needed to control the isolate. New isolate objects can be created without some of these capabilities if necessary, using the [Isolate.new] constructor.
+由 spawn 操作提供的 `Isolate` 对象将拥有控制该 isolate 所需的控制端口和各项 capability。如有需要，也可以使用 [Isolate.new] 构造函数创建缺少部分 capability 的新 `Isolate` 对象。
 
-An `Isolate` object cannot be sent over a `SendPort`, but the control port and capabilities can be sent, and can be used to create a new functioning `Isolate` object in the receiving port's isolate.
+`Isolate` 对象本身不能通过 `SendPort` 发送，但其控制端口和各项 capability 是可以发送的，接收端口所在的 isolate 可以利用它们创建出一个功能正常的新 `Isolate` 对象。
 
 ### immediate
 
@@ -68,7 +68,7 @@ An `Isolate` object cannot be sent over a `SendPort`, but the control port and c
 int immediate
 ```
 
-Argument to `ping` and `kill`: Ask for immediate action.
+`ping` 和 `kill` 的参数：请求立即执行操作。
 
 ### beforeNextEvent
 
@@ -76,7 +76,7 @@ Argument to `ping` and `kill`: Ask for immediate action.
 int beforeNextEvent
 ```
 
-Argument to `ping` and `kill`: Ask for action before the next event.
+`ping` 和 `kill` 的参数：请求在下一个事件之前执行操作。
 
 ### controlPort
 
@@ -84,13 +84,13 @@ Argument to `ping` and `kill`: Ask for action before the next event.
 SendPort controlPort
 ```
 
-Control port used to send control messages to the isolate.
+用于向 isolate 发送控制消息的控制端口。
 
-The control port identifies the isolate.
+控制端口用于标识该 isolate。
 
-An `Isolate` object allows sending control messages through the control port.
+`Isolate` 对象允许通过控制端口发送控制消息。
 
-Some control messages require a specific capability to be passed along with the message (see [pauseCapability] and [terminateCapability]), otherwise the message is ignored by the isolate.
+部分控制消息要求随消息一起传递特定的 capability（参见 [pauseCapability] 和 [terminateCapability]），否则该消息会被 isolate 忽略。
 
 ### pauseCapability
 
@@ -98,11 +98,11 @@ Some control messages require a specific capability to be passed along with the 
 Capability? pauseCapability
 ```
 
-Capability granting the ability to pause the isolate.
+授予暂停该 isolate 能力的 capability。
 
-This capability is required by [pause]. If the capability is `null`, or if it is not the correct pause capability of the isolate identified by [controlPort], then calls to [pause] will have no effect.
+[pause] 需要该 capability。如果该 capability 为 `null`，或者不是 [controlPort] 所标识 isolate 的正确暂停 capability，那么调用 [pause] 将不会产生任何效果。
 
-If the isolate is spawned in a paused state, use this capability as argument to the [resume] method in order to resume the paused isolate.
+如果该 isolate 是以暂停状态创建的，可将此 capability 作为参数传递给 [resume] 方法，以恢复该已暂停的 isolate。
 
 ### terminateCapability
 
@@ -110,9 +110,9 @@ If the isolate is spawned in a paused state, use this capability as argument to 
 Capability? terminateCapability
 ```
 
-Capability granting the ability to terminate the isolate.
+授予终止该 isolate 能力的 capability。
 
-This capability is required by [kill] and [setErrorsFatal]. If the capability is `null`, or if it is not the correct termination capability of the isolate identified by [controlPort], then calls to those methods will have no effect.
+[kill] 和 [setErrorsFatal] 需要该 capability。如果该 capability 为 `null`，或者不是 [controlPort] 所标识 isolate 的正确终止 capability，那么调用这些方法将不会产生任何效果。
 
 ### debugName
 
@@ -120,13 +120,13 @@ This capability is required by [kill] and [setErrorsFatal]. If the capability is
 String? get debugName
 ```
 
-The name of the [Isolate] displayed for debug purposes.
+为调试目的而显示的 [Isolate] 名称。
 
-This can be set using the `debugName` parameter in [spawn] and [spawnUri].
+可通过 [spawn] 和 [spawnUri] 中的 `debugName` 参数进行设置。
 
-This name does not uniquely identify an isolate. Multiple isolates in the same process may have the same `debugName`.
+该名称并不能唯一标识某个 isolate。同一进程中的多个 isolate 可能拥有相同的 `debugName`。
 
-For a given isolate, this value will be the same as the values returned by `Dart_DebugName` in the C embedding API and the `debugName` property in [IsolateMirror].
+对于给定的 isolate，该值与 C 嵌入式 API 中 `Dart_DebugName` 返回的值，以及 [IsolateMirror] 中的 `debugName` 属性值相同。
 
 ### Isolate()
 
@@ -134,15 +134,15 @@ For a given isolate, this value will be the same as the values returned by `Dart
 Isolate(SendPort controlPort, {Capability? pauseCapability, Capability? terminateCapability})
 ```
 
-Creates a new [Isolate] object with a restricted set of capabilities.
+创建一个具有受限 capability 集合的新 [Isolate] 对象。
 
-The port should be a control port for an isolate, as taken from another `Isolate` object.
+该端口应为某个 isolate 的控制端口，取自另一个 `Isolate` 对象。
 
-The capabilities should be the subset of the capabilities that are available to the original isolate. Capabilities of an isolate are locked to that isolate, and have no effect anywhere else, so the capabilities should come from the same isolate as the control port.
+这些 capability 应为原始 isolate 所拥有 capability 的子集。isolate 的 capability 与该 isolate 绑定，在其他任何地方均不产生效果，因此这些 capability 应与控制端口来自同一个 isolate。
 
-Can also be used to create an [Isolate] object from a control port, and any available capabilities, that have been sent through a [SendPort].
+也可用于根据通过 [SendPort] 发送过来的控制端口及可用的 capability 创建一个 [Isolate] 对象。
 
-Example:
+示例：
 
 ```dart
 Isolate isolate = findSomeIsolate();
@@ -150,7 +150,7 @@ Isolate restrictedIsolate = Isolate(isolate.controlPort);
 untrustedCode(restrictedIsolate);
 ```
 
-This example creates a new `Isolate` object that cannot be used to pause or terminate the isolate. All the untrusted code can do is to inspect the isolate and see uncaught errors or when it terminates.
+此示例创建了一个无法用于暂停或终止该 isolate 的新 `Isolate` 对象。不受信任的代码所能做的，仅仅是检查该 isolate、查看未捕获的错误，或者获知其何时终止。
 
 ### run()
 
@@ -158,7 +158,7 @@ This example creates a new `Isolate` object that cannot be used to pause or term
 Future<R> run<R>(FutureOr<R> computation(), {String? debugName})
 ```
 
-Runs [computation] in a new isolate and returns the result.
+在新的 isolate 中运行 [computation] 并返回结果。
 
 ```dart
 int slowFib(int n) =>
@@ -168,7 +168,7 @@ int slowFib(int n) =>
 var fib40 = await Isolate.run(() => slowFib(40));
 ```
 
-If [computation] is asynchronous (returns a `Future<R>`) then that future is awaited in the new isolate, completing the entire asynchronous computation, before returning the result.
+如果 [computation] 是异步的（返回 `Future<R>`），那么会在新 isolate 中等待该 future 完成整个异步计算，然后再返回结果。
 
 ```dart
 int slowFib(int n) =>
@@ -181,7 +181,7 @@ Stream<int> fibStream() async* {
 var fib40 = await Isolate.run(() => fibStream().elementAt(40));
 ```
 
-If [computation] throws, the isolate is terminated and this function throws the same error.
+如果 [computation] 抛出异常，该 isolate 将被终止，此函数会抛出同样的错误。
 
 ```dart import:convert
 Future<int> eventualError() async {
@@ -197,13 +197,13 @@ try {
 }
 ```
 
-Any uncaught asynchronous errors will terminate the computation as well, but will be reported as a [RemoteError] because [addErrorListener] does not provide the original error object.
+任何未捕获的异步错误同样会终止计算，但会以 [RemoteError] 的形式报告，因为 [addErrorListener] 不会提供原始的错误对象。
 
-The result is sent using [exit], which means it's sent to this isolate without copying.
+结果通过 [exit] 发送，这意味着它会在不经复制的情况下发送到当前 isolate。
 
-The [computation] function and its result (or error) must be sendable between isolates. Objects that cannot be sent include open files and sockets (see [SendPort.send] for details).
+[computation] 函数及其结果（或错误）必须能够在 isolate 之间发送。不可发送的对象包括已打开的文件和套接字（详见 [SendPort.send]）。
 
-If [computation] is a closure then it may implicitly send unexpected state to the isolate due to limitations in the Dart implementation. This can cause performance issues, increased memory usage (see http://dartbug.com/36983) or, if the state includes objects that can't be spent between isolates, a runtime failure.
+如果 [computation] 是一个闭包，由于 Dart 实现的限制，它可能会隐式地向该 isolate 发送意外的状态。这可能导致性能问题、内存占用增加（参见 http://dartbug.com/36983），或者如果该状态中包含无法在 isolate 之间传递的对象，则会导致运行时失败。
 
 ```dart import:convert import:io
 
@@ -225,7 +225,7 @@ void serializeAndWrite(File f, Object o) async {
 }
 ```
 
-In such cases, you can create a new function to call [Isolate.run] that takes all of the required state as arguments.
+遇到这种情况时，可以创建一个新函数来调用 [Isolate.run]，并将所有所需状态作为参数传入。
 
 ```dart import:convert import:io
 
@@ -245,7 +245,7 @@ void serializeAndWrite(File f, Object o) async {
 }
 ```
 
-The [debugName] is only used to name the new isolate for debugging.
+[debugName] 仅用于为新 isolate 命名，以便调试。
 
 ### current
 
@@ -253,13 +253,13 @@ The [debugName] is only used to name the new isolate for debugging.
 Isolate get current
 ```
 
-An [Isolate] object representing the current isolate.
+代表当前 isolate 的 [Isolate] 对象。
 
-The current isolate for code using [current] is the isolate running the code.
+对于使用 [current] 的代码而言，当前 isolate 即为运行该代码的 isolate。
 
-The isolate object provides the capabilities required to inspect, pause or kill the isolate, and allows granting these capabilities to others.
+该 isolate 对象提供了检查、暂停或终止该 isolate 所需的 capability，并允许将这些 capability 授予其他 isolate。
 
-It is possible to pause the current isolate, but doing so _without_ first passing the ability to resume it again to another isolate, is a sure way to hang your program.
+可以暂停当前 isolate，但如果在暂停之前 _没有_ 先将恢复其运行的能力传递给另一个 isolate，程序必然会因此挂起。
 
 ### packageConfig
 
@@ -267,13 +267,13 @@ It is possible to pause the current isolate, but doing so _without_ first passin
 Future<Uri?> get packageConfig
 ```
 
-The location of the package configuration file of the current isolate.
+当前 isolate 的包配置文件所在位置。
 
-If the isolate was spawned without specifying its package configuration file then the returned value is `null`.
+如果创建该 isolate 时未指定其包配置文件，则返回值为 `null`。
 
-Otherwise, the returned value is an absolute URI specifying the location of isolate's package configuration file.
+否则，返回值是一个绝对 URI，指明该 isolate 包配置文件的位置。
 
-The package configuration file is usually named `package_config.json`, and you can use [`package:package_config`](https://pub.dev/documentation/package_config/latest/) to read and parse it.
+包配置文件通常命名为 `package_config.json`，可使用 [`package:package_config`](https://pub.dev/documentation/package_config/latest/) 对其进行读取和解析。
 
 ### packageConfigSync
 
@@ -281,13 +281,13 @@ The package configuration file is usually named `package_config.json`, and you c
 Uri? get packageConfigSync
 ```
 
-The location of the package configuration file of the current isolate.
+当前 isolate 的包配置文件所在位置。
 
-If the isolate was spawned without specifying its package configuration file then the returned value is `null`.
+如果创建该 isolate 时未指定其包配置文件，则返回值为 `null`。
 
-Otherwise, the returned value is an absolute URI specifying the location of isolate's package configuration file.
+否则，返回值是一个绝对 URI，指明该 isolate 包配置文件的位置。
 
-The package configuration file is usually named `package_config.json`, and you can use [`package:package_config`](https://pub.dev/documentation/package_config/latest/) to read and parse it.
+包配置文件通常命名为 `package_config.json`，可使用 [`package:package_config`](https://pub.dev/documentation/package_config/latest/) 对其进行读取和解析。
 
 ### resolvePackageUri()
 
@@ -295,19 +295,19 @@ The package configuration file is usually named `package_config.json`, and you c
 Future<Uri?> resolvePackageUri(Uri packageUri)
 ```
 
-Resolves a `package:` URI to its actual location.
+将 `package:` URI 解析为其实际位置。
 
-Returns the actual location of the file or directory specified by the [packageUri] `package:` URI.
+返回 [packageUri] 这个 `package:` URI 所指定文件或目录的实际位置。
 
-If the [packageUri] is not a `package:` URI, it's returned as-is.
+如果 [packageUri] 不是 `package:` URI，则按原样返回。
 
-Returns `null` if [packageUri] is a `package:` URI, but either the current package configuration does not have a configuration for the package name of the URI, or the URI is not valid (doesn't start with `package:valid_package_name/`),
+如果 [packageUri] 是 `package:` URI，但当前包配置中没有该 URI 对应包名的配置，或者该 URI 无效（不以 `package:valid_package_name/` 开头），则返回 `null`。
 
-A `package:` URI is resolved to its actual location based on a package resolution configuration (see [packageConfig]) which specifies how to find the actual location of the file or directory that the `package:` URI points to.
+`package:` URI 会根据包解析配置（参见 [packageConfig]）被解析为其实际位置，该配置指明了如何找到 `package:` URI 所指向文件或目录的实际位置。
 
-The actual location corresponding to a `package:` URI is always a non-`package:` URI, typically a `file:` or possibly `http:` URI.
+`package:` URI 对应的实际位置始终是非 `package:` 的 URI，通常为 `file:` URI，也可能是 `http:` URI。
 
-A program may be run in a way where source files are not available, and if so, the returned URI may not correspond to the actual file or directory or be `null`.
+程序可能在源文件不可用的情况下运行，此时返回的 URI 可能与实际文件或目录不对应，或者为 `null`。
 
 ### resolvePackageUriSync()
 
@@ -315,19 +315,19 @@ A program may be run in a way where source files are not available, and if so, t
 Uri? resolvePackageUriSync(Uri packageUri)
 ```
 
-Resolves a `package:` URI to its actual location.
+将 `package:` URI 解析为其实际位置。
 
-Returns the actual location of the file or directory specified by the [packageUri] `package:` URI.
+返回 [packageUri] 这个 `package:` URI 所指定文件或目录的实际位置。
 
-If the [packageUri] is not a `package:` URI, it's returned as-is.
+如果 [packageUri] 不是 `package:` URI，则按原样返回。
 
-Returns `null` if [packageUri] is a `package:` URI, but either the current package configuration does not have a configuration for the package name of the URI, or the URI is not valid (doesn't start with `package:valid_package_name/`),
+如果 [packageUri] 是 `package:` URI，但当前包配置中没有该 URI 对应包名的配置，或者该 URI 无效（不以 `package:valid_package_name/` 开头），则返回 `null`。
 
-A `package:` URI is resolved to its actual location based on a package resolution configuration (see [packageConfig]) which specifies how to find the actual location of the file or directory that the `package:` URI points to.
+`package:` URI 会根据包解析配置（参见 [packageConfig]）被解析为其实际位置，该配置指明了如何找到 `package:` URI 所指向文件或目录的实际位置。
 
-The actual location corresponding to a `package:` URI is always a non-`package:` URI, typically a `file:` or possibly `http:` URI.
+`package:` URI 对应的实际位置始终是非 `package:` 的 URI，通常为 `file:` URI，也可能是 `http:` URI。
 
-A program may be run in a way where source files are not available, and if so, the returned URI may not correspond to the actual file or directory or be `null`.
+程序可能在源文件不可用的情况下运行，此时返回的 URI 可能与实际文件或目录不对应，或者为 `null`。
 
 ### spawn()
 
@@ -335,27 +335,27 @@ A program may be run in a way where source files are not available, and if so, t
 Future<Isolate> spawn<T>(void entryPoint(T message), T message, {bool paused = false, bool errorsAreFatal = true, SendPort? onExit, SendPort? onError, String? debugName})
 ```
 
-Spawns an isolate that shares the same code as the current isolate.
+创建一个与当前 isolate 共享相同代码的 isolate。
 
-The argument [entryPoint] specifies the initial function to call in the spawned isolate. The entry-point function is invoked in the new isolate with [message] as the only argument.
+参数 [entryPoint] 指定了在新创建的 isolate 中要调用的初始函数。该入口函数会在新 isolate 中被调用，并以 [message] 作为唯一参数。
 
-The [entryPoint] function must be able to be called with a single argument, that is, a function which accepts at least one positional parameter and has at most one required positional parameter. The function may accept any number of optional parameters, as long as it _can_ be called with just a single argument. If [entryPoint] is a closure then it may implicitly send unexpected state to the isolate due to limitations in the Dart implementation. This can cause performance issues, increased memory usage (see http://dartbug.com/36983) or, if the state includes objects that can't be spent between isolates, a runtime failure. See [run] for an example.
+[entryPoint] 函数必须能够以单个参数进行调用，也就是说，该函数至少接受一个位置参数，且最多只有一个必需的位置参数。只要 _可以_ 仅用单个参数调用，该函数可以接受任意数量的可选参数。如果 [entryPoint] 是一个闭包，由于 Dart 实现的限制，它可能会隐式地向该 isolate 发送意外的状态。这可能导致性能问题、内存占用增加（参见 http://dartbug.com/36983），或者如果该状态中包含无法在 isolate 之间传递的对象，则会导致运行时失败。示例参见 [run]。
 
-[message] must be sendable between isolates. Objects that cannot be sent include open files and sockets (see [SendPort.send] for details). Usually the initial [message] contains a [SendPort] so that the spawner and spawnee can communicate with each other.
+[message] 必须能够在 isolate 之间发送。不可发送的对象包括已打开的文件和套接字（详见 [SendPort.send]）。初始 [message] 通常包含一个 [SendPort]，以便发起方与被创建方之间能够相互通信。
 
-If the [paused] parameter is set to `true`, the isolate will start up in a paused state, just before calling the [entryPoint] function with the [message], as if by an initial call of `isolate.pause(isolate.pauseCapability)`. To resume the isolate, call `isolate.resume(isolate.pauseCapability)`.
+如果 [paused] 参数设为 `true`，该 isolate 将在以 [message] 调用 [entryPoint] 函数之前，以暂停状态启动，如同初始时调用了 `isolate.pause(isolate.pauseCapability)` 一样。要恢复该 isolate，需调用 `isolate.resume(isolate.pauseCapability)`。
 
-If the [errorsAreFatal], [onExit] and/or [onError] parameters are provided, the isolate will act as if, respectively, [setErrorsFatal], [addOnExitListener] and [addErrorListener] were called with the corresponding parameter and was processed before the isolate starts running.
+如果提供了 [errorsAreFatal]、[onExit] 和/或 [onError] 参数，该 isolate 的行为将分别如同在其开始运行之前，已使用相应参数调用并处理了 [setErrorsFatal]、[addOnExitListener] 和 [addErrorListener]。
 
-If [debugName] is provided, the spawned [Isolate] will be identifiable by this name in debuggers and logging.
+如果提供了 [debugName]，新创建的 [Isolate] 将可以在调试器和日志中通过该名称进行识别。
 
-If [errorsAreFatal] is omitted, the platform may choose a default behavior or inherit the current isolate's behavior.
+如果省略 [errorsAreFatal]，平台可能会选择默认行为，或继承当前 isolate 的行为。
 
-You can also call the [setErrorsFatal], [addOnExitListener] and [addErrorListener] methods on the returned isolate, but unless the isolate was started as [paused], it may already have terminated before those methods can complete.
+也可以在返回的 isolate 上调用 [setErrorsFatal]、[addOnExitListener] 和 [addErrorListener] 方法，但除非该 isolate 是以 [paused] 状态启动的，否则在这些方法执行完成之前，它可能已经终止。
 
-Returns a future which will complete with an [Isolate] instance if the spawning succeeded. It will complete with an error otherwise.
+如果创建成功，返回的 future 将以一个 [Isolate] 实例完成；否则将以错误完成。
 
-One can expect the base memory overhead of an isolate to be in the order of 30 kb.
+一个 isolate 的基础内存开销大约在 30 kb 量级。
 
 ### spawnUri()
 
@@ -363,43 +363,43 @@ One can expect the base memory overhead of an isolate to be in the order of 30 k
 Future<Isolate> spawnUri(Uri uri, List<String> args, dynamic message, {bool paused = false, SendPort? onExit, SendPort? onError, bool errorsAreFatal = true, bool? checked, Map<String, String>? environment, Uri? packageRoot, Uri? packageConfig, bool automaticPackageResolution = false, String? debugName})
 ```
 
-Spawns an isolate running the script file specified by [uri].
+创建一个运行 [uri] 所指定脚本文件的 isolate。
 
-Creates and spawns a new isolate that runs the Dart program which has the [uri] file as the entry point that provides the `main` method. The new isolate belongs to a new [isolate group][], different from the isolate group of the spawning isolate.
+创建并启动一个新 isolate，运行以 [uri] 文件作为入口点（提供 `main` 方法）的 Dart 程序。新 isolate 属于一个新的 [isolate group][](isolate 组)，与发起方 isolate 所属的 isolate 组不同。
 
 [isolate group]: https://dart.dev/language/concurrency#performance-and-isolate-groups
 
-The isolate starts executing the top-level `main` function of the library with the given URI.
+该 isolate 开始执行具有给定 URI 的库中的顶层 `main` 函数。
 
-The target `main` must be callable with zero, one or two arguments. Examples:
+目标 `main` 必须能够以零个、一个或两个参数调用。示例：
 
 - `main()`
 - `main(args)`
 - `main(args, message)`
 
-When present, the parameter `args` is set to the provided [args] list. When present, the parameter `message` is set to the initial [message]. A runtime error occurs if the [message] argument's runtime type cannot be assigned to the second parameter of the `main` method.
+如果存在参数 `args`，会将其设为提供的 [args] 列表。如果存在参数 `message`，会将其设为初始 [message]。如果 [message] 参数的运行时类型无法赋值给 `main` 方法的第二个参数，将发生运行时错误。
 
-If the [paused] parameter is set to `true`, the isolate will start up in a paused state, as if by an initial call of `isolate.pause(isolate.pauseCapability)`. To resume the isolate, call `isolate.resume(isolate.pauseCapability)`.
+如果 [paused] 参数设为 `true`，该 isolate 将以暂停状态启动，如同初始时调用了 `isolate.pause(isolate.pauseCapability)` 一样。要恢复该 isolate，需调用 `isolate.resume(isolate.pauseCapability)`。
 
-If the [errorsAreFatal], [onExit] and/or [onError] parameters are provided, the isolate will act as if, respectively, [setErrorsFatal], [addOnExitListener] and [addErrorListener] were called with the corresponding parameter and was processed before the isolate starts running.
+如果提供了 [errorsAreFatal]、[onExit] 和/或 [onError] 参数，该 isolate 的行为将分别如同在其开始运行之前，已使用相应参数调用并处理了 [setErrorsFatal]、[addOnExitListener] 和 [addErrorListener]。
 
-You can also call the [setErrorsFatal], [addOnExitListener] and [addErrorListener] methods on the returned isolate, but unless the isolate was started as [paused], it may already have terminated before those methods can complete.
+也可以在返回的 isolate 上调用 [setErrorsFatal]、[addOnExitListener] 和 [addErrorListener] 方法，但除非该 isolate 是以 [paused] 状态启动的，否则在这些方法执行完成之前，它可能已经终止。
 
-The [checked] parameter controls whether asserts are enabled in the created isolate. In a production-mode program, the parameter is ignored, and assertions are always disabled in all isolates. Otherwise if a `true` or `false` value is provided, assertions are enabled or disabled, respectively, in the created isolate. If `null` or no argument is provided, asserts are enabled in the created isolate if and only if they are enabled in the spawning isolate.
+[checked] 参数用于控制是否在新创建的 isolate 中启用断言（assert）。在生产模式（production-mode）程序中，该参数会被忽略，所有 isolate 中的断言始终处于禁用状态。否则，如果提供了 `true` 或 `false` 值，则在新创建的 isolate 中相应地启用或禁用断言。如果提供 `null` 或未提供该参数，则新创建的 isolate 中启用断言当且仅当发起方 isolate 中也启用了断言。
 
-It may not always be possible to honor the `checked` parameter. If the isolate code was pre-compiled, it may not be possible to change the checked mode setting dynamically. In that case, the `checked` parameter is ignored.
+`checked` 参数并非总能得到遵循。如果 isolate 代码已被预编译，则可能无法动态更改 checked 模式的设置，此时 `checked` 参数会被忽略。
 
-If the [packageConfig] parameter is provided, then it is used to find the location of a package resolution configuration file for the spawned isolate.
+如果提供了 [packageConfig] 参数，则会使用它来查找新创建 isolate 的包解析配置文件的位置。
 
-If the [automaticPackageResolution] parameter is provided, then the location of the package sources in the spawned isolate is automatically determined.
+如果提供了 [automaticPackageResolution] 参数，则会自动确定新创建 isolate 中包源代码的位置。
 
-The [environment] is a mapping from strings to strings which the spawned isolate uses when looking up [String.fromEnvironment] values. The system may add its own entries to environment as well. If `environment` is omitted, the spawned isolate has the same environment declarations as the spawning isolate.
+[environment] 是一个字符串到字符串的映射，新创建的 isolate 在查找 [String.fromEnvironment] 值时会使用它。系统也可能向该 environment 中添加自己的条目。如果省略 `environment`，则新创建的 isolate 将拥有与发起方 isolate 相同的环境声明。
 
-WARNING: The [environment] parameter is not implemented on all platforms yet.
+警告：[environment] 参数尚未在所有平台上实现。
 
-If [debugName] is provided, the spawned [Isolate] will be identifiable by this name in debuggers and logging.
+如果提供了 [debugName]，新创建的 [Isolate] 将可以在调试器和日志中通过该名称进行识别。
 
-Returns a future that will complete with an [Isolate] instance if the spawning succeeded. It will complete with an error otherwise.
+如果创建成功，返回的 future 将以一个 [Isolate] 实例完成；否则将以错误完成。
 
 ### pause()
 
@@ -407,21 +407,21 @@ Returns a future that will complete with an [Isolate] instance if the spawning s
 Capability pause([Capability? resumeCapability])
 ```
 
-Requests the isolate to pause.
+请求该 isolate 暂停。
 
-When the isolate receives the pause command, it stops processing events from the event loop queue. It may still add new events to the queue in response to, e.g., timers or receive-port messages. When the isolate is resumed, it starts handling the already enqueued events.
+当该 isolate 收到暂停命令后，会停止处理事件循环队列中的事件。它可能仍会因定时器或接收端口消息等而向队列中添加新事件。当该 isolate 恢复运行后，会开始处理已入队的事件。
 
-The pause request is sent through the isolate's command port, which bypasses the receiving isolate's event loop. The pause takes effect when it is received, pausing the event loop as it is at that time.
+暂停请求通过该 isolate 的命令端口发送，绕过接收方 isolate 的事件循环。暂停会在收到请求时立即生效，将事件循环暂停在收到请求那一刻的状态。
 
-The [resumeCapability] is used to identity the pause, and must be used again to end the pause using [resume]. If [resumeCapability] is omitted, a new capability object is created and used instead.
+[resumeCapability] 用于标识此次暂停，之后必须使用同一个 capability 通过 [resume] 结束该次暂停。如果省略 [resumeCapability]，则会创建一个新的 capability 对象并使用它。
 
-If an isolate is paused more than once using the same capability, only one resume with that capability is needed to end the pause.
+如果使用同一个 capability 对某个 isolate 多次暂停，则只需用该 capability 调用一次 resume 即可结束暂停。
 
-If an isolate is paused using more than one capability, each pause must be individually ended before the isolate resumes.
+如果某个 isolate 是使用多个不同的 capability 分别暂停的，则必须逐一结束每次暂停，isolate 才会恢复运行。
 
-Returns the capability that must be used to end the pause. This is either [resumeCapability], or a new capability when [resumeCapability] is omitted.
+返回必须用于结束此次暂停的 capability。该值要么是 [resumeCapability]，要么是在省略 [resumeCapability] 时创建的新 capability。
 
-If [pauseCapability] is `null`, or it's not the pause capability of the isolate identified by [controlPort], the pause request is ignored by the receiving isolate.
+如果 [pauseCapability] 为 `null`，或者不是 [controlPort] 所标识 isolate 的暂停 capability，接收方 isolate 将忽略该暂停请求。
 
 ### resume()
 
@@ -429,13 +429,13 @@ If [pauseCapability] is `null`, or it's not the pause capability of the isolate 
 void resume(Capability resumeCapability)
 ```
 
-Resumes a paused isolate.
+恢复一个已暂停的 isolate。
 
-Sends a message to an isolate requesting that it ends a pause that was previously requested.
+向某个 isolate 发送消息，请求其结束此前请求的暂停。
 
-When all active pause requests have been cancelled, the isolate will continue processing events and handling normal messages.
+当所有有效的暂停请求都被取消后，该 isolate 将继续处理事件并处理正常的消息。
 
-If the [resumeCapability] is not one that has previously been used to pause the isolate, or it has already been used to resume from that pause, the resume call has no effect.
+如果 [resumeCapability] 不是此前用于暂停该 isolate 的 capability，或者它已被用于从该次暂停中恢复，则此次 resume 调用不会产生任何效果。
 
 ### addOnExitListener()
 
@@ -443,17 +443,17 @@ If the [resumeCapability] is not one that has previously been used to pause the 
 void addOnExitListener(SendPort responsePort, {Object? response})
 ```
 
-Requests an exit message on [responsePort] when the isolate terminates.
+请求在该 isolate 终止时向 [responsePort] 发送一条退出消息。
 
-The isolate will send [response] as a message on [responsePort] as the last thing before it terminates. It will run no further code after the message has been sent.
+该 isolate 在终止之前的最后一步，会将 [response] 作为消息发送到 [responsePort]。消息发送完毕后，将不再运行任何代码。
 
-Adding the same port more than once will only cause it to receive one exit message, using the last response value that was added, and it only needs to be removed once using [removeOnExitListener].
+多次添加同一个端口，只会使其收到一条退出消息，且使用的是最后一次添加的 response 值；同时只需调用一次 [removeOnExitListener] 即可将其移除。
 
-If the isolate has terminated before it can receive this request, no exit message will be sent.
+如果该 isolate 在能够收到此请求之前就已终止，则不会发送任何退出消息。
 
-The [response] object must follow the same restrictions as enforced by [SendPort.send] when sending to an isolate from another isolate group; only simple values that can be sent to all isolates, like `null`, booleans, numbers or strings, are allowed.
+[response] 对象必须遵循与 [SendPort.send] 在向另一个 isolate 组中的 isolate 发送消息时相同的限制；只允许使用可发送给所有 isolate 的简单值，例如 `null`、布尔值、数字或字符串。
 
-Since isolates run concurrently, it's possible for it to exit before the exit listener is established, and in that case no response will be sent on [responsePort]. To avoid this, either use the corresponding parameter to the spawn function, or start the isolate paused, add the listener and then resume the isolate.
+由于各 isolate 是并发运行的，该 isolate 有可能在退出监听器建立之前就已退出，此时不会向 [responsePort] 发送任何响应。为避免此情况，可以使用 spawn 函数对应的参数，或者以暂停状态启动该 isolate、添加监听器后再将其恢复运行。
 
 ### removeOnExitListener()
 
@@ -461,15 +461,15 @@ Since isolates run concurrently, it's possible for it to exit before the exit li
 void removeOnExitListener(SendPort responsePort)
 ```
 
-Stops listening for exit messages from the isolate.
+停止监听来自该 isolate 的退出消息。
 
-Requests for the isolate to not send exit messages on [responsePort]. If the isolate isn't expecting to send exit messages on [responsePort], because the port hasn't been added using [addOnExitListener], or because it has already been removed, the request is ignored.
+请求该 isolate 不再向 [responsePort] 发送退出消息。如果该 isolate 原本就不会向 [responsePort] 发送退出消息——因为该端口未通过 [addOnExitListener] 添加，或已被移除——则此请求会被忽略。
 
-If the same port has been passed via [addOnExitListener] more than once, only one call to `removeOnExitListener` is needed to stop it from receiving exit messages.
+如果同一个端口曾多次通过 [addOnExitListener] 传入，只需调用一次 `removeOnExitListener` 即可使其停止接收退出消息。
 
-Closing the receive port that is associated with the [responsePort] does not stop the isolate from sending uncaught errors, they are just going to be lost.
+关闭与 [responsePort] 关联的接收端口，并不会阻止该 isolate 发送未捕获的错误，这些错误只是会因此丢失。
 
-An exit message may still be sent if the isolate terminates before this request is received and processed.
+如果该 isolate 在此请求被接收和处理之前就已终止，仍可能会发送退出消息。
 
 ### setErrorsFatal()
 
@@ -477,13 +477,13 @@ An exit message may still be sent if the isolate terminates before this request 
 void setErrorsFatal(bool errorsAreFatal)
 ```
 
-Sets whether uncaught errors will terminate the isolate.
+设置未捕获的错误是否会终止该 isolate。
 
-If errors are fatal, any uncaught error will terminate the isolate event loop and shut down the isolate.
+如果错误被设置为致命的，任何未捕获的错误都会终止该 isolate 的事件循环，并关闭该 isolate。
 
-This call requires the [terminateCapability] for the isolate. If the capability is absent or incorrect, no change is made.
+此调用需要该 isolate 的 [terminateCapability]。如果该 capability 缺失或不正确，则不会做出任何更改。
 
-Since isolates run concurrently, it's possible for the receiving isolate to exit due to an error, before a request, using this method, has been received and processed. To avoid this, either use the corresponding parameter to the spawn function, or start the isolate paused, set errors non-fatal and then resume the isolate.
+由于各 isolate 是并发运行的，接收方 isolate 有可能在通过此方法发出的请求被接收和处理之前，就因错误而退出。为避免此情况，可以使用 spawn 函数对应的参数，或者以暂停状态启动该 isolate、将错误设为非致命后再将其恢复运行。
 
 ### kill()
 
@@ -491,16 +491,16 @@ Since isolates run concurrently, it's possible for the receiving isolate to exit
 void kill({int priority = beforeNextEvent})
 ```
 
-Requests the isolate to shut down.
+请求该 isolate 关闭。
 
-The isolate is requested to terminate itself. The [priority] argument specifies when this must happen.
+请求该 isolate 自行终止。[priority] 参数指定此操作必须在何时发生。
 
-The [priority], when provided, must be one of [immediate] or [beforeNextEvent] (the default). The shutdown is performed at different times depending on the priority:
+如果提供了 [priority]，其值必须为 [immediate] 或 [beforeNextEvent]（默认值）之一。关闭操作会根据优先级在不同的时刻执行：
 
-- `immediate`: The isolate shuts down as soon as possible. Control messages are handled in order, so all previously sent control events from this isolate will all have been processed. The shutdown should happen no later than if sent with `beforeNextEvent`. It may happen earlier if the system has a way to shut down cleanly at an earlier time, even during the execution of another event.
-- `beforeNextEvent`: The shutdown is scheduled for the next time control returns to the event loop of the receiving isolate, after the current event, and any already scheduled control events, are completed.
+- `immediate`：该 isolate 会尽快关闭。控制消息按顺序处理，因此此前从该 isolate 发送的所有控制事件都会先被处理完毕。关闭时间不会晚于使用 `beforeNextEvent` 时的关闭时间；如果系统能够在更早的时刻（甚至在执行另一个事件的过程中）进行干净的关闭，关闭也可能提前发生。
+- `beforeNextEvent`：关闭操作会被安排在控制权下一次返回到接收方 isolate 的事件循环时执行，即在当前事件以及所有已排定的控制事件都执行完毕之后。
 
-If [terminateCapability] is `null`, or it's not the terminate capability of the isolate identified by [controlPort], the kill request is ignored by the receiving isolate.
+如果 [terminateCapability] 为 `null`，或者不是 [controlPort] 所标识 isolate 的终止 capability，接收方 isolate 将忽略该 kill 请求。
 
 ### ping()
 
@@ -508,16 +508,16 @@ If [terminateCapability] is `null`, or it's not the terminate capability of the 
 void ping(SendPort responsePort, {Object? response, int priority = immediate})
 ```
 
-Requests that the isolate send [response] on the [responsePort].
+请求该 isolate 将 [response] 发送到 [responsePort]。
 
-The [response] object must follow the same restrictions as enforced by [SendPort.send] when sending to an isolate from another isolate group; only simple values that can be sent to all isolates, like `null`, booleans, numbers or strings, are allowed.
+[response] 对象必须遵循与 [SendPort.send] 在向另一个 isolate 组中的 isolate 发送消息时相同的限制；只允许使用可发送给所有 isolate 的简单值，例如 `null`、布尔值、数字或字符串。
 
-If the isolate is alive, it will eventually send `response` (defaulting to `null`) on the response port.
+如果该 isolate 处于存活状态，它最终会在响应端口上发送 `response`（默认为 `null`）。
 
-The [priority] must be one of [immediate] or [beforeNextEvent]. The response is sent at different times depending on the ping type:
+[priority] 必须为 [immediate] 或 [beforeNextEvent] 之一。响应的发送时机取决于 ping 的类型：
 
-- `immediate`: The isolate responds as soon as it receives the control message. This is after any previous control message from the same isolate has been received and processed, but may be during execution of another event.
-- `beforeNextEvent`: The response is scheduled for the next time control returns to the event loop of the receiving isolate, after the current event, and any already scheduled control events, are completed.
+- `immediate`：该 isolate 在收到控制消息后立即响应。这发生在同一 isolate 之前的任何控制消息都已被接收和处理之后，但可能是在执行另一个事件的过程中发生。
+- `beforeNextEvent`：响应会被安排在控制权下一次返回到接收方 isolate 的事件循环时发送，即在当前事件以及所有已排定的控制事件都执行完毕之后。
 
 ### addErrorListener()
 
@@ -525,15 +525,15 @@ The [priority] must be one of [immediate] or [beforeNextEvent]. The response is 
 void addErrorListener(SendPort port)
 ```
 
-Requests that uncaught errors of the isolate are sent back to [port].
+请求将该 isolate 的未捕获错误发送回 [port]。
 
-The errors are sent back as two-element lists. The first element is a `String` representation of the error, usually created by calling `toString` on the error. The second element is a `String` representation of an accompanying stack trace, or `null` if no stack trace was provided. To convert this back to a [StackTrace] object, use [StackTrace.fromString].
+错误会以包含两个元素的列表形式发送回来。第一个元素是该错误的 `String` 表示形式，通常通过对该错误调用 `toString` 得到。第二个元素是随附堆栈跟踪的 `String` 表示形式，如果未提供堆栈跟踪则为 `null`。若需将其转换回 [StackTrace] 对象，可使用 [StackTrace.fromString]。
 
-Listening using the same port more than once does nothing. A port will only receive each error once, and will only need to be removed once using [removeErrorListener].
+使用同一端口多次进行监听不会产生任何效果。一个端口对每个错误只会收到一次，也只需调用一次 [removeErrorListener] 即可将其移除。
 
-Closing the receive port that is associated with the port does not stop the isolate from sending uncaught errors, they are just going to be lost. Instead use [removeErrorListener] to stop receiving errors on [port].
+关闭与该端口关联的接收端口，并不会阻止该 isolate 发送未捕获的错误，这些错误只是会因此丢失。若要停止在 [port] 上接收错误，应使用 [removeErrorListener]。
 
-Since isolates run concurrently, it's possible for it to exit before the error listener is established. To avoid this, start the isolate paused, add the listener and then resume the isolate.
+由于各 isolate 是并发运行的，该 isolate 有可能在错误监听器建立之前就已退出。为避免此情况，可以以暂停状态启动该 isolate、添加监听器后再将其恢复运行。
 
 ### removeErrorListener()
 
@@ -541,13 +541,13 @@ Since isolates run concurrently, it's possible for it to exit before the error l
 void removeErrorListener(SendPort port)
 ```
 
-Stops listening for uncaught errors from the isolate.
+停止监听来自该 isolate 的未捕获错误。
 
-Requests for the isolate to not send uncaught errors on [port]. If the isolate isn't expecting to send uncaught errors on [port], because the port hasn't been added using [addErrorListener], or because it has already been removed, the request is ignored.
+请求该 isolate 不再向 [port] 发送未捕获的错误。如果该 isolate 原本就不会向 [port] 发送未捕获的错误——因为该端口未通过 [addErrorListener] 添加，或已被移除——则此请求会被忽略。
 
-If the same port has been passed via [addErrorListener] more than once, only one call to `removeErrorListener` is needed to stop it from receiving uncaught errors.
+如果同一个端口曾多次通过 [addErrorListener] 传入，只需调用一次 `removeErrorListener` 即可使其停止接收未捕获的错误。
 
-Uncaught errors message may still be sent by the isolate until this request is received and processed.
+在此请求被接收和处理之前，该 isolate 仍可能发送未捕获错误消息。
 
 ### errors
 
@@ -555,13 +555,13 @@ Uncaught errors message may still be sent by the isolate until this request is r
 Stream get errors
 ```
 
-Returns a broadcast stream of uncaught errors from the isolate.
+返回一个广播流（broadcast stream），包含来自该 isolate 的未捕获错误。
 
-Each error is provided as an error event on the stream.
+每个错误都会作为流上的一个错误事件提供。
 
-The actual error object and stackTraces will not necessarily be the same object types as in the actual isolate, but they will always have the same [Object.toString] result.
+实际的错误对象和堆栈跟踪不一定与该 isolate 中的实际对象类型相同，但它们的 [Object.toString] 结果始终一致。
 
-This stream is based on [addErrorListener] and [removeErrorListener].
+此流基于 [addErrorListener] 和 [removeErrorListener] 实现。
 
 ### exit()
 
@@ -569,15 +569,15 @@ This stream is based on [addErrorListener] and [removeErrorListener].
 Never exit([SendPort? finalMessagePort, Object? message])
 ```
 
-Terminates the current isolate synchronously.
+同步终止当前 isolate。
 
-This operation is potentially dangerous and should be used judiciously. The isolate stops operating _immediately_. It throws if the optional [message] does not adhere to the limitations on what can be sent from one isolate to another (see [SendPort.send] for more details). It also throws if a [finalMessagePort] is associated with an isolate spawned outside of current isolate group, spawned via [spawnUri]. Please refer to [isolate group](https://dart.dev/language/concurrency#performance-and-isolate-groups) for more details about isolate groups.
+此操作具有潜在危险性，应谨慎使用。该 isolate 会 _立即_ 停止运行。如果可选参数 [message] 不符合 isolate 之间可发送内容的限制（详见 [SendPort.send]），则会抛出异常。如果 [finalMessagePort] 关联的是通过 [spawnUri] 在当前 isolate 组之外创建的 isolate，同样会抛出异常。关于 isolate 组的更多详情，请参见 [isolate group](https://dart.dev/language/concurrency#performance-and-isolate-groups)。
 
-If successful, a call to this method does not return. Pending `finally` blocks are not executed, control flow will not go back to the event loop, scheduled asynchronous asks will never run, and even pending isolate control commands may be ignored. (The isolate will send messages to ports already registered using [Isolate.addOnExitListener], but no further Dart code will run in the isolate.)
+如果成功，此方法的调用将不会返回。待执行的 `finally` 块不会被执行，控制流不会回到事件循环，已排定的异步任务永远不会运行，甚至待处理的 isolate 控制命令也可能被忽略。（该 isolate 仍会向通过 [Isolate.addOnExitListener] 注册的端口发送消息，但不会再运行任何 Dart 代码。）
 
-If [finalMessagePort] is provided, and the [message] can be sent through it (see [SendPort.send] for more details), then the message is sent through that port as the final operation of the current isolate. The isolate terminates immediately after that [SendPort.send] call returns.
+如果提供了 [finalMessagePort]，且 [message] 能够通过该端口发送（详见 [SendPort.send]），则该消息会作为当前 isolate 的最后一步操作通过该端口发送。该 [SendPort.send] 调用返回后，该 isolate 立即终止。
 
-If the port is a native port -- one provided by [ReceivePort.sendPort] or [RawReceivePort.sendPort] -- the system may be able to send this final message more efficiently than normal port communication between live isolates. In these cases this final message object graph will be reassigned to the receiving isolate without copying. Further, the receiving isolate will in most cases be able to receive the message in constant time.
+如果该端口是原生端口——即由 [ReceivePort.sendPort] 或 [RawReceivePort.sendPort] 提供的端口——系统可能会以比正常存活 isolate 间端口通信更高效的方式发送这条最终消息。在这种情况下，这条最终消息的对象图会在不经复制的情况下被重新分配给接收方 isolate。此外，在大多数情况下，接收方 isolate 能够以常数时间接收该消息。
 
 ### runSync()
 
@@ -585,17 +585,17 @@ If the port is a native port -- one provided by [ReceivePort.sendPort] or [RawRe
 R runSync<R>(R Function() f)
 ```
 
-Execute the given function in the context of the given isolate.
+在给定 isolate 的上下文中执行给定的函数。
 
-This function will throw if target isolate is running.
+如果目标 isolate 正在运行，此函数会抛出异常。
 
-Throws an error if target isolate is pinned to another thread and thus can't be entered from this thread. See [pinToCurrentThread] and [isPinnedToCurrentThread].
+如果目标 isolate 已被固定（pin）到另一个线程，从而无法从当前线程进入，会抛出错误。参见 [pinToCurrentThread] 和 [isPinnedToCurrentThread]。
 
-Throws an error if the target isolate belongs to another isolate group.
+如果目标 isolate 属于另一个 isolate 组，会抛出错误。
 
-Throws an error if [f] is not deeply immutable.
+如果 [f] 不是深度不可变（deeply immutable）的，会抛出错误。
 
-Throws an error if result returned by [f] is not deeply immutable.
+如果 [f] 返回的结果不是深度不可变的，会抛出错误。
 
 ### create()
 
@@ -603,16 +603,16 @@ Throws an error if result returned by [f] is not deeply immutable.
 Isolate create({String? debugName})
 ```
 
-Create a new isolate in the current isolate group.
+在当前 isolate 组中创建一个新的 isolate。
 
-Similar to `Dart_CreateIsolateInGroup` Dart VM C API.
+类似于 Dart VM C API 中的 `Dart_CreateIsolateInGroup`。
 
-The isolate has been created, but its event loop is not running.
+该 isolate 已被创建，但其事件循环尚未运行。
 
-To start processing isolate's messages:
+要开始处理该 isolate 的消息：
 
-- start isolate's event loop synchronously on the current thread by calling [Isolate.runEventLoopSync]
-- integrate isolate's event loop with an external event loop by registering event callback ([Isolate.onEvent]) to forward event notifications to an external event loop and then draining pending events ([Isolate.handleEvent]) from that event loop.
+- 通过调用 [Isolate.runEventLoopSync]，在当前线程上同步启动该 isolate 的事件循环；
+- 通过注册事件回调（[Isolate.onEvent]）将事件通知转发给外部事件循环，并从该外部事件循环中处理待处理事件（[Isolate.handleEvent]），从而将该 isolate 的事件循环与外部事件循环集成。
 
 ### shutdownSync()
 
@@ -620,11 +620,11 @@ To start processing isolate's messages:
 void shutdownSync()
 ```
 
-Shut down target isolate.
+关闭目标 isolate。
 
-Shutting down the isolate stops its event loop without processing any pending messages and closes all open receive ports owned by the isolate.
+关闭该 isolate 会在不处理任何待处理消息的情况下停止其事件循环，并关闭该 isolate 拥有的所有已打开的接收端口。
 
-This function will block until it acquires exclusive access to the target isolate. Isolate can only be entered for synchronous execution between turns of its event loop, when no other thread is executing code in the target isolate.
+此函数会阻塞，直到获得对目标 isolate 的独占访问权限。只有当没有其他线程正在目标 isolate 中执行代码时，才能在其事件循环的两次轮转之间进入该 isolate 进行同步执行。
 
 ### pinToCurrentThread()
 
@@ -632,13 +632,13 @@ This function will block until it acquires exclusive access to the target isolat
 bool pinToCurrentThread()
 ```
 
-Pin current isolate to the current OS thread.
+将当前 isolate 固定到当前操作系统线程。
 
-Once an isolate is pinned to an OS thread it cannot be entered by any other OS thread. An attempt to acquire exclusive access to it from another thread will fail with an error.
+一旦某个 isolate 被固定到某个操作系统线程，其他任何操作系统线程都无法进入该 isolate。从另一个线程尝试获取对其的独占访问权限将会失败并报错。
 
-Equivalent to `Dart_SetCurrentThreadOwnsIsolate` Dart VM C API.
+等价于 Dart VM C API 中的 `Dart_SetCurrentThreadOwnsIsolate`。
 
-Returns `true` on success and `false` otherwise (e.g. if target isolate is already pinned to another thread).
+成功时返回 `true`，否则返回 `false`（例如目标 isolate 已被固定到另一个线程时）。
 
 ### isPinnedToCurrentThread
 
@@ -646,9 +646,9 @@ Returns `true` on success and `false` otherwise (e.g. if target isolate is alrea
 bool get isPinnedToCurrentThread
 ```
 
-Whether the isolate is pinned to the current OS thread.
+该 isolate 是否已被固定到当前操作系统线程。
 
-Equivalent to `Dart_GetCurrentThreadOwnsIsolate` Dart VM C API.
+等价于 Dart VM C API 中的 `Dart_GetCurrentThreadOwnsIsolate`。
 
 ### runEventLoopSync()
 
@@ -656,17 +656,17 @@ Equivalent to `Dart_GetCurrentThreadOwnsIsolate` Dart VM C API.
 void runEventLoopSync()
 ```
 
-Run event loop for the target isolate synchronously on the current thread.
+在当前线程上同步运行目标 isolate 的事件循环。
 
-This function will block until it acquires exclusive access to the target isolate. Isolate can only be entered for synchronous execution between turns of its event loop, when no other thread is executing code in the target isolate.
+此函数会阻塞，直到获得对目标 isolate 的独占访问权限。只有当没有其他线程正在目标 isolate 中执行代码时，才能在其事件循环的两次轮转之间进入该 isolate 进行同步执行。
 
-This function will return once the isolate has no open keep-alive receive ports.
+一旦该 isolate 没有任何保持存活（keep-alive）的已打开接收端口，此函数将返回。
 
-The isolate will be marked as pinned to the current thread.
+该 isolate 将被标记为固定到当前线程。
 
-Similar to `Dart_RunLoop` Dart VM C API, but unlike `Dart_RunLoop` this function executes isolate's event loop on the current thread instead of delegating it into the thread-pool.
+类似于 Dart VM C API 中的 `Dart_RunLoop`，但与 `Dart_RunLoop` 不同的是，此函数会在当前线程上执行该 isolate 的事件循环，而不是将其委托给线程池。
 
-Throws an error if target isolate is pinned to another thread or already has an event loop running.
+如果目标 isolate 已被固定到另一个线程，或已有事件循环在运行，会抛出错误。
 
 ### onEvent
 
@@ -674,15 +674,15 @@ Throws an error if target isolate is pinned to another thread or already has an 
 void set onEvent(void Function(Isolate) callback)
 ```
 
-Event notify callback for the isolate.
+该 isolate 的事件通知回调。
 
-Provided callback will be called once for every new event which isolate needs to react to. Pending events can be then later be drained by calling [Isolate.handleEvent].
+每当该 isolate 需要响应一个新事件时，提供的回调都会被调用一次。之后可以通过调用 [Isolate.handleEvent] 来处理待处理的事件。
 
-Provided [callback] must be deeply immutable and will be called on an arbitrary thread and not necessarily within any isolate. See [NativeCallable.isolateGroupBound].
+提供的 [callback] 必须是深度不可变的，且会在任意线程上被调用，未必处于任何 isolate 之内。参见 [NativeCallable.isolateGroupBound]。
 
-IMPORTANT: [Isolate.handleEvent] _MUST NOT_ be called from the `callback` as this will cause a dead-locks of the Dart execution environment.
+重要提示：_不得_ 在 `callback` 中调用 [Isolate.handleEvent]，否则会导致 Dart 执行环境发生死锁。
 
-Similar to `Dart_SetMessageNotifyCallback` Dart VM C API.
+类似于 Dart VM C API 中的 `Dart_SetMessageNotifyCallback`。
 
 ### handleEvent()
 
@@ -690,13 +690,13 @@ Similar to `Dart_SetMessageNotifyCallback` Dart VM C API.
 void handleEvent()
 ```
 
-Handle at most one pending event for the isolate.
+最多处理该 isolate 的一个待处理事件。
 
-This function does nothing if there are no pending events.
+如果没有待处理事件，此函数不执行任何操作。
 
-This function will block until it acquires exclusive access to the target isolate. Isolate can only be entered for synchronous execution between turns of its event loop, when no other thread is executing code in the target isolate.
+此函数会阻塞，直到获得对目标 isolate 的独占访问权限。只有当没有其他线程正在目标 isolate 中执行代码时，才能在其事件循环的两次轮转之间进入该 isolate 进行同步执行。
 
-Similar to `Dart_HandleMessage` Dart VM C API.
+类似于 Dart VM C API 中的 `Dart_HandleMessage`。
 
 # SendPort
 
@@ -704,11 +704,11 @@ Similar to `Dart_HandleMessage` Dart VM C API.
 abstract interface class SendPort implements Capability {}
 ```
 
-Sends messages to its [ReceivePort]s.
+向其对应的 [ReceivePort] 发送消息。
 
-[SendPort]s are created from [ReceivePort]s. Any message sent through a [SendPort] is delivered to its corresponding [ReceivePort]. There might be many [SendPort]s for the same [ReceivePort].
+[SendPort] 由 [ReceivePort] 创建。通过某个 [SendPort] 发送的任何消息都会传递给其对应的 [ReceivePort]。同一个 [ReceivePort] 可能对应多个 [SendPort]。
 
-[SendPort]s can be transmitted to other isolates, and they preserve equality when sent.
+[SendPort] 可以被传递给其他 isolate，并且在发送过程中保持相等性。
 
 ### send()
 
@@ -716,21 +716,21 @@ Sends messages to its [ReceivePort]s.
 void send(Object? message)
 ```
 
-Sends an asynchronous [message] through this send port, to its corresponding [ReceivePort].
+通过此发送端口，向其对应的 [ReceivePort] 发送一条异步 [message]。
 
-If the sending and receiving isolates do not share the same code (an isolate created using [Isolate.spawnUri] does not share the code of the isolate that spawned it), the transitive object graph of [message] can **only** contain the following kinds of objects:
+如果发送方和接收方 isolate 不共享相同的代码（使用 [Isolate.spawnUri] 创建的 isolate 不与创建它的 isolate 共享代码），则 [message] 的传递闭包对象图 **只能** 包含以下几类对象：
 
 - `null`
-- `true` and `false`
-- Instances of [int], [double], [String]
-- Instances created through list, map and set literals
-- Instances created by constructors of: - [List], [Map], [LinkedHashMap], [Set] and [LinkedHashSet] - [TransferableTypedData] - [Capability]
-- [SendPort] instances from [ReceivePort.sendPort] or [RawReceivePort.sendPort] where the receive ports are created using those classes' constructors.
-- Instances of [Type] representing one of the types mentioned above, `Object`, `dynamic`, `void` and `Never` as well as nullable variants of all these types. For generic types type arguments must be sendable types for the whole type to be sendable.
+- `true` 和 `false`
+- [int]、[double]、[String] 的实例
+- 通过列表、映射和集合字面量创建的实例
+- 由以下构造函数创建的实例：[List]、[Map]、[LinkedHashMap]、[Set] 和 [LinkedHashSet]；[TransferableTypedData]；[Capability]
+- 来自 [ReceivePort.sendPort] 或 [RawReceivePort.sendPort] 的 [SendPort] 实例，其中相应的接收端口是通过这些类的构造函数创建的
+- 表示上述类型之一、`Object`、`dynamic`、`void` 和 `Never` 的 [Type] 实例，以及所有这些类型的可空变体。对于泛型类型，其类型参数必须是可发送的类型，整个类型才可发送。
 
-If the sender and receiver isolate share the same code (e.g. isolates created via [Isolate.spawn]), the transitive object graph of [message] can contain any object, with the following exceptions:
+如果发送方和接收方 isolate 共享相同的代码（例如通过 [Isolate.spawn] 创建的 isolate），[message] 的传递闭包对象图可以包含任意对象，但以下情况除外：
 
-- Objects with native resources (subclasses of e.g. `NativeFieldWrapperClass1`). A [Socket] object for example refers internally to objects that have native resources attached and can therefore not be sent.
+- 具有原生资源的对象（例如 `NativeFieldWrapperClass1` 的子类）。例如，[Socket] 对象内部引用了附带原生资源的对象，因此无法被发送。
 - [ReceivePort]
 - [DynamicLibrary]
 - [Finalizable]
@@ -739,13 +739,13 @@ If the sender and receiver isolate share the same code (e.g. isolates created vi
 - [UserTag]
 - `MirrorReference`
 
-Instances of classes that either themselves are marked with `@pragma('vm:isolate-unsendable')`, extend or implement such classes cannot be sent through the ports.
+凡是本身标注了 `@pragma('vm:isolate-unsendable')` 的类，或继承、实现了此类类的类，其实例都无法通过端口发送。
 
-Apart from those exceptions any object can be sent. Objects that are identified as immutable (e.g. strings) will be shared whereas all other objects will be copied.
+除上述例外情况外，任何对象都可以发送。被判定为不可变的对象（例如字符串）会被共享，而其他所有对象都会被复制。
 
-The send happens immediately and may have a linear time cost to copy the transitive object graph. The send itself doesn't block (i.e. doesn't wait until the receiver has received the message). The corresponding receive port can receive the message as soon as its isolate's event loop is ready to deliver it, independently of what the sending isolate is doing.
+发送操作会立即进行，复制传递闭包对象图可能会产生与其大小呈线性关系的时间开销。发送操作本身不会阻塞（即不会等待接收方收到消息）。只要对应接收端口所在 isolate 的事件循环准备好投递消息，该端口便可以接收到消息，这与发送方 isolate 当时在做什么无关。
 
-Note: Due to an implementation choice the Dart VM made for how closures represent captured state, closures can currently capture more state than they need, which can cause the transitive closure to be larger than needed. Open bug to address this: http://dartbug.com/36983
+注意：由于 Dart VM 在闭包表示已捕获状态方面所做的实现选择，闭包目前可能会捕获比实际所需更多的状态，这可能导致传递闭包比所需的更大。相关未解决问题参见：http://dartbug.com/36983
 
 ### operator ==()
 
@@ -753,7 +753,7 @@ Note: Due to an implementation choice the Dart VM made for how closures represen
 bool operator ==(dynamic other)
 ```
 
-Tests whether [other] is a [SendPort] pointing to the same [ReceivePort] as this one.
+测试 [other] 是否为指向与当前对象相同 [ReceivePort] 的 [SendPort]。
 
 ### hashCode
 
@@ -761,7 +761,7 @@ Tests whether [other] is a [SendPort] pointing to the same [ReceivePort] as this
 int get hashCode
 ```
 
-A hash code for this send port that is consistent with the == operator.
+该发送端口的哈希码，与 `==` 运算符保持一致。
 
 # ReceivePort
 
@@ -769,13 +769,13 @@ A hash code for this send port that is consistent with the == operator.
 abstract interface class ReceivePort implements Stream<dynamic> {}
 ```
 
-Together with [SendPort], the only means of communication between isolates.
+与 [SendPort] 一起，构成 isolate 之间通信的唯一方式。
 
-[ReceivePort]s have a `sendPort` getter which returns a [SendPort]. Any message that is sent through this [SendPort] is delivered to the [ReceivePort] it has been created from. There, the message is dispatched to the `ReceivePort`'s listener.
+[ReceivePort] 具有一个 `sendPort` 获取器，返回一个 [SendPort]。通过该 [SendPort] 发送的任何消息都会传递给创建它的那个 [ReceivePort]，并在那里被分派给该 `ReceivePort` 的监听器。
 
-A [ReceivePort] is a non-broadcast stream. This means that it buffers incoming messages until a listener is registered. Only one listener can receive messages. See [Stream.asBroadcastStream] for transforming the port to a broadcast stream.
+[ReceivePort] 是一个非广播流（non-broadcast stream）。这意味着在注册监听器之前，它会缓冲收到的消息。只能有一个监听器接收消息。若要将该端口转换为广播流，请参见 [Stream.asBroadcastStream]。
 
-A [ReceivePort] may have many [SendPort]s.
+一个 [ReceivePort] 可以对应多个 [SendPort]。
 
 ### ReceivePort()
 
@@ -783,13 +783,13 @@ A [ReceivePort] may have many [SendPort]s.
 ReceivePort([String debugName = ''])
 ```
 
-Opens a long-lived port for receiving messages.
+打开一个长期存在的端口用于接收消息。
 
-A [ReceivePort] is a non-broadcast stream. This means that it buffers incoming messages until a listener is registered. Only one listener can receive messages. See [Stream.asBroadcastStream] for transforming the port to a broadcast stream.
+[ReceivePort] 是一个非广播流。这意味着在注册监听器之前，它会缓冲收到的消息。只能有一个监听器接收消息。若要将该端口转换为广播流，请参见 [Stream.asBroadcastStream]。
 
-The optional `debugName` parameter can be set to associate a name with this port that can be displayed in tooling.
+可设置可选的 `debugName` 参数，为该端口关联一个可在工具中显示的名称。
 
-A receive port is closed by canceling its subscription.
+通过取消其订阅来关闭一个接收端口。
 
 ### ReceivePort.fromRawReceivePort()
 
@@ -797,9 +797,9 @@ A receive port is closed by canceling its subscription.
 ReceivePort.fromRawReceivePort(RawReceivePort rawPort)
 ```
 
-Creates a [ReceivePort] from a [RawReceivePort].
+根据一个 [RawReceivePort] 创建一个 [ReceivePort]。
 
-The handler of the given [rawPort] is overwritten during the construction of the result.
+在构造结果对象的过程中，给定 [rawPort] 的处理器（handler）会被覆盖。
 
 ### listen()
 
@@ -807,13 +807,13 @@ The handler of the given [rawPort] is overwritten during the construction of the
 StreamSubscription<dynamic> listen(void onData(dynamic message), {Function? onError, void onDone(), bool? cancelOnError})
 ```
 
-Listen for events from [Stream].
+监听来自 [Stream] 的事件。
 
-See [Stream.listen].
+参见 [Stream.listen]。
 
-Note that [onError] and [cancelOnError] are ignored since a [ReceivePort] will never receive an error.
+请注意，由于 [ReceivePort] 永远不会收到错误，[onError] 和 [cancelOnError] 会被忽略。
 
-The [onDone] handler will be called when the stream closes. The stream closes when [close] is called.
+流关闭时会调用 [onDone] 处理器。调用 [close] 时流会关闭。
 
 ### close()
 
@@ -821,13 +821,13 @@ The [onDone] handler will be called when the stream closes. The stream closes wh
 void close()
 ```
 
-Closes the receive port.
+关闭该接收端口。
 
-No further events will be received by the receive port, or emitted as stream events.
+该接收端口将不再接收任何事件，也不会再作为流事件发出。
 
-If [listen] has been called and the [StreamSubscription] has not been canceled yet, the subscription will be closed with a "done" event.
+如果已调用 [listen] 且 [StreamSubscription] 尚未被取消，该订阅将随一个 "done" 事件一起关闭。
 
-If the stream has already been canceled this method has no effect.
+如果该流已被取消，此方法不会产生任何效果。
 
 ### sendPort
 
@@ -835,7 +835,7 @@ If the stream has already been canceled this method has no effect.
 SendPort get sendPort
 ```
 
-A [SendPort] which sends messages to this receive port.
+一个向该接收端口发送消息的 [SendPort]。
 
 # RawReceivePort
 
@@ -843,13 +843,13 @@ A [SendPort] which sends messages to this receive port.
 abstract interface class RawReceivePort {}
 ```
 
-A low-level asynchronous message receiver.
+一个低级别的异步消息接收器。
 
-A [RawReceivePort] is low level feature, and is not [Zone] aware. The [handler] will always be invoked in the [Zone.root] zone.
+[RawReceivePort] 是一个低级别特性，不感知 [Zone]。[handler] 始终会在 [Zone.root] 区域（zone）中被调用。
 
-The port cannot be paused. The data-handler must be set before the first message is received, otherwise the message is lost.
+该端口无法被暂停。数据处理器必须在收到第一条消息之前设置好，否则该消息会丢失。
 
-Messages can be sent to this port using [sendPort].
+可以使用 [sendPort] 向该端口发送消息。
 
 ### RawReceivePort()
 
@@ -857,13 +857,13 @@ Messages can be sent to this port using [sendPort].
 RawReceivePort([Function? handler, String debugName = ''])
 ```
 
-Opens a long-lived port for receiving messages.
+打开一个长期存在的端口用于接收消息。
 
-A [RawReceivePort] is low level and does not work with [Zone]s. It cannot be paused. The data-handler must be set before the first message is received, otherwise the message is lost.
+[RawReceivePort] 是低级别的，不支持 [Zone]。它无法被暂停。数据处理器必须在收到第一条消息之前设置好，否则该消息会丢失。
 
-If [handler] is provided, it's set as the [RawReceivePort.handler].
+如果提供了 [handler]，会将其设为 [RawReceivePort.handler]。
 
-The optional `debugName` parameter can be set to associate a name with this port that can be displayed in tooling.
+可设置可选的 `debugName` 参数，为该端口关联一个可在工具中显示的名称。
 
 ### handler
 
@@ -871,15 +871,15 @@ The optional `debugName` parameter can be set to associate a name with this port
 void set handler(Function? newHandler)
 ```
 
-Sets the handler that is invoked for every incoming message.
+设置每条收到的消息都会调用的处理器。
 
-The handler is invoked in the [Zone.root] zone. If the handler should be invoked in the current zone, do:
+该处理器会在 [Zone.root] 区域中被调用。如果需要在当前区域中调用该处理器，可执行以下操作：
 
 ```dart import:async
 rawPort.handler = Zone.current.bindCallback(actualHandler);
 ```
 
-The handler must be a function which can accept one argument of the type of the messages sent to this port. This means that if it is known that messages will all be [String]s, a handler of type `void Function(String)` can be used. The function is invoked dynamically with the actual messages, and if this invocation fails, the error becomes a top-level uncaught error in the [Zone.root] zone.
+该处理器必须是一个能够接受一个参数的函数，该参数类型与发送到此端口的消息类型一致。这意味着，如果已知所有消息都将是 [String] 类型，则可以使用类型为 `void Function(String)` 的处理器。该函数会以实际消息动态调用，如果此次调用失败，该错误会成为 [Zone.root] 区域中的顶层未捕获错误。
 
 ### close()
 
@@ -887,9 +887,9 @@ The handler must be a function which can accept one argument of the type of the 
 void close()
 ```
 
-Closes the port.
+关闭该端口。
 
-After a call to this method, any incoming message is silently dropped. The [handler] will never be called again.
+调用此方法后，任何传入的消息都会被静默丢弃，[handler] 也不会再被调用。
 
 ### sendPort
 
@@ -897,7 +897,7 @@ After a call to this method, any incoming message is silently dropped. The [hand
 SendPort get sendPort
 ```
 
-Returns a [SendPort] that sends messages to this raw receive port.
+返回一个向此原始接收端口发送消息的 [SendPort]。
 
 ### keepIsolateAlive
 
@@ -905,9 +905,9 @@ Returns a [SendPort] that sends messages to this raw receive port.
 bool keepIsolateAlive
 ```
 
-Whether this [RawReceivePort] keeps its [Isolate] alive.
+该 [RawReceivePort] 是否使其所属的 [Isolate] 保持存活。
 
-By default, receive ports keep the [Isolate] that created them alive until [close] is called. If [keepIsolateAlive] is set to `false`, the isolate may close while the port is still open. The port is closed when the isolate closes, and further messages sent by the [sendPort] are ignored.
+默认情况下，接收端口会使创建它们的 [Isolate] 保持存活，直到调用 [close] 为止。如果 [keepIsolateAlive] 设为 `false`，即使该端口仍处于打开状态，该 isolate 也可能关闭。当该 isolate 关闭时，该端口也会关闭，此后通过 [sendPort] 发送的消息都会被忽略。
 
 # RemoteError
 
@@ -915,9 +915,9 @@ By default, receive ports keep the [Isolate] that created them alive until [clos
 final class RemoteError implements Error {}
 ```
 
-Description of an error from another isolate.
+来自另一个 isolate 的错误描述。
 
-This error has the same `toString()` and `stackTrace.toString()` behavior as the original error, but has no other features of the original error.
+此错误在 `toString()` 和 `stackTrace.toString()` 方面与原始错误行为一致，但不具备原始错误的其他特性。
 
 ### stackTrace
 
@@ -943,13 +943,13 @@ String toString()
 abstract final class TransferableTypedData {}
 ```
 
-An efficiently transferable sequence of byte values.
+一个可高效传输的字节值序列。
 
-A [TransferableTypedData] is created from a number of bytes. This will take time proportional to the number of bytes.
+[TransferableTypedData] 由若干字节创建而成，此过程所需时间与字节数成正比。
 
-The [TransferableTypedData] can be moved between isolates, so sending it through a send port will only take constant time.
+[TransferableTypedData] 可以在 isolate 之间移动，因此通过发送端口发送它只需要常数时间。
 
-When sent this way, the local transferable can no longer be materialized, and the received object is now the only way to materialize the data.
+以这种方式发送后，本地的可传输对象将无法再被具体化（materialize），此后只能通过接收到的对象来具体化该数据。
 
 ### TransferableTypedData.fromList()
 
@@ -957,9 +957,9 @@ When sent this way, the local transferable can no longer be materialized, and th
 TransferableTypedData.fromList(List<TypedData> list)
 ```
 
-Creates a new [TransferableTypedData] containing the bytes of [list].
+创建一个新的 [TransferableTypedData]，其中包含 [list] 的字节内容。
 
-It must be possible to create a single [Uint8List] containing the bytes, so if there are more bytes than what the platform allows in a single [Uint8List], then creation fails.
+必须能够创建出一个包含这些字节的单一 [Uint8List]；因此，如果字节数超过了平台对单一 [Uint8List] 所允许的上限，则创建会失败。
 
 ### materialize()
 
@@ -967,6 +967,6 @@ It must be possible to create a single [Uint8List] containing the bytes, so if t
 ByteBuffer materialize()
 ```
 
-Creates a new [ByteBuffer] containing the bytes stored in this [TransferableTypedData].
+创建一个新的 [ByteBuffer]，其中包含存储在此 [TransferableTypedData] 中的字节。
 
-The [TransferableTypedData] is a cross-isolate single-use resource. This method must not be called more than once on the same underlying transferable bytes, even if the calls occur in different isolates.
+[TransferableTypedData] 是一种跨 isolate 的一次性资源。即使调用发生在不同的 isolate 中，也不得对同一底层可传输字节多次调用此方法。
