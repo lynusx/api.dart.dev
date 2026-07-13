@@ -18,9 +18,9 @@ class Object {}
 Object()
 ```
 
-创建一个新的 [Object] 实例。
+创建一个新的 [Object](https://www.yuque.com/thyname/dart.core/object) 实例。
 
-[Object] 实例没有实际意义的状态，仅通过其标识才有用。一个 [Object] 实例只与自身相等。
+[Object](https://www.yuque.com/thyname/dart.core/object) 实例没有实际意义的状态，仅通过其标识才有用。一个 [Object](https://www.yuque.com/thyname/dart.core/object) 实例只与自身相等。
 
 ## 静态方法
 
@@ -152,13 +152,13 @@ int get hashCode
 
 哈希码是一个单一整数，表示影响 [operator ==] 比较结果的对象状态。
 
-所有对象都有哈希码。[Object] 实现的默认哈希码仅表示对象的标识，这与默认的 [operator ==] 实现方式相同——只有在对象完全相同（identical）时才认为它们相等（参见 [identityHashCode]）。
+所有对象都有哈希码。[Object](https://www.yuque.com/thyname/dart.core/object) 实现的默认哈希码仅表示对象的标识，这与默认的 [operator ==] 实现方式相同——只有在对象完全相同（identical）时才认为它们相等（参见 [identityHashCode](https://www.yuque.com/thyname/dart.core/identityhashcode)）。
 
-如果重写 [operator ==] 以改用对象状态进行比较，则哈希码也必须相应更改以表示该状态，否则该对象将无法用于基于哈希的数据结构，例如默认的 [Set] 和 [Map] 实现。
+如果重写 [operator ==] 以改用对象状态进行比较，则哈希码也必须相应更改以表示该状态，否则该对象将无法用于基于哈希的数据结构，例如默认的 [Set](https://www.yuque.com/thyname/dart.core/set) 和 [Map](https://www.yuque.com/thyname/dart.core/map) 实现。
 
 根据 [operator ==] 判定为相等的对象，其哈希码必须相同。对象的哈希码只应在对象发生影响相等性的变化时才改变。除此之外，对哈希码没有其他要求：它们在同一程序的不同运行之间无需保持一致，也没有分布方面的保证。
 
-不相等的对象允许拥有相同的哈希码。从技术上讲，甚至允许所有实例都拥有相同的哈希码，但如果冲突发生得过于频繁，可能会降低 [HashSet] 或 [HashMap] 等基于哈希的数据结构的效率。
+不相等的对象允许拥有相同的哈希码。从技术上讲，甚至允许所有实例都拥有相同的哈希码，但如果冲突发生得过于频繁，可能会降低 [HashSet](https://www.yuque.com/thyname/dart.collection/hashset) 或 [HashMap](https://www.yuque.com/thyname/dart.collection/hashmap) 等基于哈希的数据结构的效率。
 
 如果子类重写了 [hashCode]，则也应重写 [operator ==] 运算符，以保持一致性。
 
@@ -199,7 +199,7 @@ dynamic object = 1;
 object.add(42); // Statically allowed, run-time error
 ```
 
-这段无效代码会调用整数 `1` 的 `noSuchMethod` 方法，并传入一个表示 `.add(42)` 调用及其参数的 [Invocation]（随后会抛出异常）。
+这段无效代码会调用整数 `1` 的 `noSuchMethod` 方法，并传入一个表示 `.add(42)` 调用及其参数的 [Invocation](https://www.yuque.com/thyname/dart.core/invocation)（随后会抛出异常）。
 
 类可以重写 [noSuchMethod]，为此类无效的动态调用提供自定义行为。
 
@@ -221,7 +221,7 @@ void main() {
 
 如果 `noSuchMethod` 返回了一个值，该值将成为原始调用的结果。如果该值的类型不是原始调用可以返回的类型，则会在调用处发生类型错误。
 
-默认行为是抛出一个 [NoSuchMethodError]。
+默认行为是抛出一个 [NoSuchMethodError](https://www.yuque.com/thyname/dart.core/nosuchmethoderror)。
 
 ## 运算符
 
@@ -233,7 +233,7 @@ bool operator ==(Object other)
 
 相等运算符。
 
-对于所有 [Object]，默认行为是当且仅当该对象与 [other] 是同一个对象时才返回 true。
+对于所有 [Object](https://www.yuque.com/thyname/dart.core/object)，默认行为是当且仅当该对象与 [other] 是同一个对象时才返回 true。
 
 重写此方法可为类指定不同的相等关系。重写后的方法仍必须是一个等价关系，即必须满足：
 

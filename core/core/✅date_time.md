@@ -91,14 +91,14 @@ print(dDay.isAtSameMomentAs(localDay)); // true
 
 ## 将 DateTime 与 Duration 结合使用
 
-使用 [add] 和 [subtract] 方法配合 [Duration] 对象，可以基于另一个 `DateTime` 创建新的 `DateTime` 对象。例如，要找到从现在起 36 小时后的时间点，可以这样写：
+使用 [add] 和 [subtract] 方法配合 [Duration](https://www.yuque.com/thyname/dart.core/duration) 对象，可以基于另一个 `DateTime` 创建新的 `DateTime` 对象。例如，要找到从现在起 36 小时后的时间点，可以这样写：
 
 ```dart
 final now = DateTime.now();
 final later = now.add(const Duration(hours: 36));
 ```
 
-要计算两个 `DateTime` 对象之间相隔的时间，请使用 [difference]，它会返回一个 [Duration] 对象：
+要计算两个 `DateTime` 对象之间相隔的时间，请使用 [difference]，它会返回一个 [Duration](https://www.yuque.com/thyname/dart.core/duration) 对象：
 
 ```
 final difference = berlinWallFell.difference(moonLanding);
@@ -109,8 +109,8 @@ print(difference.inDays); // 7416
 
 ## 其他资源
 
-- 请参阅 [Duration] 以表示一段时间跨度。
-- 请参阅 [Stopwatch] 以测量时间跨度。
+- 请参阅 [Duration](https://www.yuque.com/thyname/dart.core/duration) 以表示一段时间跨度。
+- 请参阅 [Stopwatch](https://www.yuque.com/thyname/dart.core/stopwatch) 以测量时间跨度。
 - `DateTime` 类不提供国际化支持。如需为代码添加国际化支持，请使用 [intl](https://pub.dev/packages/intl) 包。
 
 ## 构造函数
@@ -130,7 +130,7 @@ DateTime(
 ])
 ```
 
-构造一个以本地时区表示的 [DateTime] 实例。
+构造一个以本地时区表示的 [DateTime](https://www.yuque.com/thyname/dart.core/datetime) 实例。
 
 例如，创建一个表示 2017 年 9 月 7 日下午 5:30 的 `DateTime` 对象：
 
@@ -153,7 +153,7 @@ DateTime.utc(
 ])
 ```
 
-构造一个以 UTC 时区表示的 [DateTime] 实例。
+构造一个以 UTC 时区表示的 [DateTime](https://www.yuque.com/thyname/dart.core/datetime) 实例。
 
 ```dart
 final moonLanding = DateTime.utc(1969, 7, 20, 20, 18, 04);
@@ -167,7 +167,7 @@ final moonLanding = DateTime.utc(1969, 7, 20, 20, 18, 04);
 DateTime.now()
 ```
 
-构造一个表示本地时区当前日期和时间的 [DateTime] 实例。
+构造一个表示本地时区当前日期和时间的 [DateTime](https://www.yuque.com/thyname/dart.core/datetime) 实例。
 
 ```dart
 final now = DateTime.now();
@@ -180,7 +180,7 @@ final now = DateTime.now();
 DateTime.timestamp()
 ```
 
-构造一个表示当前 UTC 日期和时间的 [DateTime]。
+构造一个表示当前 UTC 日期和时间的 [DateTime](https://www.yuque.com/thyname/dart.core/datetime)。
 
 ```dart
 final mark = DateTime.timestamp();
@@ -195,11 +195,11 @@ DateTime.fromMillisecondsSinceEpoch(
 })
 ```
 
-根据给定的 [millisecondsSinceEpoch] 构造一个新的 [DateTime] 实例。
+根据给定的 [millisecondsSinceEpoch] 构造一个新的 [DateTime](https://www.yuque.com/thyname/dart.core/datetime) 实例。
 
 如果 [isUtc] 为 false，则该日期处于本地时区。
 
-构造出的 [DateTime] 表示在给定时区（本地或 UTC）中，1970-01-01T00:00:00Z + [millisecondsSinceEpoch] 毫秒所对应的时间。
+构造出的 [DateTime](https://www.yuque.com/thyname/dart.core/datetime) 表示在给定时区（本地或 UTC）中，1970-01-01T00:00:00Z + [millisecondsSinceEpoch] 毫秒所对应的时间。
 
 ```dart
 final newYearsDay =
@@ -216,11 +216,11 @@ DateTime.fromMicrosecondsSinceEpoch(
 })
 ```
 
-根据给定的 [microsecondsSinceEpoch] 构造一个新的 [DateTime] 实例。
+根据给定的 [microsecondsSinceEpoch] 构造一个新的 [DateTime](https://www.yuque.com/thyname/dart.core/datetime) 实例。
 
 如果 [isUtc] 为 false，则该日期处于本地时区。
 
-构造出的 [DateTime] 表示在给定时区（本地或 UTC）中，1970-01-01T00:00:00Z + [microsecondsSinceEpoch] 微秒所对应的时间。
+构造出的 [DateTime](https://www.yuque.com/thyname/dart.core/datetime) 表示在给定时区（本地或 UTC）中，1970-01-01T00:00:00Z + [microsecondsSinceEpoch] 微秒所对应的时间。
 
 ```dart
 final newYearsEve =
@@ -269,9 +269,9 @@ static const int monthsPerYear = 12;
 DateTime parse(String formattedString)
 ```
 
-根据 [formattedString] 构造一个新的 [DateTime] 实例。
+根据 [formattedString] 构造一个新的 [DateTime](https://www.yuque.com/thyname/dart.core/datetime) 实例。
 
-如果输入字符串无法解析，将抛出 [FormatException]。
+如果输入字符串无法解析，将抛出 [FormatException](https://www.yuque.com/thyname/dart.core/formatexception)。
 
 该函数解析 ISO 8601 的一个子集，其中包括 RFC 3339 所接受的子集。
 
@@ -310,9 +310,9 @@ DateTime parse(String formattedString)
 DateTime? tryParse(String formattedString)
 ```
 
-根据 [formattedString] 构造一个新的 [DateTime] 实例。
+根据 [formattedString] 构造一个新的 [DateTime](https://www.yuque.com/thyname/dart.core/datetime) 实例。
 
-其工作方式与 [parse] 类似，不同之处在于，当 [parse] 会抛出 [FormatException] 时，该函数会返回 `null`。
+其工作方式与 [parse] 类似，不同之处在于，当 [parse] 会抛出 [FormatException](https://www.yuque.com/thyname/dart.core/formatexception) 时，该函数会返回 `null`。
 
 ## 属性
 
@@ -322,7 +322,7 @@ DateTime? tryParse(String formattedString)
 bool isUtc
 ```
 
-如果该 [DateTime] 设置为 UTC 时间，则为 true。
+如果该 [DateTime](https://www.yuque.com/thyname/dart.core/datetime) 设置为 UTC 时间，则为 true。
 
 ```dart
 final dDay = DateTime.utc(1944, 6, 6);
@@ -537,7 +537,7 @@ int get hashCode
 bool isBefore(DateTime other)
 ```
 
-判断该 [DateTime] 是否发生在 [other] 之前。
+判断该 [DateTime](https://www.yuque.com/thyname/dart.core/datetime) 是否发生在 `other` 之前。
 
 该比较与时间是 UTC 还是本地时区无关。
 
@@ -561,7 +561,7 @@ print(!now.isBefore(now.toUtc())); // true
 bool isAfter(DateTime other)
 ```
 
-判断该 [DateTime] 是否发生在 [other] 之后。
+判断该 [DateTime](https://www.yuque.com/thyname/dart.core/datetime) 是否发生在 `other` 之后。
 
 该比较与时间是 UTC 还是本地时区无关。
 
@@ -585,7 +585,7 @@ print(!now.isAfter(now.toUtc())); // true
 bool isAtSameMomentAs(DateTime other)
 ```
 
-判断该 [DateTime] 是否与 [other] 处于同一时刻。
+判断该 [DateTime](https://www.yuque.com/thyname/dart.core/datetime) 是否与 `other` 处于同一时刻。
 
 该比较与时间是 UTC 还是本地时区无关。
 
@@ -609,13 +609,13 @@ print(now.isAtSameMomentAs(now.toUtc())); // true
 int compareTo(DateTime other)
 ```
 
-将该 DateTime 对象与 [other] 进行比较，若两者值相等，返回零。
+将该 DateTime 对象与 `other` 进行比较，若两者值相等，返回零。
 
 [compareTo] 函数返回：
 
-- 若该 DateTime [isBefore] [other]，返回负值。
-- 若该 DateTime [isAtSameMomentAs] [other]，返回 `0`；
-- 否则（即该 DateTime [isAfter] [other] 时）返回正值。
+- 若该 DateTime [isBefore] `other`，返回负值。
+- 若该 DateTime [isAtSameMomentAs] `other`，返回 `0`；
+- 否则（即该 DateTime [isAfter] `other` 时）返回正值。
 
 ```dart
 final now = DateTime.now();
@@ -636,7 +636,7 @@ DateTime toLocal()
 
 以本地时区返回该 DateTime 值。
 
-如果该 [DateTime] 已经处于本地时区，则直接返回该对象本身。否则，该方法等价于：
+如果该 [DateTime](https://www.yuque.com/thyname/dart.core/datetime) 已经处于本地时区，则直接返回该对象本身。否则，该方法等价于：
 
 ```dart template:expression
 DateTime.fromMicrosecondsSinceEpoch(microsecondsSinceEpoch,
@@ -651,7 +651,7 @@ DateTime toUtc()
 
 以 UTC 时区返回该 DateTime 值。
 
-如果该 [DateTime] 已经处于 UTC，则直接返回该对象本身。否则，该方法等价于：
+如果该 [DateTime](https://www.yuque.com/thyname/dart.core/datetime) 已经处于 UTC，则直接返回该对象本身。否则，该方法等价于：
 
 ```dart template:expression
 DateTime.fromMicrosecondsSinceEpoch(microsecondsSinceEpoch,
@@ -703,7 +703,7 @@ print(isoDate); // 1969-07-20T20:18:04.000Z
 DateTime add(Duration duration)
 ```
 
-返回一个新的 [DateTime] 实例，该实例是在该 [DateTime] 的基础上加上 [duration] 得到的。
+返回一个新的 [DateTime](https://www.yuque.com/thyname/dart.core/datetime) 实例，该实例是在该 [DateTime](https://www.yuque.com/thyname/dart.core/datetime) 的基础上加上 [duration] 得到的。
 
 ```dart
 final today = DateTime.now();
@@ -720,7 +720,7 @@ final fiftyDaysFromNow = today.add(const Duration(days: 50));
 DateTime subtract(Duration duration)
 ```
 
-返回一个新的 [DateTime] 实例，该实例是在该 [DateTime] 的基础上减去 [duration] 得到的。
+返回一个新的 [DateTime](https://www.yuque.com/thyname/dart.core/datetime) 实例，该实例是在该 [DateTime](https://www.yuque.com/thyname/dart.core/datetime) 的基础上减去 [duration] 得到的。
 
 ```dart
 final today = DateTime.now();
@@ -737,9 +737,9 @@ final fiftyDaysAgo = today.subtract(const Duration(days: 50));
 Duration difference(DateTime other)
 ```
 
-返回一个 [Duration]，表示用该 [DateTime] 减去 [other] 所得到的差值。
+返回一个 [Duration](https://www.yuque.com/thyname/dart.core/duration)，表示用该 [DateTime](https://www.yuque.com/thyname/dart.core/datetime) 减去 `other` 所得到的差值。
 
-如果 [other] 发生在该 [DateTime] 之后，则返回的 [Duration] 为负值。
+如果 `other` 发生在该 [DateTime](https://www.yuque.com/thyname/dart.core/datetime) 之后，则返回的 [Duration](https://www.yuque.com/thyname/dart.core/duration) 为负值。
 
 ```dart
 final berlinWallFell = DateTime.utc(1989, DateTime.november, 9);
@@ -771,7 +771,7 @@ assert(difference.inDays == 16592);
 bool operator ==(Object other)
 ```
 
-判断 [other] 是否是与该对象处于同一时刻且位于同一时区（UTC 或本地）的 [DateTime]。
+判断 `other` 是否是与该对象处于同一时刻且位于同一时区（UTC 或本地）的 [DateTime](https://www.yuque.com/thyname/dart.core/datetime)。
 
 ```dart
 final dDayUtc = DateTime.utc(1944, 6, 6);
@@ -790,7 +790,7 @@ print(dDayUtc != dDayLocal); // true
 extension DateTimeCopyWith on DateTime {}
 ```
 
-为 [DateTime] 对象添加 [copyWith] 方法。
+为 [DateTime](https://www.yuque.com/thyname/dart.core/datetime) 对象添加 [copyWith] 方法。
 
 ### copyWith()
 
@@ -808,9 +808,9 @@ DateTime copyWith({
 })
 ```
 
-通过更新各个属性，基于当前 [DateTime] 创建一个新的 [DateTime]。
+通过更新各个属性，基于当前 [DateTime](https://www.yuque.com/thyname/dart.core/datetime) 创建一个新的 [DateTime](https://www.yuque.com/thyname/dart.core/datetime)。
 
-[copyWith] 方法会创建一个新的 [DateTime] 对象，其 [DateTime.year]、[DateTime.hour] 等属性的值，由对应名称的参数提供；如果未提供参数或参数为 `null`，则使用该属性的现有值。
+[copyWith] 方法会创建一个新的 [DateTime](https://www.yuque.com/thyname/dart.core/datetime) 对象，其 [DateTime.year]、[DateTime.hour] 等属性的值，由对应名称的参数提供；如果未提供参数或参数为 `null`，则使用该属性的现有值。
 
 示例：
 
@@ -820,6 +820,6 @@ final sameTimeOnMoonLandingDay =
     now.copyWith(year: 1969, month: 07, day: 20);
 ```
 
-与 [DateTime] 和 [DateTime.utc] 构造函数（该操作正是使用它们来创建新值）一样，允许属性值超出其范围（例如 [month] 超出 1 到 12 的范围），这可能会影响更高位的属性（例如，月份为 13 会导致结果为次年的 1 月）。
+与 [DateTime](https://www.yuque.com/thyname/dart.core/datetime) 和 [DateTime.utc] 构造函数（该操作正是使用它们来创建新值）一样，允许属性值超出其范围（例如 [month] 超出 1 到 12 的范围），这可能会影响更高位的属性（例如，月份为 13 会导致结果为次年的 1 月）。
 
 还需注意，如果结果是本地时间的 DateTime，季节性时区调整（夏令时）可能导致某些日期、小时和分钟的组合不存在，或存在多次。前一种情况下，会使用两个相邻时区中对应的时间代替；后一种情况下，则会从两个选项中选择其一。

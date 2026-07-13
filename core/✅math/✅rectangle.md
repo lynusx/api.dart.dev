@@ -6,7 +6,7 @@ class Rectangle<T extends num> extends _RectangleBase<T> {}
 
 用于表示属性不可变的二维矩形的类。
 
-**遗留特性：** 不建议在新代码中使用 [Rectangle]。
+**遗留特性：** 不建议在新代码中使用 [Rectangle](https://www.yuque.com/thyname/dart.math/rectangle)。
 
 - 如果你正在将 `Rectangle` 类与 `dart:html` 一起使用，建议迁移到 `package:web`。要了解如何迁移及原因，请查看[迁移指南](https://dart.dev/go/package-web)。
 - 如果你想在某个坐标系中存储矩形的边界，可以考虑使用[记录（record）](https://dart.dev/language/records)。根据具体用法，可以写成 `var boundaries = (mixX: x1, maxX: x2, minY: y1, maxY: y2)`。
@@ -44,7 +44,7 @@ print(rectangle.right); // 320
 print(rectangle.bottom); // 650
 ```
 
-**遗留特性：** 不建议在新代码中使用 [Rectangle]。要了解更多信息，请查看 [Rectangle] 类的 API 文档。
+**遗留特性：** 不建议在新代码中使用 [Rectangle](https://www.yuque.com/thyname/dart.math/rectangle)。要了解更多信息，请查看 [Rectangle](https://www.yuque.com/thyname/dart.math/rectangle) 类的 API 文档。
 
 ### Rectangle.fromPoints()
 
@@ -52,7 +52,7 @@ print(rectangle.bottom); // 650
 Rectangle<T extends num>.fromPoints(Point<T> a, Point<T> b)
 ```
 
-创建一个由点 [a] 和 [b] 确定的矩形。
+创建一个由点 `a` 和 `b` 确定的矩形。
 
 该矩形包含 x 坐标介于 `a.x` 与 `b.x` 之间、y 坐标介于 `a.y` 与 `b.y` 之间（均含边界）的所有点。
 
@@ -116,7 +116,7 @@ class MutableRectangle<T extends num> extends _RectangleBase<T> implements Recta
 
 用于表示属性可变的二维轴对齐矩形的类。
 
-**遗留特性：** 不建议在新代码中使用 [MutableRectangle]。
+**遗留特性：** 不建议在新代码中使用 [MutableRectangle](https://www.yuque.com/thyname/dart.math/mutablerectangle)。
 
 - 如果你正在将 `MutableRectangle` 类与 `dart:html` 一起使用，建议迁移到 `package:web`。要了解如何迁移及原因，请查看[迁移指南](https://dart.dev/go/package-web)。
 - 如果你想在某个坐标系中存储矩形的边界，可以考虑使用[记录（record）](https://dart.dev/language/records)。根据具体用法，可以写成 `var boundaries = (mixX: x1, maxX: x2, minY: y1, maxY: y2)`。
@@ -165,7 +165,7 @@ print(rectangle.right); // 220
 print(rectangle.bottom); // 150
 ```
 
-**遗留特性：** 不建议在新代码中使用 [MutableRectangle]。要了解更多信息，请查看 [MutableRectangle] 类的 API 文档。
+**遗留特性：** 不建议在新代码中使用 [MutableRectangle](https://www.yuque.com/thyname/dart.math/mutablerectangle)。要了解更多信息，请查看 [MutableRectangle](https://www.yuque.com/thyname/dart.math/mutablerectangle) 类的 API 文档。
 
 ### MutableRectangle.fromPoints()
 
@@ -173,7 +173,7 @@ print(rectangle.bottom); // 150
 MutableRectangle<T extends num>.fromPoints(Point<T> a, Point<T> b)
 ```
 
-创建一个由点 [a] 和 [b] 确定的可变矩形。
+创建一个由点 `a` 和 `b` 确定的可变矩形。
 
 该矩形包含 x 坐标介于 `a.x` 与 `b.x` 之间、y 坐标介于 `a.y` 与 `b.y` 之间（均含边界）的所有点。
 
@@ -224,7 +224,7 @@ set width(T width)
 
 宽度必须为非负数。如果传入负数宽度，则会被限制为零。
 
-设置该值会改变矩形的右边界，但不会改变 [left]。
+设置该值会改变矩形的右边界，但不会改变 `left`。
 
 ### height
 
@@ -236,4 +236,4 @@ set height(T height)
 
 高度必须为非负数。如果传入负数高度，则会被限制为零。
 
-设置该值会改变矩形的下边界，但不会改变 [top]。
+设置该值会改变矩形的下边界，但不会改变 `top`。

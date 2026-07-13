@@ -13,7 +13,7 @@ var leftTop = const Point(0, 0);
 var rightBottom = const Point(200, 400);
 ```
 
-**遗留特性：** 不建议在新代码中使用 [Point]。
+**遗留特性：** 不建议在新代码中使用 [Point](https://www.yuque.com/thyname/dart.math/point)。
 
 - 如果你正在将 `Point` 类与 `dart:html` 一起使用，建议迁移到 `package:web`。要了解如何迁移及原因，请查看[迁移指南](https://dart.dev/go/package-web)。
 - 如果你想组合 `x` 和 `y` 坐标，可以考虑使用[记录（record）](https://dart.dev/language/records)。根据具体用法，可以写成 `var point = (x, y)` 或 `var point = (x: x, y: y)`。
@@ -28,9 +28,9 @@ var rightBottom = const Point(200, 400);
 Point(T x, T y)
 ```
 
-使用提供的 [x] 和 [y] 坐标创建一个点。
+使用提供的 `x` 和 `y` 坐标创建一个点。
 
-**遗留特性：** 不建议在新代码中使用 [Point]。要了解更多信息，请查看 [Point] 类的 API 文档。
+**遗留特性：** 不建议在新代码中使用 [Point](https://www.yuque.com/thyname/dart.math/point)。要了解更多信息，请查看 [Point](https://www.yuque.com/thyname/dart.math/point) 类的 API 文档。
 
 ## 属性
 
@@ -59,7 +59,7 @@ magnitude = const Point(10, 10).magnitude;  // 14.142135623730951
 double distanceTo(Point<T> other)
 ```
 
-返回 `this` 与 [other] 之间的距离。
+返回 `this` 与 `other` 之间的距离。
 
 ```dart
 var distanceTo = const Point(0, 0).distanceTo(const Point(0, 0)); // 0.0
@@ -74,7 +74,7 @@ distanceTo = const Point(-10, 0).distanceTo(const Point(100, 0)); // 110.0
 T squaredDistanceTo(Point<T> other)
 ```
 
-返回 `this` 与 [other] 之间的平方距离。
+返回 `this` 与 `other` 之间的平方距离。
 
 当不需要实际值时，平方距离可用于比较。
 
@@ -99,9 +99,9 @@ squaredDistance =
 bool operator ==(Object other)
 ```
 
-判断 [other] 是否为与该点坐标相同的点。
+判断 `other` 是否为与该点坐标相同的点。
 
-如果 [other] 是一个 [Point]，且其 [x] 和 [y] 坐标与该点对应的坐标相等，则返回 `true`；否则返回 `false`。
+如果 `other` 是一个 [Point](https://www.yuque.com/thyname/dart.math/point)，且其 `x` 和 `y` 坐标与该点对应的坐标相等，则返回 `true`；否则返回 `false`。
 
 示例：
 
@@ -116,7 +116,7 @@ result = const Point(1.0, 0) == const Point(-1.0, 0); // false
 Point<T> operator +(Point<T> other)
 ```
 
-将 [other] 与 `this` 相加，如同两者都是向量一样。
+将 `other` 与 `this` 相加，如同两者都是向量一样。
 
 将得到的“向量”结果作为 Point 返回。
 
@@ -133,7 +133,7 @@ point = const Point(-10, -20) + const Point(10, 100); // Point(0, 80)
 Point<T> operator -(Point<T> other)
 ```
 
-从 `this` 中减去 [other]，如同两者都是向量一样。
+从 `this` 中减去 `other`，如同两者都是向量一样。
 
 将得到的“向量”结果作为 Point 返回。
 
@@ -150,9 +150,9 @@ point = const Point(-10, -20) - const Point(100, 100); // Point(-110, -120)
 Point<T> operator *(num factor)
 ```
 
-将该点按 [factor] 缩放，如同它是一个向量一样。
+将该点按 `factor` 缩放，如同它是一个向量一样。
 
-**重要说明**：该函数接受 `num` 作为参数，仅是为了让你可以用 `int` 类型的因子缩放 `Point<double>` 对象。由于 `*` 运算符始终返回与调用者相同类型的 `Point`，因此在 `Point<int>` 上传入 double 类型的 [factor] 会**导致运行时错误**。
+**重要说明**：该函数接受 `num` 作为参数，仅是为了让你可以用 `int` 类型的因子缩放 `Point<double>` 对象。由于 `*` 运算符始终返回与调用者相同类型的 `Point`，因此在 `Point<int>` 上传入 double 类型的 `factor` 会**导致运行时错误**。
 
 示例：
 

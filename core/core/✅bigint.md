@@ -25,13 +25,13 @@ var value = BigInt.parse('0x1ffffffffffffffff'); // 36893488147419103231
 value = BigInt.parse('12345678901234567890'); // 12345678901234567890
 ```
 
-要检查大整数是否可以在不丢失精度的情况下表示为 [int]，请使用 [isValidInt]。
+要检查大整数是否可以在不丢失精度的情况下表示为 [int](https://www.yuque.com/thyname/dart.core/int)，请使用 [isValidInt]。
 
 ```dart continued
 print(bigNumber.isValidInt); // false
 ```
 
-要将大整数转换为 [int]，请使用 [toInt]。要将大整数转换为 [double]，请使用 [toDouble]。
+要将大整数转换为 [int](https://www.yuque.com/thyname/dart.core/int)，请使用 [toInt]。要将大整数转换为 [double](https://www.yuque.com/thyname/dart.core/double)，请使用 [toDouble]。
 
 ```dart
 var bigValue = BigInt.from(10).pow(3);
@@ -42,9 +42,9 @@ print(bigValue.toDouble()); // 1000.0
 
 **另请参阅：**
 
-- [int]：整数。
-- [double]：双精度浮点数。
-- [num]：[int] 和 [double] 的父类。
+- [int](https://www.yuque.com/thyname/dart.core/int)：整数。
+- [double](https://www.yuque.com/thyname/dart.core/double)：双精度浮点数。
+- [num](https://www.yuque.com/thyname/dart.core/num)：[int](https://www.yuque.com/thyname/dart.core/int) 和 [double](https://www.yuque.com/thyname/dart.core/double) 的父类。
 - [内置数字类型](https://dart.dev/language/built-in-types#numbers)
 - [数字表示](https://dart.dev/resources/language/number-representation)
 
@@ -56,7 +56,7 @@ print(bigValue.toDouble()); // 1000.0
 BigInt.from(num value)
 ```
 
-根据提供的数字 [value] 创建一个大整数。
+根据提供的数字 `value` 创建一个大整数。
 
 示例：
 
@@ -103,17 +103,17 @@ BigInt parse(
 })
 ```
 
-将 [source] 解析为一个可能带符号的整数字面量，并返回其值。
+将 `source` 解析为一个可能带符号的整数字面量，并返回其值。
 
-[source] 必须是一个非空的 [radix] 进制数字序列，可以选择性地以负号或正号（'-' 或 '+'）作为前缀。
+`source` 必须是一个非空的 `radix` 进制数字序列，可以选择性地以负号或正号（'-' 或 '+'）作为前缀。
 
-[radix] 必须在 2 到 36 的范围内。所使用的数字首先是十进制数字 0 到 9，然后是字母 'a' 到 'z'，其值为 10 到 35。也接受大写字母，其值与对应的小写字母相同。
+`radix` 必须在 2 到 36 的范围内。所使用的数字首先是十进制数字 0 到 9，然后是字母 'a' 到 'z'，其值为 10 到 35。也接受大写字母，其值与对应的小写字母相同。
 
-如果未指定 [radix]，则默认为 10。在这种情况下，[source] 数字也可以以 `0x` 开头，此时该数字将被解释为十六进制字面量，实际上意味着 `0x` 会被忽略，并将进制设置为 16。
+如果未指定 `radix`，则默认为 10。在这种情况下，`source` 数字也可以以 `0x` 开头，此时该数字将被解释为十六进制字面量，实际上意味着 `0x` 会被忽略，并将进制设置为 16。
 
 对于任何整数 `n` 和进制 `r`，可以保证 `n == int.parse(n.toRadixString(r), radix: r)`。
 
-如果 [source] 不是有效的整数字面量（可选带符号前缀），则抛出 [FormatException]。示例：
+如果 `source` 不是有效的整数字面量（可选带符号前缀），则抛出 [FormatException](https://www.yuque.com/thyname/dart.core/formatexception)。示例：
 
 ```dart
 print(BigInt.parse('-12345678901234567890')); // -12345678901234567890
@@ -149,7 +149,7 @@ BigInt? tryParse(
 })
 ```
 
-将 [source] 解析为一个可能带符号的整数字面量，并返回其值。
+将 `source` 解析为一个可能带符号的整数字面量，并返回其值。
 
 与 [parse] 相同，不同之处在于如果输入无效，此方法将返回 `null`。
 
@@ -279,7 +279,7 @@ BigInt abs()
 BigInt remainder(BigInt other)
 ```
 
-返回 `this` 除以 [other] 的截断除法余数。
+返回 `this` 除以 `other` 的截断除法余数。
 
 此操作的结果 `r` 满足：`this == (this ~/ other) * other + r`。因此，余数 `r` 与被除数 `this` 具有相同的符号。
 
@@ -316,13 +316,13 @@ print(BigInt.from(1).compareTo(BigInt.from(1))); // => 0
 BigInt pow(int exponent)
 ```
 
-返回 `this` 的 [exponent] 次幂。
+返回 `this` 的 `exponent` 次幂。
 
-如果 [exponent] 等于 0，则返回 [one]。
+如果 `exponent` 等于 0，则返回 [one]。
 
-否则 [exponent] 必须为正数。
+否则 `exponent` 必须为正数。
 
-结果始终等于 this 的 [exponent] 次幂的数学结果，仅受可用内存限制。
+结果始终等于 this 的 `exponent` 次幂的数学结果，仅受可用内存限制。
 
 示例：
 
@@ -345,9 +345,9 @@ print(value.pow(8)); // 1000000000000000000000000
 BigInt modPow(BigInt exponent, BigInt modulus)
 ```
 
-返回此整数的 [exponent] 次幂对 [modulus] 取模的结果。
+返回此整数的 `exponent` 次幂对 `modulus` 取模的结果。
 
-[exponent] 必须为非负数，且 [modulus] 必须为正数。
+`exponent` 必须为非负数，且 `modulus` 必须为正数。
 
 ### modInverse()
 
@@ -355,9 +355,9 @@ BigInt modPow(BigInt exponent, BigInt modulus)
 BigInt modInverse(BigInt modulus)
 ```
 
-返回此大整数对 [modulus] 取模的模乘法逆元。
+返回此大整数对 `modulus` 取模的模乘法逆元。
 
-[modulus] 必须为正数。
+`modulus` 必须为正数。
 
 如果不存在模逆元，则会发生错误。
 
@@ -367,7 +367,7 @@ BigInt modInverse(BigInt modulus)
 BigInt gcd(BigInt other)
 ```
 
-返回此大整数与 [other] 的最大公约数。
+返回此大整数与 `other` 的最大公约数。
 
 如果任一数字非零，则结果是能同时整除 `this` 和 `other` 的数值最大的整数。
 
@@ -393,7 +393,7 @@ print(BigInt.from(-2).gcd(BigInt.from(-3))); // 1
 BigInt toUnsigned(int width)
 ```
 
-以非负数（即无符号表示）形式返回此大整数的最低有效 [width] 位。返回值在高于 [width] 的所有位上均为零。
+以非负数（即无符号表示）形式返回此大整数的最低有效 `width` 位。返回值在高于 `width` 的所有位上均为零。
 
 ```dart
 BigInt.from(-1).toUnsigned(5) == 31   // 11111111  ->  00011111
@@ -407,7 +407,7 @@ q = (q + 1).toUnsigned(8);
 
 `q` 将从 `0` 计数到 `255`，然后回绕到 `0`。
 
-如果输入在不截断的情况下能容纳于 [width] 位内，则结果与输入相同。避免 `x` 被截断所需的最小位宽由 `x.bitLength` 给出，即：
+如果输入在不截断的情况下能容纳于 `width` 位内，则结果与输入相同。避免 `x` 被截断所需的最小位宽由 `x.bitLength` 给出，即：
 
 ```dart
 x == x.toUnsigned(x.bitLength);
@@ -419,7 +419,7 @@ x == x.toUnsigned(x.bitLength);
 BigInt toSigned(int width)
 ```
 
-返回此整数的最低有效 [width] 位，并将保留的最高位扩展为符号位。这等同于使用有符号二进制补码表示法将该值截断以适应 [width] 位。返回值在高于 [width] 的所有位置上具有相同的位值。
+返回此整数的最低有效 `width` 位，并将保留的最高位扩展为符号位。这等同于使用有符号二进制补码表示法将该值截断以适应 `width` 位。返回值在高于 `width` 的所有位置上具有相同的位值。
 
 ```dart
 var big15 = BigInt.from(15);
@@ -439,7 +439,7 @@ q = (q + 1).toSigned(8);
 
 `q` 将从 `0` 计数到 `127`，然后回绕到 `-128`，再重新计数到 `127`。
 
-如果输入值在不截断的情况下能容纳于 [width] 位内，则结果与输入相同。避免 `x` 被截断所需的最小位宽为 `x.bitLength + 1`，即：
+如果输入值在不截断的情况下能容纳于 `width` 位内，则结果与输入相同。避免 `x` 被截断所需的最小位宽为 `x.bitLength + 1`，即：
 
 ```dart
 x == x.toSigned(x.bitLength + 1);
@@ -451,7 +451,7 @@ x == x.toSigned(x.bitLength + 1);
 int toInt()
 ```
 
-将此 [BigInt] 作为 [int] 返回。
+将此 [BigInt](https://www.yuque.com/thyname/dart.core/bigint) 作为 [int](https://www.yuque.com/thyname/dart.core/int) 返回。
 
 如果该数字不适合，则会被限制为最大（或最小）整数。
 
@@ -471,9 +471,9 @@ print(bigNumber.toInt()); // 9223372036854775807
 double toDouble()
 ```
 
-将此 [BigInt] 作为 [double] 返回。
+将此 [BigInt](https://www.yuque.com/thyname/dart.core/bigint) 作为 [double](https://www.yuque.com/thyname/dart.core/double) 返回。
 
-如果该数字无法表示为 [double]，则返回一个近似值。对于数值非常大的整数，该近似值可能为无穷大。
+如果该数字无法表示为 [double](https://www.yuque.com/thyname/dart.core/double)，则返回一个近似值。对于数值非常大的整数，该近似值可能为无穷大。
 
 示例：
 
@@ -505,11 +505,11 @@ print(bigNumber.toString()); // "100000000000000000000000"
 String toRadixString(int radix)
 ```
 
-将此 [BigInt] 转换为给定 [radix] 进制的字符串表示形式。
+将此 [BigInt](https://www.yuque.com/thyname/dart.core/bigint) 转换为给定 `radix` 进制的字符串表示形式。
 
 在字符串表示形式中，大于 '9' 的数字使用小写字母表示，其中 'a' 表示 10，'z' 表示 35。
 
-[radix] 参数必须是 2 到 36 范围内的整数。
+`radix` 参数必须是 2 到 36 范围内的整数。
 
 示例：
 
@@ -549,7 +549,7 @@ BigInt operator -()
 BigInt operator +(BigInt other)
 ```
 
-将 [other] 与此大整数相加。
+将 `other` 与此大整数相加。
 
 结果仍然是一个大整数。
 
@@ -559,7 +559,7 @@ BigInt operator +(BigInt other)
 BigInt operator -(BigInt other)
 ```
 
-从此大整数中减去 [other]。
+从此大整数中减去 `other`。
 
 结果仍然是一个大整数。
 
@@ -569,7 +569,7 @@ BigInt operator -(BigInt other)
 BigInt operator *(BigInt other)
 ```
 
-将此大整数与 [other] 相乘。
+将此大整数与 `other` 相乘。
 
 结果仍然是一个大整数。
 
@@ -581,7 +581,7 @@ double operator /(BigInt other)
 
 双精度除法运算符。
 
-与 [int] 上的类似运算符一致，此操作首先对该大整数和 [other] 分别执行 [toDouble]，然后对这些值执行 [double.operator/] 并返回结果。
+与 [int](https://www.yuque.com/thyname/dart.core/int) 上的类似运算符一致，此操作首先对该大整数和 `other` 分别执行 [toDouble]，然后对这些值执行 [double.operator/] 并返回结果。
 
 **注意：** 初始的 [toDouble] 转换可能会丢失精度。
 
@@ -646,13 +646,13 @@ print(BigInt.from(-5) % BigInt.from(-3)); // 1
 BigInt operator <<(int shiftAmount)
 ```
 
-将此整数的位向左移动 [shiftAmount] 位。
+将此整数的位向左移动 `shiftAmount` 位。
 
 向左移位会使该数字变大，实际效果相当于将该数字乘以 `pow(2, shiftIndex)`。
 
 结果的大小没有限制。可以考虑使用适当的掩码结合"与"运算符来限制中间值。
 
-如果 [shiftAmount] 为负数，则会发生错误。
+如果 `shiftAmount` 为负数，则会发生错误。
 
 ### operator >>
 
@@ -660,11 +660,11 @@ BigInt operator <<(int shiftAmount)
 BigInt operator >>(int shiftAmount)
 ```
 
-将此整数的位向右移动 [shiftAmount] 位。
+将此整数的位向右移动 `shiftAmount` 位。
 
 向右移位会使该数字变小并丢弃最低有效位，实际效果相当于执行除以 `pow(2, shiftIndex)` 的整数除法。
 
-如果 [shiftAmount] 为负数，则会发生错误。
+如果 `shiftAmount` 为负数，则会发生错误。
 
 ### operator &
 
@@ -674,7 +674,7 @@ BigInt operator &(BigInt other)
 
 按位与运算符。
 
-将 `this` 和 [other] 都视为足够大的二进制补码整数，结果中仅在 `this` 和 [other] 中都被置位的位才会被置位。
+将 `this` 和 `other` 都视为足够大的二进制补码整数，结果中仅在 `this` 和 `other` 中都被置位的位才会被置位。
 
 如果两个操作数都为负数，则结果为负数，否则结果为非负数。
 
@@ -686,7 +686,7 @@ BigInt operator |(BigInt other)
 
 按位或运算符。
 
-将 `this` 和 [other] 都视为足够大的二进制补码整数，结果中在 `this` 或 [other] 任一个中被置位的位都会被置位。
+将 `this` 和 `other` 都视为足够大的二进制补码整数，结果中在 `this` 或 `other` 任一个中被置位的位都会被置位。
 
 如果两个操作数都为非负数，则结果为非负数，否则结果为负数。
 
@@ -698,7 +698,7 @@ BigInt operator ^(BigInt other)
 
 按位异或运算符。
 
-将 `this` 和 [other] 都视为足够大的二进制补码整数，结果中仅在 `this` 和 [other] 中恰好有一个被置位的位才会被置位。
+将 `this` 和 `other` 都视为足够大的二进制补码整数，结果中仅在 `this` 和 `other` 中恰好有一个被置位的位才会被置位。
 
 如果操作数具有相同的符号，则结果为非负数，否则结果为负数。
 
@@ -720,7 +720,7 @@ BigInt operator ~()
 bool operator <(BigInt other)
 ```
 
-此大整数在数值上是否小于 [other]。
+此大整数在数值上是否小于 `other`。
 
 ### operator <=
 
@@ -728,7 +728,7 @@ bool operator <(BigInt other)
 bool operator <=(BigInt other)
 ```
 
-[other] 在数值上是否大于此大整数。
+`other` 在数值上是否大于此大整数。
 
 ### operator >
 
@@ -736,7 +736,7 @@ bool operator <=(BigInt other)
 bool operator >(BigInt other)
 ```
 
-此大整数在数值上是否大于 [other]。
+此大整数在数值上是否大于 `other`。
 
 ### operator >=
 
@@ -744,4 +744,4 @@ bool operator >(BigInt other)
 bool operator >=(BigInt other)
 ```
 
-[other] 在数值上是否小于此大整数。
+`other` 在数值上是否小于此大整数。

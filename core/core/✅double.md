@@ -6,15 +6,15 @@ abstract final class double extends num {}
 
 双精度浮点数。
 
-Dart 双精度浮点数的表示，包含 double 特定的常量和操作，以及从 [num] 继承的操作的特化实现。Dart 的 double 是符合 IEEE 754 标准的 64 位浮点数。
+Dart 双精度浮点数的表示，包含 double 特定的常量和操作，以及从 [num](https://www.yuque.com/thyname/dart.core/num) 继承的操作的特化实现。Dart 的 double 是符合 IEEE 754 标准的 64 位浮点数。
 
-[double] 类型具有传染性。对 [double] 的操作返回 [double] 结果。
+[double](https://www.yuque.com/thyname/dart.core/double) 类型具有传染性。对 [double](https://www.yuque.com/thyname/dart.core/double) 的操作返回 [double](https://www.yuque.com/thyname/dart.core/double) 结果。
 
 尝试扩展或实现 double 是编译时错误。
 
 **另请参阅：**
 
-- [num]，[double] 的父类。
+- [num](https://www.yuque.com/thyname/dart.core/num)，[double](https://www.yuque.com/thyname/dart.core/double) 的父类。
 - [内置数字类型](https://dart.dev/language/built-in-types#numbers)
 - [数字表示](https://dart.dev/resources/language/number-representation)
 
@@ -58,15 +58,15 @@ static const double maxFinite = 1.7976931348623157e+308;
 double parse(String source)
 ```
 
-将 [source] 解析为 double 字面量并返回其值。
+将 `source` 解析为 double 字面量并返回其值。
 
-接受一个可选的符号（`+` 或 `-`），后跟字符串 "Infinity"、字符串 "NaN"，或一个浮点数表示形式。浮点数表示形式由尾数和可选的指数部分组成。尾数是一个小数点（`.`）后跟一串（十进制）数字，或者是一串数字后可选地跟一个小数点和更多数字。（可选的）指数部分由字符 "e" 或 "E"、一个可选的符号以及一位或多位数字组成。[source] 不能为 `null`。
+接受一个可选的符号（`+` 或 `-`），后跟字符串 "Infinity"、字符串 "NaN"，或一个浮点数表示形式。浮点数表示形式由尾数和可选的指数部分组成。尾数是一个小数点（`.`）后跟一串（十进制）数字，或者是一串数字后可选地跟一个小数点和更多数字。（可选的）指数部分由字符 "e" 或 "E"、一个可选的符号以及一位或多位数字组成。`source` 不能为 `null`。
 
 忽略前导和尾随空白字符。
 
-如果 [source] 字符串不是有效的 double 字面量，将抛出 [FormatException]。
+如果 `source` 字符串不是有效的 double 字面量，将抛出 [FormatException](https://www.yuque.com/thyname/dart.core/formatexception)。
 
-与其抛出异常后立即捕获 [FormatException]，不如使用 [tryParse] 来处理可能的解析错误。
+与其抛出异常后立即捕获 [FormatException](https://www.yuque.com/thyname/dart.core/formatexception)，不如使用 [tryParse] 来处理可能的解析错误。
 
 接受的字符串示例：
 
@@ -87,7 +87,7 @@ double parse(String source)
 double? tryParse(String source)
 ```
 
-将 [source] 解析为 double 字面量并返回其值。
+将 `source` 解析为 double 字面量并返回其值。
 
 与 [parse] 类似，但此函数在输入无效时返回 `null` 而不是抛出异常。
 
@@ -130,7 +130,7 @@ double remainder(num other)
 
 此操作的结果 `r` 满足：`this == (this ~/ other) * other + r`。因此，余数 `r` 与被除数 `this` 的符号相同。
 
-如 [int.remainder](https://api.dart.dev/dart-core/num/remainder.html) 所述，如果此数字和 `other` 都是整数，则结果为 [int](https://api.dart.dev/dart-core/int-class.html)，否则结果为 [double](https://api.dart.dev/dart-core/double-class.html)。
+如 [int.remainder](https://api.dart.dev/dart-core/num/remainder.html) 所述，如果此数字和 `other` 都是整数，则结果为 [int](https://www.yuque.com/thyname/dart.core/int)，否则结果为 [double](https://www.yuque.com/thyname/dart.core/double)。
 
 示例：
 
@@ -168,7 +168,7 @@ int round()
 
 当没有唯一最接近的整数时，向远离零的方向舍入：`(3.5).round() == 4`，`(-3.5).round() == -4`。
 
-如果此数字不是有限数（NaN 或无穷大），将抛出 [UnsupportedError]。
+如果此数字不是有限数（NaN 或无穷大），将抛出 [UnsupportedError](https://www.yuque.com/thyname/dart.core/unsupportederror)。
 
 ```dart
 print(3.0.round()); // 3
@@ -188,7 +188,7 @@ int floor()
 
 将数字向负无穷方向舍入。
 
-如果此数字不是有限数（NaN 或无穷大），将抛出 [UnsupportedError]。
+如果此数字不是有限数（NaN 或无穷大），将抛出 [UnsupportedError](https://www.yuque.com/thyname/dart.core/unsupportederror)。
 
 ```dart
 print(1.99999.floor()); // 1
@@ -209,7 +209,7 @@ int ceil()
 
 将数字向正无穷方向舍入。
 
-如果此数字不是有限数（NaN 或无穷大），将抛出 [UnsupportedError]。
+如果此数字不是有限数（NaN 或无穷大），将抛出 [UnsupportedError](https://www.yuque.com/thyname/dart.core/unsupportederror)。
 
 ```dart
 print(1.99999.ceil()); // 2
@@ -230,7 +230,7 @@ int truncate()
 
 将数字向零方向舍入。
 
-如果此数字不是有限数（NaN 或无穷大），将抛出 [UnsupportedError]。
+如果此数字不是有限数（NaN 或无穷大），将抛出 [UnsupportedError](https://www.yuque.com/thyname/dart.core/unsupportederror)。
 
 ```dart
 print(2.00001.truncate()); // 2
@@ -333,9 +333,9 @@ print((-2.5).truncateToDouble()); // -2.0
 String toString()
 ```
 
-提供此 [double] 值的表示形式。
+提供此 [double](https://www.yuque.com/thyname/dart.core/double) 值的表示形式。
 
-该表示形式是一个数字字面量，使得最接近该字面量数学值的 double 值就是此 [double]。
+该表示形式是一个数字字面量，使得最接近该字面量数学值的 double 值就是此 [double](https://www.yuque.com/thyname/dart.core/double)。
 
 对于 Not-a-Number 值返回 "NaN"。对于正无穷和负无穷分别返回 "Infinity" 和 "-Infinity"。对于负零返回 "-0.0"。
 
@@ -351,7 +351,7 @@ double operator +(num other)
 
 将 `other` 加到此数字上。
 
-如 [int.+](https://api.dart.dev/dart-core/num/operator_plus.html) 所述，如果此数字和 `other` 都是整数，则结果为 [int](https://api.dart.dev/dart-core/int-class.html)，否则结果为 [double](https://api.dart.dev/dart-core/double-class.html)。
+如 [int.+](https://api.dart.dev/dart-core/num/operator_plus.html) 所述，如果此数字和 `other` 都是整数，则结果为 [int](https://www.yuque.com/thyname/dart.core/int)，否则结果为 [double](https://www.yuque.com/thyname/dart.core/double)。
 
 ### operator -
 
@@ -361,7 +361,7 @@ double operator -(num other)
 
 从此数字中减去 `other`。
 
-如 [int.-](https://api.dart.dev/dart-core/num/operator_minus.html) 所述，如果此数字和 `other` 都是整数，则结果为 [int](https://api.dart.dev/dart-core/int-class.html)，否则结果为 [double](https://api.dart.dev/dart-core/double-class.html)。
+如 [int.-](https://api.dart.dev/dart-core/num/operator_minus.html) 所述，如果此数字和 `other` 都是整数，则结果为 [int](https://www.yuque.com/thyname/dart.core/int)，否则结果为 [double](https://www.yuque.com/thyname/dart.core/double)。
 
 ### operator \*
 
@@ -371,7 +371,7 @@ double operator *(num other)
 
 将此数字乘以 `other`。
 
-如 [int.\*](https://api.dart.dev/dart-core/num/operator_multiply.html) 所述，如果此数字和 `other` 都是整数，则结果为 [int](https://api.dart.dev/dart-core/int-class.html)，否则结果为 [double](https://api.dart.dev/dart-core/double-class.html)。
+如 [int.\*](https://api.dart.dev/dart-core/num/operator_multiply.html) 所述，如果此数字和 `other` 都是整数，则结果为 [int](https://www.yuque.com/thyname/dart.core/int)，否则结果为 [double](https://www.yuque.com/thyname/dart.core/double)。
 
 ### operator %
 
@@ -389,7 +389,7 @@ double operator %(num other)
 
 有关截断除法的余数，请参见 [remainder](https://api.dart.dev/dart-core/double/remainder.html)。
 
-如 [int.%](https://api.dart.dev/dart-core/num/operator_modulo.html) 所述，如果此数字和 `other` 都是整数，则结果为 [int](https://api.dart.dev/dart-core/int-class.html)，否则结果为 [double](https://api.dart.dev/dart-core/double-class.html)。
+如 [int.%](https://api.dart.dev/dart-core/num/operator_modulo.html) 所述，如果此数字和 `other` 都是整数，则结果为 [int](https://www.yuque.com/thyname/dart.core/int)，否则结果为 [double](https://www.yuque.com/thyname/dart.core/double)。
 
 示例：
 
@@ -418,9 +418,9 @@ int operator ~/(num other)
 
 对此数字除以 `other` 执行截断除法。截断除法是指将带小数的结果通过向零方向舍入转换为整数的除法。
 
-如果两个操作数都是 [int](https://api.dart.dev/dart-core/int-class.html)，则 `other` 不能为零。此时 `a ~/ b` 对应于 `a.remainder(b)`，满足 `a == (a ~/ b) * b + a.remainder(b)`。
+如果两个操作数都是 [int](https://www.yuque.com/thyname/dart.core/int)，则 `other` 不能为零。此时 `a ~/ b` 对应于 `a.remainder(b)`，满足 `a == (a ~/ b) * b + a.remainder(b)`。
 
-如果任一操作数为 [double](https://api.dart.dev/dart-core/double-class.html)，则在执行除法之前会将另一个操作数转换为 double，并对结果进行截断。此时 `a ~/ b` 等价于 `(a / b).truncate()`。这意味着 double 除法的中间结果必须是有限整数（不能是无穷大或 [double.nan](https://api.dart.dev/dart-core/double/nan-constant.html)）。
+如果任一操作数为 [double](https://www.yuque.com/thyname/dart.core/double)，则在执行除法之前会将另一个操作数转换为 double，并对结果进行截断。此时 `a ~/ b` 等价于 `(a / b).truncate()`。这意味着 double 除法的中间结果必须是有限整数（不能是无穷大或 [double.nan](https://api.dart.dev/dart-core/double/nan-constant.html)）。
 
 ### operator unary-
 
@@ -430,4 +430,4 @@ double operator -()
 
 从此数字中减去 `other`。
 
-如 [int.-](https://api.dart.dev/dart-core/num/operator_minus.html) 所述，如果此数字和 `other` 都是整数，则结果为 [int](https://api.dart.dev/dart-core/int-class.html)，否则结果为 [double](https://api.dart.dev/dart-core/double-class.html)。
+如 [int.-](https://api.dart.dev/dart-core/num/operator_minus.html) 所述，如果此数字和 `other` 都是整数，则结果为 [int](https://www.yuque.com/thyname/dart.core/int)，否则结果为 [double](https://www.yuque.com/thyname/dart.core/double)。
