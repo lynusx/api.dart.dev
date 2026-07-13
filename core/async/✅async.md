@@ -1,8 +1,8 @@
 支持异步编程的库，包含 Future 和 Stream 等类。
 
-[Future] 和 [Stream] 是 Dart 中异步编程的基本构建模块。它们通过 `async` 和 `async*` 函数在语言层面直接得到支持，并通过 `dart:core` 库提供给所有库使用。
+[Future](https://www.yuque.com/thyname/dart.async/future) 和 [Stream](https://www.yuque.com/thyname/dart.async/stream) 是 Dart 中异步编程的基本构建模块。它们通过 `async` 和 `async*` 函数在语言层面直接得到支持，并通过 `dart:core` 库提供给所有库使用。
 
-本库提供了用于创建、使用和转换 Future 与 Stream 的更多工具，并可直接访问其他异步原语，如[计时器][Timer]、[微任务][scheduleMicrotask]和 [Zone]。
+本库提供了用于创建、使用和转换 Future 与 Stream 的更多工具，并可直接访问其他异步原语，如[Timer](https://www.yuque.com/thyname/dart.async/timer)、[scheduleMicrotask](https://www.yuque.com/thyname/dart.async/schedulemicrotask)和 [Zone](https://www.yuque.com/thyname/dart.async/zone)。
 
 在代码中使用本库：
 
@@ -26,7 +26,7 @@ Dart 库中的许多方法在执行任务时会返回 `Future`。例如，将 `H
 
 ## Stream
 
-Stream 提供了异步的数据序列。数据序列的例子包括鼠标点击等单个事件，或诸如文件内容的多个字节列表这样的大数据的顺序分块，例如鼠标点击，以及从文件中读取的字节列表流。下面的示例打开一个文件进行读取。[Stream.listen] 用于注册回调函数，每当有更多数据可用、发生错误或流结束时运行这些回调。[Stream] 提供了更多功能，可通过调用 [Stream.listen] 来获取实际数据来实现。
+Stream 提供了异步的数据序列。数据序列的例子包括鼠标点击等单个事件，或诸如文件内容的多个字节列表这样的大数据的顺序分块，例如鼠标点击，以及从文件中读取的字节列表流。下面的示例打开一个文件进行读取。[Stream.listen] 用于注册回调函数，每当有更多数据可用、发生错误或流结束时运行这些回调。[Stream](https://www.yuque.com/thyname/dart.async/stream) 提供了更多功能，可通过调用 [Stream.listen] 来获取实际数据来实现。
 
 ```dart import:io import:convert
 Stream<List<int>> stream = File('quotes.txt').openRead();

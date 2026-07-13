@@ -1,80 +1,3 @@
-数学常量和函数，以及一个随机数生成器。
-
-要在代码中使用该库：
-
-```dart
-import 'dart:math';
-```
-
-## Random
-
-[Random] 是用于生成 [bool]、[int] 或 [double] 值的生成器。
-
-```dart
-var intValue = Random().nextInt(10); // Value is >= 0 and < 10.
-var doubleValue = Random().nextDouble(); // Value is >= 0.0 and < 1.0.
-var boolValue = Random().nextBool(); // true or false, with equal chance.
-```
-
-## Point
-
-[Point] 是用于表示二维位置的实用工具类。
-
-```dart
-var leftTop = const Point(0, 0);
-var rightBottom = const Point(200, 400);
-```
-
-## Rectangle
-
-[Rectangle] 是用于表示属性不可变的二维轴对齐矩形的类。
-
-创建一个由两点确定的矩形。
-
-```dart
-var leftTop = const Point(20, 50);
-var rightBottom = const Point(300, 600);
-var rectangle = Rectangle.fromPoints(leftTop, rightBottom);
-print(rectangle.left); // 20
-print(rectangle.top); // 50
-print(rectangle.right); // 300
-print(rectangle.bottom); // 600
-```
-
-创建一个由 `(left, top)` 和 `(left+width, top+height)` 确定的矩形。
-
-```dart
-var rectangle = const Rectangle(20, 50, 300, 600);
-print(rectangle.left); // 20
-print(rectangle.top); // 50
-print(rectangle.right); // 320
-print(rectangle.bottom); // 650
-```
-
-## MutableRectangle
-
-[MutableRectangle] 是用于表示属性可变的二维轴对齐矩形的类。
-
-创建一个由 `(left, top)` 和 `(left+width, top+height)` 确定的可变矩形。
-
-```dart
-var rectangle = MutableRectangle(20, 50, 300, 600);
-print(rectangle); // Rectangle (20, 50) 300 x 600
-print(rectangle.left); // 20
-print(rectangle.top); // 50
-print(rectangle.right); // 320
-print(rectangle.bottom); // 650
-
-// Change rectangle width and height.
-rectangle.width = 200;
-rectangle.height = 100;
-print(rectangle); // Rectangle (20, 50) 200 x 100
-print(rectangle.left); // 20
-print(rectangle.top); // 50
-print(rectangle.right); // 220
-print(rectangle.bottom); // 150
-```
-
 ## 常量
 
 ### e
@@ -177,7 +100,7 @@ double atan2(num a, num b)
 
 [atan] 的一种变体。
 
-将两个参数都转换为 [double]。
+将两个参数都转换为 [double](https://www.yuque.com/thyname/dart.core/double)。
 
 返回正 x 轴与向量 ([b],[a]) 之间的夹角（以弧度表示）。结果范围为 -PI..PI。
 
@@ -197,7 +120,7 @@ num pow(num x, num exponent)
 
 返回 [x] 的 [exponent] 次幂。
 
-如果 [x] 是 [int] 且 [exponent] 是非负 [int]，则结果为 [int]；否则两个参数都会先转换为 double，结果为 [double]。
+如果 [x] 是 [int](https://www.yuque.com/thyname/dart.core/int) 且 [exponent] 是非负 [int](https://www.yuque.com/thyname/dart.core/int)，则结果为 [int](https://www.yuque.com/thyname/dart.core/int)；否则两个参数都会先转换为 double，结果为 [double](https://www.yuque.com/thyname/dart.core/double)。
 
 对于整数，幂运算的结果始终等于 `x` 的 `exponent` 次方的数学结果，仅受可用内存限制。
 
@@ -228,7 +151,7 @@ num pow(num x, num exponent)
 double sin(num radians)
 ```
 
-将 [radians] 转换为 [double] 并返回该值的正弦值。
+将 [radians] 转换为 [double](https://www.yuque.com/thyname/dart.core/double) 并返回该值的正弦值。
 
 如果 [radians] 不是有限数值，结果为 NaN。
 
@@ -238,7 +161,7 @@ double sin(num radians)
 double cos(num radians)
 ```
 
-将 [radians] 转换为 [double] 并返回该值的余弦值。
+将 [radians] 转换为 [double](https://www.yuque.com/thyname/dart.core/double) 并返回该值的余弦值。
 
 如果 [radians] 不是有限数值，结果为 NaN。
 
@@ -248,7 +171,7 @@ double cos(num radians)
 double tan(num radians)
 ```
 
-将 [radians] 转换为 [double] 并返回该值的正切值。
+将 [radians] 转换为 [double](https://www.yuque.com/thyname/dart.core/double) 并返回该值的正切值。
 
 正切函数等价于 `sin(radians)/cos(radians)`，当 `cos(radians)` 等于零时，结果可能为无穷大（正或负）。如果 [radians] 不是有限数值，结果为 NaN。
 
@@ -258,7 +181,7 @@ double tan(num radians)
 double acos(num x)
 ```
 
-将 [x] 转换为 [double] 并返回其反余弦值（以弧度表示）。
+将 [x] 转换为 [double](https://www.yuque.com/thyname/dart.core/double) 并返回其反余弦值（以弧度表示）。
 
 返回值范围为 0..PI；如果 [x] 超出 -1..1 的范围，则返回 NaN。
 
@@ -268,7 +191,7 @@ double acos(num x)
 double asin(num x)
 ```
 
-将 [x] 转换为 [double] 并返回其反正弦值（以弧度表示）。
+将 [x] 转换为 [double](https://www.yuque.com/thyname/dart.core/double) 并返回其反正弦值（以弧度表示）。
 
 返回值范围为 -PI/2..PI/2；如果 [x] 超出 -1..1 的范围，则返回 NaN。
 
@@ -278,7 +201,7 @@ double asin(num x)
 double atan(num x)
 ```
 
-将 [x] 转换为 [double] 并返回其反正切值（以弧度表示）。
+将 [x] 转换为 [double](https://www.yuque.com/thyname/dart.core/double) 并返回其反正切值（以弧度表示）。
 
 返回值范围为 -PI/2..PI/2；如果 [x] 为 NaN，则返回 NaN。
 
@@ -288,7 +211,7 @@ double atan(num x)
 double sqrt(num x)
 ```
 
-将 [x] 转换为 [double] 并返回该值的正平方根。
+将 [x] 转换为 [double](https://www.yuque.com/thyname/dart.core/double) 并返回该值的正平方根。
 
 如果 [x] 为 -0.0，返回 -0.0；如果 [x] 为其他负数或 NaN，返回 NaN。
 
@@ -309,7 +232,7 @@ print(result); // NaN
 double exp(num x)
 ```
 
-将 [x] 转换为 [double] 并返回自然常数 [e] 的 [x] 次幂。
+将 [x] 转换为 [double](https://www.yuque.com/thyname/dart.core/double) 并返回自然常数 [e] 的 [x] 次幂。
 
 如果 [x] 为 NaN，结果为 NaN。
 
@@ -319,6 +242,6 @@ double exp(num x)
 double log(num x)
 ```
 
-将 [x] 转换为 [double] 并返回该值的自然对数。
+将 [x] 转换为 [double](https://www.yuque.com/thyname/dart.core/double) 并返回该值的自然对数。
 
 如果 [x] 等于零，返回负无穷；如果 [x] 为 NaN 或小于零，返回 NaN。
