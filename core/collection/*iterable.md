@@ -4,7 +4,7 @@
 typedef IterableMixin<E> = Iterable<E>
 ```
 
-此 [Iterable] 混入实现了除 `iterator` 之外的所有 [Iterable] 成员。
+此 [Iterable](https://www.yuque.com/thyname/dart.core/iterable) 混入实现了除 `iterator` 之外的所有 [Iterable](https://www.yuque.com/thyname/dart.core/iterable) 成员。
 
 其他所有方法均基于 `iterator` 实现。
 
@@ -16,9 +16,9 @@ typedef IterableMixin<E> = Iterable<E>
 typedef IterableBase<E> = Iterable<E>
 ```
 
-用于实现 [Iterable] 的基类。
+用于实现 [Iterable](https://www.yuque.com/thyname/dart.core/iterable) 的基类。
 
-此类基于 `iterator` 实现了 [Iterable] 的所有方法，[Iterable.iterator] 除外。
+此类基于 `iterator` 实现了 [Iterable](https://www.yuque.com/thyname/dart.core/iterable) 的所有方法，[Iterable.iterator] 除外。
 
 ---
 

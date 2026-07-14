@@ -10,9 +10,9 @@ abstract interface class Map<K, V> {}
 
 映射及其键和值都可以被迭代。迭代顺序由映射的具体类型决定。示例：
 
-- 普通的 [HashMap] 是无序的（不保证任何顺序）；
-- [LinkedHashMap] 按键的插入顺序迭代；
-- 而像 [SplayTreeMap] 这样的有序映射按键的排序顺序迭代。
+- 普通的 [HashMap](https://www.yuque.com/thyname/dart.collection/hashmap) 是无序的（不保证任何顺序）；
+- [LinkedHashMap](https://www.yuque.com/thyname/dart.collection/linkedhashmap) 按键的插入顺序迭代；
+- 而像 [SplayTreeMap](https://www.yuque.com/thyname/dart.collection/splaytreemap) 这样的有序映射按键的排序顺序迭代。
 
 通常不允许在对映射执行操作期间修改映射（添加或删除键），例如在 [forEach] 调用期间调用的函数中。在迭代键或值时修改映射也可能破坏迭代。
 
@@ -28,7 +28,7 @@ abstract interface class Map<K, V> {}
 Map<K, V>()
 ```
 
-创建一个空的 [LinkedHashMap]。
+创建一个空的 [LinkedHashMap](https://www.yuque.com/thyname/dart.collection/linkedhashmap)。
 
 此构造函数等价于非 const 的映射字面量 `<K, V>{}`。
 
@@ -40,7 +40,7 @@ Map<K, V>()
 Map<K, V>.from( Map other )
 ```
 
-创建一个与 [other] 具有相同键和值的 [LinkedHashMap]。
+创建一个与 [other] 具有相同键和值的 [LinkedHashMap](https://www.yuque.com/thyname/dart.collection/linkedhashmap)。
 
 所有键必须是 [K] 的实例，所有值必须是 [V] 的实例。与 [Map.of] 不同，[other] 映射本身可以是任意类型，键和值的类型会在运行时进行检查（且可能失败）。
 
@@ -60,7 +60,7 @@ print(mapFrom); // {1: Mercury, 2: Venus, 3: Earth, 4: Mars}
 Map<K, V>.of( Map<K, V> other )
 ```
 
-创建一个与 [other] 具有相同键和值的 [LinkedHashMap]。
+创建一个与 [other] 具有相同键和值的 [LinkedHashMap](https://www.yuque.com/thyname/dart.collection/linkedhashmap)。
 
 `LinkedHashMap` 要求键实现兼容的 `operator==` 和 `hashCode`，并且允许 `null` 作为键。它按键的插入顺序迭代。
 
@@ -114,9 +114,9 @@ unmodifiableMap[4] = 'Mars'; // Throws
 Map<K, V>.identity()
 ```
 
-使用默认实现 [LinkedHashMap] 创建一个恒等映射（identity map）。
+使用默认实现 [LinkedHashMap](https://www.yuque.com/thyname/dart.collection/linkedhashmap) 创建一个恒等映射（identity map）。
 
-恒等映射使用 [identical] 判断相等性，使用 [identityHashCode] 计算键的哈希码，而不是使用键本身的 [Object.==] 和 [Object.hashCode]。
+恒等映射使用 [identical](https://www.yuque.com/thyname/dart.core/identical) 判断相等性，使用 [identityHashCode](https://www.yuque.com/thyname/dart.core/identityhashcode) 计算键的哈希码，而不是使用键本身的 [Object.==] 和 [Object.hashCode]。
 
 该映射按键的插入顺序迭代。
 
@@ -164,7 +164,7 @@ print(map); // {1: 1, 2: 2, 3: 3}
 
 由源 [iterable] 计算出的键不要求唯一。后出现的键的值会覆盖之前出现的同一键的值。
 
-创建的映射是 [LinkedHashMap]。`LinkedHashMap` 要求键实现兼容的 `operator==` 和 `hashCode`。它按键的插入顺序迭代。
+创建的映射是 [LinkedHashMap](https://www.yuque.com/thyname/dart.collection/linkedhashmap)。`LinkedHashMap` 要求键实现兼容的 `operator==` 和 `hashCode`。它按键的插入顺序迭代。
 
 ### Map.fromIterables()
 
@@ -185,9 +185,9 @@ print(map); // {Earth: false, Mars: false, Jupiter: true, Saturn: true}
 
 如果 [keys] 中多次包含同一对象，则最后一次出现的值会覆盖之前的值。
 
-两个 [Iterable] 必须具有相同的长度。
+两个 [Iterable](https://www.yuque.com/thyname/dart.core/iterable) 必须具有相同的长度。
 
-创建的映射是 [LinkedHashMap]。`LinkedHashMap` 要求键实现兼容的 `operator==` 和 `hashCode`。它按键的插入顺序迭代。
+创建的映射是 [LinkedHashMap](https://www.yuque.com/thyname/dart.collection/linkedhashmap)。`LinkedHashMap` 要求键实现兼容的 `operator==` 和 `hashCode`。它按键的插入顺序迭代。
 
 ### Map.fromEntries()
 
@@ -241,7 +241,7 @@ Map<K2, V2> castFrom<K, V, K2, V2>(Map<K, V> source)
 Iterable<MapEntry<K, V>> get entries
 ```
 
-此 [Map] 的映射条目。
+此 [Map](https://www.yuque.com/thyname/dart.core/map) 的映射条目。
 
 ### keys
 
@@ -249,7 +249,7 @@ Iterable<MapEntry<K, V>> get entries
 Iterable<K> get keys
 ```
 
-此 [Map] 的键。
+此 [Map](https://www.yuque.com/thyname/dart.core/map) 的键。
 
 返回的可迭代对象具有高效的 `length` 和 `contains` 操作，分别基于映射的 [length] 和 [containsKey]。
 
@@ -263,7 +263,7 @@ Iterable<K> get keys
 Iterable<V> get values
 ```
 
-此 [Map] 的值。
+此 [Map](https://www.yuque.com/thyname/dart.core/map) 的值。
 
 值按其对应键的顺序进行迭代。这意味着并行迭代 [keys] 和 [values] 将得到匹配的键值对。
 
@@ -365,7 +365,7 @@ void addEntries(Iterable<MapEntry<K, V>> newEntries)
 
 如果 [newEntries] 中的某个键已存在于此映射中，则对应的值会被覆盖。
 
-该操作等价于对 [newEntries] 中的每个 [MapEntry] 执行 `this[entry.key] = entry.value`。
+该操作等价于对 [newEntries] 中的每个 [MapEntry](https://www.yuque.com/thyname/dart.core/mapentry) 执行 `this[entry.key] = entry.value`。
 
 ```dart
 final planets = <int, String>{1: 'Mercury', 2: 'Venus',
@@ -576,9 +576,9 @@ void operator []=(K key, V value)
 final class MapEntry<K, V> {}
 ```
 
-表示 [Map] 中一个条目的键/值对。
+表示 [Map](https://www.yuque.com/thyname/dart.core/map) 中一个条目的键/值对。
 
-[Map] 接口包含多种可以基于条目对象来检查或修改映射的方法。
+[Map](https://www.yuque.com/thyname/dart.core/map) 接口包含多种可以基于条目对象来检查或修改映射的方法。
 
 ```dart
 final map = {'1': 'A', '2': 'B'};

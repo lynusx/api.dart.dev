@@ -80,7 +80,7 @@ Future<ServiceProtocolInfo> controlWebServer({bool enable = false, bool? silence
 String? getIsolateId(Isolate isolate)
 ```
 
-返回代表 [isolate] ID 的 [String] 令牌。
+返回代表 [isolate] ID 的 [String](https://www.yuque.com/thyname/dart.core/string) 令牌。
 
 如果正在运行的 Dart 环境不支持服务协议，则返回 null。
 
@@ -92,7 +92,7 @@ String? getIsolateId(Isolate isolate)
 String? getIsolateID(Isolate isolate)
 ```
 
-返回代表 [isolate] ID 的 [String] 令牌。
+返回代表 [isolate] ID 的 [String](https://www.yuque.com/thyname/dart.core/string) 令牌。
 
 如果正在运行的 Dart 环境不支持服务协议，则返回 null。
 
@@ -102,6 +102,6 @@ String? getIsolateID(Isolate isolate)
 String? getObjectId(Object object)
 ```
 
-返回代表 [object] ID 的 [String] 令牌。
+返回代表 [object] ID 的 [String](https://www.yuque.com/thyname/dart.core/string) 令牌。
 
 如果正在运行的 Dart 环境不支持服务协议，则返回 null。

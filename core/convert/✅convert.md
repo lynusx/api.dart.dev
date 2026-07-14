@@ -112,7 +112,7 @@ stream.transform(utf8.decoder)
       });
 ```
 
-有关创建自定义转换器的信息，请参见 [Codec](https://www.yuque.com/thyname/dart.convert/codec) 和 [Converter](https://www.yuque.com/thyname/dart.convert/converter) 类的文档。
+有关创建自定义转换器的信息，请参见 [Codec](https://www.yuque.com/thyname/dart.ui/codec) 和 [Converter](https://www.yuque.com/thyname/dart.convert/converter) 类的文档。
 
 ### HTML 转义
 

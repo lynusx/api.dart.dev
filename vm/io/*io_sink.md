@@ -6,13 +6,13 @@ abstract interface class IOSink implements StreamSink<List<int>>, StringSink {}
 
 字节与文本输出的组合。
 
-[IOSink] 将字节 [StreamSink] 与 [StringSink] 组合在一起，可以方便地输出字节和文本。
+[IOSink](https://www.yuque.com/thyname/dart.io/iosink) 将字节 [StreamSink](https://www.yuque.com/thyname/dart.async/streamsink) 与 [StringSink](https://www.yuque.com/thyname/dart.core/stringsink) 组合在一起，可以方便地输出字节和文本。
 
 `IOSink` 主要用于写入字节。通过 [write] 或 [writeCharCode] 写入的字符串会使用 [encoding] 转换为字节。通过 [add] 或 [addStream] 添加的整数数据会被视为字节数据，并会像使用 [int.toUnsigned] 一样截断为无符号 8 位值。由于这取决于 sink 背后的具体实现，因此不保证这种转换发生的具体时机。
 
 写入文本（[write]）和添加字节（[add]）可以自由交替进行。
 
-在使用 [addStream] 添加流的过程中，任何进一步向 [IOSink] 添加或写入数据的尝试都将失败，直到 [addStream] 完成为止。
+在使用 [addStream] 添加流的过程中，任何进一步向 [IOSink](https://www.yuque.com/thyname/dart.io/iosink) 添加或写入数据的尝试都将失败，直到 [addStream] 完成为止。
 
 在 sink 关闭后向其添加数据是错误的。
 
@@ -22,9 +22,9 @@ abstract interface class IOSink implements StreamSink<List<int>>, StringSink {}
 IOSink(StreamConsumer<List<int>> target, {Encoding encoding = utf8})
 ```
 
-创建一个将输出发送到字节 [StreamConsumer] [target] 的 [IOSink]。
+创建一个将输出发送到字节 [StreamConsumer](https://www.yuque.com/thyname/dart.async/streamconsumer) [target] 的 [IOSink](https://www.yuque.com/thyname/dart.io/iosink)。
 
-通过 [StreamSink] 方法写入的文本会在输出到 [target] 之前使用 [encoding] 编码为字节。
+通过 [StreamSink](https://www.yuque.com/thyname/dart.async/streamsink) 方法写入的文本会在输出到 [target] 之前使用 [encoding] 编码为字节。
 
 ### encoding
 
@@ -32,7 +32,7 @@ IOSink(StreamConsumer<List<int>> target, {Encoding encoding = utf8})
 Encoding encoding
 ```
 
-写入字符串时使用的 [Encoding]。
+写入字符串时使用的 [Encoding](https://www.yuque.com/thyname/dart.convert/encoding)。
 
 根据底层消费者（consumer）的不同，此属性可能是可变的。
 
@@ -118,7 +118,7 @@ Future addStream(Stream<List<int>> stream)
 
 添加给定 [stream] 的所有元素。
 
-返回一个 [Future]，当给定 [stream] 的所有元素都添加完成后完成。
+返回一个 [Future](https://www.yuque.com/thyname/dart.async/future)，当给定 [stream] 的所有元素都添加完成后完成。
 
 如果流中包含错误，`addStream` 会在该错误处结束，返回的 Future 会以该错误完成。
 
@@ -132,7 +132,7 @@ Future addStream(Stream<List<int>> stream)
 Future flush()
 ```
 
-返回一个 [Future]，当底层 [StreamConsumer] 接受了所有缓冲数据后完成。
+返回一个 [Future](https://www.yuque.com/thyname/dart.async/future)，当底层 [StreamConsumer](https://www.yuque.com/thyname/dart.async/streamconsumer) 接受了所有缓冲数据后完成。
 
 在 [addStream] 未完成时不得调用此方法。
 
@@ -146,7 +146,7 @@ Future close()
 
 关闭目标消费者。
 
-注意：写入 [IOSink] 的数据可能会被缓冲，调用 `close()` 不一定会刷新这些数据。要刷新所有缓冲的写入操作，请在调用 `close()` 之前调用 `flush()`。
+注意：写入 [IOSink](https://www.yuque.com/thyname/dart.io/iosink) 的数据可能会被缓冲，调用 `close()` 不一定会刷新这些数据。要刷新所有缓冲的写入操作，请在调用 `close()` 之前调用 `flush()`。
 
 ### done
 

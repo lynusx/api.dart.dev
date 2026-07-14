@@ -24,7 +24,7 @@ Unicode 字节顺序标记（BOM）字符 `U+FEFF`。
 const Utf8Codec utf8 = Utf8Codec();
 ```
 
-[Utf8Codec] 默认实现的一个实例。
+[Utf8Codec](https://www.yuque.com/thyname/dart.convert/utf8codec) 默认实现的一个实例。
 
 该实例便于访问最常见的 UTF-8 使用场景。
 
@@ -44,7 +44,7 @@ var decoded = utf8.decode([0x62, 0x6c, 0xc3, 0xa5, 0x62, 0xc3, 0xa6,
 final class Utf8Codec extends Encoding {}
 ```
 
-[Utf8Codec] 将字符串编码为 UTF-8 码元（字节），并将 UTF-8 码元解码为字符串。
+[Utf8Codec](https://www.yuque.com/thyname/dart.convert/utf8codec) 将字符串编码为 UTF-8 码元（字节），并将 UTF-8 码元解码为字符串。
 
 ## 构造函数
 
@@ -54,11 +54,11 @@ final class Utf8Codec extends Encoding {}
 Utf8Codec({bool allowMalformed = false})
 ```
 
-实例化一个新的 [Utf8Codec]。
+实例化一个新的 [Utf8Codec](https://www.yuque.com/thyname/dart.convert/utf8codec)。
 
 可选参数 [allowMalformed] 定义 [decoder]（及 [decode]）如何处理无效或未终止的字符序列。
 
-如果为 `true`（且在方法调用时未被覆盖），[decode] 和 [decoder] 会将无效（或未终止）的字节序列替换为 Unicode 替换字符 `U+FFFD`（�）。否则将抛出 [FormatException]。
+如果为 `true`（且在方法调用时未被覆盖），[decode] 和 [decoder] 会将无效（或未终止）的字节序列替换为 Unicode 替换字符 `U+FFFD`（�）。否则将抛出 [FormatException](https://www.yuque.com/thyname/dart.core/formatexception)。
 
 ## 属性
 
@@ -95,9 +95,9 @@ String decode(
 
 将 UTF-8 编码的 [codeUnits]（一个无符号 8 位整数列表）解码为对应的字符串。
 
-如果 [codeUnits] 以 [unicodeBomCharacterRune] 的编码开头，该字符将被丢弃。
+如果 [codeUnits] 以 [unicodeBomCharacterRune](https://www.yuque.com/thyname/dart.convert/unicodebomcharacterrune) 的编码开头，该字符将被丢弃。
 
-如果 [allowMalformed] 为 `true`，解码器会将无效（或未终止）的字符序列替换为 Unicode 替换字符 `U+FFFD`（�）。否则将抛出 [FormatException]。
+如果 [allowMalformed] 为 `true`，解码器会将无效（或未终止）的字符序列替换为 Unicode 替换字符 `U+FFFD`（�）。否则将抛出 [FormatException](https://www.yuque.com/thyname/dart.core/formatexception)。
 
 如果未提供 [allowMalformed]，默认使用实例化 `this` 时使用的 `allowMalformed` 值。
 
@@ -158,7 +158,7 @@ StringConversionSink startChunkedConversion(Sink<List<int>> sink)
 
 开始一次分块转换。
 
-如果给定的 [sink] 是 [ByteConversionSink]，转换器的工作效率会更高。
+如果给定的 [sink] 是 [ByteConversionSink](https://www.yuque.com/thyname/dart.convert/byteconversionsink)，转换器的工作效率会更高。
 
 ### bind()
 
@@ -189,7 +189,7 @@ final decodedBytes = utf8Decoder.convert(encodedBytes);
 print(decodedBytes); // Îñţérñåţîöñåļîžåţîờñ
 ```
 
-如果编码输入包含无效的 UTF-8 字节序列，且 [allowMalformed] 为 `false`（默认值），则抛出 [FormatException]。
+如果编码输入包含无效的 UTF-8 字节序列，且 [allowMalformed] 为 `false`（默认值），则抛出 [FormatException](https://www.yuque.com/thyname/dart.core/formatexception)。
 
 如果 [allowMalformed] 为 `true`，无效字节序列会被转换为一个或多个 Unicode 替换字符 U+FFFD（'�'）。
 
@@ -210,11 +210,11 @@ print(decodedBytes); // �
 Utf8Decoder({bool allowMalformed = false})
 ```
 
-实例化一个新的 [Utf8Decoder]。
+实例化一个新的 [Utf8Decoder](https://www.yuque.com/thyname/dart.convert/utf8decoder)。
 
 可选参数 [allowMalformed] 定义 [convert] 如何处理无效或未终止的字符序列。
 
-如果为 `true`，[convert] 会将无效（或未终止）的字符序列替换为 Unicode 替换字符 `U+FFFD`（�）。否则将抛出 [FormatException]。
+如果为 `true`，[convert] 会将无效（或未终止）的字符序列替换为 Unicode 替换字符 `U+FFFD`（�）。否则将抛出 [FormatException](https://www.yuque.com/thyname/dart.core/formatexception)。
 
 ## 方法
 
@@ -228,7 +228,7 @@ String convert(List<int> codeUnits, [int start = 0, int? end])
 
 使用从 [start] 到（不包括）[end] 的码元。如果省略 [end]，默认为 `codeUnits.length`。
 
-如果 [codeUnits] 以 [unicodeBomCharacterRune] 的编码开头，该字符将被丢弃。
+如果 [codeUnits] 以 [unicodeBomCharacterRune](https://www.yuque.com/thyname/dart.convert/unicodebomcharacterrune) 的编码开头，该字符将被丢弃。
 
 ### startChunkedConversion()
 
@@ -238,7 +238,7 @@ ByteConversionSink startChunkedConversion(Sink<String> sink)
 
 开始一次分块转换。
 
-如果给定的 [sink] 是 [StringConversionSink]，转换器的工作效率会更高。
+如果给定的 [sink] 是 [StringConversionSink](https://www.yuque.com/thyname/dart.convert/stringconversionsink)，转换器的工作效率会更高。
 
 ### bind()
 

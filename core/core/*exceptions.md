@@ -6,11 +6,11 @@ abstract interface class Exception {}
 
 所有核心库异常都实现的标记接口。
 
-[Exception] 旨在向用户传达有关失败的信息，以便能够以编程方式处理该错误。它旨在被捕获，并应包含有用的数据字段。
+[Exception](https://www.yuque.com/thyname/dart.core/exception) 旨在向用户传达有关失败的信息，以便能够以编程方式处理该错误。它旨在被捕获，并应包含有用的数据字段。
 
 不建议在库代码中直接使用 `Exception("message")` 创建实例，因为这不会为用户提供可捕获的精确类型。在测试或开发过程中使用此类的实例可能是合理的。
 
-对于不打算被捕获的失败，请使用 [Error] 及其子类。
+对于不打算被捕获的失败，请使用 [Error](https://www.yuque.com/thyname/dart.core/error) 及其子类。
 
 ## 构造函数
 
@@ -58,7 +58,7 @@ dynamic source
 
 导致该错误的实际源输入。
 
-通常是 [String]，但也可以是其他类型。如果是字符串，其部分内容可能会包含在 [toString] 的消息中。
+通常是 [String](https://www.yuque.com/thyname/dart.core/string)，但也可以是其他类型。如果是字符串，其部分内容可能会包含在 [toString] 的消息中。
 
 如果省略或未知，source 为 `null`。
 

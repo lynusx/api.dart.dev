@@ -22,7 +22,7 @@ print(identical(const <int>[1], const <int>[1])); // true
 
 整数和浮点数比较特殊，它们完全不允许创建新实例。如果两个整数相等，它们也必然是相同的（identical）。如果两个浮点数具有相同的二进制表示，它们也是相同的（在 Web 平台上，[double.nan] 和 `-0.0` 存在一些特殊情况）。
 
-[Record](记录) 值不具有 _持久性_ 标识。这使得编译器可以将记录拆分为各个部分，并在之后重新构建，而无需担心创建出具有相同标识的对象。一个记录 _可能_ 与另一个具有相同形状（shape）的记录相同——如果所有对应字段都相同，但也可能不相同；不过它永远不会与其他任何东西相同。
+[Record](https://www.yuque.com/thyname/dart.core/record) 值不具有 _持久性_ 标识。这使得编译器可以将记录拆分为各个部分，并在之后重新构建，而无需担心创建出具有相同标识的对象。一个记录 _可能_ 与另一个具有相同形状（shape）的记录相同——如果所有对应字段都相同，但也可能不相同；不过它永远不会与其他任何东西相同。
 
 示例：
 
@@ -56,9 +56,9 @@ int identityHashCode(Object? object)
 
 返回即使 `hashCode` 已被重写，原始的 [Object.hashCode] 在该对象上也会返回的值。
 
-该哈希码与 [identical] 兼容，这意味着对于任何 _非记录_ 对象，只要传入相同的参数，在同一次程序执行过程中始终保证返回相同的结果。
+该哈希码与 [identical](https://www.yuque.com/thyname/dart.core/identical) 兼容，这意味着对于任何 _非记录_ 对象，只要传入相同的参数，在同一次程序执行过程中始终保证返回相同的结果。
 
-[Record](记录) 的标识哈希码是未定义的，因为记录不保证具有持久性标识。记录值的标识及其标识哈希码可能随时发生变化。
+[Record](https://www.yuque.com/thyname/dart.core/record) 的标识哈希码是未定义的，因为记录不保证具有持久性标识。记录值的标识及其标识哈希码可能随时发生变化。
 
 ```dart
 var identitySet = HashSet(equals: identical, hashCode: identityHashCode);

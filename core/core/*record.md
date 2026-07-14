@@ -50,13 +50,13 @@ bool ok = triple.isValid;
 
 因此，以下标识符不能用作命名字段的名称：
 
-- [Object] 成员的名称：`hashCode`、`runtimeType`、`toString` 和 `noSuchMethod`。
+- [Object](https://www.yuque.com/thyname/dart.core/object) 成员的名称：`hashCode`、`runtimeType`、`toString` 和 `noSuchMethod`。
 - 同一记录中位置获取器的名称，因此 `(0, $1: 0)` 是无效的，但 `(0, $2: 0)` 是有效的，因为在*该*记录形状中不存在带有获取器 `$2` 的位置字段。_（这仍然会造成混淆，实践中应避免。）_
 - 此外，不允许使用以下划线 `_` 开头的名称。字段名称不能是库私有的。
 
-记录对象的运行时类型是一个记录类型，因此是 [Record] 的子类型，并传递性地成为 [Object] 及其超类型的子类型。
+记录对象的运行时类型是一个记录类型，因此是 [Record](https://www.yuque.com/thyname/dart.core/record) 的子类型，并传递性地成为 [Object](https://www.yuque.com/thyname/dart.core/object) 及其超类型的子类型。
 
-记录值不具有持久的 [identical] 行为。对一个记录对象的引用*随时*可能变为对另一个具有相同形状和字段值的记录对象的引用。
+记录值不具有持久的 [identical](https://www.yuque.com/thyname/dart.core/identical) 行为。对一个记录对象的引用*随时*可能变为对另一个具有相同形状和字段值的记录对象的引用。
 
 除此之外，一个记录类型只能是另一个具有相同形状的记录类型的子类型，且仅当前一个记录类型的字段类型是另一个记录类型对应字段类型的子类型时才成立。也就是说，`(int, String, {bool isValid})` 是 `(num, String, {Object isValid})` 的子类型，因为它们具有相同的形状，且字段类型逐一对应地是子类型关系。不同形状的记录类型彼此无关。
 

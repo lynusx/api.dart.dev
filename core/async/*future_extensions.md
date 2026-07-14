@@ -14,11 +14,11 @@ Future<List<T>> get wait
 
 等待此可迭代对象中的所有 Future。如果所有 Future 都成功完成，则返回一个结果值列表，其顺序与创建这些 Future 的顺序相同。
 
-与 [Future.wait] 类似，但使用 [ParallelWaitError] 报告错误，使调用方可以在必要时处理错误并释放已成功的结果。
+与 [Future.wait] 类似，但使用 [ParallelWaitError](https://www.yuque.com/thyname/dart.async/parallelwaiterror) 报告错误，使调用方可以在必要时处理错误并释放已成功的结果。
 
 当所有 Future 都完成时，返回的 Future 才会完成。如果其中任意一个 Future 未完成，则返回的 Future 也不会完成。
 
-如果任意一个 Future 以错误完成，则返回的 Future 会以 [ParallelWaitError] 完成。[ParallelWaitError.values] 是一个列表，包含成功的 Future 的值，出错的 Future 对应位置为 `null`。[ParallelWaitError.errors] 是一个长度相同的列表，成功的 Future 对应位置为 `null`，出错的 Future 对应位置为包含该错误的 [AsyncError]。
+如果任意一个 Future 以错误完成，则返回的 Future 会以 [ParallelWaitError](https://www.yuque.com/thyname/dart.async/parallelwaiterror) 完成。[ParallelWaitError.values] 是一个列表，包含成功的 Future 的值，出错的 Future 对应位置为 `null`。[ParallelWaitError.errors] 是一个长度相同的列表，成功的 Future 对应位置为 `null`，出错的 Future 对应位置为包含该错误的 [AsyncError](https://www.yuque.com/thyname/dart.async/asyncerror)。
 
 # FutureRecord2
 
@@ -34,7 +34,7 @@ extension FutureRecord2<T1, T2> on (Future<T1>, Future<T2>) {}
 
 当所有 Future 都完成时，返回的 Future 才会完成。如果其中任意一个 Future 未完成，则返回的 Future 也不会完成。
 
-如果部分 Future 以错误完成，则返回的 Future 会以 [ParallelWaitError] 完成。[ParallelWaitError.values] 是一个记录，包含成功的 Future 的值，出错的 Future 对应位置为 `null`。[ParallelWaitError.errors] 是一个形状相同的记录，成功的 Future 对应位置为 `null`，出错的 Future 对应位置为包含该错误的 [AsyncError]。
+如果部分 Future 以错误完成，则返回的 Future 会以 [ParallelWaitError](https://www.yuque.com/thyname/dart.async/parallelwaiterror) 完成。[ParallelWaitError.values] 是一个记录，包含成功的 Future 的值，出错的 Future 对应位置为 `null`。[ParallelWaitError.errors] 是一个形状相同的记录，成功的 Future 对应位置为 `null`，出错的 Future 对应位置为包含该错误的 [AsyncError](https://www.yuque.com/thyname/dart.async/asyncerror)。
 
 ### wait
 
@@ -48,7 +48,7 @@ Future<(T1, T2)> get wait
 
 当所有 Future 都完成时，返回的 Future 才会完成。如果其中任意一个 Future 未完成，则返回的 Future 也不会完成。
 
-如果部分 Future 以错误完成，则返回的 Future 会以 [ParallelWaitError](https://api.dart.dev/dart-async/ParallelWaitError-class.html) 完成。[ParallelWaitError.values](https://api.dart.dev/dart-async/ParallelWaitError/values.html) 是一个记录，包含成功的 Future 的值，出错的 Future 对应位置为 `null`。[ParallelWaitError.errors](https://api.dart.dev/dart-async/ParallelWaitError/errors.html) 是一个形状相同的记录，成功的 Future 对应位置为 `null`，出错的 Future 对应位置为包含该错误的 [AsyncError](https://api.dart.dev/dart-async/AsyncError-class.html)。
+如果部分 Future 以错误完成，则返回的 Future 会以 [ParallelWaitError](https://www.yuque.com/thyname/dart.async/parallelwaiterror) 完成。[ParallelWaitError.values](https://api.dart.dev/dart-async/ParallelWaitError/values.html) 是一个记录，包含成功的 Future 的值，出错的 Future 对应位置为 `null`。[ParallelWaitError.errors](https://api.dart.dev/dart-async/ParallelWaitError/errors.html) 是一个形状相同的记录，成功的 Future 对应位置为 `null`，出错的 Future 对应位置为包含该错误的 [AsyncError](https://www.yuque.com/thyname/dart.async/asyncerror)。
 
 # ParallelWaitError
 
@@ -103,4 +103,4 @@ E errors
 
 失败的 Future 的错误。
 
-形状与原始 Future 集合相同，每个失败的 Future 对应其错误（通常为 [AsyncError]），每个成功的 Future 对应 `null`。
+形状与原始 Future 集合相同，每个失败的 Future 对应其错误（通常为 [AsyncError](https://www.yuque.com/thyname/dart.async/asyncerror)），每个成功的 Future 对应 `null`。

@@ -4,9 +4,9 @@
 abstract mixin class MapBase<K, V> implements Map<K, V> {}
 ```
 
-实现 [Map] 的基类。
+实现 [Map](https://www.yuque.com/thyname/dart.core/map) 的基类。
 
-该类基本实现了 [Map] 除五个成员之外的所有成员。通过扩展该类并实现 `keys`、`operator[]`、`operator[]=`、`remove` 和 `clear`，即可实现一个基本的 `Map` 类。其余操作均基于这五个成员实现。
+该类基本实现了 [Map](https://www.yuque.com/thyname/dart.core/map) 除五个成员之外的所有成员。通过扩展该类并实现 `keys`、`operator[]`、`operator[]=`、`remove` 和 `clear`，即可实现一个基本的 `Map` 类。其余操作均基于这五个成员实现。
 
 `keys` 可迭代对象应具有高效的 [Iterable.length] 和 [Iterable.contains] 操作，并且应在迭代过程中捕获对 keys 的并发修改。
 
@@ -57,9 +57,9 @@ const MapBase<K, V>()
 typedef MapMixin<K, V> = MapBase<K, V>
 ```
 
-实现 [Map] 的混入。
+实现 [Map](https://www.yuque.com/thyname/dart.core/map) 的混入。
 
-该混入基本实现了 [Map] 除五个成员之外的所有成员。通过混入该类并实现 `keys`、`operator[]`、`operator[]=`、`remove` 和 `clear`，即可实现一个基本的 `Map` 类。其余操作均基于这五个成员实现。
+该混入基本实现了 [Map](https://www.yuque.com/thyname/dart.core/map) 除五个成员之外的所有成员。通过混入该类并实现 `keys`、`operator[]`、`operator[]=`、`remove` 和 `clear`，即可实现一个基本的 `Map` 类。其余操作均基于这五个成员实现。
 
 `keys` 可迭代对象应具有高效的 [Iterable.length] 和 [Iterable.contains] 操作，并且应在迭代过程中捕获对 keys 的并发修改。
 
@@ -73,9 +73,9 @@ typedef MapMixin<K, V> = MapBase<K, V>
 abstract class UnmodifiableMapBase<K, V> = MapBase<K, V> with _UnmodifiableMapMixin<K, V>;
 ```
 
-不可变 [Map] 的基本实现。
+不可变 [Map](https://www.yuque.com/thyname/dart.core/map) 的基本实现。
 
-该类基本实现了不可变 [Map] 除两个成员之外的所有成员。通过扩展该类并实现 `keys` 和 `operator[]`，即可实现一个简单的不可变 `Map` 类。
+该类基本实现了不可变 [Map](https://www.yuque.com/thyname/dart.core/map) 除两个成员之外的所有成员。通过扩展该类并实现 `keys` 和 `operator[]`，即可实现一个简单的不可变 `Map` 类。
 
 修改操作在使用时会抛出异常。其余非修改操作均基于 `keys` 和 `operator[]` 实现。
 
@@ -91,11 +91,11 @@ abstract class UnmodifiableMapBase<K, V> = MapBase<K, V> with _UnmodifiableMapMi
 class MapView<K, V> implements Map<K, V> {}
 ```
 
-对实现 [Map] 的类进行包装，仅暴露 `Map` 的成员。
+对实现 [Map](https://www.yuque.com/thyname/dart.core/map) 的类进行包装，仅暴露 `Map` 的成员。
 
 一个简单的包装器，将所有 `Map` 成员委托给构造函数中提供的映射。
 
-是 [UnmodifiableMapView] 等委托式映射实现的基础。
+是 [UnmodifiableMapView](https://www.yuque.com/thyname/dart.collection/unmodifiablemapview) 等委托式映射实现的基础。
 
 ## 构造函数
 
@@ -145,7 +145,7 @@ const MapView<K, V>(Map<K, V> map)
 class UnmodifiableMapView<K, V> extends MapView<K, V> with _UnmodifiableMapMixin<K, V> {}
 ```
 
-禁止修改的 [Map] 视图。
+禁止修改的 [Map](https://www.yuque.com/thyname/dart.core/map) 视图。
 
 一个 `Map` 的包装器，将所有成员转发给构造函数中提供的映射，但会修改映射的操作除外。修改操作会抛出异常。
 

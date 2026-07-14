@@ -4,9 +4,9 @@
 abstract mixin class Converter<S, T> implements StreamTransformerBase<S, T> {}
 ```
 
-[Converter] 用于将数据从一种表示形式转换为另一种表示形式。
+[Converter](https://www.yuque.com/thyname/dart.convert/converter) 用于将数据从一种表示形式转换为另一种表示形式。
 
-[Converter] 类为除 [convert] 之外的每个方法都提供了默认实现。
+[Converter](https://www.yuque.com/thyname/dart.convert/converter) 类为除 [convert] 之外的每个方法都提供了默认实现。
 
 ## 构造函数
 

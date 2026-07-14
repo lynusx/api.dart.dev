@@ -4,7 +4,7 @@
 class FileMode {}
 ```
 
-[File] 可被打开的模式。
+[File](https://www.yuque.com/thyname/dart.io/file) 可被打开的模式。
 
 ### read
 
@@ -94,7 +94,7 @@ abstract interface class File implements FileSystemEntity {}
 
 对文件系统上一个文件的引用。
 
-`File` 持有一个 [path]，可对其执行各种操作。可以使用 [FileSystemEntity] 继承而来的属性 [parent] 获取该文件的父目录。
+`File` 持有一个 [path]，可对其执行各种操作。可以使用 [FileSystemEntity](https://www.yuque.com/thyname/dart.io/filesystementity) 继承而来的属性 [parent] 获取该文件的父目录。
 
 使用一个路径名创建新的 `File` 对象，即可从程序中访问文件系统上指定的文件。
 
@@ -127,7 +127,7 @@ void main() {
 }
 ```
 
-一种更灵活实用的读取文件方式是使用 [Stream]。使用 [openRead] 打开文件，会返回一个以字节块形式提供文件数据的流。读取该流即可在数据可用时处理文件内容。你可以依次使用各种转换器（transformer）将文件内容处理为所需格式，或为输出做准备。
+一种更灵活实用的读取文件方式是使用 [Stream](https://www.yuque.com/thyname/dart.async/stream)。使用 [openRead] 打开文件，会返回一个以字节块形式提供文件数据的流。读取该流即可在数据可用时处理文件内容。你可以依次使用各种转换器（transformer）将文件内容处理为所需格式，或为输出做准备。
 
 在读取大文件、使用转换器处理数据，或需要与其他 API（例如 [WebSocket]）兼容时，可能会用到流。
 
@@ -166,7 +166,7 @@ void main() async {
 }
 ```
 
-也可以使用 [Stream] 写入文件。使用 [openWrite] 打开文件，会返回一个可向其写入数据的 [IOSink]。请务必使用 [IOSink.close] 方法关闭该 sink。
+也可以使用 [Stream](https://www.yuque.com/thyname/dart.async/stream) 写入文件。使用 [openWrite] 打开文件，会返回一个可向其写入数据的 [IOSink](https://www.yuque.com/thyname/dart.io/iosink)。请务必使用 [IOSink.close] 方法关闭该 sink。
 
 ```dart
 import 'dart:io';
@@ -184,7 +184,7 @@ void main() async {
 
 ## 异步方法的使用
 
-为避免程序被意外阻塞，多个方法都是异步的，并返回一个 [Future]。例如，用于获取文件长度的 [length] 方法会返回一个 [Future]。等待该 future 完成即可获取结果。
+为避免程序被意外阻塞，多个方法都是异步的，并返回一个 [Future](https://www.yuque.com/thyname/dart.async/future)。例如，用于获取文件长度的 [length] 方法会返回一个 [Future](https://www.yuque.com/thyname/dart.async/future)。等待该 future 完成即可获取结果。
 
 ```dart
 import 'dart:io';
@@ -215,7 +215,7 @@ void main() async {
 File(String path)
 ```
 
-创建一个 [File] 对象。
+创建一个 [File](https://www.yuque.com/thyname/dart.io/file) 对象。
 
 若 [path] 为相对路径，使用时将相对于当前工作目录（参见 [Directory.current]）进行解析。
 
@@ -227,9 +227,9 @@ File(String path)
 File.fromUri(Uri uri)
 ```
 
-通过 URI 创建一个 [File] 对象。
+通过 URI 创建一个 [File](https://www.yuque.com/thyname/dart.io/file) 对象。
 
-若 [uri] 无法引用一个文件，则会抛出 [UnsupportedError]。
+若 [uri] 无法引用一个文件，则会抛出 [UnsupportedError](https://www.yuque.com/thyname/dart.core/unsupportederror)。
 
 ### File.fromRawPath()
 
@@ -237,7 +237,7 @@ File.fromUri(Uri uri)
 File.fromRawPath(Uint8List rawPath)
 ```
 
-通过原始路径创建一个 [File] 对象。
+通过原始路径创建一个 [File](https://www.yuque.com/thyname/dart.io/file) 对象。
 
 原始路径是操作系统用于表示路径的字节序列。
 
@@ -253,11 +253,11 @@ Future<File> create({bool recursive = false, bool exclusive = false})
 
 若 [recursive] 为 `false`（默认值），仅当路径中的所有目录都已存在时，该文件才会被创建。若 [recursive] 为 `true`，则会先创建路径中所有尚不存在的父路径。
 
-若 [exclusive] 为 `true` 且待创建的文件已存在，此操作将以 [PathExistsException] 完成该 future。
+若 [exclusive] 为 `true` 且待创建的文件已存在，此操作将以 [PathExistsException](https://www.yuque.com/thyname/dart.io/pathexistsexception) 完成该 future。
 
 若 [exclusive] 为 `false`，[create] 不会改动已存在的文件。若文件存在限制性权限，即便调用 [create] 也可能失败。
 
-若操作失败，将以 [FileSystemException] 完成该 future。
+若操作失败，将以 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception) 完成该 future。
 
 ### createSync()
 
@@ -269,11 +269,11 @@ void createSync({bool recursive = false, bool exclusive = false})
 
 若 [recursive] 为 `false`（默认值），仅当路径中的所有目录都已存在时，该文件才会被创建。若 [recursive] 为 `true`，则会先创建路径中所有尚不存在的父路径。
 
-若 [exclusive] 为 `true` 且待创建的文件已存在，则抛出 [FileSystemException]。
+若 [exclusive] 为 `true` 且待创建的文件已存在，则抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 若 [exclusive] 为 `false`，[createSync] 不会改动已存在的文件。若文件存在限制性权限，即便调用 [createSync] 也可能失败。
 
-若操作失败，抛出 [FileSystemException]。
+若操作失败，抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### rename()
 
@@ -283,7 +283,7 @@ Future<File> rename(String newPath)
 
 重命名此文件。
 
-返回一个 `Future<File>`，其在完成时携带重命名后文件对应的 [File]。
+返回一个 `Future<File>`，其在完成时携带重命名后文件对应的 [File](https://www.yuque.com/thyname/dart.io/file)。
 
 若 [newPath] 是相对路径，会相对于当前工作目录（[Directory.current]）进行解析。这意味着，若仅想更改文件名而保持文件所在目录不变，需要构造一个以新名称结尾的完整新路径。示例：
 
@@ -298,7 +298,7 @@ Future<File> changeFileNameOnly(File file, String newFileName) {
 
 在某些平台上，重命名操作无法将文件移动到不同的文件系统。若是这种情况，请改为使用 [copy] 将文件复制到新位置，然后删除原文件。
 
-若 [newPath] 指向一个已存在的文件或链接，该实体会被先移除。若 [newPath] 指向一个已存在的目录，操作将失败，future 将以 [FileSystemException] 完成。
+若 [newPath] 指向一个已存在的文件或链接，该实体会被先移除。若 [newPath] 指向一个已存在的目录，操作将失败，future 将以 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception) 完成。
 
 ### renameSync()
 
@@ -308,7 +308,7 @@ File renameSync(String newPath)
 
 同步地重命名此文件。
 
-返回重命名后文件对应的 [File]。
+返回重命名后文件对应的 [File](https://www.yuque.com/thyname/dart.io/file)。
 
 若 [newPath] 是相对路径，会相对于当前工作目录（[Directory.current]）进行解析。这意味着，若仅想更改文件名而保持文件所在目录不变，需要构造一个以新名称结尾的完整新路径。示例：
 
@@ -323,7 +323,7 @@ File changeFileNameOnlySync(File file, String newFileName) {
 
 在某些平台上，重命名操作无法将文件移动到不同的文件系统。若是这种情况，请改为使用 [copySync] 将文件复制到新位置，然后 [deleteSync] 原文件。
 
-若 [newPath] 指向一个已存在的文件或链接，该实体会被先移除。若 [newPath] 指向一个已存在的目录，则抛出 [FileSystemException]。
+若 [newPath] 指向一个已存在的文件或链接，该实体会被先移除。若 [newPath] 指向一个已存在的目录，则抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### delete()
 
@@ -331,17 +331,17 @@ File changeFileNameOnlySync(File file, String newFileName) {
 Future<FileSystemEntity> delete({bool recursive = false})
 ```
 
-删除此 [File]。
+删除此 [File](https://www.yuque.com/thyname/dart.io/file)。
 
 若 [recursive] 为 `false`：
 
-- 若 [path] 对应一个常规文件、命名管道或套接字，则删除该路径。若 [path] 对应一个链接，且该链接解析指向一个文件，则会删除 [path] 处的链接。其他所有情况下，[delete] 都将以 [FileSystemException] 完成。
+- 若 [path] 对应一个常规文件、命名管道或套接字，则删除该路径。若 [path] 对应一个链接，且该链接解析指向一个文件，则会删除 [path] 处的链接。其他所有情况下，[delete] 都将以 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception) 完成。
 
 若 [recursive] 为 `true`：
 
-- [path] 处的 [FileSystemEntity] 将被删除，无论其类型如何。若 [path] 对应一个文件或链接，则删除该文件或链接。若 [path] 对应一个目录，则该目录及其下所有子目录与文件都将被删除。递归删除时不会跟随链接，只会删除链接本身，而不会删除其目标。这一行为使得 [delete] 可用于无条件删除任意文件系统对象。
+- [path] 处的 [FileSystemEntity](https://www.yuque.com/thyname/dart.io/filesystementity) 将被删除，无论其类型如何。若 [path] 对应一个文件或链接，则删除该文件或链接。若 [path] 对应一个目录，则该目录及其下所有子目录与文件都将被删除。递归删除时不会跟随链接，只会删除链接本身，而不会删除其目标。这一行为使得 [delete] 可用于无条件删除任意文件系统对象。
 
-若无法删除此 [File]，则 [delete] 将以 [FileSystemException] 完成。
+若无法删除此 [File](https://www.yuque.com/thyname/dart.io/file)，则 [delete] 将以 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception) 完成。
 
 ### deleteSync()
 
@@ -349,17 +349,17 @@ Future<FileSystemEntity> delete({bool recursive = false})
 void deleteSync({bool recursive = false})
 ```
 
-同步地删除此 [File]。
+同步地删除此 [File](https://www.yuque.com/thyname/dart.io/file)。
 
 若 [recursive] 为 `false`：
 
-- 若 [path] 对应一个常规文件、命名管道或套接字，则删除该路径。若 [path] 对应一个链接，且该链接解析指向一个文件，则会删除 [path] 处的链接。其他所有情况下，[delete] 都将抛出 [FileSystemException]。
+- 若 [path] 对应一个常规文件、命名管道或套接字，则删除该路径。若 [path] 对应一个链接，且该链接解析指向一个文件，则会删除 [path] 处的链接。其他所有情况下，[delete] 都将抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 若 [recursive] 为 `true`：
 
-- [path] 处的 [FileSystemEntity] 将被删除，无论其类型如何。若 [path] 对应一个文件或链接，则删除该文件或链接。若 [path] 对应一个目录，则该目录及其下所有子目录与文件都将被删除。递归删除时不会跟随链接，只会删除链接本身，而不会删除其目标。这一行为使得 [delete] 可用于无条件删除任意文件系统对象。
+- [path] 处的 [FileSystemEntity](https://www.yuque.com/thyname/dart.io/filesystementity) 将被删除，无论其类型如何。若 [path] 对应一个文件或链接，则删除该文件或链接。若 [path] 对应一个目录，则该目录及其下所有子目录与文件都将被删除。递归删除时不会跟随链接，只会删除链接本身，而不会删除其目标。这一行为使得 [delete] 可用于无条件删除任意文件系统对象。
 
-若无法删除此 [File]，则 [delete] 将抛出 [FileSystemException]。
+若无法删除此 [File](https://www.yuque.com/thyname/dart.io/file)，则 [delete] 将抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### copy()
 
@@ -371,7 +371,7 @@ Future<File> copy(String newPath)
 
 若 [newPath] 是相对路径，会相对于当前工作目录（[Directory.current]）进行解析。
 
-返回一个 `Future<File>`，其在完成时携带复制后文件对应的 [File]。
+返回一个 `Future<File>`，其在完成时携带复制后文件对应的 [File](https://www.yuque.com/thyname/dart.io/file)。
 
 若 [newPath] 指向一个已存在的文件，该文件会被先移除。若 [newPath] 指向一个已存在的目录，操作将失败，future 将以异常完成。
 
@@ -385,7 +385,7 @@ File copySync(String newPath)
 
 若 [newPath] 是相对路径，会相对于当前工作目录（[Directory.current]）进行解析。
 
-返回复制后文件对应的 [File]。
+返回复制后文件对应的 [File](https://www.yuque.com/thyname/dart.io/file)。
 
 若 [newPath] 指向一个已存在的文件，该文件会被先移除。若 [newPath] 指向一个已存在的目录，操作将失败并抛出异常。
 
@@ -407,7 +407,7 @@ int lengthSync()
 
 同步获取该文件的长度。
 
-若操作失败，抛出 [FileSystemException]。
+若操作失败，抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### absolute
 
@@ -415,7 +415,7 @@ int lengthSync()
 File get absolute
 ```
 
-一个路径为 [path] 绝对路径的 [File]。
+一个路径为 [path] 绝对路径的 [File](https://www.yuque.com/thyname/dart.io/file)。
 
 绝对路径的计算方式为：对相对路径添加当前工作目录作为前缀，或原样返回已是绝对路径的路径。
 
@@ -429,7 +429,7 @@ Future<DateTime> lastAccessed()
 
 返回一个 `Future<DateTime>`，其在该信息可用时，携带该文件最后一次被访问的日期与时间完成。
 
-若操作失败，抛出 [FileSystemException]。
+若操作失败，抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### lastAccessedSync()
 
@@ -441,7 +441,7 @@ DateTime lastAccessedSync()
 
 在该信息可用时，返回该文件最后一次被访问的日期与时间。会阻塞，直到该信息可返回，或确定该信息不可用为止。
 
-若操作失败，抛出 [FileSystemException]。
+若操作失败，抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### setLastAccessed()
 
@@ -451,9 +451,9 @@ Future setLastAccessed(DateTime time)
 
 修改该文件最后被访问的时间。
 
-返回一个在该操作完成后即完成的 [Future]。
+返回一个在该操作完成后即完成的 [Future](https://www.yuque.com/thyname/dart.async/future)。
 
-若无法设置该时间，抛出 [FileSystemException]。
+若无法设置该时间，抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### setLastAccessedSync()
 
@@ -463,7 +463,7 @@ void setLastAccessedSync(DateTime time)
 
 同步地修改该文件最后被访问的时间。
 
-若无法设置该时间，抛出 [FileSystemException]。
+若无法设置该时间，抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### lastModified()
 
@@ -475,7 +475,7 @@ Future<DateTime> lastModified()
 
 返回一个 `Future<DateTime>`，其在该信息可用时，携带该文件最后一次被修改的日期与时间完成。
 
-若操作失败，抛出 [FileSystemException]。
+若操作失败，抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### lastModifiedSync()
 
@@ -487,7 +487,7 @@ DateTime lastModifiedSync()
 
 在该信息可用时，返回该文件最后一次被修改的日期与时间。会阻塞，直到该信息可返回，或确定该信息不可用为止。
 
-若操作失败，抛出 [FileSystemException]。
+若操作失败，抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### setLastModified()
 
@@ -497,9 +497,9 @@ Future setLastModified(DateTime time)
 
 修改该文件最后被修改的时间。
 
-返回一个在该操作完成后即完成的 [Future]。
+返回一个在该操作完成后即完成的 [Future](https://www.yuque.com/thyname/dart.async/future)。
 
-若无法设置该时间，抛出 [FileSystemException]。
+若无法设置该时间，抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### setLastModifiedSync()
 
@@ -509,7 +509,7 @@ void setLastModifiedSync(DateTime time)
 
 同步地修改该文件最后被修改的时间。
 
-若无法设置属性，抛出 [FileSystemException]。
+若无法设置属性，抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### open()
 
@@ -519,7 +519,7 @@ Future<RandomAccessFile> open({FileMode mode = FileMode.read})
 
 打开该文件以进行随机访问操作。
 
-返回一个 `Future<RandomAccessFile>`，其在完成时携带已打开的随机访问文件。[RandomAccessFile] 必须使用 [RandomAccessFile.close] 方法关闭。
+返回一个 `Future<RandomAccessFile>`，其在完成时携带已打开的随机访问文件。[RandomAccessFile](https://www.yuque.com/thyname/dart.io/randomaccessfile) 必须使用 [RandomAccessFile.close] 方法关闭。
 
 文件可以三种模式打开：
 
@@ -529,7 +529,7 @@ Future<RandomAccessFile> open({FileMode mode = FileMode.read})
 
 - [FileMode.append]：与 [FileMode.write] 相同，但不会截断文件。
 
-若操作失败，抛出 [FileSystemException]。
+若操作失败，抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### openSync()
 
@@ -539,11 +539,11 @@ RandomAccessFile openSync({FileMode mode = FileMode.read})
 
 同步地打开该文件以进行随机访问操作。
 
-其结果是一个可执行随机访问操作的 [RandomAccessFile]。已打开的 [RandomAccessFile] 必须使用 [RandomAccessFile.close] 方法关闭。
+其结果是一个可执行随机访问操作的 [RandomAccessFile](https://www.yuque.com/thyname/dart.io/randomaccessfile)。已打开的 [RandomAccessFile](https://www.yuque.com/thyname/dart.io/randomaccessfile) 必须使用 [RandomAccessFile.close] 方法关闭。
 
 有关 [mode] 参数的信息，参见 [open]。
 
-若操作失败，抛出 [FileSystemException]。
+若操作失败，抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### openRead()
 
@@ -551,7 +551,7 @@ RandomAccessFile openSync({FileMode mode = FileMode.read})
 Stream<List<int>> openRead([int? start, int? end])
 ```
 
-为此文件的内容创建一个新的独立 [Stream]。
+为此文件的内容创建一个新的独立 [Stream](https://www.yuque.com/thyname/dart.async/stream)。
 
 若提供了 [start]，将从字节偏移量 [start] 处开始读取文件；否则从开头（索引 0）开始读取。
 
@@ -559,9 +559,9 @@ Stream<List<int>> openRead([int? start, int? end])
 
 为确保系统资源被正确释放，必须将该流读取到底，或取消该流上的订阅。
 
-若 [File] 是一个[命名管道](https://en.wikipedia.org/wiki/Named_pipe)，则返回的 [Stream] 会等待管道的写入端被关闭后才发出 "done" 信号。若在管道被打开时没有任何写入者与之相连，则 [Stream.listen] 会一直等待，直到有写入者打开该管道。
+若 [File](https://www.yuque.com/thyname/dart.io/file) 是一个[命名管道](https://en.wikipedia.org/wiki/Named_pipe)，则返回的 [Stream](https://www.yuque.com/thyname/dart.async/stream) 会等待管道的写入端被关闭后才发出 "done" 信号。若在管道被打开时没有任何写入者与之相连，则 [Stream.listen] 会一直等待，直到有写入者打开该管道。
 
-打开或读取文件时发生的错误，将在返回的 [Stream] 上作为 [FileSystemException] 错误事件出现，之后该 [Stream] 会被关闭。例如：
+打开或读取文件时发生的错误，将在返回的 [Stream](https://www.yuque.com/thyname/dart.async/stream) 上作为 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception) 错误事件出现，之后该 [Stream](https://www.yuque.com/thyname/dart.async/stream) 会被关闭。例如：
 
 ```dart
 // 此示例将打印 "Error reading file" 消息，
@@ -581,20 +581,20 @@ await for (final data in stream) {
 IOSink openWrite({FileMode mode = FileMode.write, Encoding encoding = utf8})
 ```
 
-为该文件创建一个新的独立 [IOSink]。
+为该文件创建一个新的独立 [IOSink](https://www.yuque.com/thyname/dart.io/iosink)。
 
-该 [IOSink] 在不再使用时必须关闭，以释放系统资源。
+该 [IOSink](https://www.yuque.com/thyname/dart.io/iosink) 在不再使用时必须关闭，以释放系统资源。
 
-文件对应的 [IOSink] 可以两种模式打开：
+文件对应的 [IOSink](https://www.yuque.com/thyname/dart.io/iosink) 可以两种模式打开：
 
 - [FileMode.write]：将文件截断为长度零。
 - [FileMode.append]：将初始写入位置设为文件末尾。
 
-通过返回的 [IOSink] 写入字符串时，将使用 [encoding] 指定的编码。返回的 [IOSink] 具有一个 `encoding` 属性，可在创建 [IOSink] 后修改。
+通过返回的 [IOSink](https://www.yuque.com/thyname/dart.io/iosink) 写入字符串时，将使用 [encoding] 指定的编码。返回的 [IOSink](https://www.yuque.com/thyname/dart.io/iosink) 具有一个 `encoding` 属性，可在创建 [IOSink](https://www.yuque.com/thyname/dart.io/iosink) 后修改。
 
-返回的 [IOSink] 不会将换行符（`"\n"`）转换为平台约定的行结束符（例如 Windows 上的 `"\r\n"`）。如需使用与平台相关的行结束符，请写入一个 [Platform.lineTerminator]。
+返回的 [IOSink](https://www.yuque.com/thyname/dart.io/iosink) 不会将换行符（`"\n"`）转换为平台约定的行结束符（例如 Windows 上的 `"\r\n"`）。如需使用与平台相关的行结束符，请写入一个 [Platform.lineTerminator]。
 
-若在打开或写入文件时发生错误，[IOSink.done]、[IOSink.flush] 与 [IOSink.close] 对应的 future 都将以 [FileSystemException] 完成。必须处理来自 [IOSink.done] future 的错误，否则该错误将不会被捕获。
+若在打开或写入文件时发生错误，[IOSink.done]、[IOSink.flush] 与 [IOSink.close] 对应的 future 都将以 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception) 完成。必须处理来自 [IOSink.done] future 的错误，否则该错误将不会被捕获。
 
 例如，可以对 [IOSink.done] 的错误调用 [FutureExtensions.ignore]，并记得在 `try`/`catch` 中 `await` [IOSink.flush] 和 [IOSink.close] 调用：
 
@@ -638,7 +638,7 @@ Uint8List readAsBytesSync()
 
 同步地将文件的全部内容作为字节列表读取。
 
-若操作失败，抛出 [FileSystemException]。
+若操作失败，抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### readAsString()
 
@@ -646,7 +646,7 @@ Uint8List readAsBytesSync()
 Future<String> readAsString({Encoding encoding = utf8})
 ```
 
-使用给定的 [Encoding] 将文件的全部内容作为字符串读取。
+使用给定的 [Encoding](https://www.yuque.com/thyname/dart.convert/encoding) 将文件的全部内容作为字符串读取。
 
 返回一个 `Future<String>`，其在文件内容读取完成后携带该字符串完成。
 
@@ -656,9 +656,9 @@ Future<String> readAsString({Encoding encoding = utf8})
 String readAsStringSync({Encoding encoding = utf8})
 ```
 
-同步地使用给定的 [Encoding] 将文件的全部内容作为字符串读取。
+同步地使用给定的 [Encoding](https://www.yuque.com/thyname/dart.convert/encoding) 将文件的全部内容作为字符串读取。
 
-若操作失败，抛出 [FileSystemException]。
+若操作失败，抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### readAsLines()
 
@@ -666,7 +666,7 @@ String readAsStringSync({Encoding encoding = utf8})
 Future<List<String>> readAsLines({Encoding encoding = utf8})
 ```
 
-使用给定的 [Encoding] 将文件的全部内容按行读取为文本。
+使用给定的 [Encoding](https://www.yuque.com/thyname/dart.convert/encoding) 将文件的全部内容按行读取为文本。
 
 返回一个 `Future<List<String>>`，其在文件内容读取完成后携带各行内容完成。
 
@@ -676,9 +676,9 @@ Future<List<String>> readAsLines({Encoding encoding = utf8})
 List<String> readAsLinesSync({Encoding encoding = utf8})
 ```
 
-同步地使用给定的 [Encoding] 将文件的全部内容按行读取为文本。
+同步地使用给定的 [Encoding](https://www.yuque.com/thyname/dart.convert/encoding) 将文件的全部内容按行读取为文本。
 
-若操作失败，抛出 [FileSystemException]。
+若操作失败，抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### writeAsBytes()
 
@@ -688,7 +688,7 @@ Future<File> writeAsBytes(List<int> bytes, {FileMode mode = FileMode.write, bool
 
 将字节列表写入文件。
 
-打开文件，将字节列表写入其中，然后关闭该文件。返回一个 `Future<File>`，其在整个操作完成后携带此 [File] 对象完成。
+打开文件，将字节列表写入其中，然后关闭该文件。返回一个 `Future<File>`，其在整个操作完成后携带此 [File](https://www.yuque.com/thyname/dart.io/file) 对象完成。
 
 默认情况下，[writeAsBytes] 会以写入方式创建文件，并在文件已存在时将其截断。若要将字节追加到已有文件末尾，可传入可选参数 mode 为 [FileMode.append]。
 
@@ -712,7 +712,7 @@ void writeAsBytesSync(List<int> bytes, {FileMode mode = FileMode.write, bool flu
 
 若参数 [flush] 设为 `true`，写入的数据会在返回之前被刷新到文件系统。
 
-若操作失败，抛出 [FileSystemException]。
+若操作失败，抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### writeAsString()
 
@@ -722,7 +722,7 @@ Future<File> writeAsString(String contents, {FileMode mode = FileMode.write, Enc
 
 将字符串写入文件。
 
-打开文件，以给定编码写入该字符串，然后关闭该文件。返回一个 `Future<File>`，其在整个操作完成后携带此 [File] 对象完成。
+打开文件，以给定编码写入该字符串，然后关闭该文件。返回一个 `Future<File>`，其在整个操作完成后携带此 [File](https://www.yuque.com/thyname/dart.io/file) 对象完成。
 
 默认情况下，[writeAsString] 会以写入方式创建文件，并在文件已存在时将其截断。若要将字节追加到已有文件末尾，可传入可选参数 mode 为 [FileMode.append]。
 
@@ -746,7 +746,7 @@ void writeAsStringSync(String contents, {FileMode mode = FileMode.write, Encodin
 
 此方法不会将换行符（`"\n"`）转换为平台约定的行结束符（例如 Windows 上的 `"\r\n"`）。如需在 [contents] 中使用与平台相关的行结束符分隔各行，请使用 [Platform.lineTerminator]。
 
-若操作失败，抛出 [FileSystemException]。
+若操作失败，抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### path
 
@@ -764,13 +764,13 @@ abstract interface class RandomAccessFile {}
 
 对文件中数据的随机访问。
 
-`RandomAccessFile` 对象通过在 [File] 对象上调用 `open` 方法获得。
+`RandomAccessFile` 对象通过在 [File](https://www.yuque.com/thyname/dart.io/file) 对象上调用 `open` 方法获得。
 
-`RandomAccessFile` 同时具有异步和同步两种方法。所有异步方法都返回一个 [Future]，而同步方法则会直接返回结果，并阻塞当前 isolate 直到结果就绪。
+`RandomAccessFile` 同时具有异步和同步两种方法。所有异步方法都返回一个 [Future](https://www.yuque.com/thyname/dart.async/future)，而同步方法则会直接返回结果，并阻塞当前 isolate 直到结果就绪。
 
-对于给定的 `RandomAccessFile` 实例，同一时刻最多只能有一个待处理的异步方法。若在某个异步方法仍在进行时调用了另一个异步方法，将抛出 [FileSystemException]。
+对于给定的 `RandomAccessFile` 实例，同一时刻最多只能有一个待处理的异步方法。若在某个异步方法仍在进行时调用了另一个异步方法，将抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
-若有异步方法正在挂起，此时也无法调用任何同步方法，同样会抛出 [FileSystemException]。
+若有异步方法正在挂起，此时也无法调用任何同步方法，同样会抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### close()
 
@@ -780,7 +780,7 @@ Future<void> close()
 
 关闭该文件。
 
-返回一个在文件关闭后完成的 [Future]。
+返回一个在文件关闭后完成的 [Future](https://www.yuque.com/thyname/dart.async/future)。
 
 ### closeSync()
 
@@ -790,7 +790,7 @@ void closeSync()
 
 同步地关闭该文件。
 
-若操作失败，抛出 [FileSystemException]。
+若操作失败，抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### readByte()
 
@@ -812,7 +812,7 @@ int readByteSync()
 
 若已到达文件末尾，返回 -1。
 
-若操作失败，抛出 [FileSystemException]。
+若操作失败，抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### read()
 
@@ -824,7 +824,7 @@ Future<Uint8List> read(int count)
 
 实际读取的字节数可能少于 [count]。例如在读取超出文件末尾，或从当前不包含额外数据的管道中读取时，就可能出现这种情况。
 
-只有在读取超出文件末尾，或 [count] 为 `0` 时，才会返回一个空的 [Uint8List]。
+只有在读取超出文件末尾，或 [count] 为 `0` 时，才会返回一个空的 [Uint8List](https://www.yuque.com/thyname/dart.typed_data/uint8list)。
 
 ### readSync()
 
@@ -836,9 +836,9 @@ Uint8List readSync(int count)
 
 实际读取的字节数可能少于 [count]。例如在读取超出文件末尾，或从当前不包含额外数据的管道中读取时，就可能出现这种情况。
 
-只有在读取超出文件末尾，或 [count] 为 `0` 时，才会返回一个空的 [Uint8List]。
+只有在读取超出文件末尾，或 [count] 为 `0` 时，才会返回一个空的 [Uint8List](https://www.yuque.com/thyname/dart.typed_data/uint8list)。
 
-若操作失败，抛出 [FileSystemException]。
+若操作失败，抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### readInto()
 
@@ -864,7 +864,7 @@ int readIntoSync(List<int> buffer, [int start = 0, int? end])
 
 返回读取的字节数。若文件中没有 `end - start` 那么多字节可供读取，返回值可能小于该数值。
 
-若操作失败，抛出 [FileSystemException]。
+若操作失败，抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### writeByte()
 
@@ -886,7 +886,7 @@ int writeByteSync(int value)
 
 成功时返回 1。
 
-若操作失败，抛出 [FileSystemException]。
+若操作失败，抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### writeFrom()
 
@@ -898,7 +898,7 @@ Future<RandomAccessFile> writeFrom(List<int> buffer, [int start = 0, int? end])
 
 会读取 [buffer] 中从索引 [start] 到索引 [end] 的内容。[start] 必须非负，且不大于 [buffer].length。若省略 [end]，其默认值为 [buffer].length；否则 [end] 必须不小于 [start] 且不大于 [buffer].length。
 
-返回一个 `Future<RandomAccessFile>`，其在写入完成时携带此 [RandomAccessFile] 完成。
+返回一个 `Future<RandomAccessFile>`，其在写入完成时携带此 [RandomAccessFile](https://www.yuque.com/thyname/dart.io/randomaccessfile) 完成。
 
 ### writeFromSync()
 
@@ -910,7 +910,7 @@ void writeFromSync(List<int> buffer, [int start = 0, int? end])
 
 会读取 [buffer] 中从索引 [start] 到索引 [end] 的内容。[start] 必须非负，且不大于 [buffer].length。若省略 [end]，其默认值为 [buffer].length；否则 [end] 必须不小于 [start] 且不大于 [buffer].length。
 
-若操作失败，抛出 [FileSystemException]。
+若操作失败，抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### writeString()
 
@@ -918,7 +918,7 @@ void writeFromSync(List<int> buffer, [int start = 0, int? end])
 Future<RandomAccessFile> writeString(String string, {Encoding encoding = utf8})
 ```
 
-使用给定的 [Encoding] 将字符串写入文件。
+使用给定的 [Encoding](https://www.yuque.com/thyname/dart.convert/encoding) 将字符串写入文件。
 
 返回一个 `Future<RandomAccessFile>`，其在写入完成时携带此随机访问文件完成。
 
@@ -928,9 +928,9 @@ Future<RandomAccessFile> writeString(String string, {Encoding encoding = utf8})
 void writeStringSync(String string, {Encoding encoding = utf8})
 ```
 
-使用给定的 [Encoding] 同步地将单个字符串写入文件。
+使用给定的 [Encoding](https://www.yuque.com/thyname/dart.convert/encoding) 同步地将单个字符串写入文件。
 
-若操作失败，抛出 [FileSystemException]。
+若操作失败，抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### position()
 
@@ -950,7 +950,7 @@ int positionSync()
 
 同步获取文件中当前的字节位置。
 
-若操作失败，抛出 [FileSystemException]。
+若操作失败，抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### setPosition()
 
@@ -970,7 +970,7 @@ void setPositionSync(int position)
 
 同步地设置文件中的字节位置。
 
-若操作失败，抛出 [FileSystemException]。
+若操作失败，抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### truncate()
 
@@ -990,7 +990,7 @@ void truncateSync(int length)
 
 同步地将文件截断（或扩展）为 [length] 字节。
 
-若操作失败，抛出 [FileSystemException]。
+若操作失败，抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### length()
 
@@ -1010,7 +1010,7 @@ int lengthSync()
 
 同步获取文件的长度。
 
-若操作失败，抛出 [FileSystemException]。
+若操作失败，抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### flush()
 
@@ -1030,7 +1030,7 @@ void flushSync()
 
 同步地将文件内容刷新到磁盘。
 
-若操作失败，抛出 [FileSystemException]。
+若操作失败，抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### lock()
 
@@ -1046,7 +1046,7 @@ Future<RandomAccessFile> lock([FileLock mode = FileLock.exclusive, int start = 0
 
 要获取文件的独占锁，该文件必须以写入方式打开。
 
-若 [mode] 为 [FileLock.exclusive] 或 [FileLock.shared]，当无法获取锁时会报错。若 [mode] 为 [FileLock.blockingExclusive] 或 [FileLock.blockingShared]，则只有在获取到锁之后，返回的 [Future] 才会被解析。
+若 [mode] 为 [FileLock.exclusive] 或 [FileLock.shared]，当无法获取锁时会报错。若 [mode] 为 [FileLock.blockingExclusive] 或 [FileLock.blockingShared]，则只有在获取到锁之后，返回的 [Future](https://www.yuque.com/thyname/dart.async/future) 才会被解析。
 
 _注意_ 文件加锁在不同平台上的行为略有差异：
 
@@ -1054,7 +1054,7 @@ _注意_ 文件加锁在不同平台上的行为略有差异：
 
 在 Windows 上，加锁与解锁所使用的区域必须一致，否则解锁将导致操作系统错误 "The segment is already unlocked"。
 
-在 Windows 上，对文件加锁会将该锁与获取该锁时所用的具体文件句柄相关联。若同一文件以不同的句柄再次被打开（即便在同一进程内），使用新句柄尝试写入被锁定的区域将会失败。为确保加锁后写入成功，应使用获取该锁的同一个 [RandomAccessFile] 对象进行后续的写入操作。
+在 Windows 上，对文件加锁会将该锁与获取该锁时所用的具体文件句柄相关联。若同一文件以不同的句柄再次被打开（即便在同一进程内），使用新句柄尝试写入被锁定的区域将会失败。为确保加锁后写入成功，应使用获取该锁的同一个 [RandomAccessFile](https://www.yuque.com/thyname/dart.io/randomaccessfile) 对象进行后续的写入操作。
 
 ### lockSync()
 
@@ -1078,7 +1078,7 @@ _注意_ 文件加锁在不同平台上的行为略有差异：
 
 在 Windows 上，加锁与解锁所使用的区域必须一致，否则解锁将导致操作系统错误 "The segment is already unlocked"。
 
-在 Windows 上，对文件加锁会将该锁与获取该锁时所用的具体文件句柄相关联。若同一文件以不同的句柄再次被打开（即便在同一进程内），使用新句柄尝试写入被锁定的区域将会失败。为确保加锁后写入成功，应使用获取该锁的同一个 [RandomAccessFile] 对象进行后续的写入操作。
+在 Windows 上，对文件加锁会将该锁与获取该锁时所用的具体文件句柄相关联。若同一文件以不同的句柄再次被打开（即便在同一进程内），使用新句柄尝试写入被锁定的区域将会失败。为确保加锁后写入成功，应使用获取该锁的同一个 [RandomAccessFile](https://www.yuque.com/thyname/dart.io/randomaccessfile) 对象进行后续的写入操作。
 
 ### unlock()
 
@@ -1246,9 +1246,9 @@ String toString()
 abstract interface class ReadPipe implements Stream<List<int>> {}
 ```
 
-由 [Pipe.create] 创建的 [Pipe] 中的"读取"端。
+由 [Pipe.create] 创建的 [Pipe](https://www.yuque.com/thyname/dart.io/pipe) 中的"读取"端。
 
-只要 [Pipe] 的"写入"端（即 [Pipe.write]）尚未关闭，读取流就会持续监听。
+只要 [Pipe](https://www.yuque.com/thyname/dart.io/pipe) 的"写入"端（即 [Pipe.write]）尚未关闭，读取流就会持续监听。
 
 ```dart
 final pipe = await Pipe.create();
@@ -1263,7 +1263,7 @@ pipe.read.transform(utf8.decoder).listen((data) {
 abstract interface class WritePipe implements IOSink {}
 ```
 
-由 [Pipe.create] 创建的 [Pipe] 中的"写入"端。
+由 [Pipe.create] 创建的 [Pipe](https://www.yuque.com/thyname/dart.io/pipe) 中的"写入"端。
 
 ```dart
 final pipe = await Pipe.create();
@@ -1302,7 +1302,7 @@ await pipe.write.close();
 ReadPipe get read
 ```
 
-[Pipe] 的读取端。
+[Pipe](https://www.yuque.com/thyname/dart.io/pipe) 的读取端。
 
 ### write
 
@@ -1310,7 +1310,7 @@ ReadPipe get read
 WritePipe get write
 ```
 
-[Pipe] 的写入端。
+[Pipe](https://www.yuque.com/thyname/dart.io/pipe) 的写入端。
 
 ### create()
 

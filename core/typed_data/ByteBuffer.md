@@ -24,7 +24,7 @@ int get lengthInBytes
 Uint8List asUint8List([int offsetInBytes = 0, int? length])
 ```
 
-创建此字节缓冲区某个区域的 [Uint8List] _视图_。
+创建此字节缓冲区某个区域的 [Uint8List](https://www.yuque.com/thyname/dart.typed_data/uint8list) _视图_。
 
 该视图由此字节缓冲区的字节支持。对 `Uint8List` 所做的任何更改也会更改缓冲区，反之亦然。
 
@@ -42,7 +42,7 @@ Uint8List asUint8List([int offsetInBytes = 0, int? length])
 Int8List asInt8List([int offsetInBytes = 0, int? length])
 ```
 
-创建此字节缓冲区某个区域的 [Int8List] _视图_。
+创建此字节缓冲区某个区域的 [Int8List](https://www.yuque.com/thyname/dart.typed_data/int8list) _视图_。
 
 该视图由此字节缓冲区的字节支持。对 `Int8List` 所做的任何更改也会更改缓冲区，反之亦然。
 
@@ -60,7 +60,7 @@ Int8List asInt8List([int offsetInBytes = 0, int? length])
 Uint8ClampedList asUint8ClampedList([int offsetInBytes = 0, int? length])
 ```
 
-创建此字节缓冲区某个区域的 [Uint8ClampedList] _视图_。
+创建此字节缓冲区某个区域的 [Uint8ClampedList](https://www.yuque.com/thyname/dart.typed_data/uint8clampedlist) _视图_。
 
 该视图由此字节缓冲区的字节支持。对 `Uint8ClampedList` 所做的任何更改也会更改缓冲区，反之亦然。
 
@@ -78,7 +78,7 @@ Uint8ClampedList asUint8ClampedList([int offsetInBytes = 0, int? length])
 Uint16List asUint16List([int offsetInBytes = 0, int? length])
 ```
 
-创建此字节缓冲区某个区域的 [Uint16List] _视图_。
+创建此字节缓冲区某个区域的 [Uint16List](https://www.yuque.com/thyname/dart.typed_data/uint16list) _视图_。
 
 该视图由此字节缓冲区的字节支持。对 `Uint16List` 所做的任何更改也会更改缓冲区，反之亦然。
 
@@ -97,7 +97,7 @@ Uint16List asUint16List([int offsetInBytes = 0, int? length])
 Int16List asInt16List([int offsetInBytes = 0, int? length])
 ```
 
-创建此字节缓冲区某个区域的 [Int16List] _视图_。
+创建此字节缓冲区某个区域的 [Int16List](https://www.yuque.com/thyname/dart.typed_data/int16list) _视图_。
 
 该视图由此字节缓冲区的字节支持。对 `Int16List` 所做的任何更改也会更改缓冲区，反之亦然。
 
@@ -116,7 +116,7 @@ Int16List asInt16List([int offsetInBytes = 0, int? length])
 Uint32List asUint32List([int offsetInBytes = 0, int? length])
 ```
 
-创建此字节缓冲区某个区域的 [Uint32List] _视图_。
+创建此字节缓冲区某个区域的 [Uint32List](https://www.yuque.com/thyname/dart.typed_data/uint32list) _视图_。
 
 该视图由此字节缓冲区的字节支持。对 `Uint32List` 所做的任何更改也会更改缓冲区，反之亦然。
 
@@ -135,7 +135,7 @@ Uint32List asUint32List([int offsetInBytes = 0, int? length])
 Int32List asInt32List([int offsetInBytes = 0, int? length])
 ```
 
-创建此字节缓冲区某个区域的 [Int32List] _视图_。
+创建此字节缓冲区某个区域的 [Int32List](https://www.yuque.com/thyname/dart.typed_data/int32list) _视图_。
 
 该视图由此字节缓冲区的字节支持。对 `Int32List` 所做的任何更改也会更改缓冲区，反之亦然。
 
@@ -154,7 +154,7 @@ Int32List asInt32List([int offsetInBytes = 0, int? length])
 Uint64List asUint64List([int offsetInBytes = 0, int? length])
 ```
 
-创建此字节缓冲区某个区域的 [Uint64List] _视图_。
+创建此字节缓冲区某个区域的 [Uint64List](https://www.yuque.com/thyname/dart.typed_data/uint64list) _视图_。
 
 该视图由此字节缓冲区的字节支持。对 `Uint64List` 所做的任何更改也会更改缓冲区，反之亦然。
 
@@ -173,7 +173,7 @@ Uint64List asUint64List([int offsetInBytes = 0, int? length])
 Int64List asInt64List([int offsetInBytes = 0, int? length])
 ```
 
-创建此字节缓冲区某个区域的 [Int64List] _视图_。
+创建此字节缓冲区某个区域的 [Int64List](https://www.yuque.com/thyname/dart.typed_data/int64list) _视图_。
 
 该视图由此字节缓冲区的字节支持。对 `Int64List` 所做的任何更改也会更改缓冲区，反之亦然。
 
@@ -192,7 +192,7 @@ Int64List asInt64List([int offsetInBytes = 0, int? length])
 Int32x4List asInt32x4List([int offsetInBytes = 0, int? length])
 ```
 
-创建此字节缓冲区某个区域的 [Int32x4List] _视图_。
+创建此字节缓冲区某个区域的 [Int32x4List](https://www.yuque.com/thyname/dart.typed_data/int32x4list) _视图_。
 
 该视图由此字节缓冲区的字节支持。对 `Int32x4List` 所做的任何更改也会更改缓冲区，反之亦然。
 
@@ -211,7 +211,7 @@ Int32x4List asInt32x4List([int offsetInBytes = 0, int? length])
 Float32List asFloat32List([int offsetInBytes = 0, int? length])
 ```
 
-创建此字节缓冲区某个区域的 [Float32List] _视图_。
+创建此字节缓冲区某个区域的 [Float32List](https://www.yuque.com/thyname/dart.typed_data/float32list) _视图_。
 
 该视图由此字节缓冲区的字节支持。对 `Float32List` 所做的任何更改也会更改缓冲区，反之亦然。
 
@@ -230,7 +230,7 @@ Float32List asFloat32List([int offsetInBytes = 0, int? length])
 Float64List asFloat64List([int offsetInBytes = 0, int? length])
 ```
 
-创建此字节缓冲区某个区域的 [Float64List] _视图_。
+创建此字节缓冲区某个区域的 [Float64List](https://www.yuque.com/thyname/dart.typed_data/float64list) _视图_。
 
 该视图由此字节缓冲区的字节支持。对 `Float64List` 所做的任何更改也会更改缓冲区，反之亦然。
 
@@ -249,7 +249,7 @@ Float64List asFloat64List([int offsetInBytes = 0, int? length])
 Float32x4List asFloat32x4List([int offsetInBytes = 0, int? length])
 ```
 
-创建此字节缓冲区某个区域的 [Float32x4List] _视图_。
+创建此字节缓冲区某个区域的 [Float32x4List](https://www.yuque.com/thyname/dart.typed_data/float32x4list) _视图_。
 
 该视图由此字节缓冲区的字节支持。对 `Float32x4List` 所做的任何更改也会更改缓冲区，反之亦然。
 
@@ -268,7 +268,7 @@ Float32x4List asFloat32x4List([int offsetInBytes = 0, int? length])
 Float64x2List asFloat64x2List([int offsetInBytes = 0, int? length])
 ```
 
-创建此字节缓冲区某个区域的 [Float64x2List] _视图_。
+创建此字节缓冲区某个区域的 [Float64x2List](https://www.yuque.com/thyname/dart.typed_data/float64x2list) _视图_。
 
 该视图由此字节缓冲区的字节支持。对 `Float64x2List` 所做的任何更改也会更改缓冲区，反之亦然。
 
@@ -287,7 +287,7 @@ Float64x2List asFloat64x2List([int offsetInBytes = 0, int? length])
 ByteData asByteData([int offsetInBytes = 0, int? length])
 ```
 
-创建此字节缓冲区某个区域的 [ByteData] _视图_。
+创建此字节缓冲区某个区域的 [ByteData](https://www.yuque.com/thyname/dart.typed_data/bytedata) _视图_。
 
 该视图由此字节缓冲区的字节支持。对 `ByteData` 所做的任何更改也会更改缓冲区，反之亦然。
 

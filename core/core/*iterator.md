@@ -35,7 +35,7 @@ E get current
 
 当前元素。
 
-如果迭代器尚未移动到第一个元素（即尚未调用过 [moveNext]），或者迭代器已经移动到 [Iterable] 的最后一个元素之后（即 [moveNext] 已返回 false），则 [current] 的值是未指定的。此时，[Iterator] 既可以抛出异常，也可以返回一个特定于该迭代器的默认值。
+如果迭代器尚未移动到第一个元素（即尚未调用过 [moveNext]），或者迭代器已经移动到 [Iterable](https://www.yuque.com/thyname/dart.core/iterable) 的最后一个元素之后（即 [moveNext] 已返回 false），则 [current] 的值是未指定的。此时，[Iterator](https://www.yuque.com/thyname/dart.core/iterator) 既可以抛出异常，也可以返回一个特定于该迭代器的默认值。
 
 `current` 获取器应当保持其值，直到下一次调用 [moveNext] 为止，即使底层集合发生了变化也是如此。在成功调用 `moveNext` 之后，用户不需要缓存当前值，而是可以持续从迭代器中读取该值。
 

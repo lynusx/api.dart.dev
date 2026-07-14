@@ -18,7 +18,7 @@ String toString()
 class OSError implements Exception {}
 ```
 
-一个 [Exception]，用于持有来自操作系统的错误信息。
+一个 [Exception](https://www.yuque.com/thyname/dart.core/exception)，用于持有来自操作系统的错误信息。
 
 ### noErrorCode
 

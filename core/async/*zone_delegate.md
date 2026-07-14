@@ -8,9 +8,9 @@ abstract final class ZoneDelegate {}
 
 此类允许 zone 方法的实现在保留原始 zone 相关信息的同时，调用父 zone 上的方法。
 
-自定义 zone（通过 [Zone.fork] 或 [runZoned] 创建）可以提供大多数 zone 方法的实现。这类似于重写 [Zone] 的方法，但此机制不需要子类化。
+自定义 zone（通过 [Zone.fork] 或 [runZoned](https://www.yuque.com/thyname/dart.async/runzoned) 创建）可以提供大多数 zone 方法的实现。这类似于重写 [Zone](https://www.yuque.com/thyname/dart.async/zone) 的方法，但此机制不需要子类化。
 
-自定义 zone 函数（通过 [ZoneSpecification] 提供）通常会记录或包装其参数，然后使用提供的 [ZoneDelegate] 将操作委托给其父 zone。
+自定义 zone 函数（通过 [ZoneSpecification](https://www.yuque.com/thyname/dart.async/zonespecification) 提供）通常会记录或包装其参数，然后使用提供的 [ZoneDelegate](https://www.yuque.com/thyname/dart.async/zonedelegate) 将操作委托给其父 zone。
 
 虽然 zone 可以通过 [Zone.parent] 访问其父 zone，但仍建议调用所提供的父委托（parent delegate）上的方法，原因有二：
 
@@ -25,7 +25,7 @@ abstract final class ZoneDelegate {}
 void handleUncaughtError(Zone zone, Object error, StackTrace stackTrace)
 ```
 
-以当前 zone 调用该 zone 的 [HandleUncaughtErrorHandler]。
+以当前 zone 调用该 zone 的 [HandleUncaughtErrorHandler](https://www.yuque.com/thyname/dart.async/handleuncaughterrorhandler)。
 
 ### run()
 
@@ -33,7 +33,7 @@ void handleUncaughtError(Zone zone, Object error, StackTrace stackTrace)
 R run<R>(Zone zone, R f())
 ```
 
-以当前 zone 调用该 zone 的 [RunHandler]。
+以当前 zone 调用该 zone 的 [RunHandler](https://www.yuque.com/thyname/dart.async/runhandler)。
 
 ### runUnary()
 
@@ -41,7 +41,7 @@ R run<R>(Zone zone, R f())
 R runUnary<R, T>(Zone zone, R f(T arg), T arg)
 ```
 
-以当前 zone 调用该 zone 的 [RunUnaryHandler]。
+以当前 zone 调用该 zone 的 [RunUnaryHandler](https://www.yuque.com/thyname/dart.async/rununaryhandler)。
 
 ### runBinary()
 
@@ -49,7 +49,7 @@ R runUnary<R, T>(Zone zone, R f(T arg), T arg)
 R runBinary<R, T1, T2>(Zone zone, R f(T1 arg1, T2 arg2), T1 arg1, T2 arg2)
 ```
 
-以当前 zone 调用该 zone 的 [RunBinaryHandler]。
+以当前 zone 调用该 zone 的 [RunBinaryHandler](https://www.yuque.com/thyname/dart.async/runbinaryhandler)。
 
 ### registerCallback()
 
@@ -57,7 +57,7 @@ R runBinary<R, T1, T2>(Zone zone, R f(T1 arg1, T2 arg2), T1 arg1, T2 arg2)
 ZoneCallback<R> registerCallback<R>(Zone zone, R f())
 ```
 
-以当前 zone 调用该 zone 的 [RegisterCallbackHandler]。
+以当前 zone 调用该 zone 的 [RegisterCallbackHandler](https://www.yuque.com/thyname/dart.async/registercallbackhandler)。
 
 ### registerUnaryCallback()
 
@@ -81,7 +81,7 @@ ZoneBinaryCallback<R, T1, T2> registerBinaryCallback<R, T1, T2>(Zone zone, R f(T
 AsyncError? errorCallback(Zone zone, Object error, StackTrace? stackTrace)
 ```
 
-以当前 zone 调用该 zone 的 [ErrorCallbackHandler]。
+以当前 zone 调用该 zone 的 [ErrorCallbackHandler](https://www.yuque.com/thyname/dart.async/errorcallbackhandler)。
 
 ### scheduleMicrotask()
 
@@ -89,7 +89,7 @@ AsyncError? errorCallback(Zone zone, Object error, StackTrace? stackTrace)
 void scheduleMicrotask(Zone zone, void f())
 ```
 
-以当前 zone 调用该 zone 的 [ScheduleMicrotaskHandler]。
+以当前 zone 调用该 zone 的 [ScheduleMicrotaskHandler](https://www.yuque.com/thyname/dart.async/schedulemicrotaskhandler)。
 
 ### createTimer()
 
@@ -97,7 +97,7 @@ void scheduleMicrotask(Zone zone, void f())
 Timer createTimer(Zone zone, Duration duration, void f())
 ```
 
-以当前 zone 调用该 zone 的 [CreateTimerHandler]。
+以当前 zone 调用该 zone 的 [CreateTimerHandler](https://www.yuque.com/thyname/dart.async/createtimerhandler)。
 
 ### createPeriodicTimer()
 
@@ -105,7 +105,7 @@ Timer createTimer(Zone zone, Duration duration, void f())
 Timer createPeriodicTimer(Zone zone, Duration period, void f(Timer timer))
 ```
 
-以当前 zone 调用该 zone 的 [CreatePeriodicTimerHandler]。
+以当前 zone 调用该 zone 的 [CreatePeriodicTimerHandler](https://www.yuque.com/thyname/dart.async/createperiodictimerhandler)。
 
 ### print()
 
@@ -113,7 +113,7 @@ Timer createPeriodicTimer(Zone zone, Duration period, void f(Timer timer))
 void print(Zone zone, String line)
 ```
 
-以当前 zone 调用该 zone 的 [PrintHandler]。
+以当前 zone 调用该 zone 的 [PrintHandler](https://www.yuque.com/thyname/dart.async/printhandler)。
 
 ### fork()
 
@@ -121,4 +121,4 @@ void print(Zone zone, String line)
 Zone fork(Zone zone, ZoneSpecification? specification, Map? zoneValues)
 ```
 
-以当前 zone 调用该 zone 的 [ForkHandler]。
+以当前 zone 调用该 zone 的 [ForkHandler](https://www.yuque.com/thyname/dart.async/forkhandler)。

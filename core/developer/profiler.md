@@ -26,7 +26,7 @@ UserTag(String label)
 String get label
 ```
 
-此 [UserTag] 的标签。
+此 [UserTag](https://www.yuque.com/thyname/dart.developer/usertag) 的标签。
 
 ### makeCurrent()
 
@@ -34,7 +34,7 @@ String get label
 UserTag makeCurrent()
 ```
 
-将此 [UserTag] 设为该 isolate 的当前标签。返回设置之前的当前标签。
+将此 [UserTag](https://www.yuque.com/thyname/dart.developer/usertag) 设为该 isolate 的当前标签。返回设置之前的当前标签。
 
 ### defaultTag
 
@@ -42,7 +42,7 @@ UserTag makeCurrent()
 UserTag get defaultTag
 ```
 
-标签为 'Default' 的默认 [UserTag]。
+标签为 'Default' 的默认 [UserTag](https://www.yuque.com/thyname/dart.developer/usertag)。
 
 # getCurrentTag()
 
@@ -50,4 +50,4 @@ UserTag get defaultTag
 UserTag getCurrentTag()
 ```
 
-返回该 isolate 的当前 [UserTag]。
+返回该 isolate 的当前 [UserTag](https://www.yuque.com/thyname/dart.developer/usertag)。

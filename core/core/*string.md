@@ -98,8 +98,8 @@ for (final item in clef.runes) {
 
 ## 其他资源
 
-- [StringBuffer]：用于高效地增量构建字符串。
-- [RegExp]：用于处理正则表达式。
+- [StringBuffer](https://www.yuque.com/thyname/dart.core/stringbuffer)：用于高效地增量构建字符串。
+- [RegExp](https://www.yuque.com/thyname/dart.core/regexp)：用于处理正则表达式。
 - [字符串与正则表达式](https://dart.dev/libraries/dart-core#strings-and-regular-expressions)
 
 ## 构造函数
@@ -139,7 +139,7 @@ String.fromCharCode(int charCode)
 
 如果 [charCode] 可以用单个 UTF-16 代码单元表示，则新字符串只包含一个代码单元。否则，[length] 为 2，且这两个代码单元构成一个代理对。详见 [fromCharCodes] 的文档。
 
-允许使用代理对的一半来创建 [String]。
+允许使用代理对的一半来创建 [String](https://www.yuque.com/thyname/dart.core/string)。
 
 ### String.fromEnvironment()
 
@@ -237,7 +237,7 @@ List<int> get codeUnits
 Runes get runes
 ```
 
-该字符串的 Unicode 码点组成的 [Iterable]。
+该字符串的 Unicode 码点组成的 [Iterable](https://www.yuque.com/thyname/dart.core/iterable)。
 
 如果字符串中包含代理对，该迭代器会将其合并并作为一个整数返回。未配对的代理单元的一半会被当作有效的 16 位代码单元处理。
 
@@ -312,7 +312,7 @@ print(string.startsWith(RegExp(r'\w{3}'), 2)); // false
 
 [index] 不能为负数，也不能大于 [length]。
 
-如果 [index] 大于零且正则表达式不是多行模式，则包含 '^' 的 [RegExp] 不会匹配。该模式作用于整个字符串，并不会先提取出从 [index] 开始的子字符串：
+如果 [index] 大于零且正则表达式不是多行模式，则包含 '^' 的 [RegExp](https://www.yuque.com/thyname/dart.core/regexp) 不会匹配。该模式作用于整个字符串，并不会先提取出从 [index] 开始的子字符串：
 
 ```dart
 const string = 'Dart';
@@ -583,7 +583,7 @@ String replaceAll(Pattern from, String replace)
 'resume'.replaceAll(RegExp(r'e'), 'é'); // 'résumé'
 ```
 
-请注意，[replace] 字符串不会被解释。如果替换内容依赖于匹配结果（例如依赖于 [RegExp] 的捕获组），请改用 [replaceAllMapped] 方法。
+请注意，[replace] 字符串不会被解释。如果替换内容依赖于匹配结果（例如依赖于 [RegExp](https://www.yuque.com/thyname/dart.core/regexp) 的捕获组），请改用 [replaceAllMapped] 方法。
 
 ### replaceAllMapped()
 
@@ -593,11 +593,11 @@ String replaceAllMapped(Pattern from, String Function(Match match) replace)
 
 将所有匹配 [from] 的子字符串替换为计算得出的字符串。
 
-创建一个新字符串，其中所有与 [from] 匹配的非重叠子字符串（即通过 `from.allMatches(thisString)` 迭代得到的那些）都被替换为对相应的 [Match] 对象调用 [replace] 后得到的结果。
+创建一个新字符串，其中所有与 [from] 匹配的非重叠子字符串（即通过 `from.allMatches(thisString)` 迭代得到的那些）都被替换为对相应的 [Match](https://www.yuque.com/thyname/dart.core/match) 对象调用 [replace] 后得到的结果。
 
 这可用于将匹配项替换为依赖于匹配内容的新内容，这与 [replaceAll] 中替换字符串始终固定不同。
 
-[replace] 函数会以该模式生成的 [Match] 作为参数被调用，其返回结果将被用作替换内容。
+[replace] 函数会以该模式生成的 [Match](https://www.yuque.com/thyname/dart.core/match) 作为参数被调用，其返回结果将被用作替换内容。
 
 下面定义的函数使用 [replaceAllMapped] 将字符串中的每个单词转换为简化版的 "pig latin"（说反话）：
 
@@ -652,7 +652,7 @@ print(splitted); // [Hello, world!];
 
 如果该模式与字符串完全不匹配，则结果始终是一个只包含原字符串的列表。
 
-如果 [pattern] 是一个 [String]，则以下等式始终成立：
+如果 [pattern] 是一个 [String](https://www.yuque.com/thyname/dart.core/string)，则以下等式始终成立：
 
 ```dart
 string.split(pattern).join(pattern) == string
@@ -786,7 +786,7 @@ String toUpperCase()
 String operator [](int index)
 ```
 
-给定 [index] 处的字符（以单代码单元 [String] 形式表示）。
+给定 [index] 处的字符（以单代码单元 [String](https://www.yuque.com/thyname/dart.core/string) 形式表示）。
 
 返回的字符串恰好表示一个 UTF-16 代码单元，该单元可能是代理对的一半。代理对中的单个成员是无效的 UTF-16 字符串：
 
@@ -855,7 +855,7 @@ print(multiplied); // 'DartDartDart'
 final class Runes extends Iterable<int> {}
 ```
 
-[String] 的 runes（整数形式的 Unicode 码点）。
+[String](https://www.yuque.com/thyname/dart.core/string) 的 runes（整数形式的 Unicode 码点）。
 
 字符串中的字符以 UTF-16 编码。对 UTF-16 进行解码（即合并代理对）会得到 Unicode 码点。与 Go 语言中的术语类似，Dart 使用 "rune" 来表示代表一个 Unicode 码点的整数。使用 `runes` 属性可以获取字符串的 rune 序列。
 
@@ -897,7 +897,7 @@ for (final item in emojiMan.codeUnits) {
 Runes(String string)
 ```
 
-为 [string] 创建一个 [Runes] 迭代器。
+为 [string] 创建一个 [Runes](https://www.yuque.com/thyname/dart.core/runes) 迭代器。
 
 ## 属性
 
@@ -917,11 +917,11 @@ RuneIterator get iterator
 
 一个新的 `Iterator`，用于迭代该 `Iterable` 的元素。
 
-Iterable 类可以指定其元素的迭代顺序（例如 [List](https://api.flutter.dev/flutter/dart-core/List-class.html) 总是按索引顺序迭代），也可以不做规定（例如基于哈希的 [Set](https://api.flutter.dev/flutter/dart-core/Set-class.html) 可能以任意顺序迭代）。
+Iterable 类可以指定其元素的迭代顺序（例如 [List](https://www.yuque.com/thyname/dart.core/list) 总是按索引顺序迭代），也可以不做规定（例如基于哈希的 [Set](https://www.yuque.com/thyname/dart.core/set) 可能以任意顺序迭代）。
 
 每次读取 `iterator` 时，都会返回一个新的迭代器，可用于再次遍历所有元素。同一个 iterable 的多个迭代器可以相互独立地进行遍历，但只要底层集合未发生变化，它们应以相同的顺序返回相同的元素。
 
-修改集合可能导致新创建的迭代器产生不同的元素，也可能改变现有元素的顺序。[List](https://api.flutter.dev/flutter/dart-core/List-class.html) 精确规定了其迭代顺序，因此修改列表会以可预测的方式改变迭代顺序。基于哈希的 [Set](https://api.flutter.dev/flutter/dart-core/Set-class.html) 在添加新元素时，其迭代顺序可能会发生完全改变。
+修改集合可能导致新创建的迭代器产生不同的元素，也可能改变现有元素的顺序。[List](https://www.yuque.com/thyname/dart.core/list) 精确规定了其迭代顺序，因此修改列表会以可预测的方式改变迭代顺序。基于哈希的 [Set](https://www.yuque.com/thyname/dart.core/set) 在添加新元素时，其迭代顺序可能会发生完全改变。
 
 在创建新迭代器之后修改底层集合，可能会导致下一次对该迭代器调用 [Iterator.moveNext](https://api.flutter.dev/flutter/dart-core/Iterator/moveNext.html) 时出错。任何 _可修改的_ iterable 类都应说明哪些操作会中断迭代。
 
@@ -933,7 +933,7 @@ int get last
 
 最后一个元素。
 
-如果 `this` 为空，则抛出 [StateError](https://api.flutter.dev/flutter/dart-core/StateError-class.html)。否则可能会遍历所有元素，并返回最后遇到的那个。某些 iterable 可能有更高效的方式来查找最后一个元素（例如列表可以直接访问最后一个元素，而无需遍历之前的元素）。
+如果 `this` 为空，则抛出 [StateError](https://www.yuque.com/thyname/dart.core/stateerror)。否则可能会遍历所有元素，并返回最后遇到的那个。某些 iterable 可能有更高效的方式来查找最后一个元素（例如列表可以直接访问最后一个元素，而无需遍历之前的元素）。
 
 ---
 
@@ -943,7 +943,7 @@ int get last
 final class RuneIterator implements Iterator<int> {}
 ```
 
-用于读取 Dart 字符串的 runes（整数形式的 Unicode 码点）的 [Iterator]。
+用于读取 Dart 字符串的 runes（整数形式的 Unicode 码点）的 [Iterator](https://www.yuque.com/thyname/dart.core/iterator)。
 
 ## 构造函数
 

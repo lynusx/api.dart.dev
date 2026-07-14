@@ -82,7 +82,7 @@ Float64x2 operator /(Float64x2 other)
 Float64x2 scale(double s)
 ```
 
-返回此 [Float64x2] 的一个副本，其中每个通道都按 [s] 缩放。等价于 this \* new Float64x2.splat(s)
+返回此 [Float64x2](https://www.yuque.com/thyname/dart.typed_data/float64x2) 的一个副本，其中每个通道都按 [s] 缩放。等价于 this \* new Float64x2.splat(s)
 
 ### abs()
 
@@ -90,7 +90,7 @@ Float64x2 scale(double s)
 Float64x2 abs()
 ```
 
-此 [Float64x2] 按通道计算的绝对值。
+此 [Float64x2](https://www.yuque.com/thyname/dart.typed_data/float64x2) 按通道计算的绝对值。
 
 ### clamp()
 
@@ -98,7 +98,7 @@ Float64x2 abs()
 Float64x2 clamp(Float64x2 lowerLimit, Float64x2 upperLimit)
 ```
 
-按通道将此 [Float64x2] 限制在 [lowerLimit]-[upperLimit] 范围内。
+按通道将此 [Float64x2](https://www.yuque.com/thyname/dart.typed_data/float64x2) 限制在 [lowerLimit]-[upperLimit] 范围内。
 
 ### x
 
@@ -130,7 +130,7 @@ int get signMask
 Float64x2 withX(double x)
 ```
 
-返回一个从此 [Float64x2] 复制而来、具有新 x 值的新 [Float64x2]。
+返回一个从此 [Float64x2](https://www.yuque.com/thyname/dart.typed_data/float64x2) 复制而来、具有新 x 值的新 [Float64x2](https://www.yuque.com/thyname/dart.typed_data/float64x2)。
 
 ### withY()
 
@@ -138,7 +138,7 @@ Float64x2 withX(double x)
 Float64x2 withY(double y)
 ```
 
-返回一个从此 [Float64x2] 复制而来、具有新 y 值的新 [Float64x2]。
+返回一个从此 [Float64x2](https://www.yuque.com/thyname/dart.typed_data/float64x2) 复制而来、具有新 y 值的新 [Float64x2](https://www.yuque.com/thyname/dart.typed_data/float64x2)。
 
 ### min()
 
@@ -146,7 +146,7 @@ Float64x2 withY(double y)
 Float64x2 min(Float64x2 other)
 ```
 
-此 [Float64x2] 与 [other] 中按通道的最小值。
+此 [Float64x2](https://www.yuque.com/thyname/dart.typed_data/float64x2) 与 [other] 中按通道的最小值。
 
 ### max()
 
@@ -154,7 +154,7 @@ Float64x2 min(Float64x2 other)
 Float64x2 max(Float64x2 other)
 ```
 
-此 [Float64x2] 与 [other] 中按通道的最大值。
+此 [Float64x2](https://www.yuque.com/thyname/dart.typed_data/float64x2) 与 [other] 中按通道的最大值。
 
 ### sqrt()
 
@@ -162,4 +162,4 @@ Float64x2 max(Float64x2 other)
 Float64x2 sqrt()
 ```
 
-此 [Float64x2] 按通道计算的平方根。
+此 [Float64x2](https://www.yuque.com/thyname/dart.typed_data/float64x2) 按通道计算的平方根。

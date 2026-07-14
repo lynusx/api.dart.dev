@@ -6,7 +6,7 @@ abstract final class ByteData implements TypedData {}
 
 一个固定长度、支持随机访问的字节序列，同时提供对这些字节所表示的定宽整数和浮点数的随机及非对齐访问。
 
-`ByteData` 可用于打包和解包来自外部源（如网络或文件系统）的数据，并且比使用普通的 [List] 实现更高效地处理大量数值数据。`ByteData` 可以通过消除对象头的需要来节省空间，并通过消除数据复制的需要来节省时间。
+`ByteData` 可用于打包和解包来自外部源（如网络或文件系统）的数据，并且比使用普通的 [List](https://www.yuque.com/thyname/dart.core/list) 实现更高效地处理大量数值数据。`ByteData` 可以通过消除对象头的需要来节省空间，并通过消除数据复制的需要来节省时间。
 
 如果数据以字节形式传入，可以通过共享相同的缓冲区将其转换为 `ByteData`。
 
@@ -34,7 +34,7 @@ int huh = bdata.getInt32(0); // 0x40428f5c
 ByteData(int length)
 ```
 
-创建一个指定长度（以元素为单位）的 [ByteData]，其所有字节初始均为零。
+创建一个指定长度（以元素为单位）的 [ByteData](https://www.yuque.com/thyname/dart.typed_data/bytedata)，其所有字节初始均为零。
 
 ### ByteData.view()
 
@@ -42,13 +42,13 @@ ByteData(int length)
 ByteData.view(ByteBuffer buffer, [int offsetInBytes = 0, int? length])
 ```
 
-创建 [buffer] 中指定区域的 [ByteData] _视图_。
+创建 [buffer] 中指定区域的 [ByteData](https://www.yuque.com/thyname/dart.typed_data/bytedata) _视图_。
 
-对 [ByteData] 的更改将在字节缓冲区中可见，反之亦然。如果未指定该区域的 [offsetInBytes] 索引，则默认为零（字节缓冲区中的第一个字节）。如果未提供长度，则视图将延伸到字节缓冲区的末尾。
+对 [ByteData](https://www.yuque.com/thyname/dart.typed_data/bytedata) 的更改将在字节缓冲区中可见，反之亦然。如果未指定该区域的 [offsetInBytes] 索引，则默认为零（字节缓冲区中的第一个字节）。如果未提供长度，则视图将延伸到字节缓冲区的末尾。
 
 [offsetInBytes] 和 [length] 必须为非负数，且 [offsetInBytes] + [length] 必须小于或等于 [buffer] 的长度。
 
-请注意，当从 [TypedData] 列表或字节数据创建视图时，该列表或字节数据本身可能是一个更大缓冲区上的视图，其 [TypedData.offsetInBytes] 大于零。仅仅执行 `ByteData.view(other.buffer, 0, count)` 可能不会指向你预期的字节。相反，你可能需要执行：
+请注意，当从 [TypedData](https://www.yuque.com/thyname/dart.typed_data/typeddata) 列表或字节数据创建视图时，该列表或字节数据本身可能是一个更大缓冲区上的视图，其 [TypedData.offsetInBytes] 大于零。仅仅执行 `ByteData.view(other.buffer, 0, count)` 可能不会指向你预期的字节。相反，你可能需要执行：
 
 ```dart
 ByteData.view(other.buffer, other.offsetInBytes, count)
@@ -68,9 +68,9 @@ ByteData.sublistView(other, 0, count);
 ByteData.sublistView(TypedData data, [int start = 0, int? end])
 ```
 
-在 [data] 的元素范围上创建一个 [ByteData] 视图。
+在 [data] 的元素范围上创建一个 [ByteData](https://www.yuque.com/thyname/dart.typed_data/bytedata) 视图。
 
-在与 [data] 从 [start] 到 [end] 的元素相对应的 `data.buffer` 范围上创建一个视图。如果 [data] 是一个类型化数据列表，如 [Uint16List]，则该视图基于索引从 [start] 到 [end] 的元素所对应的字节。如果 [data] 是一个 [ByteData]，则将其视为字节列表处理。
+在与 [data] 从 [start] 到 [end] 的元素相对应的 `data.buffer` 范围上创建一个视图。如果 [data] 是一个类型化数据列表，如 [Uint16List](https://www.yuque.com/thyname/dart.typed_data/uint16list)，则该视图基于索引从 [start] 到 [end] 的元素所对应的字节。如果 [data] 是一个 [ByteData](https://www.yuque.com/thyname/dart.typed_data/bytedata)，则将其视为字节列表处理。
 
 如果提供了 [start] 和 [end]，它们必须满足
 
@@ -86,7 +86,7 @@ ByteData.sublistView(TypedData data, [int start = 0, int? end])
 ByteData asUnmodifiableView()
 ```
 
-此 [ByteData] 的一个只读视图。
+此 [ByteData](https://www.yuque.com/thyname/dart.typed_data/bytedata) 的一个只读视图。
 
 ### getInt8()
 

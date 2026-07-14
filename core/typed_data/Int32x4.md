@@ -128,7 +128,7 @@ Int32x4 shuffle(int mask)
 Int32x4 shuffleMix(Int32x4 other, int mask)
 ```
 
-对此 [Int32x4] 和 [other] 中的通道值进行重排。返回的 Int32x4 的 XY 通道来自此 [Int32x4]，ZW 通道来自 [other]。使用与 [shuffle] 相同的 [mask]。
+对此 [Int32x4](https://www.yuque.com/thyname/dart.typed_data/int32x4) 和 [other] 中的通道值进行重排。返回的 Int32x4 的 XY 通道来自此 [Int32x4](https://www.yuque.com/thyname/dart.typed_data/int32x4)，ZW 通道来自 [other]。使用与 [shuffle] 相同的 [mask]。
 
 ### withX()
 
@@ -136,7 +136,7 @@ Int32x4 shuffleMix(Int32x4 other, int mask)
 Int32x4 withX(int x)
 ```
 
-返回一个从此 [Int32x4] 复制而来、具有新 x 值的新 [Int32x4]。
+返回一个从此 [Int32x4](https://www.yuque.com/thyname/dart.typed_data/int32x4) 复制而来、具有新 x 值的新 [Int32x4](https://www.yuque.com/thyname/dart.typed_data/int32x4)。
 
 ### withY()
 
@@ -144,7 +144,7 @@ Int32x4 withX(int x)
 Int32x4 withY(int y)
 ```
 
-返回一个从此 [Int32x4] 复制而来、具有新 y 值的新 [Int32x4]。
+返回一个从此 [Int32x4](https://www.yuque.com/thyname/dart.typed_data/int32x4) 复制而来、具有新 y 值的新 [Int32x4](https://www.yuque.com/thyname/dart.typed_data/int32x4)。
 
 ### withZ()
 
@@ -152,7 +152,7 @@ Int32x4 withY(int y)
 Int32x4 withZ(int z)
 ```
 
-返回一个从此 [Int32x4] 复制而来、具有新 z 值的新 [Int32x4]。
+返回一个从此 [Int32x4](https://www.yuque.com/thyname/dart.typed_data/int32x4) 复制而来、具有新 z 值的新 [Int32x4](https://www.yuque.com/thyname/dart.typed_data/int32x4)。
 
 ### withW()
 
@@ -160,7 +160,7 @@ Int32x4 withZ(int z)
 Int32x4 withW(int w)
 ```
 
-返回一个从此 [Int32x4] 复制而来、具有新 w 值的新 [Int32x4]。
+返回一个从此 [Int32x4](https://www.yuque.com/thyname/dart.typed_data/int32x4) 复制而来、具有新 w 值的新 [Int32x4](https://www.yuque.com/thyname/dart.typed_data/int32x4)。
 
 ### flagX
 
@@ -200,7 +200,7 @@ bool get flagW
 Int32x4 withFlagX(bool x)
 ```
 
-返回一个从此 [Int32x4] 复制而来、具有新 x 值的新 [Int32x4]。
+返回一个从此 [Int32x4](https://www.yuque.com/thyname/dart.typed_data/int32x4) 复制而来、具有新 x 值的新 [Int32x4](https://www.yuque.com/thyname/dart.typed_data/int32x4)。
 
 ### withFlagY()
 
@@ -208,7 +208,7 @@ Int32x4 withFlagX(bool x)
 Int32x4 withFlagY(bool y)
 ```
 
-返回一个从此 [Int32x4] 复制而来、具有新 y 值的新 [Int32x4]。
+返回一个从此 [Int32x4](https://www.yuque.com/thyname/dart.typed_data/int32x4) 复制而来、具有新 y 值的新 [Int32x4](https://www.yuque.com/thyname/dart.typed_data/int32x4)。
 
 ### withFlagZ()
 
@@ -216,7 +216,7 @@ Int32x4 withFlagY(bool y)
 Int32x4 withFlagZ(bool z)
 ```
 
-返回一个从此 [Int32x4] 复制而来、具有新 z 值的新 [Int32x4]。
+返回一个从此 [Int32x4](https://www.yuque.com/thyname/dart.typed_data/int32x4) 复制而来、具有新 z 值的新 [Int32x4](https://www.yuque.com/thyname/dart.typed_data/int32x4)。
 
 ### withFlagW()
 
@@ -224,7 +224,7 @@ Int32x4 withFlagZ(bool z)
 Int32x4 withFlagW(bool w)
 ```
 
-返回一个从此 [Int32x4] 复制而来、具有新 w 值的新 [Int32x4]。
+返回一个从此 [Int32x4](https://www.yuque.com/thyname/dart.typed_data/int32x4) 复制而来、具有新 w 值的新 [Int32x4](https://www.yuque.com/thyname/dart.typed_data/int32x4)。
 
 ### select()
 
@@ -232,4 +232,4 @@ Int32x4 withFlagW(bool w)
 Float32x4 select(Float32x4 trueValue, Float32x4 falseValue)
 ```
 
-根据此 [Int32x4] 位掩码合并 [trueValue] 和 [falseValue]：当此 [Int32x4] 中的位为开启状态时，选择 [trueValue] 中的位；当此 [Int32x4] 中的位为关闭状态时，选择 [falseValue] 中的位。
+根据此 [Int32x4](https://www.yuque.com/thyname/dart.typed_data/int32x4) 位掩码合并 [trueValue] 和 [falseValue]：当此 [Int32x4](https://www.yuque.com/thyname/dart.typed_data/int32x4) 中的位为开启状态时，选择 [trueValue] 中的位；当此 [Int32x4](https://www.yuque.com/thyname/dart.typed_data/int32x4) 中的位为关闭状态时，选择 [falseValue] 中的位。

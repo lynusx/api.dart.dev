@@ -69,9 +69,9 @@ abstract interface class Match {}
 
 字符串搜索的结果。
 
-`Match` 或 [Match] 对象的 [Iterable] 是从 [Pattern] 的匹配方法（[Pattern.allMatches] 和 [Pattern.matchAsPrefix]）中返回的。
+`Match` 或 [Match](https://www.yuque.com/thyname/dart.core/match) 对象的 [Iterable](https://www.yuque.com/thyname/dart.core/iterable) 是从 [Pattern](https://www.yuque.com/thyname/dart.core/pattern) 的匹配方法（[Pattern.allMatches] 和 [Pattern.matchAsPrefix]）中返回的。
 
-以下示例在一个 [String] 中查找 [RegExp] 的所有匹配项，并遍历返回的 `Match` 对象可迭代集合。
+以下示例在一个 [String](https://www.yuque.com/thyname/dart.core/string) 中查找 [RegExp](https://www.yuque.com/thyname/dart.core/regexp) 的所有匹配项，并遍历返回的 `Match` 对象可迭代集合。
 
 ```dart
 final regExp = RegExp(r'(\w+)');

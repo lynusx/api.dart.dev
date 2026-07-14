@@ -26,7 +26,7 @@ Link.fromRawPath(Uint8List rawPath)
 Link.fromUri(Uri uri)
 ```
 
-创建一个 [Link] 对象。
+创建一个 [Link](https://www.yuque.com/thyname/dart.io/link) 对象。
 
 如果 [path] 是相对路径，使用时将相对于当前工作目录（参见 [Directory.current]）进行解释。
 
@@ -50,7 +50,7 @@ Future<Link> create(String target, {bool recursive = false})
 
 创建的 Windows 符号链接的类型将与 [target] 的类型一致（如果 [target] 存在）；否则将创建文件链接。如果之后 [target] 被替换为不同类型的对象，已创建链接的类型不会改变，但此时该链接将无法被 [resolveSymbolicLinks] 解析。
 
-要在 Windows 上创建符号链接，Dart 必须以管理员模式运行，或者系统必须启用开发者模式，否则进行此调用时将抛出 [FileSystemException]，并将 `ERROR_PRIVILEGE_NOT_HELD` 设置为其 errno。
+要在 Windows 上创建符号链接，Dart 必须以管理员模式运行，或者系统必须启用开发者模式，否则进行此调用时将抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)，并将 `ERROR_PRIVILEGE_NOT_HELD` 设置为其 errno。
 
 在其他平台上，使用 POSIX 的 `symlink()` 调用来创建包含字符串 [target] 的符号链接。如果 [target] 是相对路径，它将相对于包含该链接的目录进行解释。
 
@@ -72,7 +72,7 @@ void createSync(String target, {bool recursive = false})
 
 创建的 Windows 符号链接的类型将与 [target] 的类型一致（如果 [target] 存在）；否则将创建文件链接。如果之后 [target] 被替换为不同类型的对象，已创建链接的类型不会改变，但此时该链接将无法被 [resolveSymbolicLinks] 解析。
 
-要在 Windows 上创建符号链接，Dart 必须以管理员模式运行，或者系统必须启用开发者模式，否则进行此调用时将抛出 [FileSystemException]，并将 `ERROR_PRIVILEGE_NOT_HELD` 设置为其 errno。
+要在 Windows 上创建符号链接，Dart 必须以管理员模式运行，或者系统必须启用开发者模式，否则进行此调用时将抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)，并将 `ERROR_PRIVILEGE_NOT_HELD` 设置为其 errno。
 
 在其他平台上，使用 POSIX 的 `symlink()` 调用来创建包含字符串 [target] 的符号链接。如果 [target] 是相对路径，它将相对于包含该链接的目录进行解释。
 
@@ -84,7 +84,7 @@ void updateSync(String target)
 
 同步更新一个已存在的链接。
 
-删除 [path] 处已存在的链接，并使用 [createSync] 创建指向 [target] 的新链接。如果原链接不存在，将抛出 [PathNotFoundException]；也可能抛出 [deleteSync] 或 [createSync] 可能抛出的任何 [FileSystemException]。
+删除 [path] 处已存在的链接，并使用 [createSync] 创建指向 [target] 的新链接。如果原链接不存在，将抛出 [PathNotFoundException](https://www.yuque.com/thyname/dart.io/pathnotfoundexception)；也可能抛出 [deleteSync] 或 [createSync] 可能抛出的任何 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### update()
 
@@ -96,7 +96,7 @@ Future<Link> update(String target)
 
 删除 [path] 处已存在的链接，并使用 [create] 创建指向 [target] 的新链接。
 
-返回一个 Future，成功时以该 `Link` 完成；如果 [path] 处不存在链接，则以 [PathNotFoundException] 完成；也可能以 [delete] 或 [create] 可能抛出的任何 [FileSystemException] 完成。
+返回一个 Future，成功时以该 `Link` 完成；如果 [path] 处不存在链接，则以 [PathNotFoundException](https://www.yuque.com/thyname/dart.io/pathnotfoundexception) 完成；也可能以 [delete] 或 [create] 可能抛出的任何 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception) 完成。
 
 ### resolveSymbolicLinks()
 
@@ -118,9 +118,9 @@ Future<Link> rename(String newPath)
 
 重命名此链接。
 
-返回一个 `Future<Link>`，以重命名后链接的 [Link] 完成。
+返回一个 `Future<Link>`，以重命名后链接的 [Link](https://www.yuque.com/thyname/dart.io/link) 完成。
 
-如果 [newPath] 指向一个已存在的文件或链接，该实体将先被删除。如果 [newPath] 指向一个已存在的目录，则该 Future 将以 [FileSystemException] 完成。
+如果 [newPath] 指向一个已存在的文件或链接，该实体将先被删除。如果 [newPath] 指向一个已存在的目录，则该 Future 将以 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception) 完成。
 
 ### renameSync()
 
@@ -130,9 +130,9 @@ Link renameSync(String newPath)
 
 同步重命名此链接。
 
-返回重命名后链接的 [Link] 实例。
+返回重命名后链接的 [Link](https://www.yuque.com/thyname/dart.io/link) 实例。
 
-如果 [newPath] 指向一个已存在的文件或链接，该实体将先被删除。如果 [newPath] 指向一个已存在的目录，将抛出 [FileSystemException]。
+如果 [newPath] 指向一个已存在的文件或链接，该实体将先被删除。如果 [newPath] 指向一个已存在的目录，将抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### delete()
 
@@ -140,17 +140,17 @@ Link renameSync(String newPath)
 Future<FileSystemEntity> delete({bool recursive = false})
 ```
 
-删除此 [Link]。
+删除此 [Link](https://www.yuque.com/thyname/dart.io/link)。
 
 如果 [recursive] 为 `false`：
 
-- 如果 [path] 对应一个链接，该路径将被删除。否则，[delete] 将以 [FileSystemException] 完成。
+- 如果 [path] 对应一个链接，该路径将被删除。否则，[delete] 将以 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception) 完成。
 
 如果 [recursive] 为 `true`：
 
-- [path] 处的 [FileSystemEntity] 将被删除，无论其类型如何。如果 [path] 对应文件或链接，该文件或链接将被删除。如果 [path] 对应目录，该目录及其所有子目录和文件都将被删除。递归删除时不会跟随链接，只会删除链接本身，而不会删除其目标。这种行为使得 [delete] 可用于无条件删除任何文件系统对象。
+- [path] 处的 [FileSystemEntity](https://www.yuque.com/thyname/dart.io/filesystementity) 将被删除，无论其类型如何。如果 [path] 对应文件或链接，该文件或链接将被删除。如果 [path] 对应目录，该目录及其所有子目录和文件都将被删除。递归删除时不会跟随链接，只会删除链接本身，而不会删除其目标。这种行为使得 [delete] 可用于无条件删除任何文件系统对象。
 
-如果此 [Link] 无法删除，[delete] 将以 [FileSystemException] 完成。
+如果此 [Link](https://www.yuque.com/thyname/dart.io/link) 无法删除，[delete] 将以 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception) 完成。
 
 ### deleteSync()
 
@@ -158,17 +158,17 @@ Future<FileSystemEntity> delete({bool recursive = false})
 void deleteSync({bool recursive = false})
 ```
 
-同步删除此 [Link]。
+同步删除此 [Link](https://www.yuque.com/thyname/dart.io/link)。
 
 如果 [recursive] 为 `false`：
 
-- 如果 [path] 对应一个链接，该路径将被删除。否则，[delete] 将抛出 [FileSystemException]。
+- 如果 [path] 对应一个链接，该路径将被删除。否则，[delete] 将抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 如果 [recursive] 为 `true`：
 
-- [path] 处的 [FileSystemEntity] 将被删除，无论其类型如何。如果 [path] 对应文件或链接，该文件或链接将被删除。如果 [path] 对应目录，该目录及其所有子目录和文件都将被删除。递归删除时不会跟随链接，只会删除链接本身，而不会删除其目标。这种行为使得 [delete] 可用于无条件删除任何文件系统对象。
+- [path] 处的 [FileSystemEntity](https://www.yuque.com/thyname/dart.io/filesystementity) 将被删除，无论其类型如何。如果 [path] 对应文件或链接，该文件或链接将被删除。如果 [path] 对应目录，该目录及其所有子目录和文件都将被删除。递归删除时不会跟随链接，只会删除链接本身，而不会删除其目标。这种行为使得 [delete] 可用于无条件删除任何文件系统对象。
 
-如果此 [Link] 无法删除，[delete] 将抛出 [FileSystemException]。
+如果此 [Link](https://www.yuque.com/thyname/dart.io/link) 无法删除，[delete] 将抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### absolute
 
@@ -176,7 +176,7 @@ void deleteSync({bool recursive = false})
 Link get absolute
 ```
 
-路径为此 [Link] 绝对路径的 [Link] 实例。
+路径为此 [Link](https://www.yuque.com/thyname/dart.io/link) 绝对路径的 [Link](https://www.yuque.com/thyname/dart.io/link) 实例。
 
 绝对路径的计算方式是：为相对路径添加当前工作目录前缀，或者原样返回绝对路径。
 
@@ -192,7 +192,7 @@ Future<String> target()
 
 如果返回的目标是相对路径，则它是相对于包含该链接的目录而言的。
 
-如果链接不存在，或者不是一个链接，Future 将以 [FileSystemException] 完成。
+如果链接不存在，或者不是一个链接，Future 将以 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception) 完成。
 
 ### targetSync()
 
@@ -206,4 +206,4 @@ String targetSync()
 
 如果返回的目标是相对路径，则它是相对于包含该链接的目录而言的。
 
-如果链接不存在，或者不是一个链接，将抛出 [FileSystemException]。
+如果链接不存在，或者不是一个链接，将抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。

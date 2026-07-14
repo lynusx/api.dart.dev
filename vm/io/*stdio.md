@@ -22,7 +22,7 @@ String? readLineSync({Encoding encoding = systemEncoding, bool retainNewlines = 
 
 行可以由 `<CR><LF>` 或 `<LF>` 终止。在 Windows 上，当 stdin 的 [stdioType] 为 [StdioType.terminal] 时，终止符也可以是单个 `<CR>`。
 
-输入字节通过 [encoding] 转换为字符串。如果省略 [encoding]，默认使用 [systemEncoding]。
+输入字节通过 [encoding] 转换为字符串。如果省略 [encoding]，默认使用 [systemEncoding](https://www.yuque.com/thyname/dart.io/systemencoding)。
 
 如果 [retainNewlines] 为 `false`，返回的字符串将不包含末尾的行终止符；如果为 `true`，返回的字符串将包含行终止符。默认值为 `false`。
 
@@ -136,15 +136,15 @@ stdin 是否连接了终端。
 class Stdout extends _StdSink implements IOSink {}
 ```
 
-连接到进程标准输出或标准错误的 [IOSink]。
+连接到进程标准输出或标准错误的 [IOSink](https://www.yuque.com/thyname/dart.io/iosink)。
 
 提供一个*阻塞式*的 `IOSink`，因此使用它写入时会阻塞，直到输出完成。
 
-在某些场景下，这种阻塞行为并不理想，因为它不具备 `dart:io` 通常提供的非阻塞行为。可使用 [nonBlocking] 属性获取具有非阻塞行为的 [IOSink]。
+在某些场景下，这种阻塞行为并不理想，因为它不具备 `dart:io` 通常提供的非阻塞行为。可使用 [nonBlocking] 属性获取具有非阻塞行为的 [IOSink](https://www.yuque.com/thyname/dart.io/iosink)。
 
 此类还可用于检查 `stdout` 或 `stderr` 是否连接到终端，并查询部分终端属性。
 
-[addError] API 继承自 [StreamSink]，调用它将导致未处理的异步错误，除非在 [done] 上设置了错误处理程序。
+[addError] API 继承自 [StreamSink](https://www.yuque.com/thyname/dart.async/streamsink)，调用它将导致未处理的异步错误，除非在 [done] 上设置了错误处理程序。
 
 [lineTerminator] 字段被 [write]、[writeln]、[writeAll] 和 [writeCharCode] 方法用于转换 `"\n"`。默认情况下，`"\n"` 会被原样输出。
 
@@ -164,7 +164,7 @@ int get terminalColumns
 
 终端的列数。
 
-如果 stdout 未连接终端，将抛出 [StdoutException]。更多信息参见 [hasTerminal]。
+如果 stdout 未连接终端，将抛出 [StdoutException](https://www.yuque.com/thyname/dart.io/stdoutexception)。更多信息参见 [hasTerminal]。
 
 ### terminalLines
 
@@ -174,7 +174,7 @@ int get terminalLines
 
 终端的行数。
 
-如果 stdout 未连接终端，将抛出 [StdoutException]。更多信息参见 [hasTerminal]。
+如果 stdout 未连接终端，将抛出 [StdoutException](https://www.yuque.com/thyname/dart.io/stdoutexception)。更多信息参见 [hasTerminal]。
 
 ### supportsAnsiEscapes
 
@@ -208,7 +208,7 @@ IOSink get nonBlocking
 class StdoutException implements IOException {}
 ```
 
-由 [Stdout] 的某些操作抛出的异常。
+由 [Stdout](https://www.yuque.com/thyname/dart.io/stdout) 的某些操作抛出的异常。
 
 ### message
 
@@ -244,7 +244,7 @@ String toString()
 class StdinException implements IOException {}
 ```
 
-由 [Stdin] 的某些操作抛出的异常。
+由 [Stdin](https://www.yuque.com/thyname/dart.io/stdin) 的某些操作抛出的异常。
 
 ### message
 

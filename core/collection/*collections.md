@@ -4,9 +4,9 @@
 class UnmodifiableListView<E> extends UnmodifiableListBase<E> {}
 ```
 
-另一个 List 的不可修改 [List] 视图。
+另一个 List 的不可修改 [List](https://www.yuque.com/thyname/dart.core/list) 视图。
 
-元素的来源可以是 [List]，也可以是任何具有高效 [Iterable.length] 和 [Iterable.elementAt] 实现的 [Iterable]。
+元素的来源可以是 [List](https://www.yuque.com/thyname/dart.core/list)，也可以是任何具有高效 [Iterable.length] 和 [Iterable.elementAt] 实现的 [Iterable](https://www.yuque.com/thyname/dart.core/iterable)。
 
 ```dart
 final numbers = <int>[10, 20, 30];
@@ -29,7 +29,7 @@ UnmodifiableListView<E>(Iterable<E> source)
 
 创建一个由 [source] 支持的不可修改列表。
 
-元素的 [source] 可以是 [List]，也可以是任何具有高效 [Iterable.length] 和 [Iterable.elementAt] 实现的 [Iterable]。
+元素的 [source] 可以是 [List](https://www.yuque.com/thyname/dart.core/list)，也可以是任何具有高效 [Iterable.length] 和 [Iterable.elementAt] 实现的 [Iterable](https://www.yuque.com/thyname/dart.core/iterable)。
 
 ## 属性
 

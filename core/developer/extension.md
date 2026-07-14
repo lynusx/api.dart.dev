@@ -92,9 +92,9 @@ bool isError()
 
 判断此响应是否表示一个错误。
 
-服务协议扩展处理器。通过 [registerExtension] 注册。
+服务协议扩展处理器。通过 [registerExtension](https://www.yuque.com/thyname/dart.developer/registerextension) 注册。
 
-必须以 [ServiceExtensionResponse] 完成。[method] 为服务协议请求的方法名，[parameters] 为保存服务协议请求参数的映射。
+必须以 [ServiceExtensionResponse](https://www.yuque.com/thyname/dart.developer/serviceextensionresponse) 完成。[method] 为服务协议请求的方法名，[parameters] 为保存服务协议请求参数的映射。
 
 _注意_：所有参数名和参数值均以字符串形式编码。
 
@@ -120,7 +120,7 @@ bool get extensionStreamHasListener
 
 VM 服务的客户端可以使用 `listenStream` 方法注册为扩展流的监听者。只要至少有一个这样的客户端注册为监听者且尚未断开连接，扩展流就处于有监听者的状态。
 
-当流存在监听者时调用 [postEvent] 将尝试把该事件传递给所有当前监听者，尽管某个监听者可能在事件送达前断开连接。当流没有监听者时调用 [postEvent] 意味着没有人会收到该事件，此调用实际上是一个空操作。
+当流存在监听者时调用 [postEvent](https://www.yuque.com/thyname/dart.developer/postevent) 将尝试把该事件传递给所有当前监听者，尽管某个监听者可能在事件送达前断开连接。当流没有监听者时调用 [postEvent](https://www.yuque.com/thyname/dart.developer/postevent) 意味着没有人会收到该事件，此调用实际上是一个空操作。
 
 # postEvent()
 
@@ -130,4 +130,4 @@ void postEvent(String eventKind, Map eventData, {String stream = 'Extension'})
 
 向 “Extension” 事件流发布一个类型为 [eventKind]、负载为 [eventData] 的事件。
 
-如果 [extensionStreamHasListener] 为 false，此方法为空操作。可通过覆盖 [stream] 设置事件应发布到的目标流。[stream] 不得以下划线开头，也不得是 VM Service 的核心流。
+如果 [extensionStreamHasListener](https://www.yuque.com/thyname/dart.developer/extensionstreamhaslistener) 为 false，此方法为空操作。可通过覆盖 [stream] 设置事件应发布到的目标流。[stream] 不得以下划线开头，也不得是 VM Service 的核心流。

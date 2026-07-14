@@ -4,7 +4,7 @@
 final class InternetAddressType {}
 ```
 
-[InternetAddress] 的类型（或地址族）。
+[InternetAddress](https://www.yuque.com/thyname/dart.io/internetaddress) 的类型（或地址族）。
 
 目前支持 IP 版本 4（IPv4）、IP 版本 6（IPv6）和 Unix 域地址。Unix 域套接字仅在 Linux、MacOS 和 Android 上可用。
 
@@ -102,7 +102,7 @@ IP 版本 6 任意地址。
 InternetAddressType get type
 ```
 
-[InternetAddress] 的地址族。
+[InternetAddress](https://www.yuque.com/thyname/dart.io/internetaddress) 的地址族。
 
 ### address
 
@@ -130,11 +130,11 @@ String get host
 Uint8List get rawAddress
 ```
 
-此 [InternetAddress] 的原始地址。
+此 [InternetAddress](https://www.yuque.com/thyname/dart.io/internetaddress) 的原始地址。
 
 对于 IP 地址，结果是长度为 4 或 16 字节的列表。对于 Unix 域地址，返回表示 [address] 的 UTF-8 编码字节序列。
 
-返回的列表是一份新的副本，因此可以在不修改 [InternetAddress] 的情况下更改该列表。
+返回的列表是一份新的副本，因此可以在不修改 [InternetAddress](https://www.yuque.com/thyname/dart.io/internetaddress) 的情况下更改该列表。
 
 ### isLoopback
 
@@ -142,7 +142,7 @@ Uint8List get rawAddress
 bool get isLoopback
 ```
 
-[InternetAddress] 是否为环回地址。
+[InternetAddress](https://www.yuque.com/thyname/dart.io/internetaddress) 是否为环回地址。
 
 ### isLinkLocal
 
@@ -150,7 +150,7 @@ bool get isLoopback
 bool get isLinkLocal
 ```
 
-[InternetAddress] 的作用域是否为链路本地。
+[InternetAddress](https://www.yuque.com/thyname/dart.io/internetaddress) 的作用域是否为链路本地。
 
 ### isMulticast
 
@@ -158,7 +158,7 @@ bool get isLinkLocal
 bool get isMulticast
 ```
 
-[InternetAddress] 的作用域是否为组播。
+[InternetAddress](https://www.yuque.com/thyname/dart.io/internetaddress) 的作用域是否为组播。
 
 ### InternetAddress()
 
@@ -166,7 +166,7 @@ bool get isMulticast
 InternetAddress(String address, {InternetAddressType? type})
 ```
 
-从数字地址或文件路径创建一个新的 [InternetAddress]。
+从数字地址或文件路径创建一个新的 [InternetAddress](https://www.yuque.com/thyname/dart.io/internetaddress)。
 
 如果 [type] 为 [InternetAddressType.IPv4]，则 [address] 必须是数字 IPv4 地址（点分十进制表示法）。如果 [type] 为 [InternetAddressType.IPv6]，则 [address] 必须是数字 IPv6 地址（十六进制表示法）。如果 [type] 为 [InternetAddressType.unix]，则 [address] 必须是有效的文件路径。如果省略 [type]，则 [address] 必须是数字 IPv4 或 IPv6 地址，类型将根据格式推断。
 
@@ -176,7 +176,7 @@ InternetAddress(String address, {InternetAddressType? type})
 InternetAddress.fromRawAddress(Uint8List rawAddress, {InternetAddressType? type})
 ```
 
-根据提供的原始地址字节创建一个新的 [InternetAddress]。
+根据提供的原始地址字节创建一个新的 [InternetAddress](https://www.yuque.com/thyname/dart.io/internetaddress)。
 
 如果 [type] 为 [InternetAddressType.IPv4]，则 [rawAddress] 的长度必须为 4。如果 [type] 为 [InternetAddressType.IPv6]，则 [rawAddress] 的长度必须为 16。如果 [type] 为 [InternetAddressType.unix]，则 [rawAddress] 必须是有效的 UTF-8 编码文件路径。
 
@@ -190,7 +190,7 @@ Future<InternetAddress> reverse()
 
 对此 [address] 执行反向 DNS 查找。
 
-返回一个新的 [InternetAddress]，其地址相同，但 [host] 字段设置为查找结果。
+返回一个新的 [InternetAddress](https://www.yuque.com/thyname/dart.io/internetaddress)，其地址相同，但 [host] 字段设置为查找结果。
 
 如果此地址为 Unix 域地址，则不执行查找，直接返回此地址。
 
@@ -220,7 +220,7 @@ InternetAddress? tryParse(String address)
 abstract interface class InterfaceAddress implements InternetAddress {}
 ```
 
-绑定到 [NetworkInterface] 的 [InternetAddress]，并扩展了网络配置详细信息。
+绑定到 [NetworkInterface](https://www.yuque.com/thyname/dart.io/networkinterface) 的 [InternetAddress](https://www.yuque.com/thyname/dart.io/internetaddress)，并扩展了网络配置详细信息。
 
 除地址本身外，还提供前缀长度（也称为子网掩码长度），以及对于 IPv4 地址而言的网络广播地址。
 
@@ -250,7 +250,7 @@ InternetAddress? get broadcast
 abstract interface class NetworkInterface {}
 ```
 
-[NetworkInterface] 表示当前系统上的一个活动网络接口。它包含绑定到该接口的 [InterfaceAddress] 列表。
+[NetworkInterface](https://www.yuque.com/thyname/dart.io/networkinterface) 表示当前系统上的一个活动网络接口。它包含绑定到该接口的 [InterfaceAddress](https://www.yuque.com/thyname/dart.io/interfaceaddress) 列表。
 
 ### name
 
@@ -258,7 +258,7 @@ abstract interface class NetworkInterface {}
 String get name
 ```
 
-[NetworkInterface] 的名称。
+[NetworkInterface](https://www.yuque.com/thyname/dart.io/networkinterface) 的名称。
 
 ### index
 
@@ -266,7 +266,7 @@ String get name
 int get index
 ```
 
-[NetworkInterface] 的索引。
+[NetworkInterface](https://www.yuque.com/thyname/dart.io/networkinterface) 的索引。
 
 ### addresses
 
@@ -274,7 +274,7 @@ int get index
 List<InterfaceAddress> get addresses
 ```
 
-当前绑定到此 [NetworkInterface] 的 [InterfaceAddress] 列表。
+当前绑定到此 [NetworkInterface](https://www.yuque.com/thyname/dart.io/networkinterface) 的 [InterfaceAddress](https://www.yuque.com/thyname/dart.io/interfaceaddress) 列表。
 
 ### listSupported
 
@@ -292,11 +292,11 @@ Dart 支持的所有平台都支持 [list] 方法，因此该属性始终为 tru
 Future<List<NetworkInterface>> list({bool includeLoopback = false, bool includeLinkLocal = false, InternetAddressType type = InternetAddressType.any})
 ```
 
-查询系统中的 [NetworkInterface]。
+查询系统中的 [NetworkInterface](https://www.yuque.com/thyname/dart.io/networkinterface)。
 
 如果 [includeLoopback] 为 `true`，返回的列表将包含环回设备。默认值为 `false`。
 
-如果 [includeLinkLocal] 为 `true`，返回的 [NetworkInterface] 的地址列表可能包含链路本地地址。默认值为 `false`。
+如果 [includeLinkLocal] 为 `true`，返回的 [NetworkInterface](https://www.yuque.com/thyname/dart.io/networkinterface) 的地址列表可能包含链路本地地址。默认值为 `false`。
 
 如果 [type] 为 [InternetAddressType.IPv4] 或 [InternetAddressType.IPv6]，将只查找指定类型的地址。默认值为 [InternetAddressType.any]。
 
@@ -308,9 +308,9 @@ abstract interface class RawServerSocket implements Stream<RawSocket> {}
 
 一个监听套接字。
 
-`RawServerSocket` 提供一个低级 [RawSocket] 对象的流，每个连接到监听套接字的连接对应一个 [RawSocket] 对象。
+`RawServerSocket` 提供一个低级 [RawSocket](https://www.yuque.com/thyname/dart.io/rawsocket) 对象的流，每个连接到监听套接字的连接对应一个 [RawSocket](https://www.yuque.com/thyname/dart.io/rawsocket) 对象。
 
-更多信息参见 [RawSocket]。
+更多信息参见 [RawSocket](https://www.yuque.com/thyname/dart.io/rawsocket)。
 
 ### bind()
 
@@ -322,7 +322,7 @@ Future<RawServerSocket> bind(dynamic address, int port, {int backlog = 0, bool v
 
 当返回的 Future 完成时，服务器套接字已绑定到给定的 [address] 和 [port]，并已开始监听。
 
-[address] 可以是 [String] 或 [InternetAddress]。如果 [address] 是 [String]，[bind] 将执行 [InternetAddress.lookup] 并使用列表中的第一个值。要监听环回适配器（只允许来自本地主机的传入连接），请使用 [InternetAddress.loopbackIPv4] 或 [InternetAddress.loopbackIPv6]。要允许来自网络的传入连接，请使用 [InternetAddress.anyIPv4] 或 [InternetAddress.anyIPv6] 以绑定到所有接口，或使用特定接口的 IP 地址。
+[address] 可以是 [String](https://www.yuque.com/thyname/dart.core/string) 或 [InternetAddress](https://www.yuque.com/thyname/dart.io/internetaddress)。如果 [address] 是 [String](https://www.yuque.com/thyname/dart.core/string)，[bind] 将执行 [InternetAddress.lookup] 并使用列表中的第一个值。要监听环回适配器（只允许来自本地主机的传入连接），请使用 [InternetAddress.loopbackIPv4] 或 [InternetAddress.loopbackIPv6]。要允许来自网络的传入连接，请使用 [InternetAddress.anyIPv4] 或 [InternetAddress.anyIPv6] 以绑定到所有接口，或使用特定接口的 IP 地址。
 
 如果使用 IP 版本 6（IPv6）地址，将同时接受 IP 版本 6（IPv6）和版本 4（IPv4）连接。要将其限制为仅版本 6（IPv6），请使用 [v6Only] 设置仅版本 6。
 
@@ -330,7 +330,7 @@ Future<RawServerSocket> bind(dynamic address, int port, {int backlog = 0, bool v
 
 可选参数 [backlog] 用于指定底层操作系统监听设置的监听队列长度。如果 [backlog] 的值为 `0`（默认值），系统将选择一个合理的值。
 
-可选参数 [shared] 指定是否允许其他 RawServerSocket 对象绑定到相同的 [address]、[port] 和 [v6Only] 组合。如果 [shared] 为 `true`，且来自此隔离区（isolate）或其他隔离区的更多 [RawServerSocket] 绑定到该端口，则传入连接将在所有绑定的 [RawServerSocket] 之间分配。通过这种方式，连接可以分布在多个隔离区上。
+可选参数 [shared] 指定是否允许其他 RawServerSocket 对象绑定到相同的 [address]、[port] 和 [v6Only] 组合。如果 [shared] 为 `true`，且来自此隔离区（isolate）或其他隔离区的更多 [RawServerSocket](https://www.yuque.com/thyname/dart.io/rawserversocket) 绑定到该端口，则传入连接将在所有绑定的 [RawServerSocket](https://www.yuque.com/thyname/dart.io/rawserversocket) 之间分配。通过这种方式，连接可以分布在多个隔离区上。
 
 ### port
 
@@ -366,9 +366,9 @@ abstract interface class ServerSocket implements ServerSocketBase<Socket> {}
 
 一个监听套接字。
 
-[ServerSocket] 提供一个 [Socket] 对象的流，每个连接到监听套接字的连接对应一个 [Socket] 对象。
+[ServerSocket](https://www.yuque.com/thyname/dart.io/serversocket) 提供一个 [Socket](https://www.yuque.com/thyname/dart.io/socket) 对象的流，每个连接到监听套接字的连接对应一个 [Socket](https://www.yuque.com/thyname/dart.io/socket) 对象。
 
-更多信息参见 [Socket]。
+更多信息参见 [Socket](https://www.yuque.com/thyname/dart.io/socket)。
 
 ### bind()
 
@@ -380,7 +380,7 @@ Future<ServerSocket> bind(dynamic address, int port, {int backlog = 0, bool v6On
 
 当返回的 Future 完成时，服务器套接字已绑定到给定的 [address] 和 [port]，并已开始监听。
 
-[address] 可以是 [String] 或 [InternetAddress]。如果 [address] 是 [String]，[bind] 将执行 [InternetAddress.lookup] 并使用列表中的第一个值。要监听环回适配器（只允许来自本地主机的传入连接），请使用 [InternetAddress.loopbackIPv4] 或 [InternetAddress.loopbackIPv6]。要允许来自网络的传入连接，请使用 [InternetAddress.anyIPv4] 或 [InternetAddress.anyIPv6] 以绑定到所有接口，或使用特定接口的 IP 地址。
+[address] 可以是 [String](https://www.yuque.com/thyname/dart.core/string) 或 [InternetAddress](https://www.yuque.com/thyname/dart.io/internetaddress)。如果 [address] 是 [String](https://www.yuque.com/thyname/dart.core/string)，[bind] 将执行 [InternetAddress.lookup] 并使用列表中的第一个值。要监听环回适配器（只允许来自本地主机的传入连接），请使用 [InternetAddress.loopbackIPv4] 或 [InternetAddress.loopbackIPv6]。要允许来自网络的传入连接，请使用 [InternetAddress.anyIPv4] 或 [InternetAddress.anyIPv6] 以绑定到所有接口，或使用特定接口的 IP 地址。
 
 如果使用 IP 版本 6（IPv6）地址，将同时接受 IP 版本 6（IPv6）和版本 4（IPv4）连接。要将其限制为仅版本 6（IPv6），请使用 [v6Only] 设置仅版本 6。
 
@@ -422,7 +422,7 @@ Future<ServerSocket> close()
 final class SocketDirection {}
 ```
 
-[SocketDirection] 用作 [Socket.close] 和 [RawSocket.close] 的参数，用于在指定方向上关闭套接字。
+[SocketDirection](https://www.yuque.com/thyname/dart.io/socketdirection) 用作 [Socket.close] 和 [RawSocket.close] 的参数，用于在指定方向上关闭套接字。
 
 ### receive
 
@@ -450,7 +450,7 @@ final class SocketOption {}
 
 用于配置套接字的选项，通过 [Socket.setOption] 进行配置。
 
-[SocketOption] 用作 [Socket.setOption] 和 [RawSocket.setOption] 的参数，用于自定义底层套接字的行为。
+[SocketOption](https://www.yuque.com/thyname/dart.io/socketoption) 用作 [Socket.setOption] 和 [RawSocket.setOption] 的参数，用于自定义底层套接字的行为。
 
 ### tcpNoDelay
 
@@ -468,7 +468,7 @@ tcpNoDelay 默认禁用。
 final class RawSocketOption {}
 ```
 
-[RawSocketOption] 用作 [Socket.setRawOption] 和 [RawSocket.setRawOption] 的参数，用于自定义底层套接字的行为。
+[RawSocketOption](https://www.yuque.com/thyname/dart.io/rawsocketoption) 用作 [Socket.setRawOption] 和 [RawSocket.setRawOption] 的参数，用于自定义底层套接字的行为。
 
 它允许对套接字选项进行精细控制，其值将传递给底层平台的 setsockopt 和 getsockopt 实现。
 
@@ -478,7 +478,7 @@ final class RawSocketOption {}
 RawSocketOption(int level, int option, Uint8List value)
 ```
 
-为 [RawSocket.getRawOption] 和 [RawSocket.setRawOption] 创建一个 [RawSocketOption]。
+为 [RawSocket.getRawOption] 和 [RawSocket.setRawOption] 创建一个 [RawSocketOption](https://www.yuque.com/thyname/dart.io/rawsocketoption)。
 
 [level] 和 [option] 参数对应于原生 `getsockopt()` 和 `setsockopt()` 调用中的 `level` 和 `optname` 参数。
 
@@ -494,7 +494,7 @@ value 参数及其长度对应于原生调用中的 optval 和 length 参数。
 RawSocketOption.fromInt(int level, int option, int value)
 ```
 
-用于创建基于整数的 [RawSocketOption] 的便捷构造函数。
+用于创建基于整数的 [RawSocketOption](https://www.yuque.com/thyname/dart.io/rawsocketoption) 的便捷构造函数。
 
 ### RawSocketOption.fromBool()
 
@@ -502,7 +502,7 @@ RawSocketOption.fromInt(int level, int option, int value)
 RawSocketOption.fromBool(int level, int option, bool value)
 ```
 
-用于创建基于布尔值的 [RawSocketOption] 的便捷构造函数。
+用于创建基于布尔值的 [RawSocketOption](https://www.yuque.com/thyname/dart.io/rawsocketoption) 的便捷构造函数。
 
 ### level
 
@@ -536,7 +536,7 @@ Uint8List value
 
 要设置的原始数据，或用于写入当前选项值的数组。
 
-此列表长度必须与预期选项的长度一致。对于大多数接受 [int] 或 [bool] 值的选项，长度应为 4。对于需要结构体（例如 in_addr_t）的选项，长度应为该结构体的正确长度。
+此列表长度必须与预期选项的长度一致。对于大多数接受 [int](https://www.yuque.com/thyname/dart.core/int) 或 [bool](https://www.yuque.com/thyname/dart.core/bool) 值的选项，长度应为 4。对于需要结构体（例如 in_addr_t）的选项，长度应为该结构体的正确长度。
 
 ### levelSocket
 
@@ -600,9 +600,9 @@ int get levelUdp
 class RawSocketEvent {}
 ```
 
-[RawDatagramSocket]、[RawSecureSocket] 和 [RawSocket] 的事件。
+[RawDatagramSocket](https://www.yuque.com/thyname/dart.io/rawdatagramsocket)、[RawSecureSocket](https://www.yuque.com/thyname/dart.io/rawsecuresocket) 和 [RawSocket](https://www.yuque.com/thyname/dart.io/rawsocket) 的事件。
 
-当套接字状态发生变化时，这些事件对象由套接字的 [Stream] 行为使用（例如 [RawSocket.listen]、[RawSocket.forEach]）。
+当套接字状态发生变化时，这些事件对象由套接字的 [Stream](https://www.yuque.com/thyname/dart.async/stream) 行为使用（例如 [RawSocket.listen]、[RawSocket.forEach]）。
 
 ```dart
 import 'dart:convert';
@@ -689,9 +689,9 @@ final class ConnectionTask<S> {}
 Future<S> socket
 ```
 
-一个 `Future`，其完成值与 `S.connect()` 的返回值相同，除非在此 [ConnectionTask] 上调用了 [cancel]。
+一个 `Future`，其完成值与 `S.connect()` 的返回值相同，除非在此 [ConnectionTask](https://www.yuque.com/thyname/dart.io/connectiontask) 上调用了 [cancel]。
 
-如果调用了 [cancel]，该 Future 将以 [SocketException] 错误完成，该错误消息表明连接尝试已被取消。
+如果调用了 [cancel]，该 Future 将以 [SocketException](https://www.yuque.com/thyname/dart.io/socketexception) 错误完成，该错误消息表明连接尝试已被取消。
 
 ### fromSocket()
 
@@ -723,7 +723,7 @@ void cancel()
 
 取消连接尝试。
 
-这也会导致 [socket] `Future` 以 [SocketException] 错误完成。
+这也会导致 [socket] `Future` 以 [SocketException](https://www.yuque.com/thyname/dart.io/socketexception) 错误完成。
 
 # RawSocket
 
@@ -733,9 +733,9 @@ abstract interface class RawSocket implements Stream<RawSocketEvent> {}
 
 一个 TCP 连接。
 
-一个 _套接字连接_ 将一个 _本地_ 套接字连接到一个 _远程_ 套接字。数据以 [Uint8List] 的形式由本地套接字接收，并通过 [read] 方法提供，也可以通过 [write] 方法发送到远程套接字。
+一个 _套接字连接_ 将一个 _本地_ 套接字连接到一个 _远程_ 套接字。数据以 [Uint8List](https://www.yuque.com/thyname/dart.typed_data/uint8list) 的形式由本地套接字接收，并通过 [read] 方法提供，也可以通过 [write] 方法发送到远程套接字。
 
-此类的 [Stream] 接口提供关于特定变化发生时的事件通知，例如数据变为可用时（[RawSocketEvent.read]）或远程端停止监听时（[RawSocketEvent.closed]）。
+此类的 [Stream](https://www.yuque.com/thyname/dart.async/stream) 接口提供关于特定变化发生时的事件通知，例如数据变为可用时（[RawSocketEvent.read]）或远程端停止监听时（[RawSocketEvent.closed]）。
 
 ### readEventsEnabled
 
@@ -743,7 +743,7 @@ abstract interface class RawSocket implements Stream<RawSocketEvent> {}
 bool readEventsEnabled
 ```
 
-设置或获取 [RawSocket] 是否应监听 [RawSocketEvent.read] 和 [RawSocketEvent.readClosed] 事件。默认值为 `true`。
+设置或获取 [RawSocket](https://www.yuque.com/thyname/dart.io/rawsocket) 是否应监听 [RawSocketEvent.read] 和 [RawSocketEvent.readClosed] 事件。默认值为 `true`。
 
 警告：将 [readEventsEnabled] 设置为 `false` 可能会阻止套接字在 [SocketDirection.receive] 和 [SocketDirection.send] 方向被独立关闭时完全关闭。更多详情参见 [shutdown]。
 
@@ -753,7 +753,7 @@ bool readEventsEnabled
 bool writeEventsEnabled
 ```
 
-设置或获取 [RawSocket] 是否应监听 [RawSocketEvent.write] 事件。默认值为 `true`。这是一次性监听器，必须再次将 writeEventsEnabled 设置为 true 才能接收另一个写入事件。
+设置或获取 [RawSocket](https://www.yuque.com/thyname/dart.io/rawsocket) 是否应监听 [RawSocketEvent.write] 事件。默认值为 `true`。这是一次性监听器，必须再次将 writeEventsEnabled 设置为 true 才能接收另一个写入事件。
 
 ### connect()
 
@@ -763,15 +763,15 @@ Future<RawSocket> connect(dynamic host, int port, {dynamic sourceAddress, int so
 
 创建一个到主机和端口的新套接字连接。
 
-返回一个 [Future]，一旦连接完成将以 [RawSocket] 完成，如果主机查找或连接失败，则以错误完成。
+返回一个 [Future](https://www.yuque.com/thyname/dart.async/future)，一旦连接完成将以 [RawSocket](https://www.yuque.com/thyname/dart.io/rawsocket) 完成，如果主机查找或连接失败，则以错误完成。
 
-[host] 可以是 [String] 或 [InternetAddress]。如果 [host] 是 [String]，[connect] 将执行 [InternetAddress.lookup] 并尝试所有返回的 [InternetAddress]，直到连接成功。如果 IPv4 和 IPv6 地址都可用，则优先使用 IPv4 连接。如果无法建立连接，则返回第一个失败连接的错误。
+[host] 可以是 [String](https://www.yuque.com/thyname/dart.core/string) 或 [InternetAddress](https://www.yuque.com/thyname/dart.io/internetaddress)。如果 [host] 是 [String](https://www.yuque.com/thyname/dart.core/string)，[connect] 将执行 [InternetAddress.lookup] 并尝试所有返回的 [InternetAddress](https://www.yuque.com/thyname/dart.io/internetaddress)，直到连接成功。如果 IPv4 和 IPv6 地址都可用，则优先使用 IPv4 连接。如果无法建立连接，则返回第一个失败连接的错误。
 
-[sourceAddress] 参数用于指定进行连接时要绑定的本地地址。[sourceAddress] 可以是 [String] 或 [InternetAddress]。如果传入的是 [String]，则必须是数字 IP 地址。
+[sourceAddress] 参数用于指定进行连接时要绑定的本地地址。[sourceAddress] 可以是 [String](https://www.yuque.com/thyname/dart.core/string) 或 [InternetAddress](https://www.yuque.com/thyname/dart.io/internetaddress)。如果传入的是 [String](https://www.yuque.com/thyname/dart.core/string)，则必须是数字 IP 地址。
 
 [sourcePort] 定义要绑定的本地端口。如果未指定 [sourcePort] 或为零，将选择一个端口。
 
-[timeout] 参数用于指定等待建立连接的最大允许时间。如果 [timeout] 长于系统级超时时间，超时可能会比指定的 [timeout] 更早发生。超时时，将抛出 [SocketException]，并且所有正在进行的到 [host] 的连接尝试都将被取消。
+[timeout] 参数用于指定等待建立连接的最大允许时间。如果 [timeout] 长于系统级超时时间，超时可能会比指定的 [timeout] 更早发生。超时时，将抛出 [SocketException](https://www.yuque.com/thyname/dart.io/socketexception)，并且所有正在进行的到 [host] 的连接尝试都将被取消。
 
 ### startConnect()
 
@@ -779,7 +779,7 @@ Future<RawSocket> connect(dynamic host, int port, {dynamic sourceAddress, int so
 Future<ConnectionTask<RawSocket>> startConnect(dynamic host, int port, {dynamic sourceAddress, int sourcePort = 0})
 ```
 
-类似于 [connect]，但返回一个以 [ConnectionTask] 完成的 [Future]，如果不再需要 [RawSocket]，可以取消该任务。
+类似于 [connect]，但返回一个以 [ConnectionTask](https://www.yuque.com/thyname/dart.io/connectiontask) 完成的 [Future](https://www.yuque.com/thyname/dart.async/future)，如果不再需要 [RawSocket](https://www.yuque.com/thyname/dart.io/rawsocket)，可以取消该任务。
 
 ### available()
 
@@ -807,13 +807,13 @@ SocketMessage? readMessage([int? count])
 
 从套接字中读取包含最多 [count] 字节的消息。
 
-此函数与 [read] 的不同之处在于，它还会返回已发送的任何 [SocketControlMessage]。
+此函数与 [read] 的不同之处在于，它还会返回已发送的任何 [SocketControlMessage](https://www.yuque.com/thyname/dart.io/socketcontrolmessage)。
 
-此函数是非阻塞的，只有在数据可用时才会返回数据。如果立即可读的字节较少，读取的字节数可能小于 [count]。[SocketMessage] 中数据缓冲区的长度表示已读取的字节数。
+此函数是非阻塞的，只有在数据可用时才会返回数据。如果立即可读的字节较少，读取的字节数可能小于 [count]。[SocketMessage](https://www.yuque.com/thyname/dart.io/socketmessage) 中数据缓冲区的长度表示已读取的字节数。
 
 如果没有可用数据，则返回 `null`。
 
-[RawSecureSocket] 不支持此方法。
+[RawSecureSocket](https://www.yuque.com/thyname/dart.io/rawsecuresocket) 不支持此方法。
 
 在 Android、Fuchsia、Windows 上不支持。
 
@@ -841,7 +841,7 @@ int sendMessage(List<SocketControlMessage> controlMessages, List<int> data, [int
 
 从 [offset] 开始，写入 [controlMessages] 和最多 [count] 字节的 [data]。如果未提供 [count]，将写入尽可能多的字节。如果不需要发送控制消息，请改用 [write]。
 
-当发送的控制消息被接收时，它们将被保留，直到下一次调用 [readMessage]，此时所有当前可用的控制消息都将作为返回的 [SocketMessage] 的一部分提供。调用 [read] 只会读取数据字节，不会影响控制消息。
+当发送的控制消息被接收时，它们将被保留，直到下一次调用 [readMessage]，此时所有当前可用的控制消息都将作为返回的 [SocketMessage](https://www.yuque.com/thyname/dart.io/socketmessage) 的一部分提供。调用 [read] 只会读取数据字节，不会影响控制消息。
 
 [count] 必须为正数（大于零）。
 
@@ -849,9 +849,9 @@ int sendMessage(List<SocketControlMessage> controlMessages, List<int> data, [int
 
 此函数是非阻塞的，只有在套接字中有可用的缓冲区空间时才会写入数据。
 
-如果消息无法发送，将抛出 [OSError]。
+如果消息无法发送，将抛出 [OSError](https://www.yuque.com/thyname/dart.io/oserror)。
 
-[RawSecureSocket] 不支持此方法。
+[RawSecureSocket](https://www.yuque.com/thyname/dart.io/rawsecuresocket) 不支持此方法。
 
 在 Android、Fuchsia、Windows 上不支持。
 
@@ -863,7 +863,7 @@ int get port
 
 此套接字使用的端口。
 
-如果套接字已关闭，则抛出 [SocketException]。
+如果套接字已关闭，则抛出 [SocketException](https://www.yuque.com/thyname/dart.io/socketexception)。
 
 ### remotePort
 
@@ -873,7 +873,7 @@ int get remotePort
 
 此套接字连接到的远程端口。
 
-如果套接字已关闭，则抛出 [SocketException]。
+如果套接字已关闭，则抛出 [SocketException](https://www.yuque.com/thyname/dart.io/socketexception)。
 
 ### address
 
@@ -881,9 +881,9 @@ int get remotePort
 InternetAddress get address
 ```
 
-用于连接此套接字的 [InternetAddress]。
+用于连接此套接字的 [InternetAddress](https://www.yuque.com/thyname/dart.io/internetaddress)。
 
-如果套接字已关闭，则抛出 [SocketException]。
+如果套接字已关闭，则抛出 [SocketException](https://www.yuque.com/thyname/dart.io/socketexception)。
 
 ### remoteAddress
 
@@ -891,9 +891,9 @@ InternetAddress get address
 InternetAddress get remoteAddress
 ```
 
-此套接字连接到的远程 [InternetAddress]。
+此套接字连接到的远程 [InternetAddress](https://www.yuque.com/thyname/dart.io/internetaddress)。
 
-如果套接字已关闭，则抛出 [SocketException]。
+如果套接字已关闭，则抛出 [SocketException](https://www.yuque.com/thyname/dart.io/socketexception)。
 
 ### close()
 
@@ -925,9 +925,9 @@ void shutdown(SocketDirection direction)
 bool setOption(SocketOption option, bool enabled)
 ```
 
-自定义 [RawSocket]。
+自定义 [RawSocket](https://www.yuque.com/thyname/dart.io/rawsocket)。
 
-可用选项参见 [SocketOption]。
+可用选项参见 [SocketOption](https://www.yuque.com/thyname/dart.io/socketoption)。
 
 如果选项设置成功，返回 `true`，否则返回 `false`。
 
@@ -937,13 +937,13 @@ bool setOption(SocketOption option, bool enabled)
 Uint8List getRawOption(RawSocketOption option)
 ```
 
-读取有关 [RawSocket] 的底层信息。
+读取有关 [RawSocket](https://www.yuque.com/thyname/dart.io/rawsocket) 的底层信息。
 
-可用选项参见 [RawSocketOption]。
+可用选项参见 [RawSocketOption](https://www.yuque.com/thyname/dart.io/rawsocketoption)。
 
 成功时返回 [RawSocketOption.value]。
 
-失败时抛出 [OSError]。
+失败时抛出 [OSError](https://www.yuque.com/thyname/dart.io/oserror)。
 
 ### setRawOption()
 
@@ -951,11 +951,11 @@ Uint8List getRawOption(RawSocketOption option)
 void setRawOption(RawSocketOption option)
 ```
 
-自定义 [RawSocket]。
+自定义 [RawSocket](https://www.yuque.com/thyname/dart.io/rawsocket)。
 
-可用选项参见 [RawSocketOption]。
+可用选项参见 [RawSocketOption](https://www.yuque.com/thyname/dart.io/rawsocketoption)。
 
-失败时抛出 [OSError]。
+失败时抛出 [OSError](https://www.yuque.com/thyname/dart.io/oserror)。
 
 # Socket
 
@@ -965,9 +965,9 @@ abstract interface class Socket implements Stream<Uint8List>, IOSink {}
 
 两个套接字之间的 TCP 连接。
 
-一个 _套接字连接_ 将一个 _本地_ 套接字连接到一个 _远程_ 套接字。数据以 [Uint8List] 的形式由本地套接字接收，并通过此类的 [Stream] 接口提供，也可以通过此类的 [IOSink] 接口发送到远程套接字。
+一个 _套接字连接_ 将一个 _本地_ 套接字连接到一个 _远程_ 套接字。数据以 [Uint8List](https://www.yuque.com/thyname/dart.typed_data/uint8list) 的形式由本地套接字接收，并通过此类的 [Stream](https://www.yuque.com/thyname/dart.async/stream) 接口提供，也可以通过此类的 [IOSink](https://www.yuque.com/thyname/dart.io/iosink) 接口发送到远程套接字。
 
-除非通过 [Socket.setOption] 设置了 [SocketOption.tcpNoDelay]，否则通过 [IOSink] 接口发送的数据的传输可能会被延迟。
+除非通过 [Socket.setOption] 设置了 [SocketOption.tcpNoDelay]，否则通过 [IOSink](https://www.yuque.com/thyname/dart.io/iosink) 接口发送的数据的传输可能会被延迟。
 
 ### connect()
 
@@ -975,15 +975,15 @@ abstract interface class Socket implements Stream<Uint8List>, IOSink {}
 Future<Socket> connect(dynamic host, int port, {dynamic sourceAddress, int sourcePort = 0, Duration? timeout})
 ```
 
-创建一个到主机和端口的新套接字连接，并返回一个 [Future]，一旦连接完成将以 [Socket] 完成，如果主机查找或连接失败，则以错误完成。
+创建一个到主机和端口的新套接字连接，并返回一个 [Future](https://www.yuque.com/thyname/dart.async/future)，一旦连接完成将以 [Socket](https://www.yuque.com/thyname/dart.io/socket) 完成，如果主机查找或连接失败，则以错误完成。
 
-[host] 可以是 [String] 或 [InternetAddress]。如果 [host] 是 [String]，[connect] 将执行 [InternetAddress.lookup] 并尝试所有返回的 [InternetAddress]，直到连接成功。除非成功建立连接，否则返回第一个失败连接的错误。
+[host] 可以是 [String](https://www.yuque.com/thyname/dart.core/string) 或 [InternetAddress](https://www.yuque.com/thyname/dart.io/internetaddress)。如果 [host] 是 [String](https://www.yuque.com/thyname/dart.core/string)，[connect] 将执行 [InternetAddress.lookup] 并尝试所有返回的 [InternetAddress](https://www.yuque.com/thyname/dart.io/internetaddress)，直到连接成功。除非成功建立连接，否则返回第一个失败连接的错误。
 
-[sourceAddress] 参数用于指定进行连接时要绑定的本地地址。[sourceAddress] 可以是 [String] 或 [InternetAddress]。如果传入的是 [String]，则必须是数字 IP 地址。
+[sourceAddress] 参数用于指定进行连接时要绑定的本地地址。[sourceAddress] 可以是 [String](https://www.yuque.com/thyname/dart.core/string) 或 [InternetAddress](https://www.yuque.com/thyname/dart.io/internetaddress)。如果传入的是 [String](https://www.yuque.com/thyname/dart.core/string)，则必须是数字 IP 地址。
 
 [sourcePort] 定义要绑定的本地端口。如果未指定 [sourcePort] 或为零，将选择一个端口。
 
-[timeout] 参数用于指定等待建立连接的最大允许时间。如果 [timeout] 长于系统级超时时间，超时可能会比指定的 [timeout] 更早发生。超时时，将抛出 [SocketException]，并且所有正在进行的到 [host] 的连接尝试都将被取消。
+[timeout] 参数用于指定等待建立连接的最大允许时间。如果 [timeout] 长于系统级超时时间，超时可能会比指定的 [timeout] 更早发生。超时时，将抛出 [SocketException](https://www.yuque.com/thyname/dart.io/socketexception)，并且所有正在进行的到 [host] 的连接尝试都将被取消。
 
 ### startConnect()
 
@@ -991,7 +991,7 @@ Future<Socket> connect(dynamic host, int port, {dynamic sourceAddress, int sourc
 Future<ConnectionTask<Socket>> startConnect(dynamic host, int port, {dynamic sourceAddress, int sourcePort = 0})
 ```
 
-类似于 [connect]，但返回一个以 [ConnectionTask] 完成的 [Future]，如果不再需要 [Socket]，可以取消该任务。
+类似于 [connect]，但返回一个以 [ConnectionTask](https://www.yuque.com/thyname/dart.io/connectiontask) 完成的 [Future](https://www.yuque.com/thyname/dart.async/future)，如果不再需要 [Socket](https://www.yuque.com/thyname/dart.io/socket)，可以取消该任务。
 
 ### destroy()
 
@@ -1003,7 +1003,7 @@ void destroy()
 
 调用 [destroy] 将在流上产生一个关闭事件，并且不再响应传输给它的数据。
 
-调用（从 [IOSink] 继承的）[close] 只会关闭 [Socket] 的发送功能。
+调用（从 [IOSink](https://www.yuque.com/thyname/dart.io/iosink) 继承的）[close] 只会关闭 [Socket](https://www.yuque.com/thyname/dart.io/socket) 的发送功能。
 
 ### setOption()
 
@@ -1011,13 +1011,13 @@ void destroy()
 bool setOption(SocketOption option, bool enabled)
 ```
 
-自定义 [RawSocket]。
+自定义 [RawSocket](https://www.yuque.com/thyname/dart.io/rawsocket)。
 
-可用选项参见 [SocketOption]。
+可用选项参见 [SocketOption](https://www.yuque.com/thyname/dart.io/socketoption)。
 
 如果选项设置成功，返回 `true`，否则返回 false。
 
-如果套接字已被销毁或升级为安全套接字，则抛出 [SocketException]。
+如果套接字已被销毁或升级为安全套接字，则抛出 [SocketException](https://www.yuque.com/thyname/dart.io/socketexception)。
 
 ### getRawOption()
 
@@ -1025,13 +1025,13 @@ bool setOption(SocketOption option, bool enabled)
 Uint8List getRawOption(RawSocketOption option)
 ```
 
-读取有关 [RawSocket] 的底层信息。
+读取有关 [RawSocket](https://www.yuque.com/thyname/dart.io/rawsocket) 的底层信息。
 
-可用选项参见 [RawSocketOption]。
+可用选项参见 [RawSocketOption](https://www.yuque.com/thyname/dart.io/rawsocketoption)。
 
 成功时返回 [RawSocketOption.value]。
 
-失败时抛出 [OSError]，如果套接字已被销毁或升级为安全套接字，则抛出 [SocketException]。
+失败时抛出 [OSError](https://www.yuque.com/thyname/dart.io/oserror)，如果套接字已被销毁或升级为安全套接字，则抛出 [SocketException](https://www.yuque.com/thyname/dart.io/socketexception)。
 
 ### setRawOption()
 
@@ -1039,11 +1039,11 @@ Uint8List getRawOption(RawSocketOption option)
 void setRawOption(RawSocketOption option)
 ```
 
-自定义 [RawSocket]。
+自定义 [RawSocket](https://www.yuque.com/thyname/dart.io/rawsocket)。
 
-可用选项参见 [RawSocketOption]。
+可用选项参见 [RawSocketOption](https://www.yuque.com/thyname/dart.io/rawsocketoption)。
 
-失败时抛出 [OSError]，如果套接字已被销毁或升级为安全套接字，则抛出 [SocketException]。
+失败时抛出 [OSError](https://www.yuque.com/thyname/dart.io/oserror)，如果套接字已被销毁或升级为安全套接字，则抛出 [SocketException](https://www.yuque.com/thyname/dart.io/socketexception)。
 
 ### addError()
 
@@ -1053,7 +1053,7 @@ void addError(Object error, [StackTrace? stackTrace])
 
 套接字不支持的操作。
 
-此方法继承自 [IOSink]，套接字不支持，**不得**调用。套接字没有报告错误的方式，因此使用 [addError] 传入的任何错误都会丢失。
+此方法继承自 [IOSink](https://www.yuque.com/thyname/dart.io/iosink)，套接字不支持，**不得**调用。套接字没有报告错误的方式，因此使用 [addError] 传入的任何错误都会丢失。
 
 ### port
 
@@ -1063,7 +1063,7 @@ int get port
 
 此套接字使用的端口。
 
-如果套接字已关闭，则抛出 [SocketException]。如果套接字是 Unix 域套接字，端口为 0。
+如果套接字已关闭，则抛出 [SocketException](https://www.yuque.com/thyname/dart.io/socketexception)。如果套接字是 Unix 域套接字，端口为 0。
 
 ### remotePort
 
@@ -1073,7 +1073,7 @@ int get remotePort
 
 此套接字连接到的远程端口。
 
-如果套接字已关闭，则抛出 [SocketException]。如果套接字是 Unix 域套接字，端口为 0。
+如果套接字已关闭，则抛出 [SocketException](https://www.yuque.com/thyname/dart.io/socketexception)。如果套接字是 Unix 域套接字，端口为 0。
 
 ### address
 
@@ -1081,9 +1081,9 @@ int get remotePort
 InternetAddress get address
 ```
 
-用于连接此套接字的 [InternetAddress]。
+用于连接此套接字的 [InternetAddress](https://www.yuque.com/thyname/dart.io/internetaddress)。
 
-如果套接字已关闭，则抛出 [SocketException]。
+如果套接字已关闭，则抛出 [SocketException](https://www.yuque.com/thyname/dart.io/socketexception)。
 
 ### remoteAddress
 
@@ -1091,9 +1091,9 @@ InternetAddress get address
 InternetAddress get remoteAddress
 ```
 
-此套接字连接到的远程 [InternetAddress]。
+此套接字连接到的远程 [InternetAddress](https://www.yuque.com/thyname/dart.io/internetaddress)。
 
-如果套接字已关闭，则抛出 [SocketException]。
+如果套接字已关闭，则抛出 [SocketException](https://www.yuque.com/thyname/dart.io/socketexception)。
 
 ### close()
 
@@ -1113,7 +1113,7 @@ Future get done
 final class Datagram {}
 ```
 
-由 [RawDatagramSocket] 接收的数据包。
+由 [RawDatagramSocket](https://www.yuque.com/thyname/dart.io/rawdatagramsocket) 接收的数据包。
 
 ### data
 
@@ -1151,7 +1151,7 @@ Datagram(Uint8List data, InternetAddress address, int port)
 abstract interface class ResourceHandle {}
 ```
 
-围绕操作系统资源句柄的包装器，以便可以通过 Socket 作为 [SocketMessage] 的一部分传递。
+围绕操作系统资源句柄的包装器，以便可以通过 Socket 作为 [SocketMessage](https://www.yuque.com/thyname/dart.io/socketmessage) 的一部分传递。
 
 ### ResourceHandle.fromFile()
 
@@ -1223,9 +1223,9 @@ RandomAccessFile toFile()
 
 这也可用于接收 stdin 和 stdout 句柄以及读写管道。
 
-由于 [ResourceHandle] 表示单个操作系统资源，在调用此方法之后，不能再调用 [toFile]、[toSocket]、[toRawSocket]、[toRawDatagramSocket]、[toReadPipe]、[toWritePipe] 中的任何一个。
+由于 [ResourceHandle](https://www.yuque.com/thyname/dart.io/resourcehandle) 表示单个操作系统资源，在调用此方法之后，不能再调用 [toFile]、[toSocket]、[toRawSocket]、[toRawDatagramSocket]、[toReadPipe]、[toWritePipe] 中的任何一个。
 
-如果此资源句柄不是文件或 stdio 句柄，则返回的 [RandomAccessFile] 的行为完全未指定。请务必小心，避免错误地使用句柄。
+如果此资源句柄不是文件或 stdio 句柄，则返回的 [RandomAccessFile](https://www.yuque.com/thyname/dart.io/randomaccessfile) 的行为完全未指定。请务必小心，避免错误地使用句柄。
 
 ### toSocket()
 
@@ -1235,9 +1235,9 @@ Socket toSocket()
 
 从资源句柄中提取已打开的套接字。
 
-由于 [ResourceHandle] 表示单个操作系统资源，在调用此方法之后，不能再调用 [toFile]、[toSocket]、[toRawSocket]、[toRawDatagramSocket]、[toReadPipe]、[toWritePipe] 中的任何一个。
+由于 [ResourceHandle](https://www.yuque.com/thyname/dart.io/resourcehandle) 表示单个操作系统资源，在调用此方法之后，不能再调用 [toFile]、[toSocket]、[toRawSocket]、[toRawDatagramSocket]、[toReadPipe]、[toWritePipe] 中的任何一个。
 
-如果此资源句柄不是套接字句柄，则返回的 [Socket] 的行为完全未指定。请务必小心，避免错误地使用句柄。
+如果此资源句柄不是套接字句柄，则返回的 [Socket](https://www.yuque.com/thyname/dart.io/socket) 的行为完全未指定。请务必小心，避免错误地使用句柄。
 
 ### toRawSocket()
 
@@ -1247,9 +1247,9 @@ RawSocket toRawSocket()
 
 从资源句柄中提取已打开的原始套接字。
 
-由于 [ResourceHandle] 表示单个操作系统资源，在调用此方法之后，不能再调用 [toFile]、[toSocket]、[toRawSocket]、[toRawDatagramSocket]、[toReadPipe]、[toWritePipe] 中的任何一个。
+由于 [ResourceHandle](https://www.yuque.com/thyname/dart.io/resourcehandle) 表示单个操作系统资源，在调用此方法之后，不能再调用 [toFile]、[toSocket]、[toRawSocket]、[toRawDatagramSocket]、[toReadPipe]、[toWritePipe] 中的任何一个。
 
-如果此资源句柄不是套接字句柄，则返回的 [RawSocket] 的行为完全未指定。请务必小心，避免错误地使用句柄。
+如果此资源句柄不是套接字句柄，则返回的 [RawSocket](https://www.yuque.com/thyname/dart.io/rawsocket) 的行为完全未指定。请务必小心，避免错误地使用句柄。
 
 ### toRawDatagramSocket()
 
@@ -1259,9 +1259,9 @@ RawDatagramSocket toRawDatagramSocket()
 
 从资源句柄中提取已打开的原始数据报套接字。
 
-由于 [ResourceHandle] 表示单个操作系统资源，在调用此方法之后，不能再调用 [toFile]、[toSocket]、[toRawSocket]、[toRawDatagramSocket]、[toReadPipe]、[toWritePipe] 中的任何一个。
+由于 [ResourceHandle](https://www.yuque.com/thyname/dart.io/resourcehandle) 表示单个操作系统资源，在调用此方法之后，不能再调用 [toFile]、[toSocket]、[toRawSocket]、[toRawDatagramSocket]、[toReadPipe]、[toWritePipe] 中的任何一个。
 
-如果此资源句柄不是数据报套接字句柄，则返回的 [RawDatagramSocket] 的行为完全未指定。请务必小心，避免错误地使用句柄。
+如果此资源句柄不是数据报套接字句柄，则返回的 [RawDatagramSocket](https://www.yuque.com/thyname/dart.io/rawdatagramsocket) 的行为完全未指定。请务必小心，避免错误地使用句柄。
 
 ### toReadPipe()
 
@@ -1271,9 +1271,9 @@ ReadPipe toReadPipe()
 
 从资源句柄中提取读管道。
 
-由于 [ResourceHandle] 表示单个操作系统资源，在调用此方法之后，不能再调用 [toFile]、[toSocket]、[toRawSocket]、[toRawDatagramSocket]、[toReadPipe]、[toWritePipe] 中的任何一个。
+由于 [ResourceHandle](https://www.yuque.com/thyname/dart.io/resourcehandle) 表示单个操作系统资源，在调用此方法之后，不能再调用 [toFile]、[toSocket]、[toRawSocket]、[toRawDatagramSocket]、[toReadPipe]、[toWritePipe] 中的任何一个。
 
-如果此资源句柄不是可读管道，则返回的 [ReadPipe] 的行为完全未指定。请务必小心，避免错误地使用句柄。
+如果此资源句柄不是可读管道，则返回的 [ReadPipe](https://www.yuque.com/thyname/dart.io/readpipe) 的行为完全未指定。请务必小心，避免错误地使用句柄。
 
 ### toWritePipe()
 
@@ -1283,9 +1283,9 @@ WritePipe toWritePipe()
 
 从资源句柄中提取写管道。
 
-由于 [ResourceHandle] 表示单个操作系统资源，在调用此方法之后，不能再调用 [toFile]、[toSocket]、[toRawSocket]、[toRawDatagramSocket]、[toReadPipe]、[toWritePipe] 中的任何一个。
+由于 [ResourceHandle](https://www.yuque.com/thyname/dart.io/resourcehandle) 表示单个操作系统资源，在调用此方法之后，不能再调用 [toFile]、[toSocket]、[toRawSocket]、[toRawDatagramSocket]、[toReadPipe]、[toWritePipe] 中的任何一个。
 
-如果此资源句柄不是可写管道，则返回的 [ReadPipe] 的行为完全未指定。请务必小心，避免错误地使用句柄。
+如果此资源句柄不是可写管道，则返回的 [ReadPipe](https://www.yuque.com/thyname/dart.io/readpipe) 的行为完全未指定。请务必小心，避免错误地使用句柄。
 
 # SocketControlMessage
 
@@ -1293,9 +1293,9 @@ WritePipe toWritePipe()
 abstract interface class SocketControlMessage {}
 ```
 
-通过调用 [RawSocket.readMessage] 接收的 [SocketMessage] 中的控制消息部分。
+通过调用 [RawSocket.readMessage] 接收的 [SocketMessage](https://www.yuque.com/thyname/dart.io/socketmessage) 中的控制消息部分。
 
-控制消息可以携带不同的信息，包括 [ResourceHandle]。如果此消息中包含 [ResourceHandle]，可以通过 [extractHandles] 提取。
+控制消息可以携带不同的信息，包括 [ResourceHandle](https://www.yuque.com/thyname/dart.io/resourcehandle)。如果此消息中包含 [ResourceHandle](https://www.yuque.com/thyname/dart.io/resourcehandle)，可以通过 [extractHandles] 提取。
 
 ### SocketControlMessage.fromHandles()
 
@@ -1327,7 +1327,7 @@ int get level
 
 用于确定控制消息种类的平台特定值。
 
-与 [type] 一起，这两个整数以平台特定的方式标识控制消息的种类。例如，在 Linux 上，这些值的某些组合表示该控制消息携带 [ResourceHandle]。
+与 [type] 一起，这两个整数以平台特定的方式标识控制消息的种类。例如，在 Linux 上，这些值的某些组合表示该控制消息携带 [ResourceHandle](https://www.yuque.com/thyname/dart.io/resourcehandle)。
 
 ### type
 
@@ -1337,7 +1337,7 @@ int get type
 
 用于确定控制消息种类的平台特定值。
 
-与 [level] 一起，这两个整数以平台特定的方式标识控制消息的种类。例如，在 Linux 上，这些值的某些组合表示该控制消息携带 [ResourceHandle]。
+与 [level] 一起，这两个整数以平台特定的方式标识控制消息的种类。例如，在 Linux 上，这些值的某些组合表示该控制消息携带 [ResourceHandle](https://www.yuque.com/thyname/dart.io/resourcehandle)。
 
 ### data
 
@@ -1355,7 +1355,7 @@ Uint8List get data
 final class SocketMessage {}
 ```
 
-由 [RawDatagramSocket] 接收的套接字消息。
+由 [RawDatagramSocket](https://www.yuque.com/thyname/dart.io/rawdatagramsocket) 接收的套接字消息。
 
 套接字消息由 [data] 字节和 [controlMessages] 组成。
 
@@ -1391,7 +1391,7 @@ abstract interface class RawDatagramSocket extends Stream<RawSocketEvent> {}
 
 UDP 套接字的无缓冲接口。
 
-原始数据报套接字以底层操作系统接收数据的相同分块方式，传递 [RawSocketEvent] 的 [Stream]。
+原始数据报套接字以底层操作系统接收数据的相同分块方式，传递 [RawSocketEvent](https://www.yuque.com/thyname/dart.io/rawsocketevent) 的 [Stream](https://www.yuque.com/thyname/dart.async/stream)。
 
 请注意，UDP 套接字无法被远程对等方关闭，因此永远不会收到 [RawSocketEvent.readClosed] 事件。
 
@@ -1439,7 +1439,7 @@ void main() async {
 bool readEventsEnabled
 ```
 
-[RawDatagramSocket] 是否应监听 [RawSocketEvent.read] 事件。
+[RawDatagramSocket](https://www.yuque.com/thyname/dart.io/rawdatagramsocket) 是否应监听 [RawSocketEvent.read] 事件。
 
 默认值为 `true`。
 
@@ -1449,7 +1449,7 @@ bool readEventsEnabled
 bool writeEventsEnabled
 ```
 
-[RawDatagramSocket] 是否应监听 [RawSocketEvent.write] 事件。
+[RawDatagramSocket](https://www.yuque.com/thyname/dart.io/rawdatagramsocket) 是否应监听 [RawSocketEvent.write] 事件。
 
 默认值为 `true`。这是一次性监听器，必须再次将 [writeEventsEnabled] 设置为 true 才能接收另一个写入事件。
 
@@ -1507,11 +1507,11 @@ Future<RawDatagramSocket> bind(dynamic host, int port, {bool reuseAddress = true
 
 将套接字绑定到给定的 [host] 和 [port]。
 
-当套接字绑定完成并开始监听 [port] 时，返回的 Future 将以绑定套接字的 [RawDatagramSocket] 完成。
+当套接字绑定完成并开始监听 [port] 时，返回的 Future 将以绑定套接字的 [RawDatagramSocket](https://www.yuque.com/thyname/dart.io/rawdatagramsocket) 完成。
 
-[host] 可以是 [String] 或 [InternetAddress]。如果 [host] 是 [String]，[bind] 将执行 [InternetAddress.lookup] 并使用列表中的第一个值。要监听环回接口（只允许来自本地主机的传入连接），请使用 [InternetAddress.loopbackIPv4] 或 [InternetAddress.loopbackIPv6]。要允许来自任何网络的传入连接，请使用 [InternetAddress.anyIPv4] 或 [InternetAddress.anyIPv6] 以绑定到所有接口，或使用特定接口的 IP 地址。
+[host] 可以是 [String](https://www.yuque.com/thyname/dart.core/string) 或 [InternetAddress](https://www.yuque.com/thyname/dart.io/internetaddress)。如果 [host] 是 [String](https://www.yuque.com/thyname/dart.core/string)，[bind] 将执行 [InternetAddress.lookup] 并使用列表中的第一个值。要监听环回接口（只允许来自本地主机的传入连接），请使用 [InternetAddress.loopbackIPv4] 或 [InternetAddress.loopbackIPv6]。要允许来自任何网络的传入连接，请使用 [InternetAddress.anyIPv4] 或 [InternetAddress.anyIPv6] 以绑定到所有接口，或使用特定接口的 IP 地址。
 
-[reuseAddress] 应为所有绑定到同一地址的监听器设置。否则，将失败并抛出 [SocketException]。
+[reuseAddress] 应为所有绑定到同一地址的监听器设置。否则，将失败并抛出 [SocketException](https://www.yuque.com/thyname/dart.io/socketexception)。
 
 [reusePort] 指定端口是否可以重用。
 
@@ -1553,7 +1553,7 @@ int send(List<int> buffer, InternetAddress address, int port)
 
 返回值为 `0` 表示发送数据报将阻塞，可以再次尝试 [send] 调用。
 
-返回值为 [buffer] 的大小表示已向操作系统发出传输数据报的请求。这并不表示操作系统已成功发送数据报。如果本地发送数据报失败，将向 [Stream] 添加一个错误事件。如果发生网络或远程故障，则不会报告。
+返回值为 [buffer] 的大小表示已向操作系统发出传输数据报的请求。这并不表示操作系统已成功发送数据报。如果本地发送数据报失败，将向 [Stream](https://www.yuque.com/thyname/dart.async/stream) 添加一个错误事件。如果发生网络或远程故障，则不会报告。
 
 IPv4 UDP 数据报的最大大小为 65535 字节（包括数据和头部），但由于操作系统限制和网络的最大传输单元（MTU），实际最大大小可能会低得多。
 
@@ -1597,13 +1597,13 @@ void leaveMulticast(InternetAddress group, [NetworkInterface? interface])
 Uint8List getRawOption(RawSocketOption option)
 ```
 
-读取有关 [RawSocket] 的底层信息。
+读取有关 [RawSocket](https://www.yuque.com/thyname/dart.io/rawsocket) 的底层信息。
 
-可用选项参见 [RawSocketOption]。
+可用选项参见 [RawSocketOption](https://www.yuque.com/thyname/dart.io/rawsocketoption)。
 
 成功时返回 [RawSocketOption.value]。
 
-失败时抛出 [OSError]。
+失败时抛出 [OSError](https://www.yuque.com/thyname/dart.io/oserror)。
 
 ### setRawOption()
 
@@ -1611,11 +1611,11 @@ Uint8List getRawOption(RawSocketOption option)
 void setRawOption(RawSocketOption option)
 ```
 
-自定义 [RawSocket]。
+自定义 [RawSocket](https://www.yuque.com/thyname/dart.io/rawsocket)。
 
-可用选项参见 [RawSocketOption]。
+可用选项参见 [RawSocketOption](https://www.yuque.com/thyname/dart.io/rawsocketoption)。
 
-失败时抛出 [OSError]。
+失败时抛出 [OSError](https://www.yuque.com/thyname/dart.io/oserror)。
 
 # SocketException
 
@@ -1669,7 +1669,7 @@ int? port
 SocketException(String message, {OSError? osError, InternetAddress? address, int? port})
 ```
 
-使用提供的值创建一个 [SocketException]。
+使用提供的值创建一个 [SocketException](https://www.yuque.com/thyname/dart.io/socketexception)。
 
 ### SocketException.closed()
 

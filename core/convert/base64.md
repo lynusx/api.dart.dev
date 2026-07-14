@@ -4,7 +4,7 @@
 Base64Codec const base64
 ```
 
-一个 [base64](https://tools.ietf.org/html/rfc4648) 编码器和解码器。
+一个 [base64](https://www.yuque.com/thyname/dart.convert/base64) 编码器和解码器。
 
 它使用默认的 base64 字母表进行编码，使用 base64 和 base64url 两种字母表进行解码，不允许无效字符，并且要求填充（padding）。
 
@@ -16,7 +16,7 @@ var encoded = base64.encode([0x62, 0x6c, 0xc3, 0xa5, 0x62, 0xc3, 0xa6,
 var decoded = base64.decode("YmzDpWLDpnJncsO4ZAo=");
 ```
 
-如果局部变量遮蔽了 [base64] 常量，可以改用顶层函数 [base64Encode] 和 [base64Decode]。
+如果局部变量遮蔽了 [base64](https://www.yuque.com/thyname/dart.convert/base64) 常量，可以改用顶层函数 [base64Encode](https://www.yuque.com/thyname/dart.convert/base64encode) 和 [base64Decode](https://www.yuque.com/thyname/dart.convert/base64decode)。
 
 ---
 
@@ -46,9 +46,9 @@ var decoded = base64Url.decode("YmzDpWLDpnJncsO4ZAo=");
 String base64Encode(List<int> bytes)
 ```
 
-使用 [base64](https://tools.ietf.org/html/rfc4648) 编码方式对 [bytes] 进行编码。
+使用 [base64](https://www.yuque.com/thyname/dart.convert/base64) 编码方式对 [bytes] 进行编码。
 
-是 `base64.encode(bytes)` 的简写形式。适用于局部变量遮蔽了全局 [base64] 常量的情况。
+是 `base64.encode(bytes)` 的简写形式。适用于局部变量遮蔽了全局 [base64](https://www.yuque.com/thyname/dart.convert/base64) 常量的情况。
 
 ---
 
@@ -70,9 +70,9 @@ String base64UrlEncode(List<int> bytes)
 Uint8List base64Decode(String source)
 ```
 
-解码 [base64](https://tools.ietf.org/html/rfc4648) 或 [base64url](https://tools.ietf.org/html/rfc4648) 编码的字节。
+解码 [base64](https://www.yuque.com/thyname/dart.convert/base64) 或 [base64url](https://tools.ietf.org/html/rfc4648) 编码的字节。
 
-是 `base64.decode(bytes)` 的简写形式。适用于局部变量遮蔽了全局 [base64] 常量的情况。
+是 `base64.decode(bytes)` 的简写形式。适用于局部变量遮蔽了全局 [base64](https://www.yuque.com/thyname/dart.convert/base64) 常量的情况。
 
 ---
 
@@ -82,9 +82,9 @@ Uint8List base64Decode(String source)
 final class Base64Codec extends Codec<List<int>, String> {}
 ```
 
-一个 [base64](https://tools.ietf.org/html/rfc4648) 编码器和解码器。
+一个 [base64](https://www.yuque.com/thyname/dart.convert/base64) 编码器和解码器。
 
-[Base64Codec] 支持将字节以 base64 方式编码为 ASCII 字符串，并将有效的编码结果解码回字节。
+[Base64Codec](https://www.yuque.com/thyname/dart.convert/base64codec) 支持将字节以 base64 方式编码为 ASCII 字符串，并将有效的编码结果解码回字节。
 
 此实现仅处理最简单的 RFC 4648 base64 及 base64url 编码。解码时不允许出现无效字符，并且要求（同时也会生成）填充，以使输入始终为 4 个字符的整数倍。
 
@@ -136,7 +136,7 @@ Uint8List decode(String encoded)
 
 输入将按照 `decoder.convert` 的方式进行解码。
 
-返回的 [Uint8List] 恰好包含解码后的字节，因此 [Uint8List.length] 正是解码后字节的数量。[Uint8List.buffer] 可能比解码后的字节更大。
+返回的 [Uint8List](https://www.yuque.com/thyname/dart.typed_data/uint8list) 恰好包含解码后的字节，因此 [Uint8List.length] 正是解码后字节的数量。[Uint8List.buffer] 可能比解码后的字节更大。
 
 ### normalize()
 
@@ -228,7 +228,7 @@ base64 编码数据的解码器。
 
 要求编码内容具有正确的填充。
 
-如果输入不是有效的 base64 数据，将抛出 [FormatException]。
+如果输入不是有效的 base64 数据，将抛出 [FormatException](https://www.yuque.com/thyname/dart.core/formatexception)。
 
 示例：
 
@@ -263,7 +263,7 @@ Uint8List convert(String input, [int start = 0, int? end])
 
 如果省略 [start]，默认为 [input] 的起始位置。如果省略 [end]，默认为 [input] 的结束位置。
 
-返回的 [Uint8List] 恰好包含解码后的字节，因此 [Uint8List.length] 正是解码后字节的数量。[Uint8List.buffer] 可能比解码后的字节更大。
+返回的 [Uint8List](https://www.yuque.com/thyname/dart.typed_data/uint8list) 恰好包含解码后的字节，因此 [Uint8List.length] 正是解码后字节的数量。[Uint8List.buffer] 可能比解码后的字节更大。
 
 ### startChunkedConversion()
 

@@ -6,17 +6,17 @@ abstract interface class Directory implements FileSystemEntity {}
 
 对文件系统上一个目录（或称*文件夹*）的引用。
 
-[Directory] 是一个持有 [path] 的对象，可对其执行各种操作。目录的路径既可以是[绝对路径][absolute]，也可以是相对路径。由于它是一个 [FileSystemEntity]，因此可以访问其[父目录][parent]。
+[Directory](https://www.yuque.com/thyname/dart.io/directory) 是一个持有 [path] 的对象，可对其执行各种操作。目录的路径既可以是[绝对路径][absolute]，也可以是相对路径。由于它是一个 [FileSystemEntity](https://www.yuque.com/thyname/dart.io/filesystementity)，因此可以访问其[父目录][parent]。
 
-[Directory] 还提供了对系统临时文件目录（[systemTemp]）的静态访问，以及访问和修改[当前目录][current]的能力。
+[Directory](https://www.yuque.com/thyname/dart.io/directory) 还提供了对系统临时文件目录（[systemTemp]）的静态访问，以及访问和修改[当前目录][current]的能力。
 
-创建一个新的 [Directory] 以访问指定路径的目录：
+创建一个新的 [Directory](https://www.yuque.com/thyname/dart.io/directory) 以访问指定路径的目录：
 
 ```dart
 var myDir = Directory('myDir');
 ```
 
-[Directory] 的大多数实例方法都同时存在同步和异步两种版本，例如 [create] 和 [createSync]。除非有特殊原因需要使用同步版本，否则应优先使用异步版本，以避免阻塞程序。
+[Directory](https://www.yuque.com/thyname/dart.io/directory) 的大多数实例方法都同时存在同步和异步两种版本，例如 [create] 和 [createSync]。除非有特殊原因需要使用同步版本，否则应优先使用异步版本，以避免阻塞程序。
 
 ## 创建目录
 
@@ -34,7 +34,7 @@ void main() async {
 
 ## 列出目录的条目
 
-使用 [list] 或 [listSync] 方法获取某个目录中包含的文件与目录。将 `recursive` 设为 true 可递归列出所有子目录。将 `followLinks` 设为 true 可跟随符号链接。[list] 方法返回一个 [FileSystemEntity] 对象的 [Stream]。监听该流即可在找到每个对象时进行访问：
+使用 [list] 或 [listSync] 方法获取某个目录中包含的文件与目录。将 `recursive` 设为 true 可递归列出所有子目录。将 `followLinks` 设为 true 可跟随符号链接。[list] 方法返回一个 [FileSystemEntity](https://www.yuque.com/thyname/dart.io/filesystementity) 对象的 [Stream](https://www.yuque.com/thyname/dart.async/stream)。监听该流即可在找到每个对象时进行访问：
 
 ```dart
 import 'dart:io';
@@ -54,9 +54,9 @@ void main() async {
 
 ## 异步方法的使用
 
-I/O 操作在等待完成期间可能会阻塞程序一段时间。为避免这种情况，所有涉及 I/O 的方法都提供了返回 [Future] 的异步版本。该 future 会在 I/O 操作完成时完成。在 I/O 操作进行期间，Dart 程序不会被阻塞，可以执行其他操作。
+I/O 操作在等待完成期间可能会阻塞程序一段时间。为避免这种情况，所有涉及 I/O 的方法都提供了返回 [Future](https://www.yuque.com/thyname/dart.async/future) 的异步版本。该 future 会在 I/O 操作完成时完成。在 I/O 操作进行期间，Dart 程序不会被阻塞，可以执行其他操作。
 
-例如，用于判断目录是否存在的 [exists] 方法，会通过 [Future] 异步返回一个布尔值。
+例如，用于判断目录是否存在的 [exists] 方法，会通过 [Future](https://www.yuque.com/thyname/dart.async/future) 异步返回一个布尔值。
 
 ```dart
 import 'dart:io';
@@ -90,7 +90,7 @@ String get path
 Directory(String path)
 ```
 
-创建一个 [Directory] 对象。
+创建一个 [Directory](https://www.yuque.com/thyname/dart.io/directory) 对象。
 
 若 [path] 为相对路径，使用时将相对于当前工作目录（参见 [Directory.current]）进行解析。
 
@@ -108,9 +108,9 @@ Directory.fromRawPath(Uint8List path)
 Directory.fromUri(Uri uri)
 ```
 
-通过 URI 创建一个 [Directory]。
+通过 URI 创建一个 [Directory](https://www.yuque.com/thyname/dart.io/directory)。
 
-若 [uri] 无法引用一个目录，则会抛出 [UnsupportedError]。
+若 [uri] 无法引用一个目录，则会抛出 [UnsupportedError](https://www.yuque.com/thyname/dart.core/unsupportederror)。
 
 ### current
 
@@ -126,7 +126,7 @@ Directory get current
 Uri get uri
 ```
 
-表示该目录位置的 [Uri]。
+表示该目录位置的 [Uri](https://www.yuque.com/thyname/dart.core/uri)。
 
 若该实体的 [path] 为绝对路径，则该 URI 的 scheme 始终为 "file"；否则 scheme 为空且该 URI 为相对路径。该 URI 的路径始终以斜杠（'/'）结尾。
 
@@ -138,7 +138,7 @@ void set current(dynamic path)
 
 设置 Dart 进程的当前工作目录。
 
-此设置会影响所有正在运行的 isolate。新值可以是一个 [Directory] 或一个字符串。
+此设置会影响所有正在运行的 isolate。新值可以是一个 [Directory](https://www.yuque.com/thyname/dart.io/directory) 或一个字符串。
 
 新值会原样传递给操作系统的系统调用，因此若传入的是相对路径，将由操作系统进行解析。
 
@@ -224,11 +224,11 @@ Future<Directory> rename(String newPath)
 
 重命名此目录。
 
-返回一个 `Future<Directory>`，其在完成时携带重命名后目录对应的 [Directory]。
+返回一个 `Future<Directory>`，其在完成时携带重命名后目录对应的 [Directory](https://www.yuque.com/thyname/dart.io/directory)。
 
-若 [newPath] 指向一个已存在的目录，其行为因平台而异。在所有平台上，若该已存在的目录非空，future 都将以 [FileSystemException] 完成。在 POSIX 系统上，若 [newPath] 指向一个已存在的空目录，该目录会先被删除，然后再执行本目录的重命名。
+若 [newPath] 指向一个已存在的目录，其行为因平台而异。在所有平台上，若该已存在的目录非空，future 都将以 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception) 完成。在 POSIX 系统上，若 [newPath] 指向一个已存在的空目录，该目录会先被删除，然后再执行本目录的重命名。
 
-若 [newPath] 指向一个已存在的文件或链接，操作将失败，future 将以 [FileSystemException] 完成。
+若 [newPath] 指向一个已存在的文件或链接，操作将失败，future 将以 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception) 完成。
 
 ### renameSync()
 
@@ -238,11 +238,11 @@ Directory renameSync(String newPath)
 
 同步地重命名此目录。
 
-返回重命名后目录对应的 [Directory]。
+返回重命名后目录对应的 [Directory](https://www.yuque.com/thyname/dart.io/directory)。
 
-若 [newPath] 指向一个已存在的目录，其行为因平台而异。在所有平台上，若该已存在的目录非空，都将抛出 [FileSystemException]。在 POSIX 系统上，若 [newPath] 指向一个已存在的空目录，该目录会先被删除，然后再执行本目录的重命名。
+若 [newPath] 指向一个已存在的目录，其行为因平台而异。在所有平台上，若该已存在的目录非空，都将抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。在 POSIX 系统上，若 [newPath] 指向一个已存在的空目录，该目录会先被删除，然后再执行本目录的重命名。
 
-若 [newPath] 指向一个已存在的文件或链接，操作将失败，并抛出 [FileSystemException]。
+若 [newPath] 指向一个已存在的文件或链接，操作将失败，并抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### delete()
 
@@ -250,17 +250,17 @@ Directory renameSync(String newPath)
 Future<FileSystemEntity> delete({bool recursive = false})
 ```
 
-删除此 [Directory]。
+删除此 [Directory](https://www.yuque.com/thyname/dart.io/directory)。
 
 若 [recursive] 为 `false`：
 
-- 若 [path] 对应一个空目录，则删除该目录。若 [path] 对应一个链接，且该链接解析指向一个目录，则会删除 [path] 处的链接。其他所有情况下，[delete] 都将以 [FileSystemException] 完成。
+- 若 [path] 对应一个空目录，则删除该目录。若 [path] 对应一个链接，且该链接解析指向一个目录，则会删除 [path] 处的链接。其他所有情况下，[delete] 都将以 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception) 完成。
 
 若 [recursive] 为 `true`：
 
-- [path] 处的 [FileSystemEntity] 将被删除，无论其类型如何。若 [path] 对应一个文件或链接，则删除该文件或链接。若 [path] 对应一个目录，则该目录及其下所有子目录与文件都将被删除。递归删除时不会跟随链接，只会删除链接本身，而不会删除其目标。这一行为使得 [delete] 可用于无条件删除任意文件系统对象。
+- [path] 处的 [FileSystemEntity](https://www.yuque.com/thyname/dart.io/filesystementity) 将被删除，无论其类型如何。若 [path] 对应一个文件或链接，则删除该文件或链接。若 [path] 对应一个目录，则该目录及其下所有子目录与文件都将被删除。递归删除时不会跟随链接，只会删除链接本身，而不会删除其目标。这一行为使得 [delete] 可用于无条件删除任意文件系统对象。
 
-若无法删除此 [Directory]，则 [delete] 将以 [FileSystemException] 完成。
+若无法删除此 [Directory](https://www.yuque.com/thyname/dart.io/directory)，则 [delete] 将以 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception) 完成。
 
 ### deleteSync()
 
@@ -268,17 +268,17 @@ Future<FileSystemEntity> delete({bool recursive = false})
 void deleteSync({bool recursive = false})
 ```
 
-同步地删除此 [Directory]。
+同步地删除此 [Directory](https://www.yuque.com/thyname/dart.io/directory)。
 
 若 [recursive] 为 `false`：
 
-- 若 [path] 对应一个空目录，则删除该目录。若 [path] 对应一个链接，且该链接解析指向一个目录，则会删除 [path] 处的链接。其他所有情况下，[delete] 都将抛出 [FileSystemException]。
+- 若 [path] 对应一个空目录，则删除该目录。若 [path] 对应一个链接，且该链接解析指向一个目录，则会删除 [path] 处的链接。其他所有情况下，[delete] 都将抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 若 [recursive] 为 `true`：
 
-- [path] 处的 [FileSystemEntity] 将被删除，无论其类型如何。若 [path] 对应一个文件或链接，则删除该文件或链接。若 [path] 对应一个目录，则该目录及其下所有子目录与文件都将被删除。递归删除时不会跟随链接，只会删除链接本身，而不会删除其目标。这一行为使得 [delete] 可用于无条件删除任意文件系统对象。
+- [path] 处的 [FileSystemEntity](https://www.yuque.com/thyname/dart.io/filesystementity) 将被删除，无论其类型如何。若 [path] 对应一个文件或链接，则删除该文件或链接。若 [path] 对应一个目录，则该目录及其下所有子目录与文件都将被删除。递归删除时不会跟随链接，只会删除链接本身，而不会删除其目标。这一行为使得 [delete] 可用于无条件删除任意文件系统对象。
 
-若无法删除此 [Directory]，则 [delete] 将抛出 [FileSystemException]。
+若无法删除此 [Directory](https://www.yuque.com/thyname/dart.io/directory)，则 [delete] 将抛出 [FileSystemException](https://www.yuque.com/thyname/dart.io/filesystemexception)。
 
 ### absolute
 
@@ -286,7 +286,7 @@ void deleteSync({bool recursive = false})
 Directory get absolute
 ```
 
-一个路径为此 [Directory] 绝对路径的 [Directory]。
+一个路径为此 [Directory](https://www.yuque.com/thyname/dart.io/directory) 绝对路径的 [Directory](https://www.yuque.com/thyname/dart.io/directory)。
 
 绝对路径的计算方式为：对相对路径添加当前工作目录作为前缀，或原样返回已是绝对路径的路径。
 
@@ -296,19 +296,19 @@ Directory get absolute
 Stream<FileSystemEntity> list({bool recursive = false, bool followLinks = true})
 ```
 
-列出此 [Directory] 的子目录与文件。
+列出此 [Directory](https://www.yuque.com/thyname/dart.io/directory) 的子目录与文件。
 
 可选择递归进入子目录。
 
-若 [followLinks] 为 `false`，则任何找到的符号链接都将作为 [Link] 对象报告，而不是作为目录或文件报告，且不会递归进入这些链接。
+若 [followLinks] 为 `false`，则任何找到的符号链接都将作为 [Link](https://www.yuque.com/thyname/dart.io/link) 对象报告，而不是作为目录或文件报告，且不会递归进入这些链接。
 
 若 [followLinks] 为 `true`，则有效的链接会根据其指向的内容报告为目录或文件，若 [recursive] 为 `true`，指向目录的链接也会被递归进入。
 
-失效的链接会作为 [Link] 对象报告。
+失效的链接会作为 [Link](https://www.yuque.com/thyname/dart.io/link) 对象报告。
 
-若符号链接在文件系统中形成了循环，则递归列出时不会在同一次递归遍历中两次跟随同一链接，但在第二次遇到该链接时会将其作为 [Link] 报告。
+若符号链接在文件系统中形成了循环，则递归列出时不会在同一次递归遍历中两次跟随同一链接，但在第二次遇到该链接时会将其作为 [Link](https://www.yuque.com/thyname/dart.io/link) 报告。
 
-结果是一个由目录、文件与链接对应的 [FileSystemEntity] 对象组成的 [Stream]。该 [Stream] 中条目的顺序是任意的，且不包含特殊条目 `'.'` 和 `'..'`。
+结果是一个由目录、文件与链接对应的 [FileSystemEntity](https://www.yuque.com/thyname/dart.io/filesystementity) 对象组成的 [Stream](https://www.yuque.com/thyname/dart.async/stream)。该 [Stream](https://www.yuque.com/thyname/dart.async/stream) 中条目的顺序是任意的，且不包含特殊条目 `'.'` 和 `'..'`。
 
 ### listSync()
 
@@ -316,17 +316,17 @@ Stream<FileSystemEntity> list({bool recursive = false, bool followLinks = true})
 List<FileSystemEntity> listSync({bool recursive = false, bool followLinks = true})
 ```
 
-列出此 [Directory] 的子目录与文件。可选择递归进入子目录。
+列出此 [Directory](https://www.yuque.com/thyname/dart.io/directory) 的子目录与文件。可选择递归进入子目录。
 
-若 [followLinks] 为 `false`，则任何找到的符号链接都将作为 [Link] 对象报告，而不是作为目录或文件报告，且不会递归进入这些链接。
+若 [followLinks] 为 `false`，则任何找到的符号链接都将作为 [Link](https://www.yuque.com/thyname/dart.io/link) 对象报告，而不是作为目录或文件报告，且不会递归进入这些链接。
 
 若 [followLinks] 为 `true`，则有效的链接会根据其指向的内容报告为目录或文件，若 [recursive] 为 `true`，指向目录的链接也会被递归进入。
 
-失效的链接会作为 [Link] 对象报告。
+失效的链接会作为 [Link](https://www.yuque.com/thyname/dart.io/link) 对象报告。
 
-若链接在文件系统中形成了循环，则递归列出时不会在同一次递归遍历中两次跟随同一链接，但在第二次遇到该链接时会将其作为 [Link] 报告。
+若链接在文件系统中形成了循环，则递归列出时不会在同一次递归遍历中两次跟随同一链接，但在第二次遇到该链接时会将其作为 [Link](https://www.yuque.com/thyname/dart.io/link) 报告。
 
-返回一个由目录、文件与链接对应的 [FileSystemEntity] 对象组成的 [List]。该 [List] 中条目的顺序是任意的，且不包含特殊条目 `'.'` 和 `'..'`。
+返回一个由目录、文件与链接对应的 [FileSystemEntity](https://www.yuque.com/thyname/dart.io/filesystementity) 对象组成的 [List](https://www.yuque.com/thyname/dart.core/list)。该 [List](https://www.yuque.com/thyname/dart.core/list) 中条目的顺序是任意的，且不包含特殊条目 `'.'` 和 `'..'`。
 
 ### toString()
 
@@ -334,4 +334,4 @@ List<FileSystemEntity> listSync({bool recursive = false, bool followLinks = true
 String toString()
 ```
 
-返回此 [Directory] 的可读字符串表示形式。
+返回此 [Directory](https://www.yuque.com/thyname/dart.io/directory) 的可读字符串表示形式。

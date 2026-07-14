@@ -53,9 +53,9 @@ print(stopwatch.elapsedMilliseconds); // 0
 Stopwatch()
 ```
 
-创建一个处于停止状态、经过计数为零的 [Stopwatch]。
+创建一个处于停止状态、经过计数为零的 [Stopwatch](https://www.yuque.com/thyname/dart.core/stopwatch)。
 
-以下示例展示了如何在分配后立即启动 [Stopwatch]。
+以下示例展示了如何在分配后立即启动 [Stopwatch](https://www.yuque.com/thyname/dart.core/stopwatch)。
 
 ```dart
 final stopwatch = Stopwatch()..start();
@@ -77,11 +77,11 @@ int get frequency
 int get elapsedTicks
 ```
 
-自调用 [start] 以来，[Stopwatch] 运行期间经过的时钟滴答数。
+自调用 [start] 以来，[Stopwatch](https://www.yuque.com/thyname/dart.core/stopwatch) 运行期间经过的时钟滴答数。
 
 即调用 [start] 和调用 [stop] 之间经过的时钟滴答数。
 
-如果 [Stopwatch] 从未启动过，则为 0。
+如果 [Stopwatch](https://www.yuque.com/thyname/dart.core/stopwatch) 从未启动过，则为 0。
 
 经过的时钟滴答数每秒增加 [frequency]。
 
@@ -91,7 +91,7 @@ int get elapsedTicks
 Duration get elapsed
 ```
 
-将 [elapsedTicks] 计数器转换为 [Duration]。
+将 [elapsedTicks] 计数器转换为 [Duration](https://www.yuque.com/thyname/dart.core/duration)。
 
 ### elapsedMicroseconds
 
@@ -115,7 +115,7 @@ int get elapsedMilliseconds
 bool get isRunning
 ```
 
-[Stopwatch] 当前是否正在运行。
+[Stopwatch](https://www.yuque.com/thyname/dart.core/stopwatch) 当前是否正在运行。
 
 ## 方法
 
@@ -125,11 +125,11 @@ bool get isRunning
 void start()
 ```
 
-启动 [Stopwatch]。
+启动 [Stopwatch](https://www.yuque.com/thyname/dart.core/stopwatch)。
 
-[elapsed] 计数单调递增。如果 [Stopwatch] 已停止，再次调用 start 会重新启动它，但不会重置 [elapsed] 计数。
+[elapsed] 计数单调递增。如果 [Stopwatch](https://www.yuque.com/thyname/dart.core/stopwatch) 已停止，再次调用 start 会重新启动它，但不会重置 [elapsed] 计数。
 
-如果 [Stopwatch] 当前正在运行，则调用 start 不会产生任何效果。
+如果 [Stopwatch](https://www.yuque.com/thyname/dart.core/stopwatch) 当前正在运行，则调用 start 不会产生任何效果。
 
 ### stop()
 
@@ -137,9 +137,9 @@ void start()
 void stop()
 ```
 
-停止 [Stopwatch]。
+停止 [Stopwatch](https://www.yuque.com/thyname/dart.core/stopwatch)。
 
-调用此方法后，[elapsedTicks] 计数将停止增加。如果 [Stopwatch] 当前未在运行，则调用此方法不会产生任何效果。
+调用此方法后，[elapsedTicks] 计数将停止增加。如果 [Stopwatch](https://www.yuque.com/thyname/dart.core/stopwatch) 当前未在运行，则调用此方法不会产生任何效果。
 
 ### reset()
 
@@ -149,4 +149,4 @@ void reset()
 
 将 [elapsed] 计数重置为零。
 
-此方法不会停止或启动 [Stopwatch]。
+此方法不会停止或启动 [Stopwatch](https://www.yuque.com/thyname/dart.core/stopwatch)。

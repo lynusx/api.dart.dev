@@ -4,9 +4,9 @@
 abstract final class LinkedHashSet<E> implements Set<E> {}
 ```
 
-[LinkedHashSet] 是一种基于哈希表实现的 [Set]。
+[LinkedHashSet](https://www.yuque.com/thyname/dart.collection/linkedhashset) 是一种基于哈希表实现的 [Set](https://www.yuque.com/thyname/dart.core/set)。
 
-[Set] 的默认实现即为 [LinkedHashSet]。
+[Set](https://www.yuque.com/thyname/dart.core/set) 的默认实现即为 [LinkedHashSet](https://www.yuque.com/thyname/dart.collection/linkedhashset)。
 
 `LinkedHashSet` 还会记录元素的插入顺序，迭代按照先插入先迭代的顺序进行。
 
@@ -94,9 +94,9 @@ print(planets); // {}
 
 **另请参阅：**
 
-- [Set] 是每个对象只能出现一次的集合的通用接口。
-- [HashSet] 中对象的迭代顺序不保证。
-- [SplayTreeSet] 按排序顺序迭代对象。
+- [Set](https://www.yuque.com/thyname/dart.core/set) 是每个对象只能出现一次的集合的通用接口。
+- [HashSet](https://www.yuque.com/thyname/dart.collection/hashset) 中对象的迭代顺序不保证。
+- [SplayTreeSet](https://www.yuque.com/thyname/dart.collection/splaytreeset) 按排序顺序迭代对象。
 
 ## 构造函数
 
@@ -127,7 +127,7 @@ LinkedHashSet<int>(equals: (int e1, int e2) => (e1 - e2) % 5 == 0,
 
 如果 `equals`、`hashCode` 和 `isValidKey` 都未提供，则默认的 `isValidKey` 会接受所有值。此时假定默认的相等性和哈希码操作对所有对象都适用。
 
-同样，如果 `equals` 为 [identical]，`hashCode` 为 [identityHashCode]，且省略了 `isValidKey`，则得到的集合是基于标识（identity）的，此时 `isValidKey` 默认接受所有键。这样的映射可以直接使用 [LinkedHashSet.identity] 创建。
+同样，如果 `equals` 为 [identical](https://www.yuque.com/thyname/dart.core/identical)，`hashCode` 为 [identityHashCode](https://www.yuque.com/thyname/dart.core/identityhashcode)，且省略了 `isValidKey`，则得到的集合是基于标识（identity）的，此时 `isValidKey` 默认接受所有键。这样的映射可以直接使用 [LinkedHashSet.identity] 创建。
 
 ### LinkedHashSet.identity()
 

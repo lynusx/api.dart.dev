@@ -4,13 +4,13 @@
 base class LinkedList<E extends LinkedListEntry<E>> extends Iterable<E> {}
 ```
 
-一个特殊的双向链表，其元素扩展自 [LinkedListEntry]。
+一个特殊的双向链表，其元素扩展自 [LinkedListEntry](https://www.yuque.com/thyname/dart.collection/linkedlistentry)。
 
-这不是一个通用的数据结构。它只接受*扩展*自 [LinkedListEntry] 类的元素。关于允许在两端进行常量时间添加和删除操作的通用集合，请参阅 [Queue] 的实现。
+这不是一个通用的数据结构。它只接受*扩展*自 [LinkedListEntry](https://www.yuque.com/thyname/dart.collection/linkedlistentry) 类的元素。关于允许在两端进行常量时间添加和删除操作的通用集合，请参阅 [Queue](https://www.yuque.com/thyname/dart.collection/queue) 的实现。
 
-这不是 [List] 的实现。尽管名称如此，该类并未实现 [List] 接口。它不支持通过索引进行常量时间查找。
+这不是 [List](https://www.yuque.com/thyname/dart.core/list) 的实现。尽管名称如此，该类并未实现 [List](https://www.yuque.com/thyname/dart.core/list) 接口。它不支持通过索引进行常量时间查找。
 
-由于元素本身包含了该链表的链接信息，因此每个元素同时只能存在于一个链表中。要将元素添加到另一个链表，必须先将其从当前链表中移除（如果存在的话）。出于同样的原因，[remove] 和 [contains] 方法基于*标识*进行判断，即使 [LinkedListEntry] 重写了 [Object.==] 也是如此。
+由于元素本身包含了该链表的链接信息，因此每个元素同时只能存在于一个链表中。要将元素添加到另一个链表，必须先将其从当前链表中移除（如果存在的话）。出于同样的原因，[remove] 和 [contains] 方法基于*标识*进行判断，即使 [LinkedListEntry](https://www.yuque.com/thyname/dart.collection/linkedlistentry) 重写了 [Object.==] 也是如此。
 
 作为回报，每个元素都知道自己在链表中的位置，以及它所属的链表。这使得在只有元素本身的情况下，[LinkedListEntry.insertAfter]、[LinkedListEntry.insertBefore] 和 [LinkedListEntry.unlink] 操作可以在常量时间内完成。
 
@@ -130,7 +130,7 @@ bool remove(E entry)
 bool contains(Object? entry)
 ```
 
-判断 [entry] 是否是属于该链表的 [LinkedListEntry]。
+判断 [entry] 是否是属于该链表的 [LinkedListEntry](https://www.yuque.com/thyname/dart.collection/linkedlistentry)。
 
 如果 [entry] 的 [LinkedListEntry.list] 是该链表，则认为它属于该链表。
 
@@ -160,7 +160,7 @@ void forEach(void action(E entry))
 abstract base mixin class LinkedListEntry<E extends LinkedListEntry<E>> {}
 ```
 
-可以作为 [LinkedList] 元素的对象。
+可以作为 [LinkedList](https://www.yuque.com/thyname/dart.collection/linkedlist) 元素的对象。
 
 `LinkedList` 的所有元素都必须扩展该类。该类提供了将元素连接在一起的内部链接，以及对该元素当前所属链表的引用。
 

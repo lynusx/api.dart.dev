@@ -8,13 +8,13 @@ abstract final class int extends num {}
 
 `int` 的默认实现是 64 位二进制补码整数，其运算在发生溢出时会环绕到该范围内。
 
-**注意：** 编译为 JavaScript 时，整数被限制为可由双精度浮点数精确表示的值。可用的整数值包括 -2^53 到 2^53 之间的所有整数，以及一些量级更大的整数，其中包括一些大于 2^63 的整数。因此，[int] 类中运算符和方法的行为有时在 Dart VM 与编译为 JavaScript 的 Dart 代码之间会有所不同。例如，位运算符在编译为 JavaScript 时会将其操作数截断为 32 位整数。
+**注意：** 编译为 JavaScript 时，整数被限制为可由双精度浮点数精确表示的值。可用的整数值包括 -2^53 到 2^53 之间的所有整数，以及一些量级更大的整数，其中包括一些大于 2^63 的整数。因此，[int](https://www.yuque.com/thyname/dart.core/int) 类中运算符和方法的行为有时在 Dart VM 与编译为 JavaScript 的 Dart 代码之间会有所不同。例如，位运算符在编译为 JavaScript 时会将其操作数截断为 32 位整数。
 
 不能继承（extend）、实现（implement）或混入（mix in）`int` 类。
 
 **另请参阅：**
 
-- [num]：[int] 的父类。
+- [num](https://www.yuque.com/thyname/dart.core/num)：[int](https://www.yuque.com/thyname/dart.core/int) 的父类。
 - [内置数字类型](https://dart.dev/language/built-in-types#numbers)
 - [数字表示方式](https://dart.dev/resources/language/number-representation)
 
@@ -83,9 +83,9 @@ int parse(
 
 对于任意整数 `n` 和有效的进制 `r`，可以保证 `n == int.parse(n.toRadixString(r), radix: r)`。
 
-如果 [source] 字符串不包含有效的整数字面量（可以带有前导符号），则会抛出 [FormatException]。
+如果 [source] 字符串不包含有效的整数字面量（可以带有前导符号），则会抛出 [FormatException](https://www.yuque.com/thyname/dart.core/formatexception)。
 
-与其抛出并立即捕获 [FormatException]，不如使用 [tryParse] 来处理可能的解析错误。
+与其抛出并立即捕获 [FormatException](https://www.yuque.com/thyname/dart.core/formatexception)，不如使用 [tryParse] 来处理可能的解析错误。
 
 示例：
 
@@ -108,7 +108,7 @@ int? tryParse(
 
 将 [source] 解析为一个可能带符号的整数字面量。
 
-与 [parse] 类似，但在 [parse] 会抛出 [FormatException] 的情况下，该函数会返回 `null`。
+与 [parse] 类似，但在 [parse] 会抛出 [FormatException](https://www.yuque.com/thyname/dart.core/formatexception) 的情况下，该函数会返回 `null`。
 
 示例：
 
@@ -423,7 +423,7 @@ String toString()
 String toRadixString(int radix)
 ```
 
-将该 [int] 转换为以给定 [radix] 进制表示的字符串。
+将该 [int](https://www.yuque.com/thyname/dart.core/int) 转换为以给定 [radix] 进制表示的字符串。
 
 在字符串表示中，大于 '9' 的数字使用小写字母表示，其中 'a' 表示 10，'z' 表示 35。
 

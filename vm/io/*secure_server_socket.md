@@ -4,9 +4,9 @@
 class SecureServerSocket extends Stream<SecureSocket> implements ServerSocketBase<SecureSocket> {}
 ```
 
-一个服务器套接字，提供高层级 [Socket] 的流。
+一个服务器套接字，提供高层级 [Socket](https://www.yuque.com/thyname/dart.io/socket) 的流。
 
-更多信息请参见 [SecureSocket]。
+更多信息请参见 [SecureSocket](https://www.yuque.com/thyname/dart.io/securesocket)。
 
 ### bind()
 
@@ -18,7 +18,7 @@ Future<SecureServerSocket> bind(dynamic address, int port, SecurityContext? cont
 
 当返回的 Future 完成时，服务器套接字已绑定到给定的 [address] 和 [port]，并已开始监听。
 
-[address] 可以是 [String] 或 [InternetAddress]。如果 [address] 是 [String]，[bind] 将执行 [InternetAddress.lookup] 并使用列表中的第一个值。要监听环回适配器（只允许来自本地主机的传入连接），请使用 [InternetAddress.loopbackIPv4] 或 [InternetAddress.loopbackIPv6] 的值。要允许来自网络的传入连接，可使用 [InternetAddress.anyIPv4] 或 [InternetAddress.anyIPv6] 的值，以绑定到所有接口，或使用特定接口的 IP 地址。
+[address] 可以是 [String](https://www.yuque.com/thyname/dart.core/string) 或 [InternetAddress](https://www.yuque.com/thyname/dart.io/internetaddress)。如果 [address] 是 [String](https://www.yuque.com/thyname/dart.core/string)，[bind] 将执行 [InternetAddress.lookup] 并使用列表中的第一个值。要监听环回适配器（只允许来自本地主机的传入连接），请使用 [InternetAddress.loopbackIPv4] 或 [InternetAddress.loopbackIPv6] 的值。要允许来自网络的传入连接，可使用 [InternetAddress.anyIPv4] 或 [InternetAddress.anyIPv6] 的值，以绑定到所有接口，或使用特定接口的 IP 地址。
 
 如果 [port] 的值为 `0`，系统将选择一个临时端口。可以通过 [port] getter 获取实际使用的端口。
 
@@ -32,7 +32,7 @@ Future<SecureServerSocket> bind(dynamic address, int port, SecurityContext? cont
 
 [supportedProtocols] 是一个可选的协议列表（按优先级从高到低排列），在与客户端进行 ALPN 协议协商期间使用。示例值为 "http/1.1" 或 "h2"。可以通过 [SecureSocket.selectedProtocol] 获取协商选定的协议。
 
-可选参数 [shared] 指定是否允许其他 [SecureServerSocket] 对象绑定到相同的 [address]、[port] 和 [v6Only] 组合。如果 [shared] 为 `true`，并且来自此 isolate 或其他 isolate 的更多 [SecureServerSocket] 绑定到同一端口，则传入的连接将在所有已绑定的 `SecureServerSocket` 之间分配。通过这种方式，连接可以分布到多个 isolate 上。
+可选参数 [shared] 指定是否允许其他 [SecureServerSocket](https://www.yuque.com/thyname/dart.io/secureserversocket) 对象绑定到相同的 [address]、[port] 和 [v6Only] 组合。如果 [shared] 为 `true`，并且来自此 isolate 或其他 isolate 的更多 [SecureServerSocket](https://www.yuque.com/thyname/dart.io/secureserversocket) 绑定到同一端口，则传入的连接将在所有已绑定的 `SecureServerSocket` 之间分配。通过这种方式，连接可以分布到多个 isolate 上。
 
 ### listen()
 
@@ -72,9 +72,9 @@ Future<SecureServerSocket> close()
 class RawSecureServerSocket extends Stream<RawSecureSocket> {}
 ```
 
-一个服务器套接字，提供低层级 [RawSecureSocket] 的流。
+一个服务器套接字，提供低层级 [RawSecureSocket](https://www.yuque.com/thyname/dart.io/rawsecuresocket) 的流。
 
-更多信息请参见 [RawSecureSocket]。
+更多信息请参见 [RawSecureSocket](https://www.yuque.com/thyname/dart.io/rawsecuresocket)。
 
 ### requestClientCertificate
 
@@ -104,7 +104,7 @@ Future<RawSecureServerSocket> bind(dynamic address, int port, SecurityContext? c
 
 当返回的 Future 完成时，服务器套接字已绑定到给定的 [address] 和 [port]，并已开始监听。
 
-[address] 可以是 [String] 或 [InternetAddress]。如果 [address] 是 [String]，[bind] 将执行 [InternetAddress.lookup] 并使用列表中的第一个值。要监听环回适配器（只允许来自本地主机的传入连接），请使用 [InternetAddress.loopbackIPv4] 或 [InternetAddress.loopbackIPv6] 的值。要允许来自网络的传入连接，可使用 [InternetAddress.anyIPv4] 或 [InternetAddress.anyIPv6] 的值，以绑定到所有接口，或使用特定接口的 IP 地址。
+[address] 可以是 [String](https://www.yuque.com/thyname/dart.core/string) 或 [InternetAddress](https://www.yuque.com/thyname/dart.io/internetaddress)。如果 [address] 是 [String](https://www.yuque.com/thyname/dart.core/string)，[bind] 将执行 [InternetAddress.lookup] 并使用列表中的第一个值。要监听环回适配器（只允许来自本地主机的传入连接），请使用 [InternetAddress.loopbackIPv4] 或 [InternetAddress.loopbackIPv6] 的值。要允许来自网络的传入连接，可使用 [InternetAddress.anyIPv4] 或 [InternetAddress.anyIPv6] 的值，以绑定到所有接口，或使用特定接口的 IP 地址。
 
 如果 [port] 的值为 `0`，系统将选择一个临时端口。可以通过 [port] getter 获取实际使用的端口。
 
@@ -118,7 +118,7 @@ Future<RawSecureServerSocket> bind(dynamic address, int port, SecurityContext? c
 
 [supportedProtocols] 是一个可选的协议列表（按优先级从高到低排列），在与客户端进行 ALPN 协议协商期间使用。示例值为 "http/1.1" 或 "h2"。可以通过 [RawSecureSocket.selectedProtocol] 获取协商选定的协议。
 
-可选参数 [shared] 指定是否允许其他 [RawSecureServerSocket] 对象绑定到相同的 [address]、[port] 和 [v6Only] 组合。如果 [shared] 为 `true`，并且来自此 isolate 或其他 isolate 的更多 [RawSecureServerSocket] 绑定到该端口，则传入的连接将在所有已绑定的 [RawSecureServerSocket] 之间分配。通过这种方式，连接可以分布到多个 isolate 上。
+可选参数 [shared] 指定是否允许其他 [RawSecureServerSocket](https://www.yuque.com/thyname/dart.io/rawsecureserversocket) 对象绑定到相同的 [address]、[port] 和 [v6Only] 组合。如果 [shared] 为 `true`，并且来自此 isolate 或其他 isolate 的更多 [RawSecureServerSocket](https://www.yuque.com/thyname/dart.io/rawsecureserversocket) 绑定到该端口，则传入的连接将在所有已绑定的 [RawSecureServerSocket](https://www.yuque.com/thyname/dart.io/rawsecureserversocket) 之间分配。通过这种方式，连接可以分布到多个 isolate 上。
 
 ### listen()
 

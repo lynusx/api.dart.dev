@@ -26,4 +26,4 @@ static StackTrace defaultStackTrace(Object error)
 
 错误的默认堆栈跟踪。
 
-如果 [error] 是一个 [Error] 且具有 [Error.stackTrace]，则返回该堆栈跟踪。否则，返回默认的 [StackTrace.empty]。
+如果 [error] 是一个 [Error](https://www.yuque.com/thyname/dart.core/error) 且具有 [Error.stackTrace]，则返回该堆栈跟踪。否则，返回默认的 [StackTrace.empty]。

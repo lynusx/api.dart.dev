@@ -4,7 +4,7 @@
 abstract final class LinkedHashMap<K, V> implements Map<K, V> {}
 ```
 
-一个按插入顺序排列的 [Map]，预期具备常数时间的查找性能。
+一个按插入顺序排列的 [Map](https://www.yuque.com/thyname/dart.core/map)，预期具备常数时间的查找性能。
 
 非常量的映射字面量（如 `{"a": 42, "b": 7}`）就是一个 `LinkedHashMap`。
 
@@ -106,9 +106,9 @@ print(planetsByDiameter.isEmpty); // true
 
 **另请参阅：**
 
-- [Map]，键/值对集合的通用接口。
-- [HashMap] 是无序的（迭代顺序不保证）。
-- [SplayTreeMap] 按排序顺序迭代键。
+- [Map](https://www.yuque.com/thyname/dart.core/map)，键/值对集合的通用接口。
+- [HashMap](https://www.yuque.com/thyname/dart.collection/hashmap) 是无序的（迭代顺序不保证）。
+- [SplayTreeMap](https://www.yuque.com/thyname/dart.collection/splaytreemap) 按排序顺序迭代键。
 
 ## 构造函数
 
@@ -122,7 +122,7 @@ LinkedHashMap<K, V>({
 })
 ```
 
-创建一个基于哈希表、按插入顺序排列的 [Map]。
+创建一个基于哈希表、按插入顺序排列的 [Map](https://www.yuque.com/thyname/dart.core/map)。
 
 如果提供了 [equals]，则使用它来比较表中的键与新键。如果省略 [equals]，则改用键自身的 [Object.==]。[equals] 函数**禁止**修改使用它作为等价判断依据的映射。如果发生了修改，其结果行为是未指定的。
 
@@ -145,7 +145,7 @@ LikedHashMap<int,int>(equals: (int a, int b) => (b - a) % 5 == 0,
 
 如果 `equals`、`hashCode` 和 `isValidKey` 都未提供，则默认的 `isValidKey` 会接受所有键。此时假定默认的相等性和哈希码操作对所有对象都适用。
 
-同样，如果 `equals` 为 [identical]，`hashCode` 为 [identityHashCode]，且省略了 `isValidKey`，则得到的映射是基于标识（identity）的，此时 `isValidKey` 默认接受所有键。这样的映射可以直接使用 [LinkedHashMap.identity] 创建。
+同样，如果 `equals` 为 [identical](https://www.yuque.com/thyname/dart.core/identical)，`hashCode` 为 [identityHashCode](https://www.yuque.com/thyname/dart.core/identityhashcode)，且省略了 `isValidKey`，则得到的映射是基于标识（identity）的，此时 `isValidKey` 默认接受所有键。这样的映射可以直接使用 [LinkedHashMap.identity] 创建。
 
 ### LinkedHashMap.identity()
 
@@ -168,7 +168,7 @@ LinkedHashMap<K, V>(equals: identical,
 LinkedHashMap<K, V>.from(Map other )
 ```
 
-创建一个包含 [other] 中所有键值对的 [LinkedHashMap]。
+创建一个包含 [other] 中所有键值对的 [LinkedHashMap](https://www.yuque.com/thyname/dart.collection/linkedhashmap)。
 
 所有键都必须是 [K] 的实例，所有值都必须是 [V] 的实例。[other] 映射本身可以是任意类型。示例：
 
@@ -184,7 +184,7 @@ print(fromBaseMap); // {1: A, 2: B, 3: C}
 LinkedHashMap<K, V>.of(Map<K, V> other )
 ```
 
-创建一个包含 [other] 中所有键值对的 [LinkedHashMap]。示例：
+创建一个包含 [other] 中所有键值对的 [LinkedHashMap](https://www.yuque.com/thyname/dart.collection/linkedhashmap)。示例：
 
 ```dart
 final baseMap = <int, String>{3: 'A', 2: 'B', 1: 'C', 4: 'D'};
@@ -202,7 +202,7 @@ LinkedHashMap<K, V>.fromIterable(
 })
 ```
 
-创建一个 [LinkedHashMap]，其键和值由 [iterable] 计算得出。
+创建一个 [LinkedHashMap](https://www.yuque.com/thyname/dart.collection/linkedhashmap)，其键和值由 [iterable] 计算得出。
 
 对于 [iterable] 中的每个元素，此构造函数会分别应用 [key] 和 [value] 来计算出一个键/值对。
 
@@ -223,13 +223,13 @@ print(mapFromIterable); // {11: 121, 12: 144, 13: 169, 14: 196}
 LinkedHashMap<K, V>.fromIterables(Iterable<K> keys, Iterable<V> values)
 ```
 
-创建一个将给定的 [keys] 关联到 [values] 的 [LinkedHashMap]。
+创建一个将给定的 [keys] 关联到 [values] 的 [LinkedHashMap](https://www.yuque.com/thyname/dart.collection/linkedhashmap)。
 
 此构造函数会遍历 [keys] 和 [values]，将 [keys] 中的每个元素映射到 [values] 中对应位置的元素。
 
 如果 [keys] 中包含多次相同的对象，则后出现的会覆盖之前的值。
 
-两个 [Iterable] 的长度必须相同，否则会产生错误。示例：
+两个 [Iterable](https://www.yuque.com/thyname/dart.core/iterable) 的长度必须相同，否则会产生错误。示例：
 
 ```dart
 final values = [0.06, 0.81, 1, 0.11];
@@ -245,7 +245,7 @@ print(mapFromIterables);
 LinkedHashMap<K, V>.fromEntries(Iterable<MapEntry<K, V>> entries)
 ```
 
-创建一个包含 [entries] 中所有条目的 [LinkedHashMap]。
+创建一个包含 [entries] 中所有条目的 [LinkedHashMap](https://www.yuque.com/thyname/dart.collection/linkedhashmap)。
 
 返回一个新的 `LinkedHashMap<K, V>`，[entries] 中的所有条目会按迭代顺序被添加到其中。
 

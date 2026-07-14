@@ -14,7 +14,7 @@ abstract class Symbol {}
 const Symbol( String name )
 ```
 
-构造一个表示所提供名称的新 [Symbol]。
+构造一个表示所提供名称的新 [Symbol](https://www.yuque.com/thyname/dart.core/symbol)。
 
 由相等的 [name] 字符串创建的符号本身也是相等的。如果这些符号是使用 `const` 创建的，那么具有相同 [name] 字符串的符号会被规范化并且是同一个（identical）。
 

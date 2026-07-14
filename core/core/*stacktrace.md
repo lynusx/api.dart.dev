@@ -6,7 +6,7 @@ abstract interface class StackTrace {}
 
 所有堆栈跟踪对象都实现的接口。
 
-[StackTrace] 用于向用户传达触发异常的调用序列信息。
+[StackTrace](https://www.yuque.com/thyname/dart.core/stacktrace) 用于向用户传达触发异常的调用序列信息。
 
 这些对象由运行时创建，无法以编程方式创建它们。
 
@@ -60,7 +60,7 @@ try { throw 0; } catch (_, stack) { return stack; }
 String toString()
 ```
 
-返回该堆栈跟踪的 [String] 表示形式。
+返回该堆栈跟踪的 [String](https://www.yuque.com/thyname/dart.core/string) 表示形式。
 
 该字符串表示从抛出异常的位置到当前调用序列顶部的完整堆栈跟踪。
 

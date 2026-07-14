@@ -26,7 +26,7 @@ SystemEncoding()
 
 创建一个 const 的 SystemEncoding。
 
-用户应使用顶层常量 [systemEncoding]。
+用户应使用顶层常量 [systemEncoding](https://www.yuque.com/thyname/dart.io/systemencoding)。
 
 ### name
 

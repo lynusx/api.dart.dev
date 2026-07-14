@@ -4,7 +4,7 @@
 AsciiCodec const ascii
 ```
 
-[AsciiCodec] 默认实现的一个实例。
+[AsciiCodec](https://www.yuque.com/thyname/dart.convert/asciicodec) 默认实现的一个实例。
 
 该实例为最常见的 ASCII 使用场景提供了便捷的访问方式。
 
@@ -24,7 +24,7 @@ final class AsciiCodec extends Encoding {}
 
 ASCII 字符的编码与解码。
 
-一个 [Encoding]（字符串与字节之间的转换）实现，用于将 ASCII 字符（U+0000..U+007F）与其对应的字节值相互转换。
+一个 [Encoding](https://www.yuque.com/thyname/dart.convert/encoding)（字符串与字节之间的转换）实现，用于将 ASCII 字符（U+0000..U+007F）与其对应的字节值相互转换。
 
 将任何非 ASCII 字符（U+0080..U+10FFFF）视为编码的无效输入，将任何大于等于 128 的字节视为解码的无效输入。
 
@@ -36,9 +36,9 @@ ASCII 字符的编码与解码。
 AsciiCodec({bool allowInvalid = false})
 ```
 
-实例化一个新的 [AsciiCodec]。
+实例化一个新的 [AsciiCodec](https://www.yuque.com/thyname/dart.convert/asciicodec)。
 
-如果 [allowInvalid] 为 `true`，则 [decode] 方法以及由 [decoder] 返回的转换器默认允许无效值（即大于 127 的字节值）。如果允许无效值，无效值将被解码为 Unicode 替换字符（U+FFFD）。否则将抛出 [FormatException]。调用 [decode] 方法时可以选择覆盖此默认设置。
+如果 [allowInvalid] 为 `true`，则 [decode] 方法以及由 [decoder] 返回的转换器默认允许无效值（即大于 127 的字节值）。如果允许无效值，无效值将被解码为 Unicode 替换字符（U+FFFD）。否则将抛出 [FormatException](https://www.yuque.com/thyname/dart.core/formatexception)。调用 [decode] 方法时可以选择覆盖此默认设置。
 
 编码器不接受无效（非 ASCII）字符。
 
@@ -95,9 +95,9 @@ String decode(
 
 将 ASCII 字节 [bytes]（一个由无符号 7 位整数组成的列表）解码为对应的字符串。
 
-如果 [bytes] 中包含不在 0 到 127 范围内的值，解码器最终将抛出 [FormatException]。
+如果 [bytes] 中包含不在 0 到 127 范围内的值，解码器最终将抛出 [FormatException](https://www.yuque.com/thyname/dart.core/formatexception)。
 
-如果未提供 [allowInvalid]，则默认使用创建此 [AsciiCodec] 时所用的值。
+如果未提供 [allowInvalid]，则默认使用创建此 [AsciiCodec](https://www.yuque.com/thyname/dart.convert/asciicodec) 时所用的值。
 
 ---
 
@@ -137,7 +137,7 @@ final result = asciiDecoder.convert(asciiValues);
 print(result); // Dart
 ```
 
-如果 [bytes] 中包含不在 0 到 127 范围内的值，且 [allowInvalid] 为 `false`（默认值），则抛出 [FormatException]。
+如果 [bytes] 中包含不在 0 到 127 范围内的值，且 [allowInvalid] 为 `false`（默认值），则抛出 [FormatException](https://www.yuque.com/thyname/dart.core/formatexception)。
 
 如果 [allowInvalid] 为 `true`，任何超出 0 到 127 范围的字节都将被替换为 Unicode 替换字符 U+FFFD（'�'）。
 
@@ -161,4 +161,4 @@ ByteConversionSink startChunkedConversion(Sink<String> sink)
 
 启动分块转换。
 
-如果给定的 [sink] 是 [StringConversionSink]，转换器的工作效率会更高。
+如果给定的 [sink] 是 [StringConversionSink](https://www.yuque.com/thyname/dart.convert/stringconversionsink)，转换器的工作效率会更高。

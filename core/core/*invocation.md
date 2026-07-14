@@ -63,7 +63,7 @@ Invocation.setter(Symbol memberName, Object? argument)
 
 创建一个对应于设置器（setter）调用的 invocation。
 
-该构造函数可以接受任意 [Symbol] 作为 [memberName]，但请注意，_实际的 setter 名称_ 以 `=` 结尾，因此 `object.member = value` 对应的 invocation 为：
+该构造函数可以接受任意 [Symbol](https://www.yuque.com/thyname/dart.core/symbol) 作为 [memberName]，但请注意，_实际的 setter 名称_ 以 `=` 结尾，因此 `object.member = value` 对应的 invocation 为：
 
 ```dart
 Invocation.setter(const Symbol("member="), value)

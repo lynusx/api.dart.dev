@@ -34,7 +34,7 @@ final class Isolate {}
 
 一个隔离的 Dart 执行上下文。
 
-所有 Dart 代码都运行在某个 isolate 中，代码只能访问同一 isolate 内的类和值。不同的 isolate 可以通过端口（port）发送值来进行通信（参见 [ReceivePort]、[SendPort]）。
+所有 Dart 代码都运行在某个 isolate 中，代码只能访问同一 isolate 内的类和值。不同的 isolate 可以通过端口（port）发送值来进行通信（参见 [ReceivePort](https://www.yuque.com/thyname/dart.isolate/receiveport)、[SendPort](https://www.yuque.com/thyname/dart.isolate/sendport)）。
 
 `Isolate` 对象是对某个 isolate 的引用，通常不同于当前 isolate。它代表另一个 isolate，并可用于控制该 isolate。
 
@@ -108,13 +108,13 @@ Capability? terminateCapability
 String? get debugName
 ```
 
-为调试目的而显示的 [Isolate] 名称。
+为调试目的而显示的 [Isolate](https://www.yuque.com/thyname/dart.isolate/isolate) 名称。
 
 可通过 [spawn] 和 [spawnUri] 中的 `debugName` 参数进行设置。
 
 该名称并不能唯一标识某个 isolate。同一进程中的多个 isolate 可能拥有相同的 `debugName`。
 
-对于给定的 isolate，该值与 C 嵌入式 API 中 `Dart_DebugName` 返回的值，以及 [IsolateMirror] 中的 `debugName` 属性值相同。
+对于给定的 isolate，该值与 C 嵌入式 API 中 `Dart_DebugName` 返回的值，以及 [IsolateMirror](https://www.yuque.com/thyname/dart.mirrors/isolatemirror) 中的 `debugName` 属性值相同。
 
 ### Isolate()
 
@@ -122,13 +122,13 @@ String? get debugName
 Isolate(SendPort controlPort, {Capability? pauseCapability, Capability? terminateCapability})
 ```
 
-创建一个具有受限 capability 集合的新 [Isolate] 对象。
+创建一个具有受限 capability 集合的新 [Isolate](https://www.yuque.com/thyname/dart.isolate/isolate) 对象。
 
 该端口应为某个 isolate 的控制端口，取自另一个 `Isolate` 对象。
 
 这些 capability 应为原始 isolate 所拥有 capability 的子集。isolate 的 capability 与该 isolate 绑定，在其他任何地方均不产生效果，因此这些 capability 应与控制端口来自同一个 isolate。
 
-也可用于根据通过 [SendPort] 发送过来的控制端口及可用的 capability 创建一个 [Isolate] 对象。
+也可用于根据通过 [SendPort](https://www.yuque.com/thyname/dart.isolate/sendport) 发送过来的控制端口及可用的 capability 创建一个 [Isolate](https://www.yuque.com/thyname/dart.isolate/isolate) 对象。
 
 示例：
 
@@ -185,9 +185,9 @@ try {
 }
 ```
 
-任何未捕获的异步错误同样会终止计算，但会以 [RemoteError] 的形式报告，因为 [addErrorListener] 不会提供原始的错误对象。
+任何未捕获的异步错误同样会终止计算，但会以 [RemoteError](https://www.yuque.com/thyname/dart.isolate/remoteerror) 的形式报告，因为 [addErrorListener] 不会提供原始的错误对象。
 
-结果通过 [exit] 发送，这意味着它会在不经复制的情况下发送到当前 isolate。
+结果通过 [exit](https://www.yuque.com/thyname/dart.io/exit) 发送，这意味着它会在不经复制的情况下发送到当前 isolate。
 
 [computation] 函数及其结果（或错误）必须能够在 isolate 之间发送。不可发送的对象包括已打开的文件和套接字（详见 [SendPort.send]）。
 
@@ -241,7 +241,7 @@ void serializeAndWrite(File f, Object o) async {
 Isolate get current
 ```
 
-代表当前 isolate 的 [Isolate] 对象。
+代表当前 isolate 的 [Isolate](https://www.yuque.com/thyname/dart.isolate/isolate) 对象。
 
 对于使用 [current] 的代码而言，当前 isolate 即为运行该代码的 isolate。
 
@@ -329,19 +329,19 @@ Future<Isolate> spawn<T>(void entryPoint(T message), T message, {bool paused = f
 
 [entryPoint] 函数必须能够以单个参数进行调用，也就是说，该函数至少接受一个位置参数，且最多只有一个必需的位置参数。只要 _可以_ 仅用单个参数调用，该函数可以接受任意数量的可选参数。如果 [entryPoint] 是一个闭包，由于 Dart 实现的限制，它可能会隐式地向该 isolate 发送意外的状态。这可能导致性能问题、内存占用增加（参见 http://dartbug.com/36983），或者如果该状态中包含无法在 isolate 之间传递的对象，则会导致运行时失败。示例参见 [run]。
 
-[message] 必须能够在 isolate 之间发送。不可发送的对象包括已打开的文件和套接字（详见 [SendPort.send]）。初始 [message] 通常包含一个 [SendPort]，以便发起方与被创建方之间能够相互通信。
+[message] 必须能够在 isolate 之间发送。不可发送的对象包括已打开的文件和套接字（详见 [SendPort.send]）。初始 [message] 通常包含一个 [SendPort](https://www.yuque.com/thyname/dart.isolate/sendport)，以便发起方与被创建方之间能够相互通信。
 
 如果 [paused] 参数设为 `true`，该 isolate 将在以 [message] 调用 [entryPoint] 函数之前，以暂停状态启动，如同初始时调用了 `isolate.pause(isolate.pauseCapability)` 一样。要恢复该 isolate，需调用 `isolate.resume(isolate.pauseCapability)`。
 
 如果提供了 [errorsAreFatal]、[onExit] 和/或 [onError] 参数，该 isolate 的行为将分别如同在其开始运行之前，已使用相应参数调用并处理了 [setErrorsFatal]、[addOnExitListener] 和 [addErrorListener]。
 
-如果提供了 [debugName]，新创建的 [Isolate] 将可以在调试器和日志中通过该名称进行识别。
+如果提供了 [debugName]，新创建的 [Isolate](https://www.yuque.com/thyname/dart.isolate/isolate) 将可以在调试器和日志中通过该名称进行识别。
 
 如果省略 [errorsAreFatal]，平台可能会选择默认行为，或继承当前 isolate 的行为。
 
 也可以在返回的 isolate 上调用 [setErrorsFatal]、[addOnExitListener] 和 [addErrorListener] 方法，但除非该 isolate 是以 [paused] 状态启动的，否则在这些方法执行完成之前，它可能已经终止。
 
-如果创建成功，返回的 future 将以一个 [Isolate] 实例完成；否则将以错误完成。
+如果创建成功，返回的 future 将以一个 [Isolate](https://www.yuque.com/thyname/dart.isolate/isolate) 实例完成；否则将以错误完成。
 
 一个 isolate 的基础内存开销大约在 30 kb 量级。
 
@@ -385,9 +385,9 @@ Future<Isolate> spawnUri(Uri uri, List<String> args, dynamic message, {bool paus
 
 警告：[environment] 参数尚未在所有平台上实现。
 
-如果提供了 [debugName]，新创建的 [Isolate] 将可以在调试器和日志中通过该名称进行识别。
+如果提供了 [debugName]，新创建的 [Isolate](https://www.yuque.com/thyname/dart.isolate/isolate) 将可以在调试器和日志中通过该名称进行识别。
 
-如果创建成功，返回的 future 将以一个 [Isolate] 实例完成；否则将以错误完成。
+如果创建成功，返回的 future 将以一个 [Isolate](https://www.yuque.com/thyname/dart.isolate/isolate) 实例完成；否则将以错误完成。
 
 ### pause()
 
@@ -515,7 +515,7 @@ void addErrorListener(SendPort port)
 
 请求将该 isolate 的未捕获错误发送回 [port]。
 
-错误会以包含两个元素的列表形式发送回来。第一个元素是该错误的 `String` 表示形式，通常通过对该错误调用 `toString` 得到。第二个元素是随附堆栈跟踪的 `String` 表示形式，如果未提供堆栈跟踪则为 `null`。若需将其转换回 [StackTrace] 对象，可使用 [StackTrace.fromString]。
+错误会以包含两个元素的列表形式发送回来。第一个元素是该错误的 `String` 表示形式，通常通过对该错误调用 `toString` 得到。第二个元素是随附堆栈跟踪的 `String` 表示形式，如果未提供堆栈跟踪则为 `null`。若需将其转换回 [StackTrace](https://www.yuque.com/thyname/dart.core/stacktrace) 对象，可使用 [StackTrace.fromString]。
 
 使用同一端口多次进行监听不会产生任何效果。一个端口对每个错误只会收到一次，也只需调用一次 [removeErrorListener] 即可将其移除。
 
@@ -692,11 +692,11 @@ void handleEvent()
 abstract interface class SendPort implements Capability {}
 ```
 
-向其对应的 [ReceivePort] 发送消息。
+向其对应的 [ReceivePort](https://www.yuque.com/thyname/dart.isolate/receiveport) 发送消息。
 
-[SendPort] 由 [ReceivePort] 创建。通过某个 [SendPort] 发送的任何消息都会传递给其对应的 [ReceivePort]。同一个 [ReceivePort] 可能对应多个 [SendPort]。
+[SendPort](https://www.yuque.com/thyname/dart.isolate/sendport) 由 [ReceivePort](https://www.yuque.com/thyname/dart.isolate/receiveport) 创建。通过某个 [SendPort](https://www.yuque.com/thyname/dart.isolate/sendport) 发送的任何消息都会传递给其对应的 [ReceivePort](https://www.yuque.com/thyname/dart.isolate/receiveport)。同一个 [ReceivePort](https://www.yuque.com/thyname/dart.isolate/receiveport) 可能对应多个 [SendPort](https://www.yuque.com/thyname/dart.isolate/sendport)。
 
-[SendPort] 可以被传递给其他 isolate，并且在发送过程中保持相等性。
+[SendPort](https://www.yuque.com/thyname/dart.isolate/sendport) 可以被传递给其他 isolate，并且在发送过程中保持相等性。
 
 ### send()
 
@@ -704,27 +704,27 @@ abstract interface class SendPort implements Capability {}
 void send(Object? message)
 ```
 
-通过此发送端口，向其对应的 [ReceivePort] 发送一条异步 [message]。
+通过此发送端口，向其对应的 [ReceivePort](https://www.yuque.com/thyname/dart.isolate/receiveport) 发送一条异步 [message]。
 
 如果发送方和接收方 isolate 不共享相同的代码（使用 [Isolate.spawnUri] 创建的 isolate 不与创建它的 isolate 共享代码），则 [message] 的传递闭包对象图 **只能** 包含以下几类对象：
 
 - `null`
 - `true` 和 `false`
-- [int]、[double]、[String] 的实例
+- [int](https://www.yuque.com/thyname/dart.core/int)、[double](https://www.yuque.com/thyname/dart.core/double)、[String](https://www.yuque.com/thyname/dart.core/string) 的实例
 - 通过列表、映射和集合字面量创建的实例
-- 由以下构造函数创建的实例：[List]、[Map]、[LinkedHashMap]、[Set] 和 [LinkedHashSet]；[TransferableTypedData]；[Capability]
-- 来自 [ReceivePort.sendPort] 或 [RawReceivePort.sendPort] 的 [SendPort] 实例，其中相应的接收端口是通过这些类的构造函数创建的
-- 表示上述类型之一、`Object`、`dynamic`、`void` 和 `Never` 的 [Type] 实例，以及所有这些类型的可空变体。对于泛型类型，其类型参数必须是可发送的类型，整个类型才可发送。
+- 由以下构造函数创建的实例：[List](https://www.yuque.com/thyname/dart.core/list)、[Map](https://www.yuque.com/thyname/dart.core/map)、[LinkedHashMap](https://www.yuque.com/thyname/dart.collection/linkedhashmap)、[Set](https://www.yuque.com/thyname/dart.core/set) 和 [LinkedHashSet](https://www.yuque.com/thyname/dart.collection/linkedhashset)；[TransferableTypedData](https://www.yuque.com/thyname/dart.isolate/transferabletypeddata)；[Capability](https://www.yuque.com/thyname/dart.isolate/capability)
+- 来自 [ReceivePort.sendPort] 或 [RawReceivePort.sendPort] 的 [SendPort](https://www.yuque.com/thyname/dart.isolate/sendport) 实例，其中相应的接收端口是通过这些类的构造函数创建的
+- 表示上述类型之一、`Object`、`dynamic`、`void` 和 `Never` 的 [Type](https://www.yuque.com/thyname/dart.core/type) 实例，以及所有这些类型的可空变体。对于泛型类型，其类型参数必须是可发送的类型，整个类型才可发送。
 
 如果发送方和接收方 isolate 共享相同的代码（例如通过 [Isolate.spawn] 创建的 isolate），[message] 的传递闭包对象图可以包含任意对象，但以下情况除外：
 
-- 具有原生资源的对象（例如 `NativeFieldWrapperClass1` 的子类）。例如，[Socket] 对象内部引用了附带原生资源的对象，因此无法被发送。
-- [ReceivePort]
-- [DynamicLibrary]
-- [Finalizable]
-- [Finalizer]
-- [NativeFinalizer]
-- [UserTag]
+- 具有原生资源的对象（例如 `NativeFieldWrapperClass1` 的子类）。例如，[Socket](https://www.yuque.com/thyname/dart.io/socket) 对象内部引用了附带原生资源的对象，因此无法被发送。
+- [ReceivePort](https://www.yuque.com/thyname/dart.isolate/receiveport)
+- [DynamicLibrary](https://www.yuque.com/thyname/dart.ffi/dynamiclibrary)
+- [Finalizable](https://www.yuque.com/thyname/dart.ffi/finalizable)
+- [Finalizer](https://www.yuque.com/thyname/dart.core/finalizer)
+- [NativeFinalizer](https://www.yuque.com/thyname/dart.ffi/nativefinalizer)
+- [UserTag](https://www.yuque.com/thyname/dart.developer/usertag)
 - `MirrorReference`
 
 凡是本身标注了 `@pragma('vm:isolate-unsendable')` 的类，或继承、实现了此类类的类，其实例都无法通过端口发送。
@@ -741,7 +741,7 @@ void send(Object? message)
 bool operator ==(dynamic other)
 ```
 
-测试 [other] 是否为指向与当前对象相同 [ReceivePort] 的 [SendPort]。
+测试 [other] 是否为指向与当前对象相同 [ReceivePort](https://www.yuque.com/thyname/dart.isolate/receiveport) 的 [SendPort](https://www.yuque.com/thyname/dart.isolate/sendport)。
 
 ### hashCode
 
@@ -757,13 +757,13 @@ int get hashCode
 abstract interface class ReceivePort implements Stream<dynamic> {}
 ```
 
-与 [SendPort] 一起，构成 isolate 之间通信的唯一方式。
+与 [SendPort](https://www.yuque.com/thyname/dart.isolate/sendport) 一起，构成 isolate 之间通信的唯一方式。
 
-[ReceivePort] 具有一个 `sendPort` 获取器，返回一个 [SendPort]。通过该 [SendPort] 发送的任何消息都会传递给创建它的那个 [ReceivePort]，并在那里被分派给该 `ReceivePort` 的监听器。
+[ReceivePort](https://www.yuque.com/thyname/dart.isolate/receiveport) 具有一个 `sendPort` 获取器，返回一个 [SendPort](https://www.yuque.com/thyname/dart.isolate/sendport)。通过该 [SendPort](https://www.yuque.com/thyname/dart.isolate/sendport) 发送的任何消息都会传递给创建它的那个 [ReceivePort](https://www.yuque.com/thyname/dart.isolate/receiveport)，并在那里被分派给该 `ReceivePort` 的监听器。
 
-[ReceivePort] 是一个非广播流（non-broadcast stream）。这意味着在注册监听器之前，它会缓冲收到的消息。只能有一个监听器接收消息。若要将该端口转换为广播流，请参见 [Stream.asBroadcastStream]。
+[ReceivePort](https://www.yuque.com/thyname/dart.isolate/receiveport) 是一个非广播流（non-broadcast stream）。这意味着在注册监听器之前，它会缓冲收到的消息。只能有一个监听器接收消息。若要将该端口转换为广播流，请参见 [Stream.asBroadcastStream]。
 
-一个 [ReceivePort] 可以对应多个 [SendPort]。
+一个 [ReceivePort](https://www.yuque.com/thyname/dart.isolate/receiveport) 可以对应多个 [SendPort](https://www.yuque.com/thyname/dart.isolate/sendport)。
 
 ### ReceivePort()
 
@@ -773,7 +773,7 @@ ReceivePort([String debugName = ''])
 
 打开一个长期存在的端口用于接收消息。
 
-[ReceivePort] 是一个非广播流。这意味着在注册监听器之前，它会缓冲收到的消息。只能有一个监听器接收消息。若要将该端口转换为广播流，请参见 [Stream.asBroadcastStream]。
+[ReceivePort](https://www.yuque.com/thyname/dart.isolate/receiveport) 是一个非广播流。这意味着在注册监听器之前，它会缓冲收到的消息。只能有一个监听器接收消息。若要将该端口转换为广播流，请参见 [Stream.asBroadcastStream]。
 
 可设置可选的 `debugName` 参数，为该端口关联一个可在工具中显示的名称。
 
@@ -785,7 +785,7 @@ ReceivePort([String debugName = ''])
 ReceivePort.fromRawReceivePort(RawReceivePort rawPort)
 ```
 
-根据一个 [RawReceivePort] 创建一个 [ReceivePort]。
+根据一个 [RawReceivePort](https://www.yuque.com/thyname/dart.isolate/rawreceiveport) 创建一个 [ReceivePort](https://www.yuque.com/thyname/dart.isolate/receiveport)。
 
 在构造结果对象的过程中，给定 [rawPort] 的处理器（handler）会被覆盖。
 
@@ -795,11 +795,11 @@ ReceivePort.fromRawReceivePort(RawReceivePort rawPort)
 StreamSubscription<dynamic> listen(void onData(dynamic message), {Function? onError, void onDone(), bool? cancelOnError})
 ```
 
-监听来自 [Stream] 的事件。
+监听来自 [Stream](https://www.yuque.com/thyname/dart.async/stream) 的事件。
 
 参见 [Stream.listen]。
 
-请注意，由于 [ReceivePort] 永远不会收到错误，[onError] 和 [cancelOnError] 会被忽略。
+请注意，由于 [ReceivePort](https://www.yuque.com/thyname/dart.isolate/receiveport) 永远不会收到错误，[onError] 和 [cancelOnError] 会被忽略。
 
 流关闭时会调用 [onDone] 处理器。调用 [close] 时流会关闭。
 
@@ -813,7 +813,7 @@ void close()
 
 该接收端口将不再接收任何事件，也不会再作为流事件发出。
 
-如果已调用 [listen] 且 [StreamSubscription] 尚未被取消，该订阅将随一个 "done" 事件一起关闭。
+如果已调用 [listen] 且 [StreamSubscription](https://www.yuque.com/thyname/dart.async/streamsubscription) 尚未被取消，该订阅将随一个 "done" 事件一起关闭。
 
 如果该流已被取消，此方法不会产生任何效果。
 
@@ -823,7 +823,7 @@ void close()
 SendPort get sendPort
 ```
 
-一个向该接收端口发送消息的 [SendPort]。
+一个向该接收端口发送消息的 [SendPort](https://www.yuque.com/thyname/dart.isolate/sendport)。
 
 # RawReceivePort
 
@@ -833,7 +833,7 @@ abstract interface class RawReceivePort {}
 
 一个低级别的异步消息接收器。
 
-[RawReceivePort] 是一个低级别特性，不感知 [Zone]。[handler] 始终会在 [Zone.root] 区域（zone）中被调用。
+[RawReceivePort](https://www.yuque.com/thyname/dart.isolate/rawreceiveport) 是一个低级别特性，不感知 [Zone](https://www.yuque.com/thyname/dart.async/zone)。[handler] 始终会在 [Zone.root] 区域（zone）中被调用。
 
 该端口无法被暂停。数据处理器必须在收到第一条消息之前设置好，否则该消息会丢失。
 
@@ -847,7 +847,7 @@ RawReceivePort([Function? handler, String debugName = ''])
 
 打开一个长期存在的端口用于接收消息。
 
-[RawReceivePort] 是低级别的，不支持 [Zone]。它无法被暂停。数据处理器必须在收到第一条消息之前设置好，否则该消息会丢失。
+[RawReceivePort](https://www.yuque.com/thyname/dart.isolate/rawreceiveport) 是低级别的，不支持 [Zone](https://www.yuque.com/thyname/dart.async/zone)。它无法被暂停。数据处理器必须在收到第一条消息之前设置好，否则该消息会丢失。
 
 如果提供了 [handler]，会将其设为 [RawReceivePort.handler]。
 
@@ -867,7 +867,7 @@ void set handler(Function? newHandler)
 rawPort.handler = Zone.current.bindCallback(actualHandler);
 ```
 
-该处理器必须是一个能够接受一个参数的函数，该参数类型与发送到此端口的消息类型一致。这意味着，如果已知所有消息都将是 [String] 类型，则可以使用类型为 `void Function(String)` 的处理器。该函数会以实际消息动态调用，如果此次调用失败，该错误会成为 [Zone.root] 区域中的顶层未捕获错误。
+该处理器必须是一个能够接受一个参数的函数，该参数类型与发送到此端口的消息类型一致。这意味着，如果已知所有消息都将是 [String](https://www.yuque.com/thyname/dart.core/string) 类型，则可以使用类型为 `void Function(String)` 的处理器。该函数会以实际消息动态调用，如果此次调用失败，该错误会成为 [Zone.root] 区域中的顶层未捕获错误。
 
 ### close()
 
@@ -885,7 +885,7 @@ void close()
 SendPort get sendPort
 ```
 
-返回一个向此原始接收端口发送消息的 [SendPort]。
+返回一个向此原始接收端口发送消息的 [SendPort](https://www.yuque.com/thyname/dart.isolate/sendport)。
 
 ### keepIsolateAlive
 
@@ -893,9 +893,9 @@ SendPort get sendPort
 bool keepIsolateAlive
 ```
 
-该 [RawReceivePort] 是否使其所属的 [Isolate] 保持存活。
+该 [RawReceivePort](https://www.yuque.com/thyname/dart.isolate/rawreceiveport) 是否使其所属的 [Isolate](https://www.yuque.com/thyname/dart.isolate/isolate) 保持存活。
 
-默认情况下，接收端口会使创建它们的 [Isolate] 保持存活，直到调用 [close] 为止。如果 [keepIsolateAlive] 设为 `false`，即使该端口仍处于打开状态，该 isolate 也可能关闭。当该 isolate 关闭时，该端口也会关闭，此后通过 [sendPort] 发送的消息都会被忽略。
+默认情况下，接收端口会使创建它们的 [Isolate](https://www.yuque.com/thyname/dart.isolate/isolate) 保持存活，直到调用 [close] 为止。如果 [keepIsolateAlive] 设为 `false`，即使该端口仍处于打开状态，该 isolate 也可能关闭。当该 isolate 关闭时，该端口也会关闭，此后通过 [sendPort] 发送的消息都会被忽略。
 
 # RemoteError
 
@@ -933,9 +933,9 @@ abstract final class TransferableTypedData {}
 
 一个可高效传输的字节值序列。
 
-[TransferableTypedData] 由若干字节创建而成，此过程所需时间与字节数成正比。
+[TransferableTypedData](https://www.yuque.com/thyname/dart.isolate/transferabletypeddata) 由若干字节创建而成，此过程所需时间与字节数成正比。
 
-[TransferableTypedData] 可以在 isolate 之间移动，因此通过发送端口发送它只需要常数时间。
+[TransferableTypedData](https://www.yuque.com/thyname/dart.isolate/transferabletypeddata) 可以在 isolate 之间移动，因此通过发送端口发送它只需要常数时间。
 
 以这种方式发送后，本地的可传输对象将无法再被具体化（materialize），此后只能通过接收到的对象来具体化该数据。
 
@@ -945,9 +945,9 @@ abstract final class TransferableTypedData {}
 TransferableTypedData.fromList(List<TypedData> list)
 ```
 
-创建一个新的 [TransferableTypedData]，其中包含 [list] 的字节内容。
+创建一个新的 [TransferableTypedData](https://www.yuque.com/thyname/dart.isolate/transferabletypeddata)，其中包含 [list] 的字节内容。
 
-必须能够创建出一个包含这些字节的单一 [Uint8List]；因此，如果字节数超过了平台对单一 [Uint8List] 所允许的上限，则创建会失败。
+必须能够创建出一个包含这些字节的单一 [Uint8List](https://www.yuque.com/thyname/dart.typed_data/uint8list)；因此，如果字节数超过了平台对单一 [Uint8List](https://www.yuque.com/thyname/dart.typed_data/uint8list) 所允许的上限，则创建会失败。
 
 ### materialize()
 
@@ -955,6 +955,6 @@ TransferableTypedData.fromList(List<TypedData> list)
 ByteBuffer materialize()
 ```
 
-创建一个新的 [ByteBuffer]，其中包含存储在此 [TransferableTypedData] 中的字节。
+创建一个新的 [ByteBuffer](https://www.yuque.com/thyname/dart.typed_data/bytebuffer)，其中包含存储在此 [TransferableTypedData](https://www.yuque.com/thyname/dart.isolate/transferabletypeddata) 中的字节。
 
-[TransferableTypedData] 是一种跨 isolate 的一次性资源。即使调用发生在不同的 isolate 中，也不得对同一底层可传输字节多次调用此方法。
+[TransferableTypedData](https://www.yuque.com/thyname/dart.isolate/transferabletypeddata) 是一种跨 isolate 的一次性资源。即使调用发生在不同的 isolate 中，也不得对同一底层可传输字节多次调用此方法。

@@ -6,7 +6,7 @@ final class FileSystemEntityType {}
 
 文件系统上某个实体的类型，例如文件、目录或链接。
 
-这些常量由 [FileSystemEntity] 类用于指示对象的类型。
+这些常量由 [FileSystemEntity](https://www.yuque.com/thyname/dart.io/filesystementity) 类用于指示对象的类型。
 
 ### file
 
@@ -132,7 +132,7 @@ FileStat statSync(String path)
 
 若 [path] 是一个符号链接，则会先解析该链接，并返回解析结果所指文件的相关信息。
 
-返回一个包含 `stat()` 返回数据的 [FileStat] 对象。若调用失败，则返回一个 [FileStat.type] 为 [FileSystemEntityType.notFound] 且其余字段无效的 [FileStat] 对象。
+返回一个包含 `stat()` 返回数据的 [FileStat](https://www.yuque.com/thyname/dart.io/filestat) 对象。若调用失败，则返回一个 [FileStat.type] 为 [FileSystemEntityType.notFound] 且其余字段无效的 [FileStat](https://www.yuque.com/thyname/dart.io/filestat) 对象。
 
 ### stat()
 
@@ -142,7 +142,7 @@ Future<FileStat> stat(String path)
 
 异步地对 [path] 调用操作系统的 `stat()` 函数（或等效函数）。
 
-返回一个 [Future]，其完成结果与 [statSync] 相同。
+返回一个 [Future](https://www.yuque.com/thyname/dart.async/future)，其完成结果与 [statSync] 相同。
 
 ### toString()
 
@@ -166,9 +166,9 @@ String modeString()
 abstract class FileSystemEntity {}
 ```
 
-[File]、[Directory] 和 [Link] 的公共超类。
+[File](https://www.yuque.com/thyname/dart.io/file)、[Directory](https://www.yuque.com/thyname/dart.io/directory) 和 [Link](https://www.yuque.com/thyname/dart.io/link) 的公共超类。
 
-目录列出操作会返回 [FileSystemEntity] 对象。要判断某个 [FileSystemEntity] 是 [File]、[Directory] 还是 [Link]，可执行类型检查：
+目录列出操作会返回 [FileSystemEntity](https://www.yuque.com/thyname/dart.io/filesystementity) 对象。要判断某个 [FileSystemEntity](https://www.yuque.com/thyname/dart.io/filesystementity) 是 [File](https://www.yuque.com/thyname/dart.io/file)、[Directory](https://www.yuque.com/thyname/dart.io/directory) 还是 [Link](https://www.yuque.com/thyname/dart.io/link)，可执行类型检查：
 
 ```dart
 if (entity is File) (entity as File).readAsStringSync();
@@ -203,7 +203,7 @@ String get path
 Uri get uri
 ```
 
-表示该文件系统实体位置的 [Uri]。
+表示该文件系统实体位置的 [Uri](https://www.yuque.com/thyname/dart.core/uri)。
 
 若该实体的 [path] 为绝对路径，则返回的 URI 的 scheme 始终为 "file"；否则 scheme 为空且该 URI 为相对路径。
 
@@ -217,7 +217,7 @@ Future<bool> exists()
 
 返回一个 `Future<bool>`，其完成结果即为检查结果。
 
-由于 [FileSystemEntity] 是抽象类，每个 [FileSystemEntity] 对象实际上都是其子类 [File]、[Directory] 或 [Link] 之一的实例。对这些子类的实例调用 [exists] 会检查该文件系统对象是否存在*并且*属于正确的类型（文件、目录或链接）。若要检查某个路径是否指向文件系统上的某个对象而不论其类型，请使用静态方法 [type]。
+由于 [FileSystemEntity](https://www.yuque.com/thyname/dart.io/filesystementity) 是抽象类，每个 [FileSystemEntity](https://www.yuque.com/thyname/dart.io/filesystementity) 对象实际上都是其子类 [File](https://www.yuque.com/thyname/dart.io/file)、[Directory](https://www.yuque.com/thyname/dart.io/directory) 或 [Link](https://www.yuque.com/thyname/dart.io/link) 之一的实例。对这些子类的实例调用 [exists] 会检查该文件系统对象是否存在*并且*属于正确的类型（文件、目录或链接）。若要检查某个路径是否指向文件系统上的某个对象而不论其类型，请使用静态方法 [type]。
 
 ### existsSync()
 
@@ -227,7 +227,7 @@ bool existsSync()
 
 同步地检查此路径对应的文件系统实体是否存在。
 
-由于 [FileSystemEntity] 是抽象类，每个 [FileSystemEntity] 对象实际上都是其子类 [File]、[Directory] 或 [Link] 之一的实例。对这些子类的实例调用 [existsSync] 会检查该文件系统对象是否存在并且属于正确的类型（文件、目录或链接）。若要检查某个路径是否指向文件系统上的某个对象而不论其类型，请使用静态方法 [typeSync]。
+由于 [FileSystemEntity](https://www.yuque.com/thyname/dart.io/filesystementity) 是抽象类，每个 [FileSystemEntity](https://www.yuque.com/thyname/dart.io/filesystementity) 对象实际上都是其子类 [File](https://www.yuque.com/thyname/dart.io/file)、[Directory](https://www.yuque.com/thyname/dart.io/directory) 或 [Link](https://www.yuque.com/thyname/dart.io/link) 之一的实例。对这些子类的实例调用 [existsSync] 会检查该文件系统对象是否存在并且属于正确的类型（文件、目录或链接）。若要检查某个路径是否指向文件系统上的某个对象而不论其类型，请使用静态方法 [typeSync]。
 
 ### rename()
 
@@ -237,7 +237,7 @@ Future<FileSystemEntity> rename(String newPath)
 
 重命名此文件系统实体。
 
-返回一个 `Future<FileSystemEntity>`，其在完成时携带重命名后文件系统实体对应的 [FileSystemEntity] 实例。
+返回一个 `Future<FileSystemEntity>`，其在完成时携带重命名后文件系统实体对应的 [FileSystemEntity](https://www.yuque.com/thyname/dart.io/filesystementity) 实例。
 
 ### renameSync()
 
@@ -247,7 +247,7 @@ FileSystemEntity renameSync(String newPath)
 
 同步地重命名此文件系统实体。
 
-返回重命名后实体对应的 [FileSystemEntity] 实例。
+返回重命名后实体对应的 [FileSystemEntity](https://www.yuque.com/thyname/dart.io/filesystementity) 实例。
 
 ### resolveSymbolicLinks()
 
@@ -263,7 +263,7 @@ Future<String> resolveSymbolicLinks()
 
 在 Windows 上，`..` 片段会在解析符号链接*之前*被解析；而在其他平台上，符号链接会先被*解析为其目标*，然后再应用其后的 `..`。
 
-为确保在所有平台上行为一致，应在调用 `resolveSymbolicLinks` 之前先解析 `..` 片段。一种实现方式是使用 [Uri] 类：
+为确保在所有平台上行为一致，应在调用 `resolveSymbolicLinks` 之前先解析 `..` 片段。一种实现方式是使用 [Uri](https://www.yuque.com/thyname/dart.core/uri) 类：
 
 ```dart
 var path = Uri.parse('.').resolveUri(Uri.file(input)).toFilePath();
@@ -274,7 +274,7 @@ print(resolved);
 
 因为 `Uri.resolve` 会移除 `..` 片段，这样便可得到与 Windows 一致的行为。
 
-在 Windows 上，若尝试解析的符号链接的类型与其解析目标文件系统对象的类型不一致，Future 将以 [PathAccessException] 错误完成。
+在 Windows 上，若尝试解析的符号链接的类型与其解析目标文件系统对象的类型不一致，Future 将以 [PathAccessException](https://www.yuque.com/thyname/dart.io/pathaccessexception) 错误完成。
 
 ### resolveSymbolicLinksSync()
 
@@ -290,7 +290,7 @@ String resolveSymbolicLinksSync()
 
 在 Windows 上，`..` 片段会在解析符号链接*之前*被解析；而在其他平台上，符号链接会先被*解析为其目标*，然后再应用其后的 `..`。
 
-为确保在所有平台上行为一致，应在调用 `resolveSymbolicLinksSync` 之前先解析 `..` 片段。一种实现方式是使用 [Uri] 类：
+为确保在所有平台上行为一致，应在调用 `resolveSymbolicLinksSync` 之前先解析 `..` 片段。一种实现方式是使用 [Uri](https://www.yuque.com/thyname/dart.core/uri) 类：
 
 ```dart
 var path = Uri.parse('.').resolveUri(Uri.file(input)).toFilePath();
@@ -301,7 +301,7 @@ print(resolved);
 
 因为 `Uri.resolve` 会移除 `..` 片段，这样便可得到与 Windows 一致的行为。
 
-在 Windows 上，符号链接被创建为文件链接或目录链接。解析这样的符号链接时，链接类型必须与其所指向的文件系统对象的类型一致，否则将抛出 [PathAccessException]。
+在 Windows 上，符号链接被创建为文件链接或目录链接。解析这样的符号链接时，链接类型必须与其所指向的文件系统对象的类型一致，否则将抛出 [PathAccessException](https://www.yuque.com/thyname/dart.io/pathaccessexception)。
 
 ### stat()
 
@@ -317,7 +317,7 @@ Future<FileStat> stat()
 
 若 [path] 是一个符号链接，则会先解析该链接，并返回解析结果所指文件的相关信息。
 
-若调用失败，则以 `.type` 为 [FileSystemEntityType.notFound] 且其余字段无效的 [FileStat] 对象完成该 future。
+若调用失败，则以 `.type` 为 [FileSystemEntityType.notFound] 且其余字段无效的 [FileStat](https://www.yuque.com/thyname/dart.io/filestat) 对象完成该 future。
 
 ### statSync()
 
@@ -329,11 +329,11 @@ FileStat statSync()
 
 等同于 `FileStat.statSync(this.path)`。
 
-返回一个包含 `stat()` 返回数据的 [FileStat] 对象。
+返回一个包含 `stat()` 返回数据的 [FileStat](https://www.yuque.com/thyname/dart.io/filestat) 对象。
 
 若 [path] 是一个符号链接，则会先解析该链接，并返回解析结果所指文件的相关信息。
 
-若调用失败，则返回一个 `.type` 为 [FileSystemEntityType.notFound] 且其余字段无效的 [FileStat] 对象。
+若调用失败，则返回一个 `.type` 为 [FileSystemEntityType.notFound] 且其余字段无效的 [FileStat](https://www.yuque.com/thyname/dart.io/filestat) 对象。
 
 ### delete()
 
@@ -341,9 +341,9 @@ FileStat statSync()
 Future<FileSystemEntity> delete({bool recursive = false})
 ```
 
-删除此 [FileSystemEntity]。
+删除此 [FileSystemEntity](https://www.yuque.com/thyname/dart.io/filesystementity)。
 
-具体细节因 [FileSystemEntity] 的类型而异：
+具体细节因 [FileSystemEntity](https://www.yuque.com/thyname/dart.io/filesystementity) 的类型而异：
 
 - [Directory.delete]
 - [File.delete]
@@ -355,9 +355,9 @@ Future<FileSystemEntity> delete({bool recursive = false})
 void deleteSync({bool recursive = false})
 ```
 
-同步地删除此 [FileSystemEntity]。
+同步地删除此 [FileSystemEntity](https://www.yuque.com/thyname/dart.io/filesystementity)。
 
-具体细节因 [FileSystemEntity] 的类型而异：
+具体细节因 [FileSystemEntity](https://www.yuque.com/thyname/dart.io/filesystementity) 的类型而异：
 
 - [Directory.deleteSync]
 - [File.deleteSync]
@@ -369,7 +369,7 @@ void deleteSync({bool recursive = false})
 Stream<FileSystemEvent> watch({int events = FileSystemEvent.all, bool recursive = false})
 ```
 
-开始监视此 [FileSystemEntity] 的变化。
+开始监视此 [FileSystemEntity](https://www.yuque.com/thyname/dart.io/filesystementity) 的变化。
 
 具体实现使用与平台相关的、基于事件的 API 来接收文件系统通知，因此其行为取决于所在平台。
 
@@ -377,17 +377,17 @@ Stream<FileSystemEvent> watch({int events = FileSystemEvent.all, bool recursive 
 - `Linux`：使用 `inotify`。此实现同时支持监视文件与目录。不支持递归监视。注意：直接监视文件时，删除事件可能不会按预期发生。
 - `OS X`：使用 [File System Events API](https://developer.apple.com/library/archive/documentation/Darwin/Conceptual/FSEvents_ProgGuide/TechnologyOverview/TechnologyOverview.html)。此实现同时支持监视文件与目录，且支持递归监视。该 API 存在若干限制：
 
-- 在调用 [watch] 方法*之前*不久发生的变化，仍可能出现在 [Stream] 中。_ 短时间内发生的多个变化可能会乱序到达。_ 在单个目录中进行的多次变更，可能会被合并为单个 `FileSystemEvent`。
+- 在调用 [watch] 方法*之前*不久发生的变化，仍可能出现在 [Stream](https://www.yuque.com/thyname/dart.async/stream) 中。_ 短时间内发生的多个变化可能会乱序到达。_ 在单个目录中进行的多次变更，可能会被合并为单个 `FileSystemEvent`。
 
-系统会在返回的 [Stream] 开始被监听时才启动事件监听，而非在调用 [watch] 时。
+系统会在返回的 [Stream](https://www.yuque.com/thyname/dart.async/stream) 开始被监听时才启动事件监听，而非在调用 [watch] 时。
 
-返回值是一个无穷尽的广播 [Stream]，仅在以下情况之一发生时才会停止：
+返回值是一个无穷尽的广播 [Stream](https://www.yuque.com/thyname/dart.async/stream)，仅在以下情况之一发生时才会停止：
 
-- 该 [Stream] 被取消，例如通过在 [StreamSubscription] 上调用 `cancel`。
-- 被监视的 [FileSystemEntity] 被删除。
+- 该 [Stream](https://www.yuque.com/thyname/dart.async/stream) 被取消，例如通过在 [StreamSubscription](https://www.yuque.com/thyname/dart.async/streamsubscription) 上调用 `cancel`。
+- 被监视的 [FileSystemEntity](https://www.yuque.com/thyname/dart.io/filesystementity) 被删除。
 - 系统监视器意外退出。例如在 `Windows` 上，当接收 `ReadDirectoryChangesW` 事件的缓冲区溢出时会发生这种情况。
 
-使用 `events` 指定要监听的事件类型。可以通过对 [FileSystemEvent] 中的常量进行"或"运算来混合多种事件。默认值为 [FileSystemEvent.all]。
+使用 `events` 指定要监听的事件类型。可以通过对 [FileSystemEvent](https://www.yuque.com/thyname/dart.io/filesystemevent) 中的常量进行"或"运算来混合多种事件。默认值为 [FileSystemEvent.all]。
 
 一次移动事件可能会被报告为独立的删除事件和创建事件。
 
@@ -427,7 +427,7 @@ bool get isAbsolute
 FileSystemEntity get absolute
 ```
 
-一个路径为 [path] 绝对路径的 [FileSystemEntity]。
+一个路径为 [path] 绝对路径的 [FileSystemEntity](https://www.yuque.com/thyname/dart.io/filesystementity)。
 
 返回实例的类型与此实体的类型相同。
 
@@ -571,7 +571,7 @@ sealed class FileSystemEvent {}
 int create
 ```
 
-供 [FileSystemEntity.watch] 使用的位字段，用于启用 [FileSystemCreateEvent] 事件。
+供 [FileSystemEntity.watch] 使用的位字段，用于启用 [FileSystemCreateEvent](https://www.yuque.com/thyname/dart.io/filesystemcreateevent) 事件。
 
 ### modify
 
@@ -579,7 +579,7 @@ int create
 int modify
 ```
 
-供 [FileSystemEntity.watch] 使用的位字段，用于启用 [FileSystemModifyEvent] 事件。
+供 [FileSystemEntity.watch] 使用的位字段，用于启用 [FileSystemModifyEvent](https://www.yuque.com/thyname/dart.io/filesystemmodifyevent) 事件。
 
 ### delete
 
@@ -587,7 +587,7 @@ int modify
 int delete
 ```
 
-供 [FileSystemEntity.watch] 使用的位字段，用于启用 [FileSystemDeleteEvent] 事件。
+供 [FileSystemEntity.watch] 使用的位字段，用于启用 [FileSystemDeleteEvent](https://www.yuque.com/thyname/dart.io/filesystemdeleteevent) 事件。
 
 ### move
 
@@ -595,7 +595,7 @@ int delete
 int move
 ```
 
-供 [FileSystemEntity.watch] 使用的位字段，用于启用 [FileSystemMoveEvent] 事件。
+供 [FileSystemEntity.watch] 使用的位字段，用于启用 [FileSystemMoveEvent](https://www.yuque.com/thyname/dart.io/filesystemmoveevent) 事件。
 
 ### all
 
@@ -611,7 +611,7 @@ int all
 int type
 ```
 
-事件的类型。参见 [FileSystemEvent] 获取事件列表。
+事件的类型。参见 [FileSystemEvent](https://www.yuque.com/thyname/dart.io/filesystemevent) 获取事件列表。
 
 ### path
 
@@ -621,7 +621,7 @@ String path
 
 触发该事件的路径。
 
-根据平台与 [FileSystemEntity] 的不同，该路径可能是相对路径。
+根据平台与 [FileSystemEntity](https://www.yuque.com/thyname/dart.io/filesystementity) 的不同，该路径可能是相对路径。
 
 ### isDirectory
 
@@ -631,7 +631,7 @@ bool isDirectory
 
 事件的目标是否为目录。
 
-对于 [FileSystemDeleteEvent]，该值始终为 `false`。
+对于 [FileSystemDeleteEvent](https://www.yuque.com/thyname/dart.io/filesystemdeleteevent)，该值始终为 `false`。
 
 在 Windows 上，`isDirectory` 是通过在事件发生后检查文件系统实体类型来计算的，因此其结果可能不准确。对于目录的创建、修改或移动事件，若该目录在事件发生后不久即被删除，该值可能被错误地判定为 `false`；而对于新创建的指向目录的链接，该值可能被错误地判定为 `true`。
 
@@ -649,7 +649,7 @@ final class FileSystemCreateEvent extends FileSystemEvent {}
 FileSystemCreateEvent(String path, bool isDirectory)
 ```
 
-构造一个新的 [FileSystemCreateEvent]。
+构造一个新的 [FileSystemCreateEvent](https://www.yuque.com/thyname/dart.io/filesystemcreateevent)。
 
 ### toString()
 
@@ -679,7 +679,7 @@ bool contentChanged
 FileSystemModifyEvent(String path, bool isDirectory, bool contentChanged)
 ```
 
-构造一个新的 [FileSystemModifyEvent]。
+构造一个新的 [FileSystemModifyEvent](https://www.yuque.com/thyname/dart.io/filesystemmodifyevent)。
 
 ### toString()
 
@@ -701,7 +701,7 @@ final class FileSystemDeleteEvent extends FileSystemEvent {}
 FileSystemDeleteEvent(String path, bool isDirectory)
 ```
 
-构造一个新的 [FileSystemDeleteEvent]。
+构造一个新的 [FileSystemDeleteEvent](https://www.yuque.com/thyname/dart.io/filesystemdeleteevent)。
 
 ### toString()
 
@@ -717,7 +717,7 @@ bool get isDirectory
 
 该文件系统对象此前是否为目录。
 
-对于 [FileSystemDeleteEvent]，该值始终为 `false`。
+对于 [FileSystemDeleteEvent](https://www.yuque.com/thyname/dart.io/filesystemdeleteevent)，该值始终为 `false`。
 
 # FileSystemMoveEvent
 
@@ -745,7 +745,7 @@ String? destination
 FileSystemMoveEvent(String path, bool isDirectory, String? destination)
 ```
 
-构造一个新的 [FileSystemMoveEvent]。
+构造一个新的 [FileSystemMoveEvent](https://www.yuque.com/thyname/dart.io/filesystemmoveevent)。
 
 ### toString()
 

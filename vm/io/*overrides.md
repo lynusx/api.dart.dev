@@ -37,9 +37,9 @@ IOOverrides? get current
 set global(IOOverrides? overrides)
 ```
 
-在根 [Zone] 中使用的 [IOOverrides]。
+在根 [Zone](https://www.yuque.com/thyname/dart.async/zone) 中使用的 [IOOverrides](https://www.yuque.com/thyname/dart.io/iooverrides)。
 
-这些是将在根 [Zone] 中使用的 [IOOverrides]，也用于那些未设置 [IOOverrides] 且其祖先一直到根 [Zone] 也都未设置 [IOOverrides] 的 [Zone]。
+这些是将在根 [Zone](https://www.yuque.com/thyname/dart.async/zone) 中使用的 [IOOverrides](https://www.yuque.com/thyname/dart.io/iooverrides)，也用于那些未设置 [IOOverrides](https://www.yuque.com/thyname/dart.io/iooverrides) 且其祖先一直到根 [Zone](https://www.yuque.com/thyname/dart.async/zone) 也都未设置 [IOOverrides](https://www.yuque.com/thyname/dart.io/iooverrides) 的 [Zone](https://www.yuque.com/thyname/dart.async/zone)。
 
 ### runZoned()
 
@@ -47,9 +47,9 @@ set global(IOOverrides? overrides)
 R runZoned<R>(R body(), {Directory Function(String)? createDirectory, Directory Function()? getCurrentDirectory, void Function(String)? setCurrentDirectory, Directory Function()? getSystemTempDirectory, File Function(String)? createFile, Future<FileStat> Function(String)? stat, FileStat Function(String)? statSync, Future<bool> Function(String, String)? fseIdentical, bool Function(String, String)? fseIdenticalSync, Future<FileSystemEntityType> Function(String, bool)? fseGetType, FileSystemEntityType Function(String, bool)? fseGetTypeSync, Stream<FileSystemEvent> Function(String, int, bool)? fsWatch, bool Function()? fsWatchIsSupported, Link Function(String)? createLink, Future<Socket> Function(dynamic, int, {dynamic sourceAddress, int sourcePort, Duration? timeout})? socketConnect, Future<ConnectionTask<Socket>> Function(dynamic, int, {dynamic sourceAddress, int sourcePort})? socketStartConnect, Future<ServerSocket> Function(dynamic, int, {int backlog, bool v6Only, bool shared})? serverSocketBind, Stdin Function()? stdin, Stdout Function()? stdout, Stdout Function()? stderr, Never Function(int)? exit})
 ```
 
-在使用所提供覆盖的新建 [Zone] 中运行 [body]。
+在使用所提供覆盖的新建 [Zone](https://www.yuque.com/thyname/dart.async/zone) 中运行 [body]。
 
-有关这些可选参数的作用，请参阅 [IOOverrides] 相应方法的文档。
+有关这些可选参数的作用，请参阅 [IOOverrides](https://www.yuque.com/thyname/dart.io/iooverrides) 相应方法的文档。
 
 ### runWithIOOverrides()
 
@@ -57,9 +57,9 @@ R runZoned<R>(R body(), {Directory Function(String)? createDirectory, Directory 
 R runWithIOOverrides<R>(R body(), IOOverrides overrides)
 ```
 
-在使用 [overrides] 中所包含覆盖的新建 [Zone] 中运行 [body]。
+在使用 [overrides] 中所包含覆盖的新建 [Zone](https://www.yuque.com/thyname/dart.async/zone) 中运行 [body]。
 
-注意，[overrides] 应为扩展自 [IOOverrides] 的类的实例。
+注意，[overrides] 应为扩展自 [IOOverrides](https://www.yuque.com/thyname/dart.io/iooverrides) 的类的实例。
 
 ### createDirectory()
 
@@ -67,7 +67,7 @@ R runWithIOOverrides<R>(R body(), IOOverrides overrides)
 Directory createDirectory(String path)
 ```
 
-为给定的 [path] 创建一个新的 [Directory] 对象。
+为给定的 [path] 创建一个新的 [Directory](https://www.yuque.com/thyname/dart.io/directory) 对象。
 
 安装此覆盖后，此函数将覆盖 `new Directory()` 和 `new Directory.fromUri()` 的行为。
 
@@ -107,7 +107,7 @@ Directory getSystemTempDirectory()
 File createFile(String path)
 ```
 
-为给定的 [path] 创建一个新的 [File] 对象。
+为给定的 [path] 创建一个新的 [File](https://www.yuque.com/thyname/dart.io/file) 对象。
 
 安装此覆盖后，此函数将覆盖 `new File()` 和 `new File.fromUri()` 的行为。
 
@@ -117,7 +117,7 @@ File createFile(String path)
 Future<FileStat> stat(String path)
 ```
 
-异步返回 [path] 的 [FileStat] 信息。
+异步返回 [path] 的 [FileStat](https://www.yuque.com/thyname/dart.io/filestat) 信息。
 
 安装此覆盖后，此函数将覆盖 `FileStat.stat()` 的行为。
 
@@ -127,7 +127,7 @@ Future<FileStat> stat(String path)
 FileStat statSync(String path)
 ```
 
-返回 [path] 的 [FileStat] 信息。
+返回 [path] 的 [FileStat](https://www.yuque.com/thyname/dart.io/filestat) 信息。
 
 安装此覆盖后，此函数将覆盖 `FileStat.statSync()` 的行为。
 
@@ -157,7 +157,7 @@ bool fseIdenticalSync(String path1, String path2)
 Future<FileSystemEntityType> fseGetType(String path, bool followLinks)
 ```
 
-异步返回 [path] 的 [FileSystemEntityType]。
+异步返回 [path] 的 [FileSystemEntityType](https://www.yuque.com/thyname/dart.io/filesystementitytype)。
 
 安装此覆盖后，此函数将覆盖 `FileSystemEntity.type` 的行为。
 
@@ -167,7 +167,7 @@ Future<FileSystemEntityType> fseGetType(String path, bool followLinks)
 FileSystemEntityType fseGetTypeSync(String path, bool followLinks)
 ```
 
-返回 [path] 的 [FileSystemEntityType]。
+返回 [path] 的 [FileSystemEntityType](https://www.yuque.com/thyname/dart.io/filesystementitytype)。
 
 安装此覆盖后，此函数将覆盖 `FileSystemEntity.typeSync` 的行为。
 
@@ -177,7 +177,7 @@ FileSystemEntityType fseGetTypeSync(String path, bool followLinks)
 Stream<FileSystemEvent> fsWatch(String path, int events, bool recursive)
 ```
 
-返回一个 [FileSystemEvent] 的 [Stream]。
+返回一个 [FileSystemEvent](https://www.yuque.com/thyname/dart.io/filesystemevent) 的 [Stream](https://www.yuque.com/thyname/dart.async/stream)。
 
 安装此覆盖后，此函数将覆盖 `FileSystemEntity.watch()` 的行为。
 
@@ -197,7 +197,7 @@ bool fsWatchIsSupported()
 Link createLink(String path)
 ```
 
-为给定的 [path] 返回一个新的 [Link] 对象。
+为给定的 [path] 返回一个新的 [Link](https://www.yuque.com/thyname/dart.io/link) 对象。
 
 安装此覆盖后，此函数将覆盖 `new Link()` 和 `new Link.fromUri()` 的行为。
 
@@ -207,7 +207,7 @@ Link createLink(String path)
 Future<Socket> socketConnect(dynamic host, int port, {dynamic sourceAddress, int sourcePort = 0, Duration? timeout})
 ```
 
-异步返回一个连接到给定主机和端口的 [Socket]。
+异步返回一个连接到给定主机和端口的 [Socket](https://www.yuque.com/thyname/dart.io/socket)。
 
 安装此覆盖后，此函数将覆盖 `Socket.connect(...)` 的行为。
 
@@ -217,7 +217,7 @@ Future<Socket> socketConnect(dynamic host, int port, {dynamic sourceAddress, int
 Future<ConnectionTask<Socket>> socketStartConnect(dynamic host, int port, {dynamic sourceAddress, int sourcePort = 0})
 ```
 
-异步返回一个 [ConnectionTask]，成功时会连接到给定的主机和端口。
+异步返回一个 [ConnectionTask](https://www.yuque.com/thyname/dart.io/connectiontask)，成功时会连接到给定的主机和端口。
 
 安装此覆盖后，此函数将覆盖 `Socket.startConnect(...)` 的行为。
 
@@ -227,7 +227,7 @@ Future<ConnectionTask<Socket>> socketStartConnect(dynamic host, int port, {dynam
 Future<ServerSocket> serverSocketBind(dynamic address, int port, {int backlog = 0, bool v6Only = false, bool shared = false})
 ```
 
-异步返回一个 [ServerSocket]，成功时会连接到给定的地址和端口。
+异步返回一个 [ServerSocket](https://www.yuque.com/thyname/dart.io/serversocket)，成功时会连接到给定的地址和端口。
 
 安装此覆盖后，此函数将覆盖 `ServerSocket.bind(...)` 的行为。
 

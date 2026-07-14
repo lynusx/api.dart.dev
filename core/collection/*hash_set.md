@@ -4,7 +4,7 @@
 abstract final class HashSet<E> implements Set<E> {}
 ```
 
-一种基于哈希表实现的无序 [Set]。
+一种基于哈希表实现的无序 [Set](https://www.yuque.com/thyname/dart.core/set)。
 
 `HashSet` 的元素必须具有一致的相等性和 hashCode 实现。这意味着相等性运算必须在元素上定义一个稳定的等价关系（自反、对称、传递，并且随时间保持一致），并且 hashCode 必须与相等性保持一致，使得被判定为相等的对象具有相同的 hashCode。
 
@@ -91,9 +91,9 @@ print(letters); // {}
 
 **另请参阅：**
 
-- [Set] 是集合的通用接口，其中每个对象只能出现一次。
-- [LinkedHashSet] 按插入顺序存储对象。
-- [SplayTreeSet] 按排序顺序迭代对象。
+- [Set](https://www.yuque.com/thyname/dart.core/set) 是集合的通用接口，其中每个对象只能出现一次。
+- [LinkedHashSet](https://www.yuque.com/thyname/dart.collection/linkedhashset) 按插入顺序存储对象。
+- [SplayTreeSet](https://www.yuque.com/thyname/dart.collection/splaytreeset) 按排序顺序迭代对象。
 
 ## 构造函数
 
@@ -126,7 +126,7 @@ HashSet<int>(equals: (int e1, int e2) => (e1 - e2) % 5 == 0,
 
 如果既未提供 `equals`、`hashCode`，也未提供 `isValidKey`，则默认的 `isValidKey` 会接受所有值。默认的相等性和哈希码运算被假定适用于所有对象。
 
-同样，如果 `equals` 为 [identical]，`hashCode` 为 [identityHashCode]，并且省略了 `isValidKey`，则生成的集合基于对象标识（identity），且 `isValidKey` 默认接受所有键。可以直接使用 [HashSet.identity] 创建这样的集合。
+同样，如果 `equals` 为 [identical](https://www.yuque.com/thyname/dart.core/identical)，`hashCode` 为 [identityHashCode](https://www.yuque.com/thyname/dart.core/identityhashcode)，并且省略了 `isValidKey`，则生成的集合基于对象标识（identity），且 `isValidKey` 默认接受所有键。可以直接使用 [HashSet.identity] 创建这样的集合。
 
 ### HashSet.identity()
 

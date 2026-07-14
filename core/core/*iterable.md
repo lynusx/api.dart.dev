@@ -6,11 +6,11 @@ abstract mixin class Iterable<E> {}
 
 一个可以顺序访问其值（或称"元素"）的集合。
 
-可迭代对象的元素通过使用 [iterator] 获取一个 [Iterator] 来访问，并使用它逐步遍历这些值。使用迭代器进行遍历是通过调用 [Iterator.moveNext] 完成的，如果调用返回 `true`，则表示迭代器已经移动到下一个元素，该元素可通过 [Iterator.current] 获取。如果调用返回 `false`，则表示没有更多元素。[Iterator.current] 的值只能在最近一次调用 [Iterator.moveNext] 返回 `true` 之后使用。如果在迭代器上第一次调用 [Iterator.moveNext] 之前读取 [Iterator.current]，或者在某次调用返回 false 或抛出错误之后读取，读取 [Iterator.current] 可能会抛出异常，也可能返回一个任意值。
+可迭代对象的元素通过使用 [iterator] 获取一个 [Iterator](https://www.yuque.com/thyname/dart.core/iterator) 来访问，并使用它逐步遍历这些值。使用迭代器进行遍历是通过调用 [Iterator.moveNext] 完成的，如果调用返回 `true`，则表示迭代器已经移动到下一个元素，该元素可通过 [Iterator.current] 获取。如果调用返回 `false`，则表示没有更多元素。[Iterator.current] 的值只能在最近一次调用 [Iterator.moveNext] 返回 `true` 之后使用。如果在迭代器上第一次调用 [Iterator.moveNext] 之前读取 [Iterator.current]，或者在某次调用返回 false 或抛出错误之后读取，读取 [Iterator.current] 可能会抛出异常，也可能返回一个任意值。
 
 可以从同一个 `Iterable` 创建多个迭代器。每次读取 `iterator` 时，都会返回一个新的迭代器，不同的迭代器可以独立地进行遍历，每个迭代器都能访问可迭代对象的所有元素。同一个可迭代对象的迭代器*应当*以相同的顺序提供相同的值（除非在两次迭代之间修改了底层集合，某些集合允许这样做）。
 
-也可以使用 for-in 循环结构来遍历 `Iterable` 的元素，该结构在底层使用了 `iterator` 获取器。例如，可以遍历 [Map] 的所有键，因为 `Map` 的键是可迭代的。
+也可以使用 for-in 循环结构来遍历 `Iterable` 的元素，该结构在底层使用了 `iterator` 获取器。例如，可以遍历 [Map](https://www.yuque.com/thyname/dart.core/map) 的所有键，因为 `Map` 的键是可迭代的。
 
 ```dart
 var kidsBooks = {'Matilda': 'Roald Dahl',
@@ -21,21 +21,21 @@ for (var book in kidsBooks.keys) {
 }
 ```
 
-[List] 和 [Set] 类都是 `Iterable`，`dart:collection` 库中的大多数类也是如此。
+[List](https://www.yuque.com/thyname/dart.core/list) 和 [Set](https://www.yuque.com/thyname/dart.core/set) 类都是 `Iterable`，`dart:collection` 库中的大多数类也是如此。
 
-某些 [Iterable] 集合是可以修改的。向 `List` 或 `Set` 添加元素会改变其包含的元素，向 `Map` 添加新键会改变 [Map.keys] 的元素。在修改之后创建的迭代器将提供新的元素，并且可能保留也可能不保留现有元素的顺序（例如，向 [HashSet] 添加一个元素后，其顺序可能会完全改变）。
+某些 [Iterable](https://www.yuque.com/thyname/dart.core/iterable) 集合是可以修改的。向 `List` 或 `Set` 添加元素会改变其包含的元素，向 `Map` 添加新键会改变 [Map.keys] 的元素。在修改之后创建的迭代器将提供新的元素，并且可能保留也可能不保留现有元素的顺序（例如，向 [HashSet](https://www.yuque.com/thyname/dart.collection/hashset) 添加一个元素后，其顺序可能会完全改变）。
 
-在遍历集合*的过程中*修改集合，通常是*不允许*的。这样做会破坏迭代过程，通常的表现是在下一次调用 [Iterator.moveNext] 时抛出 [ConcurrentModificationError]。[Iterator.current] 获取器的当前值不应受到集合变化的影响，因为 `current` 的值是由上一次调用 [Iterator.moveNext] 设置的。
+在遍历集合*的过程中*修改集合，通常是*不允许*的。这样做会破坏迭代过程，通常的表现是在下一次调用 [Iterator.moveNext] 时抛出 [ConcurrentModificationError](https://www.yuque.com/thyname/dart.core/concurrentmodificationerror)。[Iterator.current] 获取器的当前值不应受到集合变化的影响，因为 `current` 的值是由上一次调用 [Iterator.moveNext] 设置的。
 
 一些可迭代对象在每次被遍历时都会动态计算其元素，例如 [Iterable.generate] 返回的可迭代对象，或者由 `sync*` 生成器函数返回的可迭代对象。如果计算过程不依赖于其他可能发生变化的对象，那么每次遍历生成的序列应当是相同的。
 
-`Iterable` 的成员（除 `iterator` 本身之外）都是通过查看可迭代对象的元素来工作的。这可以通过遍历 [iterator] 来实现，但某些类可能有更高效的方式来找到结果（例如 [List] 上的 [last] 或 [length]，或者 [Set] 上的 [contains]）。
+`Iterable` 的成员（除 `iterator` 本身之外）都是通过查看可迭代对象的元素来工作的。这可以通过遍历 [iterator] 来实现，但某些类可能有更高效的方式来找到结果（例如 [List](https://www.yuque.com/thyname/dart.core/list) 上的 [last] 或 [length]，或者 [Set](https://www.yuque.com/thyname/dart.core/set) 上的 [contains]）。
 
 返回另一个 `Iterable` 的方法（如 [map] 和 [where]）都是*惰性*的——它们只有在返回的可迭代对象本身被遍历时（且仅在必要时）才会遍历原始对象，而不会提前进行。
 
 由于一个可迭代对象可能被遍历多次，不建议在迭代器中包含可检测的副作用。对于 [map] 和 [where] 等方法，返回的可迭代对象会在每次遍历时执行传入的函数，因此这些函数也不应带有副作用。
 
-`Iterable` 声明提供了一个默认实现，可以被继承或混入以实现 `Iterable` 接口。它使用 [iterator] 提供的 [Iterator] 实现了除 [iterator] 获取器之外的所有成员。`Iterable` 接口的实现应当在力所能及的情况下为 `Iterable` 的成员提供更高效的实现。
+`Iterable` 声明提供了一个默认实现，可以被继承或混入以实现 `Iterable` 接口。它使用 [iterator] 提供的 [Iterator](https://www.yuque.com/thyname/dart.core/iterator) 实现了除 [iterator] 获取器之外的所有成员。`Iterable` 接口的实现应当在力所能及的情况下为 `Iterable` 的成员提供更高效的实现。
 
 ## 构造函数
 
@@ -66,7 +66,7 @@ Iterable<E>.generate( int count, [ E generator( int index )? ])
 Iterable<E>.withIterator( Iterator<E> iteratorFactory() )
 ```
 
-通过 [Iterator] 工厂函数创建一个 [Iterable]。
+通过 [Iterator](https://www.yuque.com/thyname/dart.core/iterator) 工厂函数创建一个 [Iterable](https://www.yuque.com/thyname/dart.core/iterable)。
 
 返回的可迭代对象每次读取 [iterator] 时都会调用提供的 [iteratorFactory] 函数来创建一个新的迭代器。[iteratorFactory] 函数每次调用都必须返回一个新的 `Iterator<E>` 实例。
 
@@ -137,11 +137,11 @@ Iterator<E> get iterator
 
 一个新的 `Iterator`，用于遍历此 `Iterable` 的元素。
 
-`Iterable` 类可以指定其元素的迭代顺序（例如 [List] 总是按索引顺序迭代），也可以不作规定（例如基于哈希的 [Set] 可能以任意顺序迭代）。
+`Iterable` 类可以指定其元素的迭代顺序（例如 [List](https://www.yuque.com/thyname/dart.core/list) 总是按索引顺序迭代），也可以不作规定（例如基于哈希的 [Set](https://www.yuque.com/thyname/dart.core/set) 可能以任意顺序迭代）。
 
 每次读取 `iterator` 时，都会返回一个新的迭代器，可用于再次遍历所有元素。同一个可迭代对象的多个迭代器可以独立地进行遍历，但只要底层集合没有发生变化，它们应当以相同的顺序返回相同的元素。
 
-修改集合可能导致新创建的迭代器产生不同的元素，也可能改变现有元素的顺序。[List] 精确地规定了其迭代顺序，因此修改列表会以可预测的方式改变迭代顺序。基于哈希的 [Set] 在添加一个新元素后，其迭代顺序可能会完全改变。
+修改集合可能导致新创建的迭代器产生不同的元素，也可能改变现有元素的顺序。[List](https://www.yuque.com/thyname/dart.core/list) 精确地规定了其迭代顺序，因此修改列表会以可预测的方式改变迭代顺序。基于哈希的 [Set](https://www.yuque.com/thyname/dart.core/set) 在添加一个新元素后，其迭代顺序可能会完全改变。
 
 在创建新迭代器之后修改底层集合，可能会导致在该迭代器下一次调用 [Iterator.moveNext] 时抛出错误。任何*可修改*的可迭代对象类都应当说明哪些操作会破坏迭代。
 
@@ -151,7 +151,7 @@ Iterator<E> get iterator
 int get length
 ```
 
-此 [Iterable] 中的元素个数。
+此 [Iterable](https://www.yuque.com/thyname/dart.core/iterable) 中的元素个数。
 
 统计所有元素可能需要遍历全部元素，因此可能较慢。一些可迭代对象有更高效的方式来获取元素个数，这些类*必须*重写 `length` 的默认实现。
 
@@ -199,7 +199,7 @@ E get first
 
 第一个元素。
 
-如果 `this` 为空，则抛出 [StateError]。否则返回迭代顺序中的第一个元素，等价于 `this.elementAt(0)`。
+如果 `this` 为空，则抛出 [StateError](https://www.yuque.com/thyname/dart.core/stateerror)。否则返回迭代顺序中的第一个元素，等价于 `this.elementAt(0)`。
 
 ### last
 
@@ -209,7 +209,7 @@ E get last
 
 最后一个元素。
 
-如果 `this` 为空，则抛出 [StateError]。否则可能会遍历所有元素，并返回最后看到的那一个。一些可迭代对象可能有更高效的方式来找到最后一个元素（例如列表可以直接访问最后一个元素，而无需遍历前面的元素）。
+如果 `this` 为空，则抛出 [StateError](https://www.yuque.com/thyname/dart.core/stateerror)。否则可能会遍历所有元素，并返回最后看到的那一个。一些可迭代对象可能有更高效的方式来找到最后一个元素（例如列表可以直接访问最后一个元素，而无需遍历前面的元素）。
 
 ### single
 
@@ -219,7 +219,7 @@ E get single
 
 检查此可迭代对象是否只有一个元素，并返回该元素。
 
-如果 `this` 为空或包含多个元素，则抛出 [StateError]。此操作不会遍历超过第二个元素。
+如果 `this` 为空或包含多个元素，则抛出 [StateError](https://www.yuque.com/thyname/dart.core/stateerror)。此操作不会遍历超过第二个元素。
 
 ## 方法
 
@@ -261,9 +261,9 @@ Iterable<T> map<T>(T toElement(E e))
 
 通过 [toElement] 修改后的此可迭代对象的当前元素。
 
-返回一个新的惰性 [Iterable]，其元素是通过按迭代顺序对此 `Iterable` 的每个元素调用 `toElement` 创建的。
+返回一个新的惰性 [Iterable](https://www.yuque.com/thyname/dart.core/iterable)，其元素是通过按迭代顺序对此 `Iterable` 的每个元素调用 `toElement` 创建的。
 
-返回的可迭代对象是惰性的，因此在它本身被遍历之前，不会遍历此可迭代对象的元素；遍历时会逐个应用 [toElement] 来创建元素。转换后的元素不会被缓存。对返回的 [Iterable] 进行多次遍历，将针对每次遍历对每个元素调用一次所提供的 [toElement] 函数。
+返回的可迭代对象是惰性的，因此在它本身被遍历之前，不会遍历此可迭代对象的元素；遍历时会逐个应用 [toElement] 来创建元素。转换后的元素不会被缓存。对返回的 [Iterable](https://www.yuque.com/thyname/dart.core/iterable) 进行多次遍历，将针对每次遍历对每个元素调用一次所提供的 [toElement] 函数。
 
 返回的可迭代对象上的方法可以在不需要结果的元素上省略调用 `toElement`。例如，[elementAt] 可能只调用一次 `toElement`。
 
@@ -296,11 +296,11 @@ var totalPrice = values.fold(0.0, (a, b) => a + b); // 42.5.
 Iterable<E> where(bool test(E element))
 ```
 
-创建一个新的惰性 [Iterable]，包含所有满足谓词 [test] 的元素。
+创建一个新的惰性 [Iterable](https://www.yuque.com/thyname/dart.core/iterable)，包含所有满足谓词 [test] 的元素。
 
 匹配的元素在返回的可迭代对象中的顺序与它们在 [iterator] 中的顺序相同。
 
-此方法返回被映射元素的一个视图。只要返回的 [Iterable] 没有被遍历，所提供的函数 [test] 就不会被调用。遍历不会缓存结果，因此对返回的 [Iterable] 进行多次遍历，可能会对同一个元素多次调用所提供的函数 [test]。
+此方法返回被映射元素的一个视图。只要返回的 [Iterable](https://www.yuque.com/thyname/dart.core/iterable) 没有被遍历，所提供的函数 [test] 就不会被调用。遍历不会缓存结果，因此对返回的 [Iterable](https://www.yuque.com/thyname/dart.core/iterable) 进行多次遍历，可能会对同一个元素多次调用所提供的函数 [test]。
 
 示例：
 
@@ -317,11 +317,11 @@ result = numbers.where((x) => x.isEven); // (2, 6)
 Iterable<T> whereType<T>()
 ```
 
-创建一个新的惰性 [Iterable]，包含所有类型为 [T] 的元素。
+创建一个新的惰性 [Iterable](https://www.yuque.com/thyname/dart.core/iterable)，包含所有类型为 [T] 的元素。
 
 匹配的元素在返回的可迭代对象中的顺序与它们在 [iterator] 中的顺序相同。
 
-此方法返回被映射元素的一个视图。遍历不会缓存结果，因此如果底层元素在两次遍历之间发生变化，多次遍历返回的 [Iterable] 可能会产生不同的结果。
+此方法返回被映射元素的一个视图。遍历不会缓存结果，因此如果底层元素在两次遍历之间发生变化，多次遍历返回的 [Iterable](https://www.yuque.com/thyname/dart.core/iterable) 可能会产生不同的结果。
 
 ### expand()
 
@@ -329,11 +329,11 @@ Iterable<T> whereType<T>()
 Iterable<T> expand<T>(Iterable<T> toElements(E element))
 ```
 
-将此 [Iterable] 的每个元素展开为零个或多个元素。
+将此 [Iterable](https://www.yuque.com/thyname/dart.core/iterable) 的每个元素展开为零个或多个元素。
 
 生成的 Iterable 依次遍历对此对象的每个元素调用 [toElements] 所返回的元素，顺序为迭代顺序。
 
-返回的 [Iterable] 是惰性的，每次遍历返回的可迭代对象时，都会对此可迭代对象的每个元素调用 [toElements]。
+返回的 [Iterable](https://www.yuque.com/thyname/dart.core/iterable) 是惰性的，每次遍历返回的可迭代对象时，都会对此可迭代对象的每个元素调用 [toElements]。
 
 示例：
 
@@ -370,7 +370,7 @@ bool contains(Object? element)
 
 用于判断 [element] 是否与可迭代对象中的某个元素相等的相等性判断，默认使用元素的 [Object.==]。
 
-某些类型的可迭代对象可能对其元素使用不同的相等性判断。例如，[Set] 可能使用自定义的相等性判断（参见 [Set.identity]）作为其 `contains` 使用的判断依据。同样，[Map.keys] 返回的 `Iterable` 的 `contains` 方法也应使用该 `Map` 用于键的相等性判断。
+某些类型的可迭代对象可能对其元素使用不同的相等性判断。例如，[Set](https://www.yuque.com/thyname/dart.core/set) 可能使用自定义的相等性判断（参见 [Set.identity]）作为其 `contains` 使用的判断依据。同样，[Map.keys] 返回的 `Iterable` 的 `contains` 方法也应使用该 `Map` 用于键的相等性判断。
 
 示例：
 
@@ -484,9 +484,9 @@ final every = planetsByMass.keys.every((key) => key < 1.0); // true
 String join([String separator = ""])
 ```
 
-将每个元素转换为 [String] 并将这些字符串连接起来。
+将每个元素转换为 [String](https://www.yuque.com/thyname/dart.core/string) 并将这些字符串连接起来。
 
-遍历此可迭代对象的元素，通过调用 [Object.toString] 将每个元素转换为一个 [String]，然后将这些字符串连接起来，各元素之间插入 [separator] 字符串。
+遍历此可迭代对象的元素，通过调用 [Object.toString] 将每个元素转换为一个 [String](https://www.yuque.com/thyname/dart.core/string)，然后将这些字符串连接起来，各元素之间插入 [separator] 字符串。
 
 示例：
 
@@ -520,7 +520,7 @@ result = numbers.any((element) => element >= 10); // false;
 List<E> toList({bool growable = true})
 ```
 
-创建一个包含此 [Iterable] 元素的 [List]。
+创建一个包含此 [Iterable](https://www.yuque.com/thyname/dart.core/iterable) 元素的 [List](https://www.yuque.com/thyname/dart.core/list)。
 
 元素按迭代顺序排列。如果 [growable] 为 false，则返回的列表是定长列表。
 
@@ -539,7 +539,7 @@ final valuesList =
 Set<E> toSet()
 ```
 
-创建一个包含与此可迭代对象相同元素的 [Set]。
+创建一个包含与此可迭代对象相同元素的 [Set](https://www.yuque.com/thyname/dart.core/set)。
 
 如果该可迭代对象中某个元素出现多次，或者包含一个或多个相等的元素，则该集合可能包含比该可迭代对象更少的元素。集合中元素的顺序不保证与该可迭代对象中的顺序相同。
 
@@ -600,11 +600,11 @@ result = numbers.takeWhile((x) => x.isOdd); // (1)
 Iterable<E> skip(int count)
 ```
 
-创建一个 [Iterable]，提供除前 [count] 个元素之外的所有元素。
+创建一个 [Iterable](https://www.yuque.com/thyname/dart.core/iterable)，提供除前 [count] 个元素之外的所有元素。
 
 当返回的可迭代对象被遍历时，它会开始遍历 `this`，首先跳过最初的 [count] 个元素。如果 `this` 的元素少于 `count` 个，则生成的 Iterable 为空。之后，剩余的元素将按此可迭代对象中相同的顺序进行遍历。
 
-某些可迭代对象可能能够在不先遍历前面元素的情况下找到后面的元素，例如在遍历 [List] 时。这类可迭代对象允许直接忽略被跳过的最初元素。
+某些可迭代对象可能能够在不先遍历前面元素的情况下找到后面的元素，例如在遍历 [List](https://www.yuque.com/thyname/dart.core/list) 时。这类可迭代对象允许直接忽略被跳过的最初元素。
 
 示例：
 
@@ -624,7 +624,7 @@ Iterable<E> skipWhile(bool test(E value))
 
 创建一个 `Iterable`，跳过满足 [test] 的前导元素。
 
-过滤操作是惰性进行的。返回的可迭代对象的每个新 [Iterator] 都会遍历 `this` 的所有元素。
+过滤操作是惰性进行的。返回的可迭代对象的每个新 [Iterator](https://www.yuque.com/thyname/dart.core/iterator) 都会遍历 `this` 的所有元素。
 
 返回的可迭代对象通过遍历此可迭代对象来提供元素，但会跳过所有 `test(element)` 返回 true 的初始元素。如果所有元素都满足 `test`，则生成的可迭代对象为空；否则，它会按原始顺序遍历剩余的元素，从第一个使 `test(element)` 返回 `false` 的元素开始。
 
@@ -658,7 +658,7 @@ result =
     numbers.firstWhere((element) => element > 10, orElse: () => -1); // -1
 ```
 
-如果没有元素满足 [test]，则返回调用 [orElse] 函数的结果。如果省略 [orElse]，则默认抛出 [StateError]。一旦找到第一个匹配的元素，就会停止遍历。
+如果没有元素满足 [test]，则返回调用 [orElse] 函数的结果。如果省略 [orElse]，则默认抛出 [StateError](https://www.yuque.com/thyname/dart.core/stateerror)。一旦找到第一个匹配的元素，就会停止遍历。
 
 ### lastWhere()
 
@@ -680,7 +680,7 @@ result = numbers.lastWhere((element) => element > 10,
     orElse: () => -1); // -1
 ```
 
-如果没有元素满足 [test]，则返回调用 [orElse] 函数的结果。如果省略 [orElse]，则默认抛出 [StateError]。
+如果没有元素满足 [test]，则返回调用 [orElse] 函数的结果。如果省略 [orElse]，则默认抛出 [StateError](https://www.yuque.com/thyname/dart.core/stateerror)。
 
 ### singleWhere()
 
@@ -690,7 +690,7 @@ E singleWhere(bool test(E element), {E orElse()})
 
 满足 [test] 的单个元素。
 
-检查各元素，判断 `test(element)` 是否返回 true。如果恰好有一个元素满足 [test]，则返回该元素。如果找到多个匹配的元素，则抛出 [StateError]。如果没有找到匹配的元素，则返回 [orElse] 的结果。如果省略 [orElse]，则默认抛出 [StateError]。
+检查各元素，判断 `test(element)` 是否返回 true。如果恰好有一个元素满足 [test]，则返回该元素。如果找到多个匹配的元素，则抛出 [StateError](https://www.yuque.com/thyname/dart.core/stateerror)。如果没有找到匹配的元素，则返回 [orElse] 的结果。如果省略 [orElse]，则默认抛出 [StateError](https://www.yuque.com/thyname/dart.core/stateerror)。
 
 示例：
 

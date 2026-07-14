@@ -102,11 +102,11 @@ final firstVowel = growableList.firstWhere(isVowel, orElse: () => ''); // ''
 
 还有类似的 [lastWhere] 和 [singleWhere] 方法。
 
-列表是一个 [Iterable]，支持其全部方法，包括 [where]、[map]、[whereType] 和 [toList]。
+列表是一个 [Iterable](https://www.yuque.com/thyname/dart.core/iterable)，支持其全部方法，包括 [where]、[map]、[whereType] 和 [toList]。
 
-列表属于 [Iterable]。迭代按索引顺序遍历各个值。改变元素的值不会影响迭代，但在迭代步骤之间改变有效索引——即改变列表的长度——会引发 [ConcurrentModificationError]。这意味着只有可增长列表才会抛出 ConcurrentModificationError。如果长度只是暂时改变，并在继续迭代前恢复，迭代器可能检测不到这种变化。
+列表属于 [Iterable](https://www.yuque.com/thyname/dart.core/iterable)。迭代按索引顺序遍历各个值。改变元素的值不会影响迭代，但在迭代步骤之间改变有效索引——即改变列表的长度——会引发 [ConcurrentModificationError](https://www.yuque.com/thyname/dart.core/concurrentmodificationerror)。这意味着只有可增长列表才会抛出 ConcurrentModificationError。如果长度只是暂时改变，并在继续迭代前恢复，迭代器可能检测不到这种变化。
 
-通常不允许在对列表执行某项操作期间（例如调用 [forEach] 或 [sort] 时）修改列表的长度（添加或删除元素）。在迭代列表期间改变其长度——无论是直接迭代该列表，还是通过迭代一个以该列表为后备存储的 [Iterable]——都会破坏迭代过程。
+通常不允许在对列表执行某项操作期间（例如调用 [forEach] 或 [sort] 时）修改列表的长度（添加或删除元素）。在迭代列表期间改变其长度——无论是直接迭代该列表，还是通过迭代一个以该列表为后备存储的 [Iterable](https://www.yuque.com/thyname/dart.core/iterable)——都会破坏迭代过程。
 
 ## 构造函数
 
@@ -130,7 +130,7 @@ List<E>.filled(
 final zeroList = List<int>.filled(3, 0, growable: true); // [0, 0, 0]
 ```
 
-如果 [growable] 为 false（默认值），创建的列表为固定长度；如果为 true，则为可增长列表。如果列表是可增长的，增加其 [length] 并**不会**用 [fill] 初始化新增的元素。列表创建并填充完成后，与使用 `[]` 或其他 [List] 构造函数创建的可增长列表或固定长度列表没有区别。
+如果 [growable] 为 false（默认值），创建的列表为固定长度；如果为 true，则为可增长列表。如果列表是可增长的，增加其 [length] 并**不会**用 [fill] 初始化新增的元素。列表创建并填充完成后，与使用 `[]` 或其他 [List](https://www.yuque.com/thyname/dart.core/list) 构造函数创建的可增长列表或固定长度列表没有区别。
 
 所创建列表的所有元素共享同一个 [fill] 值。
 
@@ -179,7 +179,7 @@ List<E>.from(
 
 创建一个包含所有 [elements] 的列表。
 
-[elements] 的 [Iterator] 决定元素的顺序。
+[elements] 的 [Iterator](https://www.yuque.com/thyname/dart.core/iterator) 决定元素的顺序。
 
 所有 [elements] 都应是 [E] 的实例。
 
@@ -217,7 +217,7 @@ List<E>.of(
 
 根据 [elements] 创建一个列表。
 
-[elements] 的 [Iterator] 决定元素的顺序。
+[elements] 的 [Iterator](https://www.yuque.com/thyname/dart.core/iterator) 决定元素的顺序。
 
 当 [growable] 为 true 时，该构造函数创建一个可增长列表；否则返回一个固定长度列表。
 
@@ -263,7 +263,7 @@ List<E>.unmodifiable( Iterable elements )
 
 创建一个包含所有 [elements] 的不可修改列表。
 
-[elements] 的 [Iterator] 决定元素的顺序。
+[elements] 的 [Iterator](https://www.yuque.com/thyname/dart.core/iterator) 决定元素的顺序。
 
 不可修改列表的长度和元素都不能更改。如果元素本身是不可变的，那么生成的列表也是不可变的。
 
@@ -281,7 +281,7 @@ List<E>.unmodifiableOf(Iterable<E> elements)
 
 创建一个包含所有 [elements] 的不可修改列表。
 
-[elements] 的 [Iterator] 决定元素的顺序。
+[elements] 的 [Iterator](https://www.yuque.com/thyname/dart.core/iterator) 决定元素的顺序。
 
 不可修改列表的长度和元素都不能更改。如果元素本身是不可变的，那么生成的列表也是不可变的。
 
@@ -353,7 +353,7 @@ E get first
 
 第一个元素。
 
-如果 `this` 为空，则抛出 [StateError](https://api.flutter.dev/flutter/dart-core/StateError-class.html)。否则按迭代顺序返回第一个元素，等价于 `this.elementAt(0)`。
+如果 `this` 为空，则抛出 [StateError](https://www.yuque.com/thyname/dart.core/stateerror)。否则按迭代顺序返回第一个元素，等价于 `this.elementAt(0)`。
 
 ---
 
@@ -365,7 +365,7 @@ void set first(E value)
 
 访问列表的第一个元素时，列表必须非空。
 
-与 [Iterable] 不同，列表的第一个元素可以被修改。`list.first` 等价于 `list[0]`，无论是取值还是赋值都是如此。
+与 [Iterable](https://www.yuque.com/thyname/dart.core/iterable) 不同，列表的第一个元素可以被修改。`list.first` 等价于 `list[0]`，无论是取值还是赋值都是如此。
 
 ```dart
 final numbers = <int>[1, 2, 3];
@@ -384,7 +384,7 @@ E get last
 
 最后一个元素。
 
-如果 `this` 为空，则抛出 [StateError](https://api.flutter.dev/flutter/dart-core/StateError-class.html)。否则可能会遍历元素并返回最后遇到的一个。某些可迭代对象可能有更高效的方式获取最后一个元素（例如列表可以直接访问最后一个元素，而无需遍历前面的元素）。
+如果 `this` 为空，则抛出 [StateError](https://www.yuque.com/thyname/dart.core/stateerror)。否则可能会遍历元素并返回最后遇到的一个。某些可迭代对象可能有更高效的方式获取最后一个元素（例如列表可以直接访问最后一个元素，而无需遍历前面的元素）。
 
 ---
 
@@ -396,7 +396,7 @@ void set last(E value)
 
 访问列表的最后一个元素时，列表必须非空。
 
-与 [Iterable] 不同，列表的最后一个元素可以被修改。`list.last` 等价于 `theList[theList.length - 1]`，无论是取值还是赋值都是如此。
+与 [Iterable](https://www.yuque.com/thyname/dart.core/iterable) 不同，列表的最后一个元素可以被修改。`list.last` 等价于 `theList[theList.length - 1]`，无论是取值还是赋值都是如此。
 
 ```dart
 final numbers = <int>[1, 2, 3];
@@ -451,7 +451,7 @@ numbers.length = 5; // Throws, cannot add `null`s.
 Iterable<E> get reversed
 ```
 
-此列表中对象按逆序排列所得的 [Iterable]。
+此列表中对象按逆序排列所得的 [Iterable](https://www.yuque.com/thyname/dart.core/iterable)。
 
 ```dart
 final numbers = <String>['two', 'three', 'four'];
@@ -517,7 +517,7 @@ void sort([int compare(E a, E b)])
 
 按照 [compare] 函数指定的顺序对此列表进行排序。
 
-[compare] 函数必须作为一个 [Comparator]。
+[compare] 函数必须作为一个 [Comparator](https://www.yuque.com/thyname/dart.core/comparator)。
 
 ```dart
 final numbers = <String>['two', 'three', 'four'];
@@ -526,7 +526,7 @@ numbers.sort((a, b) => a.length.compareTo(b.length));
 print(numbers); // [two, four, three]
 ```
 
-如果省略 [compare]，默认的 [List] 实现会使用 [Comparable.compare]。
+如果省略 [compare]，默认的 [List](https://www.yuque.com/thyname/dart.core/list) 实现会使用 [Comparable.compare]。
 
 ```dart
 final numbers = <int>[13, 2, -11, 0];
@@ -534,9 +534,9 @@ numbers.sort();
 print(numbers); // [-11, 0, 2, 13]
 ```
 
-在这种情况下，列表中的元素彼此之间必须是可比较的（[Comparable]）。
+在这种情况下，列表中的元素彼此之间必须是可比较的（[Comparable](https://www.yuque.com/thyname/dart.core/comparable)）。
 
-[Comparator] 可能会将不同的对象比较为相等（返回零），即使它们是不同的对象。排序函数不保证稳定，因此比较结果相等的不同对象在结果中可能以任意顺序出现：
+[Comparator](https://www.yuque.com/thyname/dart.core/comparator) 可能会将不同的对象比较为相等（返回零），即使它们是不同的对象。排序函数不保证稳定，因此比较结果相等的不同对象在结果中可能以任意顺序出现：
 
 ```dart
 final numbers = <String>['one', 'two', 'three', 'four'];
@@ -866,13 +866,13 @@ print(colors.sublist(3)); // [orange, pink]
 Iterable<E> getRange(int start, int end)
 ```
 
-创建一个遍历某个范围内元素的 [Iterable]。
+创建一个遍历某个范围内元素的 [Iterable](https://www.yuque.com/thyname/dart.core/iterable)。
 
 返回的可迭代对象遍历此列表中位置大于或等于 [start] 且小于 [end] 的元素。
 
 调用时提供的范围 [start] 和 [end] 必须有效。若 0 ≤ `start` ≤ `end` ≤ [length]，则从 [start] 到 [end] 的范围有效。空范围（`end == start`）也是有效的。
 
-返回的 [Iterable] 的行为类似于 `skip(start).take(end - start)`。也就是说，它*不会*因为此列表大小改变而中断，只是如果提前到达列表末尾（即 `end`，甚至 `start`，大于 [length]），会提前结束。
+返回的 [Iterable](https://www.yuque.com/thyname/dart.core/iterable) 的行为类似于 `skip(start).take(end - start)`。也就是说，它*不会*因为此列表大小改变而中断，只是如果提前到达列表末尾（即 `end`，甚至 `start`，大于 [length]），会提前结束。
 
 ```dart
 final colors = <String>['red', 'green', 'blue', 'orange', 'pink'];
@@ -998,9 +998,9 @@ print(numbers); // [1, 6, 7, 5]
 Map<int, E> asMap()
 ```
 
-此列表的一个不可修改的 [Map] 视图。
+此列表的一个不可修改的 [Map](https://www.yuque.com/thyname/dart.core/map) 视图。
 
-该映射使用此列表的索引作为键，对应的对象作为值。`Map.keys` 这个 [Iterable] 按数字顺序迭代此列表的索引。
+该映射使用此列表的索引作为键，对应的对象作为值。`Map.keys` 这个 [Iterable](https://www.yuque.com/thyname/dart.core/iterable) 按数字顺序迭代此列表的索引。
 
 ```dart
 var words = <String>['fee', 'fi', 'fo', 'fum'];

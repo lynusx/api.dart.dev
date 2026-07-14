@@ -4,7 +4,7 @@
 abstract interface class Queue<E> implements Iterable<E>, _QueueIterable<E> {}
 ```
 
-[Queue] 是一个可以在两端进行操作的集合。可以通过 [forEach] 或使用 [Iterator] 迭代队列中的元素。
+[Queue](https://www.yuque.com/thyname/dart.collection/queue) 是一个可以在两端进行操作的集合。可以通过 [forEach] 或使用 [Iterator](https://www.yuque.com/thyname/dart.core/iterator) 迭代队列中的元素。
 
 通常不允许在队列执行操作期间修改队列（添加或删除条目），例如在调用 [forEach] 期间进行修改。在迭代队列时修改队列很可能会破坏迭代过程。无论是直接使用 [iterator]，还是迭代通过 [map] 或 [where] 等方法返回的 `Iterable`，都是如此。
 
@@ -196,7 +196,7 @@ void clear()
 final class DoubleLinkedQueue<E> extends Iterable<E> implements Queue<E> {}
 ```
 
-一个基于双向链表实现的 [Queue]。
+一个基于双向链表实现的 [Queue](https://www.yuque.com/thyname/dart.collection/queue)。
 
 支持常数时间的添加、两端移除和查看（peek）操作。
 
@@ -218,7 +218,7 @@ DoubleLinkedQueue<E>.from(Iterable elements)
 
 队列中元素的顺序如同按照 [elements].iterator 提供的顺序使用 [addLast] 添加一样。
 
-所有 [elements] 都应该是 [E] 的实例。[elements] 可迭代对象本身可以是任意元素类型，因此该构造函数可用于对 [Queue] 进行向下转型，例如：
+所有 [elements] 都应该是 [E] 的实例。[elements] 可迭代对象本身可以是任意元素类型，因此该构造函数可用于对 [Queue](https://www.yuque.com/thyname/dart.collection/queue) 进行向下转型，例如：
 
 ```dart
 Queue<SuperType> superQueue = ...;
@@ -310,7 +310,7 @@ void forEachEntry(void action(DoubleLinkedQueueEntry<E> element))
 final class ListQueue<E> extends ListIterable<E> implements Queue<E> {}
 ```
 
-基于列表实现的 [Queue]。
+基于列表实现的 [Queue](https://www.yuque.com/thyname/dart.collection/queue)。
 
 维护一个元素的循环缓冲区，当缓冲区填满时会扩展为更大的缓冲区。这保证了查看（peek）和移除操作具有常数时间复杂度，添加操作具有均摊常数时间复杂度。
 

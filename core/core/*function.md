@@ -39,7 +39,7 @@ void doSomething(String Function(int) callback) {
 }
 ```
 
-由于函数类型是 [Object] 的子类型，因此函数类型拥有 [Object] 声明的所有成员。
+由于函数类型是 [Object](https://www.yuque.com/thyname/dart.core/object) 的子类型，因此函数类型拥有 [Object](https://www.yuque.com/thyname/dart.core/object) 声明的所有成员。
 
 函数类型还具有一个 `call` 方法，其签名与该函数类型本身相同。调用 `call` 方法的行为与直接调用该函数完全相同。这主要用于在可空函数值上进行条件调用。
 
@@ -52,7 +52,7 @@ String Function(int)? maybeFun = Random().nextBool() ? fun : null;
 print(maybeFun?.call(1)); // Prints "1" or "null".
 ```
 
-[Function] 类型具有若干在此 `class` 声明中不可见的特殊特性。
+[Function](https://www.yuque.com/thyname/dart.core/function) 类型具有若干在此 `class` 声明中不可见的特殊特性。
 
 `Function` 类型本身允许将任意函数赋值给它，因为它是任何函数类型的超类型，但它并未说明该函数应如何被调用。
 
@@ -65,7 +65,7 @@ print(f(1)); // Prints "1".
 f("not", "one", "int"); // Throws! No static warning.
 ```
 
-这样的调用是一种*动态*调用，其效果与该函数值被静态标注为 [dynamic] 时完全相同，其不安全程度也与其他任何动态调用相同。运行时会执行检查以确保参数列表与函数参数匹配，如果不匹配，调用将以 [Error] 失败。此类调用没有静态类型检查，任何参数列表都会被接受，并在运行时进行检查。
+这样的调用是一种*动态*调用，其效果与该函数值被静态标注为 [dynamic] 时完全相同，其不安全程度也与其他任何动态调用相同。运行时会执行检查以确保参数列表与函数参数匹配，如果不匹配，调用将以 [Error](https://www.yuque.com/thyname/dart.core/error) 失败。此类调用没有静态类型检查，任何参数列表都会被接受，并在运行时进行检查。
 
 正如每个函数类型都拥有自己函数类型的 `call` 方法一样，`Function` 类型也拥有一个特殊的 `call` 成员，其行为类似于一个函数类型为 `Function` 的方法（这是一种无法用普通 Dart 代码表达的方法签名）。
 

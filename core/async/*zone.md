@@ -6,11 +6,11 @@ abstract final class Zone {}
 
 区域（Zone）表示一个在异步调用过程中保持稳定的环境。
 
-所有代码都在某个区域的上下文中执行，代码可通过 [Zone.current] 获取该区域。初始的 `main` 函数运行在默认区域（[Zone.root]）的上下文中。可以使用 [runZoned] 或 [runZonedGuarded] 创建新区域并在其中运行代码，从而在不同的区域中运行代码；也可以使用 [Zone.run] 在此前可能已通过 [Zone.fork] 创建的现有区域的上下文中运行代码。
+所有代码都在某个区域的上下文中执行，代码可通过 [Zone.current] 获取该区域。初始的 `main` 函数运行在默认区域（[Zone.root]）的上下文中。可以使用 [runZoned](https://www.yuque.com/thyname/dart.async/runzoned) 或 [runZonedGuarded](https://www.yuque.com/thyname/dart.async/runzonedguarded) 创建新区域并在其中运行代码，从而在不同的区域中运行代码；也可以使用 [Zone.run] 在此前可能已通过 [Zone.fork] 创建的现有区域的上下文中运行代码。
 
 开发者可以创建一个新区域，以覆盖现有区域的部分功能。例如，自定义区域可以替换或修改 `print`、计时器、微任务，或未捕获错误的处理方式。
 
-[Zone] 类不可被子类化，但用户可以通过使用 [ZoneSpecification] 派生（fork）现有区域（通常是 [Zone.current]）来提供自定义区域。这类似于创建一个继承自基类 `Zone` 并重写部分方法的新类，只不过实际上并未创建新类，而是将重写的方法作为函数提供，这些函数显式地接收相当于自身类、"super" 类和 `this` 对象的参数。
+[Zone](https://www.yuque.com/thyname/dart.async/zone) 类不可被子类化，但用户可以通过使用 [ZoneSpecification](https://www.yuque.com/thyname/dart.async/zonespecification) 派生（fork）现有区域（通常是 [Zone.current]）来提供自定义区域。这类似于创建一个继承自基类 `Zone` 并重写部分方法的新类，只不过实际上并未创建新类，而是将重写的方法作为函数提供，这些函数显式地接收相当于自身类、"super" 类和 `this` 对象的参数。
 
 异步回调始终在其被调度时所在区域的上下文中运行。这通过以下两个步骤实现：
 
@@ -35,7 +35,7 @@ Zone root
 
 所有 isolate 入口函数（`main` 或被派生的函数）都从根区域开始运行（即在调用入口函数时，[Zone.current] 与 [Zone.root] 相同）。若未创建自定义区域，程序的其余部分将始终运行在根区域中。
 
-根区域实现了所有区域操作的默认行为。许多方法（如 [registerCallback]）仅执行该函数所需的最基本操作，仅作为供自定义区域使用的钩子而提供；而其他方法（如 [scheduleMicrotask]）则与底层系统交互，以实现所需的行为。
+根区域实现了所有区域操作的默认行为。许多方法（如 [registerCallback]）仅执行该函数所需的最基本操作，仅作为供自定义区域使用的钩子而提供；而其他方法（如 [scheduleMicrotask](https://www.yuque.com/thyname/dart.async/schedulemicrotask)）则与底层系统交互，以实现所需的行为。
 
 ### current
 
@@ -57,7 +57,7 @@ Zone? get parent
 
 若 `this` 为 [root] 区域，则为 `null`。
 
-区域是通过在现有区域上调用 [fork]，或通过派生（fork）[current] 区域的 [runZoned] 创建的。新区域的父区域即为其派生自的区域。
+区域是通过在现有区域上调用 [fork]，或通过派生（fork）[current] 区域的 [runZoned](https://www.yuque.com/thyname/dart.async/runzoned) 创建的。新区域的父区域即为其派生自的区域。
 
 ### errorZone
 
@@ -123,7 +123,7 @@ void handleUncaughtError(Object error, StackTrace stackTrace)
 此函数处理两种类型的异步错误：
 
 1.  在异步回调中抛出但未被捕获的错误，例如传递给 [Timer.run] 的函数中的 `throw`。
-2.  通过 [Future] 和 [Stream] 链传递、但没有人为其注册错误处理程序的异步错误。大多数异步类（如 [Future] 或 [Stream]）会将错误推送给其监听者。错误将以此方式持续传播，直到某个监听者处理该错误（例如通过 [Future.catchError]），或不再有可用的监听者为止。在后一种情况下，future 和 stream 将调用该区域的 [handleUncaughtError]。
+2.  通过 [Future](https://www.yuque.com/thyname/dart.async/future) 和 [Stream](https://www.yuque.com/thyname/dart.async/stream) 链传递、但没有人为其注册错误处理程序的异步错误。大多数异步类（如 [Future](https://www.yuque.com/thyname/dart.async/future) 或 [Stream](https://www.yuque.com/thyname/dart.async/stream)）会将错误推送给其监听者。错误将以此方式持续传播，直到某个监听者处理该错误（例如通过 [Future.catchError]），或不再有可用的监听者为止。在后一种情况下，future 和 stream 将调用该区域的 [handleUncaughtError]。
 
 默认情况下，当由根区域处理时，未捕获的异步错误将被视为未捕获的同步异常处理。
 
@@ -366,15 +366,15 @@ void Function(T1, T2) bindBinaryCallbackGuarded<T1, T2>(void callback(T1 argumen
 AsyncError? errorCallback(Object error, StackTrace? stackTrace)
 ```
 
-在以编程方式向 [Future] 或 [Stream] 添加错误时对其进行拦截。
+在以编程方式向 [Future](https://www.yuque.com/thyname/dart.async/future) 或 [Stream](https://www.yuque.com/thyname/dart.async/stream) 添加错误时对其进行拦截。
 
-在调用 [Completer.completeError]、[StreamController.addError] 或某些 [Future] 构造函数时，当前区域可以拦截并替换该错误。
+在调用 [Completer.completeError]、[StreamController.addError] 或某些 [Future](https://www.yuque.com/thyname/dart.async/future) 构造函数时，当前区域可以拦截并替换该错误。
 
 当错误被直接接收时（例如使用 [Future.error]），或当错误被同步捕获时（例如使用 [Future.sync]），Future 构造函数将调用此函数。
 
 无法保证某个错误只会通过 [errorCallback] 发送一次。使用中间控制器或 completer 的库最终可能会多次调用 [errorCallback]。
 
-若不希望进行替换，则返回 `null`；否则返回一个 [AsyncError] 实例，其中包含新的错误及堆栈跟踪对。
+若不希望进行替换，则返回 `null`；否则返回一个 [AsyncError](https://www.yuque.com/thyname/dart.async/asyncerror) 实例，其中包含新的错误及堆栈跟踪对。
 
 自定义区域可以拦截此操作。
 
@@ -388,7 +388,7 @@ void scheduleMicrotask(void Function() callback)
 
 在此区域中异步运行 [callback]。
 
-全局的 `scheduleMicrotask` 委托给 [current] 区域的 [scheduleMicrotask]。根区域的实现与底层系统交互，将给定的回调作为微任务进行调度。
+全局的 `scheduleMicrotask` 委托给 [current] 区域的 [scheduleMicrotask](https://www.yuque.com/thyname/dart.async/schedulemicrotask)。根区域的实现与底层系统交互，将给定的回调作为微任务进行调度。
 
 自定义区域可以拦截此操作（例如包装给定的 [callback]），或实现自己的微任务调度器。在后一种情况下，它们通常仍会使用父区域的 [ZoneDelegate.scheduleMicrotask]，以便挂接到现有的事件循环中。
 
@@ -398,7 +398,7 @@ void scheduleMicrotask(void Function() callback)
 Timer createTimer(Duration duration, void Function() callback)
 ```
 
-创建一个 [Timer]，其回调将在此区域中执行。
+创建一个 [Timer](https://www.yuque.com/thyname/dart.async/timer)，其回调将在此区域中执行。
 
 ### createPeriodicTimer()
 
@@ -406,7 +406,7 @@ Timer createTimer(Duration duration, void Function() callback)
 Timer createPeriodicTimer(Duration period, void callback(Timer timer))
 ```
 
-创建一个周期性 [Timer]，其回调将在此区域中执行。
+创建一个周期性 [Timer](https://www.yuque.com/thyname/dart.async/timer)，其回调将在此区域中执行。
 
 ### print()
 
@@ -416,7 +416,7 @@ void print(String line)
 
 打印给定的 [line]。
 
-全局的 `print` 函数委托给当前区域的 [print] 函数，从而使拦截打印操作成为可能。
+全局的 `print` 函数委托给当前区域的 [print](https://www.yuque.com/thyname/dart.core/print) 函数，从而使拦截打印操作成为可能。
 
 示例：
 

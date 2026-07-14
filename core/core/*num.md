@@ -6,12 +6,12 @@ sealed class num implements Comparable<num> {}
 
 整数或浮点数。
 
-除 [int] 和 [double] 之外的任何类型继承或实现 `num` 都是编译时错误。
+除 [int](https://www.yuque.com/thyname/dart.core/int) 和 [double](https://www.yuque.com/thyname/dart.core/double) 之外的任何类型继承或实现 `num` 都是编译时错误。
 
 **另请参阅：**
 
-- [int]：整数。
-- [double]：双精度浮点数。
+- [int](https://www.yuque.com/thyname/dart.core/int)：整数。
+- [double](https://www.yuque.com/thyname/dart.core/double)：双精度浮点数。
 - [内置数值类型](https://dart.dev/language/built-in-types#numbers)
 - [数值表示](https://dart.dev/resources/language/number-representation)
 
@@ -25,9 +25,9 @@ num parse( String input, [ @deprecated num onError( String input )? ])
 
 将包含数字字面量的字符串解析为数字。
 
-该方法首先尝试将 [input] 作为整数读取（类似于不带进制的 [int.parse]）。如果失败，则尝试将 [input] 解析为双精度浮点数（类似于 [double.parse]）。如果仍然失败，则抛出 [FormatException]。
+该方法首先尝试将 [input] 作为整数读取（类似于不带进制的 [int.parse]）。如果失败，则尝试将 [input] 解析为双精度浮点数（类似于 [double.parse]）。如果仍然失败，则抛出 [FormatException](https://www.yuque.com/thyname/dart.core/formatexception)。
 
-与其抛出并立即捕获 [FormatException]，不如使用 [tryParse] 来处理潜在的解析错误。
+与其抛出并立即捕获 [FormatException](https://www.yuque.com/thyname/dart.core/formatexception)，不如使用 [tryParse] 来处理潜在的解析错误。
 
 对于任意数字 `n`，此函数满足 `identical(n, num.parse(n.toString()))`（当 `n` 是带有效荷载的 NaN `double` 时除外）。
 
@@ -87,7 +87,7 @@ int get hashCode
 
 返回数值的哈希码。
 
-该哈希码与相等性兼容。对于具有相同数值的 [int] 和 [double]，返回相同的值，因此对双精度浮点数 0 和负 0 也返回相同的值。
+该哈希码与相等性兼容。对于具有相同数值的 [int](https://www.yuque.com/thyname/dart.core/int) 和 [double](https://www.yuque.com/thyname/dart.core/double)，返回相同的值，因此对双精度浮点数 0 和负 0 也返回相同的值。
 
 不保证 NaN 值的哈希码。
 
@@ -99,7 +99,7 @@ bool get isNaN
 
 此数字是否为 Not-a-Number（非数字）值。
 
-如果此数字是 [double.nan] 值或任何其他可能的 [double] NaN 值，则为 `true`。如果此数字是整数、有限的双精度浮点数或无限的双精度浮点数（[double.infinity] 或 [double.negativeInfinity]），则为 `false`。
+如果此数字是 [double.nan] 值或任何其他可能的 [double](https://www.yuque.com/thyname/dart.core/double) NaN 值，则为 `true`。如果此数字是整数、有限的双精度浮点数或无限的双精度浮点数（[double.infinity] 或 [double.negativeInfinity]），则为 `false`。
 
 所有数字都恰好满足 [isInfinite]、[isFinite] 和 `isNaN` 三者之一。
 
@@ -147,7 +147,7 @@ num get sign
 
 如果此数字小于零，则值为负一；如果大于零，则值为正一；如果等于零，则值为零。
 
-如果此数字是 [double] 的 NaN 值，则返回 NaN。
+如果此数字是 [double](https://www.yuque.com/thyname/dart.core/double) 的 NaN 值，则返回 NaN。
 
 返回与此数字类型相同的数字。对于双精度浮点数，`(-0.0).sign` 为 `-0.0`。
 
@@ -288,7 +288,7 @@ double truncateToDouble()
 num clamp(num lowerLimit, num upperLimit)
 ```
 
-返回将此 [num] 限制在 [lowerLimit] 到 [upperLimit] 范围内的结果。
+返回将此 [num](https://www.yuque.com/thyname/dart.core/num) 限制在 [lowerLimit] 到 [upperLimit] 范围内的结果。
 
 比较使用 [compareTo] 进行，因此会考虑 `-0.0`。这也意味着 [double.nan] 被视为最大的双精度浮点数值。
 
@@ -313,7 +313,7 @@ int compareTo(num other)
 
 如果 `this` 小于 `other`，返回负数；如果相等，返回零；如果 `this` 大于 `other`，返回正数。
 
-此方法表示的排序是 [num] 值的全序关系。所有不同的双精度浮点数互不相等，所有不同的整数也互不相等，但如果整数与双精度浮点数具有相同的数值，则二者相等。
+此方法表示的排序是 [num](https://www.yuque.com/thyname/dart.core/num) 值的全序关系。所有不同的双精度浮点数互不相等，所有不同的整数也互不相等，但如果整数与双精度浮点数具有相同的数值，则二者相等。
 
 对于双精度浮点数，`compareTo` 操作与 [operator==]、[operator<] 和 [operator>] 给出的偏序不同。例如，IEEE 双精度浮点数规定 `0.0 == -0.0`，且所有对 NaN 的比较操作都返回 false。
 
@@ -352,7 +352,7 @@ print(double.nan == double.infinity);  // => false
 int toInt()
 ```
 
-将此 [num] 截断为整数并将结果作为 [int] 返回。
+将此 [num](https://www.yuque.com/thyname/dart.core/num) 截断为整数并将结果作为 [int](https://www.yuque.com/thyname/dart.core/int) 返回。
 
 等价于 [truncate]。
 
@@ -362,9 +362,9 @@ int toInt()
 double toDouble()
 ```
 
-此数字作为 [double]。
+此数字作为 [double](https://www.yuque.com/thyname/dart.core/double)。
 
-如果整数无法精确表示为 [double]，则返回一个近似值。
+如果整数无法精确表示为 [double](https://www.yuque.com/thyname/dart.core/double)，则返回一个近似值。
 
 ### toStringAsFixed()
 
@@ -374,7 +374,7 @@ String toStringAsFixed(int fractionDigits)
 
 此数字的小数点字符串表示形式。
 
-在计算字符串表示之前，将此数字转换为 [double]，如同通过 [toDouble] 一样。
+在计算字符串表示之前，将此数字转换为 [double](https://www.yuque.com/thyname/dart.core/double)，如同通过 [toDouble] 一样。
 
 如果 `this` 的绝对值大于或等于 `10^21`，则此方法返回通过 `this.toStringAsExponential()` 计算的指数表示形式。否则，结果是小数点后恰好有 [fractionDigits] 位数字的最接近的字符串表示形式。如果 [fractionDigits] 等于 0，则省略小数点。
 
@@ -399,7 +399,7 @@ String toStringAsExponential([int? fractionDigits])
 
 此数字的指数字符串表示形式。
 
-在计算字符串表示之前，将此数字转换为 [double]。
+在计算字符串表示之前，将此数字转换为 [double](https://www.yuque.com/thyname/dart.core/double)。
 
 如果给定了 [fractionDigits]，则它必须是满足以下条件的整数：`0 <= fractionDigits <= 20`。在这种情况下，字符串在小数点后恰好包含 [fractionDigits] 位数字。否则，如果不给定该参数，返回的字符串使用能准确表示此数字的最少位数。
 
@@ -421,7 +421,7 @@ String toStringAsPrecision(int precision)
 
 具有 [precision] 位有效数字的字符串表示形式。
 
-将此数字转换为 [double]，并返回该值具有恰好 [precision] 位有效数字的字符串表示形式。
+将此数字转换为 [double](https://www.yuque.com/thyname/dart.core/double)，并返回该值具有恰好 [precision] 位有效数字的字符串表示形式。
 
 参数 [precision] 必须是满足以下条件的整数：`1 <= precision <= 21`。
 
@@ -446,11 +446,11 @@ String toString()
 
 正确表示此数字的最短字符串。
 
-范围在 `10^-6`（含）到 `10^21`（不含）之间的所有 [double] 都会转换为其十进制表示形式，且小数点后至少有一位数字。对于所有其他双精度浮点数，除了像 `NaN` 或 `Infinity` 这样的特殊值外，此方法返回指数表示形式（参见 [toStringAsExponential]）。
+范围在 `10^-6`（含）到 `10^21`（不含）之间的所有 [double](https://www.yuque.com/thyname/dart.core/double) 都会转换为其十进制表示形式，且小数点后至少有一位数字。对于所有其他双精度浮点数，除了像 `NaN` 或 `Infinity` 这样的特殊值外，此方法返回指数表示形式（参见 [toStringAsExponential]）。
 
 对于 [double.nan] 返回 `"NaN"`，对于 [double.infinity] 返回 `"Infinity"`，对于 [double.negativeInfinity] 返回 `"-Infinity"`。
 
-[int] 转换为不带小数点的十进制表示形式。
+[int](https://www.yuque.com/thyname/dart.core/int) 转换为不带小数点的十进制表示形式。
 
 示例：
 
@@ -471,7 +471,7 @@ String toString()
 12.345e67.toString(); // 1.2345e+68
 ```
 
-注意：如果返回的字符串已足够精确以唯一标识输入数字，则转换可能会对输出进行舍入。例如，[double] 类型的 `9e59` 的最精确表示形式等于 `"899999999999999918767229449717619953810131273674690656206848"`，但此方法返回更短（但仍能唯一标识）的 `"9e59"`。
+注意：如果返回的字符串已足够精确以唯一标识输入数字，则转换可能会对输出进行舍入。例如，[double](https://www.yuque.com/thyname/dart.core/double) 类型的 `9e59` 的最精确表示形式等于 `"899999999999999918767229449717619953810131273674690656206848"`，但此方法返回更短（但仍能唯一标识）的 `"9e59"`。
 
 ### remainder()
 
@@ -483,7 +483,7 @@ num remainder(num other)
 
 此操作的结果 `r` 满足：`this == (this ~/ other) * other + r`。因此，余数 `r` 与被除数 `this` 具有相同的符号。
 
-如果此数字和 [other] 都是整数，则结果为 [int]（如 [int.remainder] 所述），否则结果为 [double]。
+如果此数字和 [other] 都是整数，则结果为 [int](https://www.yuque.com/thyname/dart.core/int)（如 [int.remainder] 所述），否则结果为 [double](https://www.yuque.com/thyname/dart.core/double)。
 
 示例：
 
@@ -504,18 +504,18 @@ bool operator ==(Object other)
 
 测试此值在数值上是否等于 `other`。
 
-如果两个操作数都是 [double]，则当它们具有相同的表示形式时相等，但存在以下例外：
+如果两个操作数都是 [double](https://www.yuque.com/thyname/dart.core/double)，则当它们具有相同的表示形式时相等，但存在以下例外：
 
 - 零和负零（0.0 和 -0.0）被视为相等，二者的数值都为零。
 - NaN 不等于任何值，包括 NaN 本身。如果任一操作数为 NaN，结果始终为 false。
 
-如果一个操作数是 [double]，另一个是 [int]，则当该双精度浮点数具有整数值（有限且没有小数部分）且两个数字具有相同数值时，二者相等。
+如果一个操作数是 [double](https://www.yuque.com/thyname/dart.core/double)，另一个是 [int](https://www.yuque.com/thyname/dart.core/int)，则当该双精度浮点数具有整数值（有限且没有小数部分）且两个数字具有相同数值时，二者相等。
 
 如果两个操作数都是整数，则当它们具有相同的值时相等。
 
-如果 [other] 不是 [num]，则返回 false。
+如果 [other] 不是 [num](https://www.yuque.com/thyname/dart.core/num)，则返回 false。
 
-请注意，NaN 的这种行为是非自反的。这意味着双精度浮点数值的相等性并不是一个真正的等价关系，而 `operator==` 通常要求满足这一点。在诸如 [HashSet] 中使用 NaN 将无法正常工作。此行为是标准的 IEEE-754 双精度浮点数相等性。
+请注意，NaN 的这种行为是非自反的。这意味着双精度浮点数值的相等性并不是一个真正的等价关系，而 `operator==` 通常要求满足这一点。在诸如 [HashSet](https://www.yuque.com/thyname/dart.collection/hashset) 中使用 NaN 将无法正常工作。此行为是标准的 IEEE-754 双精度浮点数相等性。
 
 如果可以避免使用 NaN 值，其余的双精度浮点数确实具有真正的等价关系，可以安全使用。
 
@@ -529,7 +529,7 @@ num operator +(num other)
 
 将 [other] 加到此数字上。
 
-如果此数字和 [other] 都是整数，则结果为 [int]（如 [int.+] 所述），否则结果为 [double]。
+如果此数字和 [other] 都是整数，则结果为 [int](https://www.yuque.com/thyname/dart.core/int)（如 [int.+] 所述），否则结果为 [double](https://www.yuque.com/thyname/dart.core/double)。
 
 ### operator -
 
@@ -539,7 +539,7 @@ num operator -(num other)
 
 从此数字中减去 [other]。
 
-如果此数字和 [other] 都是整数，则结果为 [int]（如 [int.-] 所述），否则结果为 [double]。
+如果此数字和 [other] 都是整数，则结果为 [int](https://www.yuque.com/thyname/dart.core/int)（如 [int.-] 所述），否则结果为 [double](https://www.yuque.com/thyname/dart.core/double)。
 
 ### operator \*
 
@@ -549,7 +549,7 @@ num operator *(num other)
 
 将此数字与 [other] 相乘。
 
-如果此数字和 [other] 都是整数，则结果为 [int]（如 [int.*] 所述），否则结果为 [double]。
+如果此数字和 [other] 都是整数，则结果为 [int](https://www.yuque.com/thyname/dart.core/int)（如 [int.*] 所述），否则结果为 [double](https://www.yuque.com/thyname/dart.core/double)。
 
 ### operator %
 
@@ -567,7 +567,7 @@ num operator %(num other)
 
 有关截断除法的余数，请参见 [remainder]。
 
-如果此数字和 [other] 都是整数，则结果为 [int]（如 [int.%] 所述），否则结果为 [double]。
+如果此数字和 [other] 都是整数，则结果为 [int](https://www.yuque.com/thyname/dart.core/int)（如 [int.%] 所述），否则结果为 [double](https://www.yuque.com/thyname/dart.core/double)。
 
 示例：
 
@@ -596,9 +596,9 @@ int operator ~/(num other)
 
 对此数字执行除以 [other] 的截断除法。截断除法是指将小数结果通过向零方向舍入转换为整数的除法。
 
-如果两个操作数都是 [int]，则 [other] 不得为零。此时 `a ~/ b` 对应于 `a.remainder(b)`，满足 `a == (a ~/ b) * b + a.remainder(b)`。
+如果两个操作数都是 [int](https://www.yuque.com/thyname/dart.core/int)，则 [other] 不得为零。此时 `a ~/ b` 对应于 `a.remainder(b)`，满足 `a == (a ~/ b) * b + a.remainder(b)`。
 
-如果任一操作数是 [double]，则在执行除法和结果截断之前，会将另一操作数转换为双精度浮点数。此时 `a ~/ b` 等价于 `(a / b).truncate()`。这意味着双精度除法的中间结果必须是有限整数（不能是无穷大或 [double.nan]）。
+如果任一操作数是 [double](https://www.yuque.com/thyname/dart.core/double)，则在执行除法和结果截断之前，会将另一操作数转换为双精度浮点数。此时 `a ~/ b` 等价于 `(a / b).truncate()`。这意味着双精度除法的中间结果必须是有限整数（不能是无穷大或 [double.nan]）。
 
 ### operator unary-
 

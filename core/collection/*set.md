@@ -4,7 +4,7 @@
 abstract mixin class SetBase<E> implements Set<E> {}
 ```
 
-[Set] 的基础实现。
+[Set](https://www.yuque.com/thyname/dart.core/set) 的基础实现。
 
 此类提供了一个 `Set` 的基础实现，该实现仅依赖于以下抽象成员：[add]、[contains]、[lookup]、[remove]、[iterator]、[length] 和 [toSet]。
 
@@ -76,7 +76,7 @@ const SetBase<E>()
 String setToString(Set set)
 ```
 
-将 [Set] 转换为 [String]。
+将 [Set](https://www.yuque.com/thyname/dart.core/set) 转换为 [String](https://www.yuque.com/thyname/dart.core/string)。
 
 通过将 [set] 中的每个元素转换为字符串（调用 [Object.toString]），并用 ", " 连接这些字符串，再用 "{" 和 "}" 包裹结果，从而将 [set] 转换为字符串。
 
@@ -90,7 +90,7 @@ String setToString(Set set)
 typedef SetMixin<E> = SetBase<E>
 ```
 
-[Set] 的混入实现。
+[Set](https://www.yuque.com/thyname/dart.core/set) 的混入实现。
 
 此类提供了一个 `Set` 的基础实现，该实现仅依赖于以下抽象成员：[add]、[contains]、[lookup]、[remove]、[iterator]、[length] 和 [toSet]。
 
@@ -106,7 +106,7 @@ typedef SetMixin<E> = SetBase<E>
 class UnmodifiableSetView<E> extends SetBase<E> with _UnmodifiableSetMixin<E> {}
 ```
 
-另一个 [Set] 的不可修改视图。
+另一个 [Set](https://www.yuque.com/thyname/dart.core/set) 的不可修改视图。
 
 不得调用可能改变集合的方法，例如 [add] 和 [remove]。
 
@@ -129,7 +129,7 @@ unmodifiableSetView.remove('Earth'); // Throws.
 UnmodifiableSetView<E>(Set<E> source)
 ```
 
-创建 [source] 的一个 [UnmodifiableSetView]。
+创建 [source] 的一个 [UnmodifiableSetView](https://www.yuque.com/thyname/dart.collection/unmodifiablesetview)。
 
 ## 属性
 

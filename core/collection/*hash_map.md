@@ -4,9 +4,9 @@
 abstract final class HashMap<K, V> implements Map<K, V> {}
 ```
 
-基于哈希表实现的 [Map]。
+基于哈希表实现的 [Map](https://www.yuque.com/thyname/dart.core/map)。
 
-[HashMap] 是无序的（不保证迭代顺序）。
+[HashMap](https://www.yuque.com/thyname/dart.collection/hashmap) 是无序的（不保证迭代顺序）。
 
 `HashMap` 的键必须具有一致的 [Object.==] 和 [Object.hashCode] 实现。这意味着 `==` 运算符必须在键上定义一个稳定的等价关系（自反、对称、传递，并且随时间保持一致），并且对于通过 `==` 判定为相等的对象，其 `hashCode` 必须相同。
 
@@ -106,9 +106,9 @@ print(planets.isEmpty); // true
 
 **另请参阅：**
 
-- [Map]，键/值对集合的通用接口。
-- [LinkedHashMap] 按键的插入顺序进行迭代。
-- [SplayTreeMap] 按排序顺序迭代键。
+- [Map](https://www.yuque.com/thyname/dart.core/map)，键/值对集合的通用接口。
+- [LinkedHashMap](https://www.yuque.com/thyname/dart.collection/linkedhashmap) 按键的插入顺序进行迭代。
+- [SplayTreeMap](https://www.yuque.com/thyname/dart.collection/splaytreemap) 按排序顺序迭代键。
 
 ## 构造函数
 
@@ -122,7 +122,7 @@ HashMap<K, V>({
 })
 ```
 
-创建一个基于哈希表的无序 [Map]。
+创建一个基于哈希表的无序 [Map](https://www.yuque.com/thyname/dart.core/map)。
 
 创建的映射不以任何方式排序。在迭代键或值时，迭代顺序是不确定的，只是在映射未被修改的情况下会保持不变。
 
@@ -147,7 +147,7 @@ HashMap<int,int>(equals: (int a, int b) => (b - a) % 5 == 0,
 
 如果既未提供 `equals`、`hashCode`，也未提供 `isValidKey`，则默认的 `isValidKey` 会接受所有键。默认的相等性和哈希码运算已知适用于所有对象。
 
-同样，如果 `equals` 为 [identical]，`hashCode` 为 [identityHashCode]，并且省略了 `isValidKey`，则生成的映射基于对象标识（identity），且 `isValidKey` 默认接受所有键。可以直接使用 [HashMap.identity] 创建这样的映射。
+同样，如果 `equals` 为 [identical](https://www.yuque.com/thyname/dart.core/identical)，`hashCode` 为 [identityHashCode](https://www.yuque.com/thyname/dart.core/identityhashcode)，并且省略了 `isValidKey`，则生成的映射基于对象标识（identity），且 `isValidKey` 默认接受所有键。可以直接使用 [HashMap.identity] 创建这样的映射。
 
 ### HashMap.identity()
 
@@ -171,7 +171,7 @@ HashMap<K, V>(equals: identical, hashCode: identityHashCode)
 HashMap<K, V>.from( Map other )
 ```
 
-创建一个包含 [other] 中所有键/值对的 [HashMap]。
+创建一个包含 [other] 中所有键/值对的 [HashMap](https://www.yuque.com/thyname/dart.collection/hashmap)。
 
 所有键必须是 [K] 的实例，所有值必须是 [V] 的实例。[other] 映射本身可以是任意类型。
 
@@ -187,7 +187,7 @@ print(fromBaseMap); // {1: A, 2: B, 3: C}
 HashMap<K, V>.of( Map<K, V> other )
 ```
 
-创建一个包含 [other] 中所有键/值对的 [HashMap]。示例：
+创建一个包含 [other] 中所有键/值对的 [HashMap](https://www.yuque.com/thyname/dart.collection/hashmap)。示例：
 
 ```dart
 final baseMap = <int, String>{1: 'A', 2: 'B', 3: 'C'};
@@ -205,7 +205,7 @@ HashMap<K, V>.fromIterable(
 })
 ```
 
-创建一个 [HashMap]，其键和值是根据 [iterable] 计算得出的。
+创建一个 [HashMap](https://www.yuque.com/thyname/dart.collection/hashmap)，其键和值是根据 [iterable] 计算得出的。
 
 对于 [iterable] 中的每个元素，此构造函数会通过分别应用 [key] 和 [value] 来计算出一个键/值对。
 
@@ -226,13 +226,13 @@ print(mapFromIterable); // {11: 121, 12: 144, 13: 169, 14: 196}
 HashMap<K, V>.fromIterables(Iterable<K> keys, Iterable<V> values)
 ```
 
-创建一个 [HashMap]，将给定的 [keys] 与 [values] 关联起来。
+创建一个 [HashMap](https://www.yuque.com/thyname/dart.collection/hashmap)，将给定的 [keys] 与 [values] 关联起来。
 
 此构造函数会遍历 [keys] 和 [values]，将 [keys] 中的每个元素映射到 [values] 中对应的元素。
 
 如果 [keys] 中多次包含同一个对象，则最后一次出现时会覆盖之前的值。
 
-如果两个 [Iterable] 的长度不相同，则会产生错误。示例：
+如果两个 [Iterable](https://www.yuque.com/thyname/dart.core/iterable) 的长度不相同，则会产生错误。示例：
 
 ```dart
 final keys = ['Mercury', 'Venus', 'Earth', 'Mars'];
@@ -248,7 +248,7 @@ print(mapFromIterables);
 HashMap<K, V>.fromEntries(Iterable<MapEntry<K, V>> entries)
 ```
 
-创建一个包含 [entries] 中所有条目的 [HashMap]。
+创建一个包含 [entries] 中所有条目的 [HashMap](https://www.yuque.com/thyname/dart.collection/hashmap)。
 
 返回一个新的 `HashMap<K, V>`，[entries] 中的所有条目均按迭代顺序被添加进去。
 

@@ -60,7 +60,7 @@ class JsonCyclicError extends JsonUnsupportedObjectError {}
 
 报告对象由于循环引用而无法被字符串化。
 
-引用自身的对象无法被 [JsonCodec.encode]/[JsonEncoder.convert] 序列化。检测到循环时，将抛出 [JsonCyclicError]。
+引用自身的对象无法被 [JsonCodec.encode]/[JsonEncoder.convert] 序列化。检测到循环时，将抛出 [JsonCyclicError](https://www.yuque.com/thyname/dart.convert/jsoncyclicerror)。
 
 ## 构造函数
 
@@ -80,7 +80,7 @@ JsonCyclicError(Object? object)
 JsonCodec const json
 ```
 
-[JsonCodec] 默认实现的一个实例。
+[JsonCodec](https://www.yuque.com/thyname/dart.convert/jsoncodec) 默认实现的一个实例。
 
 该实例便于访问最常见的 JSON 使用场景。
 
@@ -91,7 +91,7 @@ var encoded = json.encode([1, 2, { "a": null }]);
 var decoded = json.decode('["foo", { "bar": 499 }]');
 ```
 
-如果局部变量遮蔽了 [json] 常量，可以使用顶层函数 [jsonEncode] 和 [jsonDecode] 代替。
+如果局部变量遮蔽了 [json](https://www.yuque.com/thyname/dart.convert/json) 常量，可以使用顶层函数 [jsonEncode](https://www.yuque.com/thyname/dart.convert/jsonencode) 和 [jsonDecode](https://www.yuque.com/thyname/dart.convert/jsondecode) 代替。
 
 ---
 
@@ -110,7 +110,7 @@ String jsonEncode(
 
 如果省略 [toEncodable]，默认使用对不可编码对象调用 `.toJson()` 的结果。
 
-是 `json.encode` 的简写形式。当局部变量遮蔽了全局常量 [json] 时非常有用。
+是 `json.encode` 的简写形式。当局部变量遮蔽了全局常量 [json](https://www.yuque.com/thyname/dart.convert/json) 时非常有用。
 
 示例：
 
@@ -162,7 +162,7 @@ dynamic jsonDecode(
 
 默认的 [reviver]（未提供时）是恒等函数。
 
-是 `json.decode` 的简写形式。当局部变量遮蔽了全局常量 [json] 时非常有用。
+是 `json.decode` 的简写形式。当局部变量遮蔽了全局常量 [json](https://www.yuque.com/thyname/dart.convert/json) 时非常有用。
 
 示例：
 
@@ -199,7 +199,7 @@ print(item['status']); // false
 final class JsonCodec extends Codec<Object?, String> {}
 ```
 
-[JsonCodec] 将 JSON 对象编码为字符串，并将字符串解码为 JSON 对象。
+[JsonCodec](https://www.yuque.com/thyname/dart.convert/jsoncodec) 将 JSON 对象编码为字符串，并将字符串解码为 JSON 对象。
 
 示例：
 
@@ -378,15 +378,15 @@ String? indent
 String convert(Object? object)
 ```
 
-将 [object] 转换为 JSON [String]。
+将 [object] 转换为 JSON [String](https://www.yuque.com/thyname/dart.core/string)。
 
-可直接序列化的值为 [num]、[String]、[bool] 和 [Null]，以及某些 [List] 和 [Map] 值。对于 [List]，其所有元素都必须是可序列化的。对于 [Map]，键必须是 [String]，值必须是可序列化的。
+可直接序列化的值为 [num](https://www.yuque.com/thyname/dart.core/num)、[String](https://www.yuque.com/thyname/dart.core/string)、[bool](https://www.yuque.com/thyname/dart.core/bool) 和 [Null](https://www.yuque.com/thyname/dart.core/null)，以及某些 [List](https://www.yuque.com/thyname/dart.core/list) 和 [Map](https://www.yuque.com/thyname/dart.core/map) 值。对于 [List](https://www.yuque.com/thyname/dart.core/list)，其所有元素都必须是可序列化的。对于 [Map](https://www.yuque.com/thyname/dart.core/map)，键必须是 [String](https://www.yuque.com/thyname/dart.core/string)，值必须是可序列化的。
 
 如果尝试序列化其他类型的值，将调用构造函数中提供的 `toEncodable` 函数，并以该值作为参数。返回结果必须是可直接序列化的值，随后将替代原始值进行序列化。
 
-如果转换抛出异常，或返回的值不可直接序列化，则抛出 [JsonUnsupportedObjectError] 异常。如果调用抛出异常，该错误会被捕获并存储在 [JsonUnsupportedObjectError] 的 `cause` 字段中。
+如果转换抛出异常，或返回的值不可直接序列化，则抛出 [JsonUnsupportedObjectError](https://www.yuque.com/thyname/dart.convert/jsonunsupportedobjecterror) 异常。如果调用抛出异常，该错误会被捕获并存储在 [JsonUnsupportedObjectError](https://www.yuque.com/thyname/dart.convert/jsonunsupportedobjecterror) 的 `cause` 字段中。
 
-如果 [List] 或 [Map] 直接或通过其他列表或映射间接引用了自身，则无法被序列化，将抛出 [JsonCyclicError]。
+如果 [List](https://www.yuque.com/thyname/dart.core/list) 或 [Map](https://www.yuque.com/thyname/dart.core/map) 直接或通过其他列表或映射间接引用了自身，则无法被序列化，将抛出 [JsonCyclicError](https://www.yuque.com/thyname/dart.convert/jsoncyclicerror)。
 
 序列化过程中 [object] 不应发生变化。
 
@@ -400,7 +400,7 @@ ChunkedConversionSink<Object?> startChunkedConversion(Sink<String> sink)
 
 开始一次分块转换。
 
-如果给定的 [sink] 是 [StringConversionSink]，转换器的工作效率会更高。
+如果给定的 [sink] 是 [StringConversionSink](https://www.yuque.com/thyname/dart.convert/stringconversionsink)，转换器的工作效率会更高。
 
 返回一个最多接受一个对象的分块转换 sink。对返回的 sink 多次调用 `add` 是错误的。
 
@@ -492,7 +492,7 @@ final class JsonDecoder extends Converter<String, Object?> {}
 
 JSON 输入必须是单个 JSON 值的 JSON 编码，该值可以是包含其他值的列表或映射。
 
-如果输入不是有效的 JSON 文本，则抛出 [FormatException]。
+如果输入不是有效的 JSON 文本，则抛出 [FormatException](https://www.yuque.com/thyname/dart.core/formatexception)。
 
 示例：
 
@@ -516,7 +516,7 @@ print(item['value']); // 1
 print(object['text']); // Dart
 ```
 
-当用作 [StreamTransformer] 时，输入流可能会发出多个字符串。所有这些字符串的拼接必须是单个 JSON 值的有效 JSON 编码。
+当用作 [StreamTransformer](https://www.yuque.com/thyname/dart.async/streamtransformer) 时，输入流可能会发出多个字符串。所有这些字符串的拼接必须是单个 JSON 值的有效 JSON 编码。
 
 ## 构造函数
 
@@ -540,11 +540,11 @@ dynamic convert(String input)
 
 将给定的 JSON 字符串 [input] 转换为其对应的对象。
 
-解析后的 JSON 值的类型为 [num]、[String]、[bool]、[Null]，或由已解析的 JSON 值组成的 [List]，或从 [String] 到已解析 JSON 值的 [Map]。
+解析后的 JSON 值的类型为 [num](https://www.yuque.com/thyname/dart.core/num)、[String](https://www.yuque.com/thyname/dart.core/string)、[bool](https://www.yuque.com/thyname/dart.core/bool)、[Null](https://www.yuque.com/thyname/dart.core/null)，或由已解析的 JSON 值组成的 [List](https://www.yuque.com/thyname/dart.core/list)，或从 [String](https://www.yuque.com/thyname/dart.core/string) 到已解析 JSON 值的 [Map](https://www.yuque.com/thyname/dart.core/map)。
 
-如果 `this` 在初始化时提供了 reviver，则解析操作会对每个已解析的对象或列表属性调用该 reviver。参数为属性名称（[String]）或列表索引（[int]），以及已解析的值。reviver 的返回值将代替解析值用作该属性的值。
+如果 `this` 在初始化时提供了 reviver，则解析操作会对每个已解析的对象或列表属性调用该 reviver。参数为属性名称（[String](https://www.yuque.com/thyname/dart.core/string)）或列表索引（[int](https://www.yuque.com/thyname/dart.core/int)），以及已解析的值。reviver 的返回值将代替解析值用作该属性的值。
 
-如果输入不是有效的 JSON 文本，则抛出 [FormatException]。
+如果输入不是有效的 JSON 文本，则抛出 [FormatException](https://www.yuque.com/thyname/dart.core/formatexception)。
 
 ### startChunkedConversion()
 

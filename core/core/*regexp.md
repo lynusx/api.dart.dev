@@ -10,11 +10,11 @@ abstract interface class RegExp implements Pattern {}
 
 Dart 正则表达式与 JavaScript 正则表达式具有相同的语法和语义。要了解更多关于 JavaScript 正则表达式的信息，请参阅 <https://ecma-international.org/ecma-262/9.0/#sec-regexp-regular-expression-objects>。
 
-Dart 通过 [matchAsPrefix] 提供了基本的正则表达式匹配算法，该方法用于检查正则表达式是否从输入的某个特定位置开始匹配其中的一部分。如果匹配成功，Dart 会以 [RegExpMatch] 的形式返回匹配的详细信息。
+Dart 通过 [matchAsPrefix] 提供了基本的正则表达式匹配算法，该方法用于检查正则表达式是否从输入的某个特定位置开始匹配其中的一部分。如果匹配成功，Dart 会以 [RegExpMatch](https://www.yuque.com/thyname/dart.core/regexpmatch) 的形式返回匹配的详细信息。
 
-你可以基于这个基本匹配检查，构建出 [RegExp] 的所有其他方法。
+你可以基于这个基本匹配检查，构建出 [RegExp](https://www.yuque.com/thyname/dart.core/regexp) 的所有其他方法。
 
-正则表达式最常见的用途是在输入中 _搜索_ 匹配项。[firstMatch] 方法提供了这一功能：它在字符串中搜索正则表达式首次匹配的位置。同样，如果找到匹配项，Dart 会以 [RegExpMatch] 的形式返回其详细信息。
+正则表达式最常见的用途是在输入中 _搜索_ 匹配项。[firstMatch] 方法提供了这一功能：它在字符串中搜索正则表达式首次匹配的位置。同样，如果找到匹配项，Dart 会以 [RegExpMatch](https://www.yuque.com/thyname/dart.core/regexpmatch) 的形式返回其详细信息。
 
 以下示例在字符串中查找正则表达式的第一个匹配项。
 
@@ -46,7 +46,7 @@ my
 string
 ```
 
-前面的示例使用了 _原始字符串_（raw string），这是一种在字符串字面量前加上 `r` 前缀的特殊字符串类型。使用原始字符串可以将字符串中的每个字符（包括 `\` 和 `$`）都视为字面字符，然后逐一传递给 [RegExp] 解析器。你应该将原始字符串作为 [RegExp] 构造函数的参数使用。
+前面的示例使用了 _原始字符串_（raw string），这是一种在字符串字面量前加上 `r` 前缀的特殊字符串类型。使用原始字符串可以将字符串中的每个字符（包括 `\` 和 `$`）都视为字面字符，然后逐一传递给 [RegExp](https://www.yuque.com/thyname/dart.core/regexp) 解析器。你应该将原始字符串作为 [RegExp](https://www.yuque.com/thyname/dart.core/regexp) 构造函数的参数使用。
 
 **性能提示**：正则表达式并不能神奇地解决所有问题。任何人都可能写出这样的正则表达式：应用于某些字符串输入时性能低下。通常，这类正则表达式在处理小型或常见输入时表现尚可，但在处理大型或不常见的输入时会出现病态的性能问题。这种不一致的行为使得性能问题在测试中更难被发现。
 
@@ -110,7 +110,7 @@ RegExp(
 
 构造一个正则表达式。
 
-如果 [source] 不符合合法的正则表达式语法，则抛出 [FormatException]。
+如果 [source] 不符合合法的正则表达式语法，则抛出 [FormatException](https://www.yuque.com/thyname/dart.core/formatexception)。
 
 如果你的代码启用了 `multiLine`，那么 `^` 和 `$` 将分别匹配 _行_ 的开头和结尾，同时也匹配输入的开头和结尾。
 
@@ -127,7 +127,7 @@ final wordPattern = RegExp(r'(\w+)');
 final digitPattern = RegExp(r'(\d+)');
 ```
 
-这些示例都使用 _原始字符串_ 作为参数。你应当优先将原始字符串用作 [RegExp] 构造函数的参数，因为这样可以更方便地将 `\` 和 `$` 作为正则表达式保留字符来书写。
+这些示例都使用 _原始字符串_ 作为参数。你应当优先将原始字符串用作 [RegExp](https://www.yuque.com/thyname/dart.core/regexp) 构造函数的参数，因为这样可以更方便地将 `\` 和 `$` 作为正则表达式保留字符来书写。
 
 如果使用非原始字符串编写，上述示例将会是：
 
@@ -164,7 +164,7 @@ String escape(String text)
 
 正则表达式中的保留字符包括：`(`、`)`、`[`、`]`、`{`、`}`、`*`、`+`、`?`、`.`、`^`、`$`、`|` 和 `\`。
 
-使用此方法可以创建一个模式，用于嵌入到更大的正则表达式中。由于 [String] 本身就是一个能匹配自身的 [Pattern]，因此如果只是要搜索该确切字符串，并不需要将其转换为正则表达式。
+使用此方法可以创建一个模式，用于嵌入到更大的正则表达式中。由于 [String](https://www.yuque.com/thyname/dart.core/string) 本身就是一个能匹配自身的 [Pattern](https://www.yuque.com/thyname/dart.core/pattern)，因此如果只是要搜索该确切字符串，并不需要将其转换为正则表达式。
 
 ```dart
 print(RegExp.escape('dash@example.com')); // dash@example\.com
@@ -321,7 +321,7 @@ String? stringMatch(String input)
 
 查找此正则表达式在 [input] 中第一个匹配项对应的字符串。
 
-与 [firstMatch] 一样，在 [input] 中搜索此正则表达式的匹配项，但如果找到匹配项，只返回匹配到的子字符串，而不是 [RegExpMatch]。
+与 [firstMatch] 一样，在 [input] 中搜索此正则表达式的匹配项，但如果找到匹配项，只返回匹配到的子字符串，而不是 [RegExpMatch](https://www.yuque.com/thyname/dart.core/regexpmatch)。
 
 ```dart
 var string = 'Dash is a bird';
@@ -340,7 +340,7 @@ abstract interface class RegExpMatch implements Match {}
 
 正则表达式匹配结果。
 
-正则表达式匹配结果本身就是一个 [Match]。此外，它还具备获取任意命名捕获组名称的能力，并支持通过名称（而非索引）来获取命名捕获组的匹配结果。
+正则表达式匹配结果本身就是一个 [Match](https://www.yuque.com/thyname/dart.core/match)。此外，它还具备获取任意命名捕获组名称的能力，并支持通过名称（而非索引）来获取命名捕获组的匹配结果。
 
 示例：
 

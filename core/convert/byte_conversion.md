@@ -4,7 +4,7 @@
 abstract mixin class ByteConversionSink implements ChunkedConversionSink<List<int>> {}
 ```
 
-[ByteConversionSink] 为转换器提供了一个用于高效传输字节数据的接口。
+[ByteConversionSink](https://www.yuque.com/thyname/dart.convert/byteconversionsink) 为转换器提供了一个用于高效传输字节数据的接口。
 
 它不再局限于接受单个非分块的字节列表作为输入，而是以分块（每块本身也是字节列表）的形式接受输入。
 

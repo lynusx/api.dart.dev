@@ -14,7 +14,7 @@ final class Flow {}
 
 用于表示 Flow 事件的类。
 
-[Flow] 对象用于在时间线切片（例如下方 [Timeline] 类创建的切片）之间穿引流事件（flow event）。添加 [Flow] 对象会使 Chrome 追踪查看器中的切片之间绘制箭头。箭头起始于传入了 [Flow.begin] 对象的 [Timeline] 事件，经过传入了 [Flow.step] 对象的 [Timeline] 事件，最终结束于传入了 [Flow.end] 对象、且具有相同 [Flow.id] 的事件。例如：
+[Flow](https://www.yuque.com/thyname/flutter.widgets/flow) 对象用于在时间线切片（例如下方 [Timeline](https://www.yuque.com/thyname/dart.developer/timeline) 类创建的切片）之间穿引流事件（flow event）。添加 [Flow](https://www.yuque.com/thyname/flutter.widgets/flow) 对象会使 Chrome 追踪查看器中的切片之间绘制箭头。箭头起始于传入了 [Flow.begin] 对象的 [Timeline](https://www.yuque.com/thyname/dart.developer/timeline) 事件，经过传入了 [Flow.step] 对象的 [Timeline](https://www.yuque.com/thyname/dart.developer/timeline) 事件，最终结束于传入了 [Flow.end] 对象、且具有相同 [Flow.id] 的事件。例如：
 
 ```dart
 var flow = Flow.begin();
@@ -47,7 +47,7 @@ Flow begin({int? id})
 
 一个 “begin” 类型的 Flow 事件。
 
-当传递给 [Timeline] 的方法时，生成一个 “begin” Flow 事件。如果未提供 [id]，将生成一个不与任何其他 Dart 生成的 flow id 冲突的 id。
+当传递给 [Timeline](https://www.yuque.com/thyname/dart.developer/timeline) 的方法时，生成一个 “begin” Flow 事件。如果未提供 [id]，将生成一个不与任何其他 Dart 生成的 flow id 冲突的 id。
 
 ### step()
 
@@ -57,7 +57,7 @@ Flow step(int id)
 
 一个 “step” 类型的 Flow 事件。
 
-当传递给 [Timeline] 的方法时，生成一个 “step” Flow 事件。[id] 参数为必需项，可以来自另一个 [Flow] 事件，也可以是来自环境的某个 id。
+当传递给 [Timeline](https://www.yuque.com/thyname/dart.developer/timeline) 的方法时，生成一个 “step” Flow 事件。[id] 参数为必需项，可以来自另一个 [Flow](https://www.yuque.com/thyname/flutter.widgets/flow) 事件，也可以是来自环境的某个 id。
 
 ### end()
 
@@ -67,7 +67,7 @@ Flow end(int id)
 
 一个 “end” 类型的 Flow 事件。
 
-当传递给 [Timeline] 的方法时，生成一个 “end” Flow 事件。[id] 参数为必需项，可以来自另一个 [Flow] 事件，也可以是来自环境的某个 id。
+当传递给 [Timeline](https://www.yuque.com/thyname/dart.developer/timeline) 的方法时，生成一个 “end” Flow 事件。[id] 参数为必需项，可以来自另一个 [Flow](https://www.yuque.com/thyname/flutter.widgets/flow) 事件，也可以是来自环境的某个 id。
 
 # Timeline
 
@@ -77,7 +77,7 @@ abstract final class Timeline {}
 
 向时间线添加内容。
 
-[Timeline] 的方法向时间线添加同步事件。在生成 Chrome 追踪格式的时间线时，使用 [Timeline] 会生成 “Complete” 事件。[Timeline] 的 [startSync] 和 [finishSync] 可以显式调用，也可以通过将闭包包装在 [timeSync] 中隐式调用。例如：
+[Timeline](https://www.yuque.com/thyname/dart.developer/timeline) 的方法向时间线添加同步事件。在生成 Chrome 追踪格式的时间线时，使用 [Timeline](https://www.yuque.com/thyname/dart.developer/timeline) 会生成 “Complete” 事件。[Timeline](https://www.yuque.com/thyname/dart.developer/timeline) 的 [startSync] 和 [finishSync] 可以显式调用，也可以通过将闭包包装在 [timeSync] 中隐式调用。例如：
 
 ```dart
 Timeline.startSync("Doing Something");
@@ -99,7 +99,7 @@ Timeline.timeSync("Doing Something", () {
 void startSync(String name, {Map? arguments, Flow? flow})
 ```
 
-开始一个标记为 [name] 的同步操作。可选地接受一个 [arguments] 映射。此切片还可以选择关联一个 [Flow] 事件。此操作必须在返回事件队列之前结束。
+开始一个标记为 [name] 的同步操作。可选地接受一个 [arguments] 映射。此切片还可以选择关联一个 [Flow](https://www.yuque.com/thyname/flutter.widgets/flow) 事件。此操作必须在返回事件队列之前结束。
 
 ### finishSync()
 
@@ -141,7 +141,7 @@ int get now
 final class TimelineTask {}
 ```
 
-时间线上的一个异步任务。一个异步任务可以包含许多（嵌套的）同步操作。同步操作的存活时间可以长于当前的 isolate 事件。要将 [TimelineTask] 传递给另一个 isolate，必须先调用 [pass] 获取任务 id，然后在另一个 isolate 中构造一个新的 [TimelineTask]。
+时间线上的一个异步任务。一个异步任务可以包含许多（嵌套的）同步操作。同步操作的存活时间可以长于当前的 isolate 事件。要将 [TimelineTask](https://www.yuque.com/thyname/dart.developer/timelinetask) 传递给另一个 isolate，必须先调用 [pass] 获取任务 id，然后在另一个 isolate 中构造一个新的 [TimelineTask](https://www.yuque.com/thyname/dart.developer/timelinetask)。
 
 ### TimelineTask()
 
@@ -151,7 +151,7 @@ TimelineTask({TimelineTask? parent, String? filterKey})
 
 创建一个任务。任务 ID 将由系统设置。
 
-如果提供了 [parent]，则在调用 [start] 时会将父任务的任务 ID 作为参数 'parentId' 提供。在 DevTools 中，此参数会使该 [TimelineTask] 与 [parent] [TimelineTask] 建立关联。
+如果提供了 [parent]，则在调用 [start] 时会将父任务的任务 ID 作为参数 'parentId' 提供。在 DevTools 中，此参数会使该 [TimelineTask](https://www.yuque.com/thyname/dart.developer/timelinetask) 与 [parent] [TimelineTask](https://www.yuque.com/thyname/dart.developer/timelinetask) 建立关联。
 
 如果提供了 [filterKey]，将在与此任务关联的每个事件的参数中插入一个名为 `filterKey` 的属性，该属性的值将设置为 [filterKey] 的值。
 
@@ -197,4 +197,4 @@ void finish({Map? arguments})
 int pass()
 ```
 
-获取该 [TimelineTask] 的任务 id。如果操作栈不为空，将抛出异常。
+获取该 [TimelineTask](https://www.yuque.com/thyname/dart.developer/timelinetask) 的任务 id。如果操作栈不为空，将抛出异常。

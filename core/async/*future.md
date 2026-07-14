@@ -78,7 +78,7 @@ Future<bool> fileContains(String path, String needle) async {
 
 `Future` 类还提供了更直接、底层的功能，用于访问其完成时的结果。`async` 和 `await` 语言特性正是构建在这一功能之上的，有时直接使用它是有意义的。有些事情无法仅通过一次 `await` 一个 future 来完成。
 
-对于一个 [Future]，可以手动注册回调，以便在值或错误可用时对其进行处理。例如：
+对于一个 [Future](https://www.yuque.com/thyname/dart.async/future)，可以手动注册回调，以便在值或错误可用时对其进行处理。例如：
 
 ```dart
 Future<int> future = getFuture();
@@ -86,7 +86,7 @@ future.then((value) => handleValue(value))
       .catchError((error) => handleError(error));
 ```
 
-由于 [Future] 可以以两种方式完成——以值完成（如果异步计算成功）或以错误完成（如果计算失败）——因此可以为其中一种或两种情况安装回调。
+由于 [Future](https://www.yuque.com/thyname/dart.async/future) 可以以两种方式完成——以值完成（如果异步计算成功）或以错误完成（如果计算失败）——因此可以为其中一种或两种情况安装回调。
 
 在某些情况下，我们说一个 future 是*被另一个 future 完成的*。这是一种简短的说法，表示该 future 将以与另一个 future 相同的方式完成，一旦那个 future 本身完成，就会得到相同的值或错误。平台库中大多数完成 future 的函数（例如 [Completer.complete] 或 [Future.value]）也接受另一个 future 作为参数，并自动将结果转发给被完成的 future。
 
@@ -162,7 +162,7 @@ Future<T>(FutureOr<T> computation())
 
 如果执行 [computation] 时抛出异常，返回的 future 将以该错误完成。
 
-如果返回值本身是一个 [Future]，创建的 future 的完成将等待该返回的 future 完成，然后以相同的结果完成。
+如果返回值本身是一个 [Future](https://www.yuque.com/thyname/dart.async/future)，创建的 future 的完成将等待该返回的 future 完成，然后以相同的结果完成。
 
 如果返回的是非 future 值，返回的 future 将以该值完成。
 
@@ -172,11 +172,11 @@ Future<T>(FutureOr<T> computation())
 Future<T>.microtask(FutureOr<T> computation())
 ```
 
-创建一个包含异步调用 [computation] 结果的 future（通过 [scheduleMicrotask] 实现）。
+创建一个包含异步调用 [computation] 结果的 future（通过 [scheduleMicrotask](https://www.yuque.com/thyname/dart.async/schedulemicrotask) 实现）。
 
 如果执行 [computation] 时抛出异常，返回的 future 将以抛出的错误完成。
 
-如果调用 [computation] 返回一个 [Future]，创建的 future 的完成将等待该返回的 future 完成，然后以相同的结果完成。
+如果调用 [computation] 返回一个 [Future](https://www.yuque.com/thyname/dart.async/future)，创建的 future 的完成将等待该返回的 future 完成，然后以相同的结果完成。
 
 如果调用 [computation] 返回非 future 值，返回的 future 将以该值完成。
 
@@ -231,11 +231,11 @@ Future<T>.value([FutureOr<T>? value])
 
 如果 [value] 是一个 future，创建的 future 会等待 [value] 这个 future 完成，然后以相同的结果完成。由于 [value] 这个 future 可能以错误完成，因此 [Future.value] 创建的 future 也可能以错误完成，尽管其名称暗示的并非如此。
 
-如果 [value] 不是 [Future]，创建的 future 将以 [value] 的值完成，等价于 `new Future<T>.sync(() => value)`。
+如果 [value] 不是 [Future](https://www.yuque.com/thyname/dart.async/future)，创建的 future 将以 [value] 的值完成，等价于 `new Future<T>.sync(() => value)`。
 
 如果省略 [value] 或其为 `null`，则会通过 `value as FutureOr<T>` 将其转换为 `FutureOr<T>`。如果 `T` 不可为空，则必须提供非 `null` 的 [value]，否则构造函数会抛出异常。
 
-使用 [Completer] 可以先创建一个 future，之后再完成它。
+使用 [Completer](https://www.yuque.com/thyname/dart.async/completer) 可以先创建一个 future，之后再完成它。
 
 示例：
 
@@ -257,7 +257,7 @@ Future<T>.error(Object error, [StackTrace? stackTrace])
 
 创建的 future 会在稍后的一个微任务（microtask）中以错误完成。这样可以留出足够的时间，让人为该 future 添加错误处理器。如果在 future 完成之前没有添加错误处理器，该错误将被视为未处理的错误。
 
-使用 [Completer] 可以创建一个 future 并稍后完成它。
+使用 [Completer](https://www.yuque.com/thyname/dart.async/completer) 可以创建一个 future 并稍后完成它。
 
 示例：
 
@@ -281,13 +281,13 @@ Future<T>.delayed(Duration duration, [FutureOr<T> Function()? computation])
 
 如果 [computation] 返回一个 future，此构造函数返回的 future 将以该 future 的值或错误完成，这可能要等到更晚的时候才能得到。
 
-如果 duration 为 0 或更小，它最早也要等到下一次事件循环迭代（在所有微任务运行完毕之后）才会完成。（等待延迟时使用的是在当前 zone 中创建的 [Timer]。）
+如果 duration 为 0 或更小，它最早也要等到下一次事件循环迭代（在所有微任务运行完毕之后）才会完成。（等待延迟时使用的是在当前 zone 中创建的 [Timer](https://www.yuque.com/thyname/dart.async/timer)。）
 
 computation 不能省略，也不能为 null。如果只是想等待一段时间，请改用 [Future.pause]。在此反映到函数签名之前，如果省略 [computation]，则 [T] 必须是可空的。此时 computation 会被当作 `() => null` 处理，future 最终将以 `null` 值完成。
 
 如果调用 [computation] 抛出异常，创建的 future 将以该错误完成。
 
-另请参阅 [Completer]，了解如何在已知的固定延迟之后的某个时刻创建并完成一个 future。
+另请参阅 [Completer](https://www.yuque.com/thyname/dart.async/completer)，了解如何在已知的固定延迟之后的某个时刻创建并完成一个 future。
 
 示例：
 
@@ -307,7 +307,7 @@ print(now.difference(later)); // At least a second.
 Future<void> pause([Duration duration = Duration.zero])
 ```
 
-创建一个在 [duration] 之后完成且没有结果的 [Future]。
+创建一个在 [duration] 之后完成且没有结果的 [Future](https://www.yuque.com/thyname/dart.async/future)。
 
 类似于 [Future.delayed]，但不执行任何操作，也不会以错误完成。
 
@@ -403,11 +403,11 @@ Future<void> forEach<T>(Iterable<T> elements, FutureOr action(T element))
 
 按顺序对 [elements] 中的每个元素调用 [action]。如果对 [action] 的调用返回一个 `Future<T>`，迭代会等待该 future 完成后再继续处理下一个元素。
 
-返回一个 [Future]，当所有元素都处理完毕后以 `null` 完成。
+返回一个 [Future](https://www.yuque.com/thyname/dart.async/future)，当所有元素都处理完毕后以 `null` 完成。
 
-非 [Future] 的返回值，以及返回的 [Future] 的完成值，都会被丢弃。
+非 [Future](https://www.yuque.com/thyname/dart.async/future) 的返回值，以及返回的 [Future](https://www.yuque.com/thyname/dart.async/future) 的完成值，都会被丢弃。
 
-[action] 抛出的任何错误（无论是同步还是异步）都会中止迭代，并在返回的 [Future] 中报告。
+[action] 抛出的任何错误（无论是同步还是异步）都会中止迭代，并在返回的 [Future](https://www.yuque.com/thyname/dart.async/future) 中报告。
 
 ### doWhile()
 
@@ -421,7 +421,7 @@ Future<void> doWhile(FutureOr<bool> action())
 
 只要该操作返回布尔值 `true`，或返回一个最终以 `true` 完成的 `Future<bool>`，该操作就会被重复调用。
 
-如果对 [action] 的某次调用返回 `false`，或返回的 [Future] 最终以 `false` 完成，迭代结束，[doWhile] 返回的 future 将以 `null` 值完成。
+如果对 [action] 的某次调用返回 `false`，或返回的 [Future](https://www.yuque.com/thyname/dart.async/future) 最终以 `false` 完成，迭代结束，[doWhile] 返回的 future 将以 `null` 值完成。
 
 如果对 [action] 的调用抛出异常，或 [action] 返回的 future 以错误完成，迭代结束，[doWhile] 返回的 future 将以相同的错误完成。
 
@@ -460,19 +460,19 @@ Future<R> then<R>(
 
 当此 future 以值完成时，将使用该值调用 [onValue] 回调。如果此 future 已经完成，回调不会立即被调用，而是会被安排在稍后的一个微任务中调用。
 
-如果提供了 [onError]，并且此 future 以错误完成，`onError` 回调会被调用，并传入该错误及其堆栈跟踪。`onError` 回调必须接受一个参数，或者接受两个参数（其中第二个是 [StackTrace]）。如果 `onError` 接受两个参数，调用时会同时传入错误和堆栈跟踪，否则只传入错误对象。`onError` 回调必须返回一个可用于完成返回的 future 的值或 future，因此它必须是可赋值给 `FutureOr<R>` 的内容。
+如果提供了 [onError]，并且此 future 以错误完成，`onError` 回调会被调用，并传入该错误及其堆栈跟踪。`onError` 回调必须接受一个参数，或者接受两个参数（其中第二个是 [StackTrace](https://www.yuque.com/thyname/dart.core/stacktrace)）。如果 `onError` 接受两个参数，调用时会同时传入错误和堆栈跟踪，否则只传入错误对象。`onError` 回调必须返回一个可用于完成返回的 future 的值或 future，因此它必须是可赋值给 `FutureOr<R>` 的内容。
 
-返回一个新的 [Future]，它将以调用 `onValue`（如果此 future 以值完成）或调用 `onError`（如果此 future 以错误完成）的结果完成。
+返回一个新的 [Future](https://www.yuque.com/thyname/dart.async/future)，它将以调用 `onValue`（如果此 future 以值完成）或调用 `onError`（如果此 future 以错误完成）的结果完成。
 
 如果被调用的回调抛出异常，返回的 future 将以抛出的错误及其堆栈跟踪完成。对于 `onError` 而言，如果抛出的异常与传给 `onError` 的错误参数是 `identical` 的，并且是*同步*抛出的，则该抛出会被视为一次重新抛出（rethrow），并使用原始的堆栈跟踪。要在异步回调中以相同的堆栈跟踪重新抛出，请使用 [Error.throwWithStackTrace]。
 
-如果回调返回一个 [Future]，`then` 返回的 future 将以该回调返回的 future 相同的结果完成。
+如果回调返回一个 [Future](https://www.yuque.com/thyname/dart.async/future)，`then` 返回的 future 将以该回调返回的 future 相同的结果完成。
 
 如果未提供 [onError]，并且此 future 以错误完成，该错误会被直接转发给返回的 future。
 
 在大多数情况下，单独使用 [catchError]（可能带有 `test` 参数）来分别处理值和错误，比在一次 [then] 调用中同时处理两者更具可读性。
 
-请注意，future 不会延迟报告错误直到有监听器被添加。如果第一次调用 `then` 或 `catchError` 发生在此 future 已经以错误完成之后，那么该错误会被报告为未处理的错误。参见 [Future] 的说明。
+请注意，future 不会延迟报告错误直到有监听器被添加。如果第一次调用 `then` 或 `catchError` 发生在此 future 已经以错误完成之后，那么该错误会被报告为未处理的错误。参见 [Future](https://www.yuque.com/thyname/dart.async/future) 的说明。
 
 ### catchError()
 
@@ -483,11 +483,11 @@ Future<T> catchError(
 })
 ```
 
-处理此 [Future] 抛出的错误。
+处理此 [Future](https://www.yuque.com/thyname/dart.async/future) 抛出的错误。
 
 这是“catch”代码块的异步等价形式。
 
-返回一个新的 [Future]，它将以此 future 的结果，或调用 `onError` 回调的结果完成。
+返回一个新的 [Future](https://www.yuque.com/thyname/dart.async/future)，它将以此 future 的结果，或调用 `onError` 回调的结果完成。
 
 如果此 future 以值完成，返回的 future 将以相同的值完成。
 
@@ -499,7 +499,7 @@ Future<T> catchError(
 
 如果省略 `test`，则默认为一个始终返回 true 的函数。`test` 函数不应抛出异常，但如果确实抛出了，会被当作 `onError` 函数抛出异常来处理。
 
-请注意，future 不会延迟报告错误直到有监听器被添加。如果第一次调用 `catchError`（或 `then`）发生在此 future 已经以错误完成之后，那么该错误会被报告为未处理的错误。参见 [Future] 的说明。
+请注意，future 不会延迟报告错误直到有监听器被添加。如果第一次调用 `catchError`（或 `then`）发生在此 future 已经以错误完成之后，那么该错误会被报告为未处理的错误。参见 [Future](https://www.yuque.com/thyname/dart.async/future) 的说明。
 
 示例：
 
@@ -528,11 +528,11 @@ Future<T> whenComplete(FutureOr<void> action())
 
 这是“finally”代码块的异步等价形式。
 
-此调用返回的 future（记为 `f`）将以与此 future 相同的方式完成，除非在调用 [action] 时，或在 [action] 调用返回的 [Future] 中发生了错误。如果对 [action] 的调用没有返回 future，其返回值会被忽略。
+此调用返回的 future（记为 `f`）将以与此 future 相同的方式完成，除非在调用 [action] 时，或在 [action] 调用返回的 [Future](https://www.yuque.com/thyname/dart.async/future) 中发生了错误。如果对 [action] 的调用没有返回 future，其返回值会被忽略。
 
 如果对 [action] 的调用抛出异常，则 `f` 将以抛出的错误完成。
 
-如果对 [action] 的调用返回一个 [Future]（记为 `f2`），则 `f` 的完成会延迟，直到 `f2` 完成。如果 `f2` 以错误完成，该错误也将成为 `f` 的结果。`f2` 的值始终会被忽略。
+如果对 [action] 的调用返回一个 [Future](https://www.yuque.com/thyname/dart.async/future)（记为 `f2`），则 `f` 的完成会延迟，直到 `f2` 完成。如果 `f2` 以错误完成，该错误也将成为 `f` 的结果。`f2` 的值始终会被忽略。
 
 此方法等价于：
 
@@ -573,7 +573,7 @@ Future<String> waitTask() {
 Stream<T> asStream()
 ```
 
-创建一个包含此 future 结果的 [Stream]。
+创建一个包含此 future 结果的 [Stream](https://www.yuque.com/thyname/dart.async/stream)。
 
 该流会产生一个单独的数据事件或错误事件，其中包含此 future 的完成结果，然后以一个 done 事件关闭。
 
@@ -594,7 +594,7 @@ Future<T> timeout(
 
 如果源 future 未能在 [timeLimit] 之内完成，将执行 [onTimeout] 操作，并将其结果（无论是返回还是抛出）用作超时 future 的结果。[onTimeout] 函数必须返回一个 [T] 或 `Future<T>`。如果 [onTimeout] 返回一个 future（即*替代结果 future*），即使源 future 在替代结果 future 之前完成，超时 future 最终也将以替代结果 future 的结果完成。这里唯一重要的是源 future 没有及时完成。
 
-如果省略 `onTimeout`，超时将导致返回的 future 以 [TimeoutException] 完成。
+如果省略 `onTimeout`，超时将导致返回的 future 以 [TimeoutException](https://www.yuque.com/thyname/dart.async/timeoutexception) 完成。
 
 无论哪种情况，源 future 之后仍可以正常完成。只是除非它在时间限制内完成，否则不会被用作超时 future 的结果。即使源 future 以错误完成，如果该错误发生在 [timeLimit] 之后，该错误也会被忽略，就像值结果一样。
 
@@ -663,7 +663,7 @@ void unawaited( Future<void>? future )
 
 明确忽略一个 future。
 
-并非所有的 future 都需要被等待。Dart 语法检查工具（linter）有一个可选的 ["unawaited futures" lint](https://dart.dev/lints/unawaited_futures)，用于强制要求异步函数中潜在的 future（静态类型为 [Future] 或 `Future?` 的表达式）必须以某种方式被处理。如果某个特定的 future 值不需要被等待，可以对它调用 `unawaited(...)`，这样可以避免触发该 lint，因为该表达式不再具有 [Future] 类型。使用 `unawaited` 没有其他效果。应使用 `unawaited` 来表明*有意*不等待该 future 的意图。
+并非所有的 future 都需要被等待。Dart 语法检查工具（linter）有一个可选的 ["unawaited futures" lint](https://dart.dev/lints/unawaited_futures)，用于强制要求异步函数中潜在的 future（静态类型为 [Future](https://www.yuque.com/thyname/dart.async/future) 或 `Future?` 的表达式）必须以某种方式被处理。如果某个特定的 future 值不需要被等待，可以对它调用 `unawaited(...)`，这样可以避免触发该 lint，因为该表达式不再具有 [Future](https://www.yuque.com/thyname/dart.async/future) 类型。使用 `unawaited` 没有其他效果。应使用 `unawaited` 来表明*有意*不等待该 future 的意图。
 
 如果该 future 以错误完成，很可能表明不等待它是一个错误的做法。该错误仍然会发生，并且会被视为未处理，除非在其他地方也等待（或以其他方式处理）了同一个 future。正因如此，`unawaited` 应仅用于*预期*会以值完成的 future。如果你还想忽略此 future 可能产生的错误，可以使用 [FutureExtensions.ignore]。
 
@@ -692,7 +692,7 @@ Future<T> onError<E extends Object>(
 
 处理此 future 上的错误。
 
-捕获此 future 可能以其完成的 [E] 类型的错误。如果提供了 [test]，则只捕获 [test] 返回 `true` 的 [E] 类型错误。如果 [E] 是 [Object]，则所有错误都有可能被捕获，具体取决于所提供的 [test]。
+捕获此 future 可能以其完成的 [E] 类型的错误。如果提供了 [test]，则只捕获 [test] 返回 `true` 的 [E] 类型错误。如果 [E] 是 [Object](https://www.yuque.com/thyname/dart.core/object)，则所有错误都有可能被捕获，具体取决于所提供的 [test]。
 
 如果错误被捕获，返回的 future 将以调用 [handleError]（传入错误和堆栈跟踪）的结果完成。此结果必须是此 future 原本可以完成的相同类型的值。例如，如果此 future 不能以 `null` 完成，那么 [handleError] 也不能返回 `null`。示例：
 
@@ -721,7 +721,7 @@ someFuture.onError<SomeException>((e, _) {
 
 如果错误未被捕获，返回的 future 将以与此 future 相同的结果（值或错误）完成。
 
-这个方法实际上是 [Future.catchError] 的一个类型更精确的版本。它使得捕获特定错误类型变得容易，并要求提供一个类型正确的错误处理函数，而不仅仅是 [Function]。正因为如此，错误处理器必须接受堆栈跟踪参数。
+这个方法实际上是 [Future.catchError] 的一个类型更精确的版本。它使得捕获特定错误类型变得容易，并要求提供一个类型正确的错误处理函数，而不仅仅是 [Function](https://www.yuque.com/thyname/dart.core/function)。正因为如此，错误处理器必须接受堆栈跟踪参数。
 
 ### ignore()
 
@@ -734,7 +734,7 @@ void ignore()
 
 并非所有的 future 都重要，即使它们包含错误也是如此，例如某个请求已经发出，但其响应已不再需要。仅仅忽略一个 future 可能会导致未捕获的异步错误。此方法则会处理（并忽略）来自此 future 的任何值或错误，从而可以安全地忽略该 future。
 
-使用 `ignore` 来表明此 future 的结果对程序而言已不再重要，即使它是一个错误也是如此。如果你只是想消除 ["unawaited futures" lint](https://dart.dev/lints/unawaited_futures)，请改用 [unawaited] 函数，这样可以确保意外的错误仍会被报告。
+使用 `ignore` 来表明此 future 的结果对程序而言已不再重要，即使它是一个错误也是如此。如果你只是想消除 ["unawaited futures" lint](https://dart.dev/lints/unawaited_futures)，请改用 [unawaited](https://www.yuque.com/thyname/dart.async/unawaited) 函数，这样可以确保意外的错误仍会被报告。
 
 ---
 
@@ -778,13 +778,13 @@ abstract interface class Completer<T> {}
 
 一种生成 Future 对象，并在稍后以值或错误完成它们的方式。
 
-大多数情况下，创建一个 future 最简单的方式是使用 [Future] 的某个构造函数来捕获单个异步计算的结果：
+大多数情况下，创建一个 future 最简单的方式是使用 [Future](https://www.yuque.com/thyname/dart.async/future) 的某个构造函数来捕获单个异步计算的结果：
 
 ```dart
 Future(() { doSomething(); return result; });
 ```
 
-或者，如果该 future 表示一系列异步计算的结果，可以使用 [Future.then] 或 [Future] 上的类似函数将它们串联起来：
+或者，如果该 future 表示一系列异步计算的结果，可以使用 [Future.then] 或 [Future](https://www.yuque.com/thyname/dart.async/future) 上的类似函数将它们串联起来：
 
 ```dart
 Future doStuff(){
@@ -849,7 +849,7 @@ Completer<T>.sync()
 
 同步完成该 future。
 
-除非该 future 的完成已知是另一个异步操作的最终结果，否则应避免使用此构造函数。如有疑问，请使用默认的 [Completer] 构造函数。
+除非该 future 的完成已知是另一个异步操作的最终结果，否则应避免使用此构造函数。如有疑问，请使用默认的 [Completer](https://www.yuque.com/thyname/dart.async/completer) 构造函数。
 
 使用普通的异步 completer 永远不会产生错误的行为，但错误地使用同步 completer 可能会导致原本正确的程序出现问题。
 
@@ -937,7 +937,7 @@ void completeError(Object error, [StackTrace? stackTrace])
 
 以错误完成一个 future 表示在尝试产生值的过程中抛出了异常。
 
-如果 [error] 是一个 [Future]，则将该 future 本身用作错误值。如果你想以该 future 的结果完成，可以使用：
+如果 [error] 是一个 [Future](https://www.yuque.com/thyname/dart.async/future)，则将该 future 本身用作错误值。如果你想以该 future 的结果完成，可以使用：
 
 ```dart
 thisCompleter.complete(theFuture)

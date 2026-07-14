@@ -239,7 +239,7 @@ HtmlEscape([HtmlEscapeMode mode = HtmlEscapeMode.unknown])
 HtmlEscapeMode mode
 ```
 
-转换器使用的 [HtmlEscapeMode]。
+转换器使用的 [HtmlEscapeMode](https://www.yuque.com/thyname/dart.convert/htmlescapemode)。
 
 ## 方法
 

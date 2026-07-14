@@ -25,7 +25,7 @@ void main() {
 
 ## 获取环境变量的值
 
-[environment] 获取器返回一个 [Map]，其中包含环境变量名称和值的键值对字符串。该 Map 是不可修改的。以下示例展示了如何获取 `PATH` 环境变量的值。
+[environment] 获取器返回一个 [Map](https://www.yuque.com/thyname/dart.core/map)，其中包含环境变量名称和值的键值对字符串。该 Map 是不可修改的。以下示例展示了如何获取 `PATH` 环境变量的值。
 
 ```dart
 import 'dart:io' show Platform;

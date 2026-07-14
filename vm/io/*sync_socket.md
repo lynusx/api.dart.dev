@@ -6,7 +6,7 @@ abstract interface class RawSynchronousSocket {}
 
 用于通过 TCP 套接字进行同步通信的底层类。
 
-警告：[RawSynchronousSocket] 可能应该只用于连接到 'localhost'。以下操作会阻塞调用线程，以等待网络响应。在这些操作完成之前，该线程无法处理任何其他事件。[RawSynchronousSocket] 不适用于需要高性能或异步 I/O（例如服务器）的应用程序。此类应用程序应改用 [Socket] 或 [RawSocket] 类中的非阻塞套接字和异步操作。
+警告：[RawSynchronousSocket](https://www.yuque.com/thyname/dart.io/rawsynchronoussocket) 可能应该只用于连接到 'localhost'。以下操作会阻塞调用线程，以等待网络响应。在这些操作完成之前，该线程无法处理任何其他事件。[RawSynchronousSocket](https://www.yuque.com/thyname/dart.io/rawsynchronoussocket) 不适用于需要高性能或异步 I/O（例如服务器）的应用程序。此类应用程序应改用 [Socket](https://www.yuque.com/thyname/dart.io/socket) 或 [RawSocket](https://www.yuque.com/thyname/dart.io/rawsocket) 类中的非阻塞套接字和异步操作。
 
 ### connectSync()
 
@@ -14,9 +14,9 @@ abstract interface class RawSynchronousSocket {}
 RawSynchronousSocket connectSync(dynamic host, int port)
 ```
 
-创建一个新的套接字连接，并返回一个 [RawSynchronousSocket]。
+创建一个新的套接字连接，并返回一个 [RawSynchronousSocket](https://www.yuque.com/thyname/dart.io/rawsynchronoussocket)。
 
-[host] 可以是 [String] 或 [InternetAddress]。如果 [host] 是 [String]，[connectSync] 将执行 [InternetAddress.lookup]，并依次尝试所有返回的 [InternetAddress]，直到连接成功。除非成功建立连接，否则将返回第一个连接失败时的错误。
+[host] 可以是 [String](https://www.yuque.com/thyname/dart.core/string) 或 [InternetAddress](https://www.yuque.com/thyname/dart.io/internetaddress)。如果 [host] 是 [String](https://www.yuque.com/thyname/dart.core/string)，[connectSync] 将执行 [InternetAddress.lookup]，并依次尝试所有返回的 [InternetAddress](https://www.yuque.com/thyname/dart.io/internetaddress)，直到连接成功。除非成功建立连接，否则将返回第一个连接失败时的错误。
 
 ### available()
 
@@ -32,9 +32,9 @@ int available()
 void closeSync()
 ```
 
-关闭 [RawSynchronousSocket]。
+关闭 [RawSynchronousSocket](https://www.yuque.com/thyname/dart.io/rawsynchronoussocket)。
 
-一旦调用了 [closeSync]，再尝试调用 [readSync]、[readIntoSync]、[writeFromSync]、[remoteAddress] 和 [remotePort] 将导致抛出 [SocketException]。
+一旦调用了 [closeSync]，再尝试调用 [readSync]、[readIntoSync]、[writeFromSync]、[remoteAddress] 和 [remotePort] 将导致抛出 [SocketException](https://www.yuque.com/thyname/dart.io/socketexception)。
 
 ### readIntoSync()
 
@@ -100,7 +100,7 @@ int get remotePort
 InternetAddress get address
 ```
 
-此套接字用于连接的 [InternetAddress]。
+此套接字用于连接的 [InternetAddress](https://www.yuque.com/thyname/dart.io/internetaddress)。
 
 ### remoteAddress
 
@@ -108,4 +108,4 @@ InternetAddress get address
 InternetAddress get remoteAddress
 ```
 
-此套接字所连接的远程 [InternetAddress]。
+此套接字所连接的远程 [InternetAddress](https://www.yuque.com/thyname/dart.io/internetaddress)。

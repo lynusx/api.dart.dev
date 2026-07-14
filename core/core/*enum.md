@@ -8,7 +8,7 @@ abstract interface class Enum {}
 
 该类由所有使用 `enum` 声明引入的类型和值实现。非平台类不能扩展或混入此类。具体类不能实现该接口。
 
-用于命名 `enum` 值的标识符可通过 `enum` 值上的 [EnumName.name] 扩展属性作为 [String] 获取。
+用于命名 `enum` 值的标识符可通过 `enum` 值上的 [EnumName.name] 扩展属性作为 [String](https://www.yuque.com/thyname/dart.core/string) 获取。
 
 ## 静态方法
 
@@ -21,7 +21,7 @@ int compareByIndex<T extends Enum>( T value1, T value2 )
 
 按 [index] 比较两个枚举值。
 
-这是一个用于枚举类型的通用 [Comparator] 函数，它根据枚举值的 [index] 值对枚举值进行排序，该值对应于 `enum` 声明中枚举元素声明的源码顺序。
+这是一个用于枚举类型的通用 [Comparator](https://www.yuque.com/thyname/dart.core/comparator) 函数，它根据枚举值的 [index] 值对枚举值进行排序，该值对应于 `enum` 声明中枚举元素声明的源码顺序。
 
 示例：
 
@@ -51,7 +51,7 @@ int compareByName<T extends Enum>( T value1, T value2 )
 
 枚举值的 [EnumName.name] 是表示该枚举值声明时所用源码名称的字符串。
 
-此 [Comparator] 通过比较两个枚举值的名称来进行比较，可用于按名称对枚举值进行排序。比较使用 [String.compareTo]，因此区分大小写。
+此 [Comparator](https://www.yuque.com/thyname/dart.core/comparator) 通过比较两个枚举值的名称来进行比较，可用于按名称对枚举值进行排序。比较使用 [String.compareTo]，因此区分大小写。
 
 示例：
 

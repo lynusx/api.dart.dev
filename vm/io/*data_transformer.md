@@ -126,7 +126,7 @@ int strategyDefault
 ZLibCodec zlib
 ```
 
-[ZLibCodec] 默认实现的一个实例。
+[ZLibCodec](https://www.yuque.com/thyname/dart.io/zlibcodec) 默认实现的一个实例。
 
 # ZLibCodec
 
@@ -134,7 +134,7 @@ ZLibCodec zlib
 final class ZLibCodec extends Codec<List<int>, List<int>> {}
 ```
 
-[ZLibCodec] 用于将原始字节编码为 ZLib 压缩字节，并将 ZLib 压缩字节解码为原始字节。
+[ZLibCodec](https://www.yuque.com/thyname/dart.io/zlibcodec) 用于将原始字节编码为 ZLib 压缩字节，并将 ZLib 压缩字节解码为原始字节。
 
 ### gzip
 
@@ -214,7 +214,7 @@ ZLibCodec({int level = ZLibOption.defaultLevel, int windowBits = ZLibOption.defa
 ZLibEncoder get encoder
 ```
 
-获取用于编码为 `ZLib` 压缩数据的 [ZLibEncoder]。
+获取用于编码为 `ZLib` 压缩数据的 [ZLibEncoder](https://www.yuque.com/thyname/dart.io/zlibencoder)。
 
 ### decoder
 
@@ -222,7 +222,7 @@ ZLibEncoder get encoder
 ZLibDecoder get decoder
 ```
 
-获取用于解码 `ZLib` 压缩数据的 [ZLibDecoder]。
+获取用于解码 `ZLib` 压缩数据的 [ZLibDecoder](https://www.yuque.com/thyname/dart.io/zlibdecoder)。
 
 # gzip
 
@@ -230,7 +230,7 @@ ZLibDecoder get decoder
 GZipCodec gzip
 ```
 
-[GZipCodec] 默认实现的一个实例。
+[GZipCodec](https://www.yuque.com/thyname/dart.io/gzipcodec) 默认实现的一个实例。
 
 # GZipCodec
 
@@ -238,7 +238,7 @@ GZipCodec gzip
 final class GZipCodec extends Codec<List<int>, List<int>> {}
 ```
 
-[GZipCodec] 用于将原始字节编码为 GZip 压缩字节，并将 GZip 压缩字节解码为原始字节。
+[GZipCodec](https://www.yuque.com/thyname/dart.io/gzipcodec) 用于将原始字节编码为 GZip 压缩字节，并将 GZip 压缩字节解码为原始字节。
 
 ### gzip
 
@@ -318,7 +318,7 @@ GZipCodec({int level = ZLibOption.defaultLevel, int windowBits = ZLibOption.defa
 ZLibEncoder get encoder
 ```
 
-获取用于编码为 `GZip` 压缩数据的 [ZLibEncoder]。
+获取用于编码为 `GZip` 压缩数据的 [ZLibEncoder](https://www.yuque.com/thyname/dart.io/zlibencoder)。
 
 ### decoder
 
@@ -326,7 +326,7 @@ ZLibEncoder get encoder
 ZLibDecoder get decoder
 ```
 
-获取用于解码 `GZip` 压缩数据的 [ZLibDecoder]。
+获取用于解码 `GZip` 压缩数据的 [ZLibDecoder](https://www.yuque.com/thyname/dart.io/zlibdecoder)。
 
 # ZLibEncoder
 
@@ -334,7 +334,7 @@ ZLibDecoder get decoder
 final class ZLibEncoder extends Converter<List<int>, List<int>> {}
 ```
 
-[ZLibEncoder] 编码器由 [ZLibCodec] 和 [GZipCodec] 用于压缩数据。
+[ZLibEncoder](https://www.yuque.com/thyname/dart.io/zlibencoder) 编码器由 [ZLibCodec](https://www.yuque.com/thyname/dart.io/zlibcodec) 和 [GZipCodec](https://www.yuque.com/thyname/dart.io/gzipcodec) 用于压缩数据。
 
 ### gzip
 
@@ -422,9 +422,9 @@ List<int> convert(List<int> bytes)
 ByteConversionSink startChunkedConversion(Sink<List<int>> sink)
 ```
 
-使用 [ZLibEncoder] 构造函数中给定的选项开始分块转换。
+使用 [ZLibEncoder](https://www.yuque.com/thyname/dart.io/zlibencoder) 构造函数中给定的选项开始分块转换。
 
-可接受任意 `Sink<List<int>>`，但优先使用 [ByteConversionSink]；若传入其他类型的 sink，会先将其转换为 [ByteConversionSink] 再使用。
+可接受任意 `Sink<List<int>>`，但优先使用 [ByteConversionSink](https://www.yuque.com/thyname/dart.convert/byteconversionsink)；若传入其他类型的 sink，会先将其转换为 [ByteConversionSink](https://www.yuque.com/thyname/dart.convert/byteconversionsink) 再使用。
 
 # ZLibDecoder
 
@@ -432,7 +432,7 @@ ByteConversionSink startChunkedConversion(Sink<List<int>> sink)
 final class ZLibDecoder extends Converter<List<int>, List<int>> {}
 ```
 
-[ZLibDecoder] 由 [ZLibCodec] 和 [GZipCodec] 用于解压数据。
+[ZLibDecoder](https://www.yuque.com/thyname/dart.io/zlibdecoder) 由 [ZLibCodec](https://www.yuque.com/thyname/dart.io/zlibcodec) 和 [GZipCodec](https://www.yuque.com/thyname/dart.io/gzipcodec) 用于解压数据。
 
 ### gzip
 
@@ -480,7 +480,7 @@ ZLibDecoder({bool gzip = false, int windowBits = ZLibOption.defaultWindowBits, L
 List<int> convert(List<int> bytes)
 ```
 
-使用 [ZLibDecoder] 构造函数中给定的选项转换字节列表。
+使用 [ZLibDecoder](https://www.yuque.com/thyname/dart.io/zlibdecoder) 构造函数中给定的选项转换字节列表。
 
 ### startChunkedConversion()
 
@@ -490,7 +490,7 @@ ByteConversionSink startChunkedConversion(Sink<List<int>> sink)
 
 开始分块转换。
 
-可接受任意 `Sink<List<int>>`，但优先使用 [ByteConversionSink]；若传入其他类型的 sink，会先将其转换为 [ByteConversionSink] 再使用。
+可接受任意 `Sink<List<int>>`，但优先使用 [ByteConversionSink](https://www.yuque.com/thyname/dart.convert/byteconversionsink)；若传入其他类型的 sink，会先将其转换为 [ByteConversionSink](https://www.yuque.com/thyname/dart.convert/byteconversionsink) 再使用。
 
 # RawZLibFilter
 
@@ -498,7 +498,7 @@ ByteConversionSink startChunkedConversion(Sink<List<int>> sink)
 abstract interface class RawZLibFilter {}
 ```
 
-[RawZLibFilter] 类提供了一个访问 zlib 的底层接口。
+[RawZLibFilter](https://www.yuque.com/thyname/dart.io/rawzlibfilter) 类提供了一个访问 zlib 的底层接口。
 
 ### RawZLibFilter.deflateFilter()
 
@@ -506,7 +506,7 @@ abstract interface class RawZLibFilter {}
 RawZLibFilter.deflateFilter({bool gzip = false, int level = ZLibOption.defaultLevel, int windowBits = ZLibOption.defaultWindowBits, int memLevel = ZLibOption.defaultMemLevel, int strategy = ZLibOption.strategyDefault, List<int>? dictionary, bool raw = false})
 ```
 
-返回一个 [RawZLibFilter]，其 [process] 和 [processed] 方法用于压缩数据。
+返回一个 [RawZLibFilter](https://www.yuque.com/thyname/dart.io/rawzlibfilter)，其 [process] 和 [processed] 方法用于压缩数据。
 
 ### RawZLibFilter.inflateFilter()
 
@@ -514,7 +514,7 @@ RawZLibFilter.deflateFilter({bool gzip = false, int level = ZLibOption.defaultLe
 RawZLibFilter.inflateFilter({bool gzip = false, int windowBits = ZLibOption.defaultWindowBits, List<int>? dictionary, bool raw = false})
 ```
 
-返回一个 [RawZLibFilter]，其 [process] 和 [processed] 方法用于解压数据。
+返回一个 [RawZLibFilter](https://www.yuque.com/thyname/dart.io/rawzlibfilter)，其 [process] 和 [processed] 方法用于解压数据。
 
 ### process()
 

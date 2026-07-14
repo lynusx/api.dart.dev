@@ -4,7 +4,7 @@
 final class LineSplitter extends StreamTransformerBase<String, String> {}
 ```
 
-一个将 [String] 拆分为独立行的 [StreamTransformer]。
+一个将 [String](https://www.yuque.com/thyname/dart.core/string) 拆分为独立行的 [StreamTransformer](https://www.yuque.com/thyname/dart.async/streamtransformer)。
 
 一行以以下之一结束：
 

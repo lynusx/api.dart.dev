@@ -4,11 +4,11 @@
 final class SplayTreeMap<K, V> extends _SplayTree<K, _SplayTreeMapNode<K, V>> with MapMixin<K, V> {}
 ```
 
-一个可以按彼此顺序排列的对象组成的 [Map]。
+一个可以按彼此顺序排列的对象组成的 [Map](https://www.yuque.com/thyname/dart.core/map)。
 
 该映射基于自平衡二叉树实现，支持大多数单条目操作，均摊时间复杂度为对数级。
 
-映射的键使用构造函数中传入的 `compare` 函数进行比较，该函数同时用于排序和判断相等性。如果映射中只包含键 `a`，那么 `map.containsKey(b)` 仅当 `compare(a, b) == 0` 时才返回 `true`，甚至不会检查 `a == b` 的值。如果省略 compare 函数，则假定对象是可比较的（[Comparable]），并使用其 [Comparable.compareTo] 方法进行比较。在这种情况下，不可比较的对象（包括 `null`）不能用作键。
+映射的键使用构造函数中传入的 `compare` 函数进行比较，该函数同时用于排序和判断相等性。如果映射中只包含键 `a`，那么 `map.containsKey(b)` 仅当 `compare(a, b) == 0` 时才返回 `true`，甚至不会检查 `a == b` 的值。如果省略 compare 函数，则假定对象是可比较的（[Comparable](https://www.yuque.com/thyname/dart.core/comparable)），并使用其 [Comparable.compareTo] 方法进行比较。在这种情况下，不可比较的对象（包括 `null`）不能用作键。
 
 为了允许使用 `compare` 函数不支持的对象调用 [operator []]、[remove] 或 [containsKey]，可以提供一个额外的 `isValidKey` 判定函数。在对可能不是 [K] 类型的参数值使用 `compare` 函数之前，会先测试该函数。如果省略，`isValidKey` 函数默认测试该值是否为 [K] 类型。
 
@@ -101,9 +101,9 @@ print(planetsByMass); // {}
 
 **另请参阅：**
 
-- [Map]，键/值对集合的通用接口。
-- [HashMap] 是无序的（不保证迭代顺序）。
-- [LinkedHashMap] 按键的插入顺序进行迭代。
+- [Map](https://www.yuque.com/thyname/dart.core/map)，键/值对集合的通用接口。
+- [HashMap](https://www.yuque.com/thyname/dart.collection/hashmap) 是无序的（不保证迭代顺序）。
+- [LinkedHashMap](https://www.yuque.com/thyname/dart.collection/linkedhashmap) 按键的插入顺序进行迭代。
 
 ## 构造函数
 
@@ -126,7 +126,7 @@ SplayTreeMap<K, V>.from(
 ])
 ```
 
-创建一个包含 [other] 中所有键/值对的 [SplayTreeMap]。
+创建一个包含 [other] 中所有键/值对的 [SplayTreeMap](https://www.yuque.com/thyname/dart.collection/splaytreemap)。
 
 所有键必须是 [K] 的实例，所有值必须是 [V] 的实例。[other] 映射本身可以是任意类型。示例：
 
@@ -146,7 +146,7 @@ SplayTreeMap<K, V>.of(
 ])
 ```
 
-创建一个包含 [other] 中所有键/值对的 [SplayTreeMap]。示例：
+创建一个包含 [other] 中所有键/值对的 [SplayTreeMap](https://www.yuque.com/thyname/dart.collection/splaytreemap)。示例：
 
 ```dart
 final baseMap = <int, String>{3: 'A', 2: 'B', 1: 'C', 4: 'D'};
@@ -166,7 +166,7 @@ SplayTreeMap<K, V>.fromIterable(
 })
 ```
 
-创建一个 [SplayTreeMap]，其键和值根据 [iterable] 计算得出。
+创建一个 [SplayTreeMap](https://www.yuque.com/thyname/dart.collection/splaytreemap)，其键和值根据 [iterable] 计算得出。
 
 对于 [iterable] 中的每个元素，此构造函数通过分别应用 [key] 和 [value] 来计算一个键/值对。
 
@@ -193,13 +193,13 @@ SplayTreeMap<K, V>.fromIterables(
 ])
 ```
 
-创建一个将给定的 [keys] 与 [values] 相关联的 [SplayTreeMap]。
+创建一个将给定的 [keys] 与 [values] 相关联的 [SplayTreeMap](https://www.yuque.com/thyname/dart.collection/splaytreemap)。
 
 此构造函数遍历 [keys] 和 [values]，将 [keys] 中的每个元素映射到 [values] 中对应的元素。
 
 如果 [keys] 中多次包含同一个对象，则最后一次出现会覆盖之前的值。
 
-如果两个 [Iterable] 的长度不一致，则会产生错误。示例：
+如果两个 [Iterable](https://www.yuque.com/thyname/dart.core/iterable) 的长度不一致，则会产生错误。示例：
 
 ```dart
 final keys = ['1', '2', '3', '4'];
@@ -281,11 +281,11 @@ K? firstKeyAfter(K key)
 final class SplayTreeSet<E> extends _SplayTree<E, _SplayTreeSetNode<E>> with Iterable<E>, SetMixin<E> {}
 ```
 
-一个可以按彼此顺序排列的对象组成的 [Set]。
+一个可以按彼此顺序排列的对象组成的 [Set](https://www.yuque.com/thyname/dart.core/set)。
 
 该集合基于自平衡二叉树实现，支持大多数操作，均摊时间复杂度为对数级。
 
-集合中的元素使用构造函数中传入的 `compare` 函数进行比较，该函数同时用于排序和判断相等性。如果集合中只包含对象 `a`，那么 `set.contains(b)` 仅当 `compare(a, b) == 0` 时才返回 `true`，甚至不会检查 `a == b` 的值。如果省略 compare 函数，则假定对象是可比较的（[Comparable]），并使用其 [Comparable.compareTo] 方法进行比较。在这种情况下，不可比较的对象（包括 `null`）不能用作元素。
+集合中的元素使用构造函数中传入的 `compare` 函数进行比较，该函数同时用于排序和判断相等性。如果集合中只包含对象 `a`，那么 `set.contains(b)` 仅当 `compare(a, b) == 0` 时才返回 `true`，甚至不会检查 `a == b` 的值。如果省略 compare 函数，则假定对象是可比较的（[Comparable](https://www.yuque.com/thyname/dart.core/comparable)），并使用其 [Comparable.compareTo] 方法进行比较。在这种情况下，不可比较的对象（包括 `null`）不能用作元素。
 
 **注意：** 在对集合执行操作期间，不要修改该集合（添加或删除元素），例如在 [forEach] 或 [containsAll] 调用期间被调用的函数中，或者在遍历集合时。
 
@@ -363,9 +363,9 @@ print(planets); // {}
 
 **另请参阅：**
 
-- [Set] 是对象集合的基类。
-- [HashSet] 不保证迭代中对象的顺序。
-- [LinkedHashSet] 按插入顺序存储对象。
+- [Set](https://www.yuque.com/thyname/dart.core/set) 是对象集合的基类。
+- [HashSet](https://www.yuque.com/thyname/dart.collection/hashset) 不保证迭代中对象的顺序。
+- [LinkedHashSet](https://www.yuque.com/thyname/dart.collection/linkedhashset) 按插入顺序存储对象。
 
 ## 构造函数
 
@@ -378,7 +378,7 @@ SplayTreeSet([
 ])
 ```
 
-使用给定的 compare 函数创建一个新的 [SplayTreeSet]。
+使用给定的 compare 函数创建一个新的 [SplayTreeSet](https://www.yuque.com/thyname/dart.collection/splaytreeset)。
 
 如果省略 [compare] 函数，则默认使用 [Comparable.compare]，此时元素必须是可比较的。
 
@@ -402,7 +402,7 @@ factory SplayTreeSet.from(
 ])
 ```
 
-创建一个包含所有 [elements] 的 [SplayTreeSet]。
+创建一个包含所有 [elements] 的 [SplayTreeSet](https://www.yuque.com/thyname/dart.collection/splaytreeset)。
 
 该集合的工作方式如同通过 `SplayTreeSet<E>(compare, isValidKey)` 创建一样。
 
@@ -432,7 +432,7 @@ factory SplayTreeSet.of(
 ])
 ```
 
-根据 [elements] 创建一个 [SplayTreeSet]。
+根据 [elements] 创建一个 [SplayTreeSet](https://www.yuque.com/thyname/dart.collection/splaytreeset)。
 
 该集合的工作方式如同通过 `new SplayTreeSet<E>(compare, isValidKey)` 创建一样。
 

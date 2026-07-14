@@ -20,11 +20,11 @@ void handleTimeout() {  // callback function
 }
 ```
 
-**注意：** 如果使用 [Timer] 的 Dart 代码被编译为 JavaScript，浏览器所能提供的最细粒度为 4 毫秒。
+**注意：** 如果使用 [Timer](https://www.yuque.com/thyname/dart.async/timer) 的 Dart 代码被编译为 JavaScript，浏览器所能提供的最细粒度为 4 毫秒。
 
 另请参阅：
 
-- [Stopwatch]，用于测量经过的时间。
+- [Stopwatch](https://www.yuque.com/thyname/dart.core/stopwatch)，用于测量经过的时间。
 
 ## 构造函数
 
@@ -155,7 +155,7 @@ void cancel()
 
 取消该定时器。
 
-一旦 [Timer] 被取消，定时器将不再调用其回调函数。对同一个 [Timer] 多次调用 [cancel] 是允许的，并且不会产生进一步的效果。
+一旦 [Timer](https://www.yuque.com/thyname/dart.async/timer) 被取消，定时器将不再调用其回调函数。对同一个 [Timer](https://www.yuque.com/thyname/dart.async/timer) 多次调用 [cancel] 是允许的，并且不会产生进一步的效果。
 
 示例：
 

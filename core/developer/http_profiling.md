@@ -14,6 +14,6 @@ void addHttpClientProfilingData(Map<String, dynamic> requestProfile)
 List<Map<String, dynamic>> getHttpClientProfilingData()
 ```
 
-返回通过 [addHttpClientProfilingData] 添加的数据。
+返回通过 [addHttpClientProfilingData](https://www.yuque.com/thyname/dart.developer/addhttpclientprofilingdata) 添加的数据。
 
 此函数仅供网络性能分析工具使用，其返回数据的格式可能会随时间变化。

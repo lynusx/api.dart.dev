@@ -100,7 +100,7 @@ StreamController({
 
 一个仅支持单个订阅者的 [stream] 控制器。
 
-如果 [sync] 为 true，返回的流控制器将是一个 [SynchronousStreamController]，使用时必须格外小心，以免破坏 [Stream] 的约定。如果有疑问，请使用非 sync 版本。
+如果 [sync] 为 true，返回的流控制器将是一个 [SynchronousStreamController](https://www.yuque.com/thyname/dart.async/synchronousstreamcontroller)，使用时必须格外小心，以免破坏 [Stream](https://www.yuque.com/thyname/dart.async/stream) 的约定。如果有疑问，请使用非 sync 版本。
 
 使用异步控制器永远不会产生错误的行为，但错误地使用同步控制器可能会导致原本正确的程序出现问题。
 
@@ -128,7 +128,7 @@ StreamController.broadcast({
 
 一个 [stream] 可被多次监听的控制器。
 
-此处 [stream] 返回的 [Stream] 是一个广播流（broadcast stream）。它可以被多次监听。
+此处 [stream] 返回的 [Stream](https://www.yuque.com/thyname/dart.async/stream) 是一个广播流（broadcast stream）。它可以被多次监听。
 
 在有订阅者开始监听流之前（通过 [onListen] 回调开始产生事件），流应保持惰性状态。当没有任何用户监听流时，流不应泄漏资源（如 websocket）。
 
@@ -138,7 +138,7 @@ StreamController.broadcast({
 
 每个监听器订阅都被独立处理，如果其中一个暂停，只有该暂停的监听器会受到影响。暂停的监听器会在内部缓冲事件，直到恢复或取消。
 
-如果 [sync] 为 true，事件可能会在 [add]、[addError] 或 [close] 调用期间由流的订阅直接触发。返回的流控制器将是一个 [SynchronousStreamController]，使用时必须格外小心，以免破坏 [Stream] 的约定。有关何时可以使用同步分发的说明，请参见 [Completer.sync]。如果有疑问，请保持控制器为非 sync 模式。
+如果 [sync] 为 true，事件可能会在 [add]、[addError] 或 [close] 调用期间由流的订阅直接触发。返回的流控制器将是一个 [SynchronousStreamController](https://www.yuque.com/thyname/dart.async/synchronousstreamcontroller)，使用时必须格外小心，以免破坏 [Stream](https://www.yuque.com/thyname/dart.async/stream) 的约定。有关何时可以使用同步分发的说明，请参见 [Completer.sync]。如果有疑问，请保持控制器为非 sync 模式。
 
 如果 [sync] 为 false，事件将始终在稍后的时间触发，即添加该事件的代码执行完毕之后。在这种情况下，无法保证多个监听器获取事件的时间顺序，只能保证每个监听器都会以正确的顺序获得所有事件。每个订阅都会单独处理事件。如果在一个异步控制器上向两个监听器发送两个事件，其中一个监听器可能会在另一个监听器获得任何事件之前就获得这两个事件。监听器必须在事件发起时（即调用 [add] 时）以及事件后续被传递时都处于订阅状态，才能接收到该事件。
 
@@ -204,7 +204,7 @@ FutureOr<void> Function()? onCancel
 StreamSink<T> get sink
 ```
 
-返回此对象的一个视图，该视图仅暴露 [StreamSink] 接口。
+返回此对象的一个视图，该视图仅暴露 [StreamSink](https://www.yuque.com/thyname/dart.async/streamsink) 接口。
 
 ### isClosed
 
@@ -236,7 +236,7 @@ bool get isPaused
 bool get hasListener
 ```
 
-[Stream] 上是否有订阅者。
+[Stream](https://www.yuque.com/thyname/dart.async/stream) 上是否有订阅者。
 
 ### done
 
@@ -325,9 +325,9 @@ abstract interface class SynchronousStreamController<T> implements StreamControl
 
 事件不会在稍后的一个微任务中被添加到流中（这会造成额外的延迟），而是由同步流控制器立即触发，就好像该流事件是当前事件或微任务的一部分。
 
-同步流控制器可用于打破 [Stream] 的约定，因此必须谨慎使用，以避免真正破坏该约定。
+同步流控制器可用于打破 [Stream](https://www.yuque.com/thyname/dart.async/stream) 的约定，因此必须谨慎使用，以避免真正破坏该约定。
 
-相比普通的 [StreamController]，使用 [SynchronousStreamController] 的唯一优势是改善了延迟。只有在这种改善很显著、且使用是安全的情况下，才应使用同步版本。否则应使用普通的流控制器，它对于 [Stream] 而言总能表现出正确的行为，也不会意外破坏其他代码。
+相比普通的 [StreamController](https://www.yuque.com/thyname/dart.async/streamcontroller)，使用 [SynchronousStreamController](https://www.yuque.com/thyname/dart.async/synchronousstreamcontroller) 的唯一优势是改善了延迟。只有在这种改善很显著、且使用是安全的情况下，才应使用同步版本。否则应使用普通的流控制器，它对于 [Stream](https://www.yuque.com/thyname/dart.async/stream) 而言总能表现出正确的行为，也不会意外破坏其他代码。
 
 向同步控制器添加事件应仅作为原始事件处理过程的最后一部分进行。此时，向流中添加事件等价于返回事件循环并在下一个微任务中添加该事件。
 

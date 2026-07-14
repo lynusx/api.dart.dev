@@ -2851,7 +2851,7 @@ Float32x4 shuffle(int mask)
 
 [mask] 必须是从 [xxxx] 到 [wwww] 的 256 个混洗掩码之一。
 
-创建一个新的 [Float32x4]，其通道值取自此值的各个通道：结果的 [x] 通道取自混洗掩码名称中第一个字母所指示的通道，[y] 通道取自第二个字母所指示的通道，[z] 通道取自第三个字母所指示的通道，[w] 通道取自第四个字母所指示的通道。
+创建一个新的 [Float32x4](https://www.yuque.com/thyname/dart.typed_data/float32x4)，其通道值取自此值的各个通道：结果的 [x] 通道取自混洗掩码名称中第一个字母所指示的通道，[y] 通道取自第二个字母所指示的通道，[z] 通道取自第三个字母所指示的通道，[w] 通道取自第四个字母所指示的通道。
 
 例如，混洗掩码 [wxyz] 会创建一个新的 `Float32x4`，其 [x] 通道是此值的 [w] 通道，因为混洗掩码名称 `wxyz` 的第一个字母是 “w”。随后，结果的 `y`、`z` 和 `w` 通道分别是此值的 `x`、`y` 和 `z` 通道的值。
 
@@ -2867,9 +2867,9 @@ Float32x4 shuffle(int mask)
 Float32x4 shuffleMix(Float32x4 other, int mask)
 ```
 
-使用 [mask] 从两个 [Float32x4] 值中选取通道进行混合。
+使用 [mask] 从两个 [Float32x4](https://www.yuque.com/thyname/dart.typed_data/float32x4) 值中选取通道进行混合。
 
-创建一个新的 [Float32x4]，其中 [x] 和 [y] 通道选自此值，具体由 [mask] 名称的前两个字母指定；[z] 和 [w] 通道选自 [other]，具体由 `mask` 名称的后两个字母指定。
+创建一个新的 [Float32x4](https://www.yuque.com/thyname/dart.typed_data/float32x4)，其中 [x] 和 [y] 通道选自此值，具体由 [mask] 名称的前两个字母指定；[z] 和 [w] 通道选自 [other]，具体由 `mask` 名称的后两个字母指定。
 
 例如，`v1.shuffleMix(v2, Float32x4.xyzw)` 等价于 `Float32x4(v1.x, v1.y, v2.z, v2.w)`。
 
@@ -2883,7 +2883,7 @@ Float32x4 withX(double x)
 
 此值，但将 [Float32x4.x] 通道的值设置为 [x]。
 
-返回一个新的 [Float32x4]，其 [y]、[z] 和 [w] 通道的值与此值相同，[Float32x4.x] 通道的值为 [x] 转换后得到的 32 位浮点数。
+返回一个新的 [Float32x4](https://www.yuque.com/thyname/dart.typed_data/float32x4)，其 [y]、[z] 和 [w] 通道的值与此值相同，[Float32x4.x] 通道的值为 [x] 转换后得到的 32 位浮点数。
 
 ### withY()
 
@@ -2893,7 +2893,7 @@ Float32x4 withY(double y)
 
 此值，但将 [Float32x4.y] 通道的值设置为 [y]。
 
-返回一个新的 [Float32x4]，其 [x]、[z] 和 [w] 通道的值与此值相同，[Float32x4.y] 通道的值为 [y] 转换后得到的 32 位浮点数。
+返回一个新的 [Float32x4](https://www.yuque.com/thyname/dart.typed_data/float32x4)，其 [x]、[z] 和 [w] 通道的值与此值相同，[Float32x4.y] 通道的值为 [y] 转换后得到的 32 位浮点数。
 
 ### withZ()
 
@@ -2903,7 +2903,7 @@ Float32x4 withZ(double z)
 
 此值，但将 [Float32x4.z] 通道的值设置为 [z]。
 
-返回一个新的 [Float32x4]，其 [x]、[y] 和 [w] 通道的值与此值相同，[Float32x4.z] 通道的值为 [z] 转换后得到的 32 位浮点数。
+返回一个新的 [Float32x4](https://www.yuque.com/thyname/dart.typed_data/float32x4)，其 [x]、[y] 和 [w] 通道的值与此值相同，[Float32x4.z] 通道的值为 [z] 转换后得到的 32 位浮点数。
 
 ### withW()
 
@@ -2913,7 +2913,7 @@ Float32x4 withW(double w)
 
 此值，但将 [Float32x4.w] 通道的值设置为 [w]。
 
-返回一个新的 [Float32x4]，其 [x]、[y] 和 [z] 通道的值与此值相同，[Float32x4.w] 通道的值为 [w] 转换后得到的 32 位浮点数。
+返回一个新的 [Float32x4](https://www.yuque.com/thyname/dart.typed_data/float32x4)，其 [x]、[y] 和 [z] 通道的值与此值相同，[Float32x4.w] 通道的值为 [w] 转换后得到的 32 位浮点数。
 
 ### min()
 

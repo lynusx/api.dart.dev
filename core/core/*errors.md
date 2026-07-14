@@ -24,13 +24,13 @@ class Error {}
 
 在这种情况下，如果 `startIndex` 为负数或过大，则会抛出错误。
 
-如果这些条件在调用函数之前无法被检测到，那么被调用的函数就不应该抛出 `Error`。它仍然可能抛出，但调用者将不得不捕获抛出的值，这实际上使其成为一种替代结果而非错误。在这种情况下，我们认为抛出的对象是一个*异常*（exception）而非错误（error）。抛出的对象可以选择实现 [Exception]，以表明它表示的是一种异常但非错误的情况，但实现 [Exception] 除了具有文档说明作用外，没有其他效果。
+如果这些条件在调用函数之前无法被检测到，那么被调用的函数就不应该抛出 `Error`。它仍然可能抛出，但调用者将不得不捕获抛出的值，这实际上使其成为一种替代结果而非错误。在这种情况下，我们认为抛出的对象是一个*异常*（exception）而非错误（error）。抛出的对象可以选择实现 [Exception](https://www.yuque.com/thyname/dart.core/exception)，以表明它表示的是一种异常但非错误的情况，但实现 [Exception](https://www.yuque.com/thyname/dart.core/exception) 除了具有文档说明作用外，没有其他效果。
 
 在 Dart 中，所有非 `null` 的值都可以被抛出。_继承_（extending）自 `Error` 类的对象会被特殊处理：首次被抛出时，抛出点的堆栈跟踪会被记录并存储在该错误对象中，可以使用 [stackTrace] 获取器来获取它。仅仅*实现*（implements）`Error` 而不继承它的错误对象，不会自动存储堆栈跟踪。
 
 错误对象也用于表示系统级的失败，例如栈溢出或内存不足的情况，这些情况同样不应由用户捕获或处理。
 
-由于错误对象并非为了被捕获而创建，因此子类之间无需进行区分。相反，创建子类是为了便于创建一组具有一致错误消息的相关错误。例如，[String.contains] 方法在其 `startIndex` 不在 `0..length` 范围内时会使用 [RangeError]，该错误可以通过 `RangeError.range(startIndex, 0, length)` 轻松创建。捕获 [Error] 的特定子类并非其设计初衷，除了在测试自己的代码时，不应在其他场景中这样做。
+由于错误对象并非为了被捕获而创建，因此子类之间无需进行区分。相反，创建子类是为了便于创建一组具有一致错误消息的相关错误。例如，[String.contains] 方法在其 `startIndex` 不在 `0..length` 范围内时会使用 [RangeError](https://www.yuque.com/thyname/dart.core/rangeerror)，该错误可以通过 `RangeError.range(startIndex, 0, length)` 轻松创建。捕获 [Error](https://www.yuque.com/thyname/dart.core/error) 的特定子类并非其设计初衷，除了在测试自己的代码时，不应在其他场景中这样做。
 
 ## 构造函数
 
@@ -48,7 +48,7 @@ Error()
 String safeToString(Object? object)
 ```
 
-安全地将某个值转换为 [String] 描述。
+安全地将某个值转换为 [String](https://www.yuque.com/thyname/dart.core/string) 描述。
 
 该转换保证不会抛出异常，因此除了特定的已知可信类型外，它不会调用对象自身的 toString 方法。
 
@@ -63,9 +63,9 @@ Never throwWithStackTrace( Object error, StackTrace stackTrace )
 
 其行为类似于：在抛出时刻，若 [StackTrace.current](https://api.dart.dev/dart-core/StackTrace/current.html) 恰好为 `stackTrace`，此时执行 `throw error`。
 
-与普通的 `throw` 一样，如果 `error` 继承自 [Error](https://api.dart.dev/dart-core/Error-class.html) 且此前尚未被抛出过，则其 [Error.stackTrace](https://api.dart.dev/dart-core/Error/stackTrace.html) 属性将被设置为 `stackTrace`。
+与普通的 `throw` 一样，如果 `error` 继承自 [Error](https://www.yuque.com/thyname/dart.core/error) 且此前尚未被抛出过，则其 [Error.stackTrace](https://api.dart.dev/dart-core/Error/stackTrace.html) 属性将被设置为 `stackTrace`。
 
-此函数不保证保留 `stackTrace` 的对象标识（identity）。被 `try`/`catch` 捕获到的该错误的 [StackTrace](https://api.dart.dev/dart-core/StackTrace-class.html) 对象，或被设置为该 `error` 的 [Error.stackTrace](https://api.dart.dev/dart-core/Error/stackTrace.html) 的对象，可能与作为参数提供的 `stackTrace` 对象并非同一对象，但根据 [StackTrace.toString](https://api.dart.dev/dart-core/StackTrace/toString.html)，二者内容相同。
+此函数不保证保留 `stackTrace` 的对象标识（identity）。被 `try`/`catch` 捕获到的该错误的 [StackTrace](https://www.yuque.com/thyname/dart.core/stacktrace) 对象，或被设置为该 `error` 的 [Error.stackTrace](https://api.dart.dev/dart-core/Error/stackTrace.html) 的对象，可能与作为参数提供的 `stackTrace` 对象并非同一对象，但根据 [StackTrace.toString](https://api.dart.dev/dart-core/StackTrace/toString.html)，二者内容相同。
 
 ## 方法
 
@@ -145,7 +145,7 @@ ArgumentError([ dynamic message, @Since.new("2.14") String? name ])
 
 创建一个错误，并使用 [message] 描述参数存在的问题。
 
-现有代码中，`message` 可能被用来保存无效值。如果 `message` 不是 [String] 类型，则会被视为一个值而非消息文本。
+现有代码中，`message` 可能被用来保存无效值。如果 `message` 不是 [String](https://www.yuque.com/thyname/dart.core/string) 类型，则会被视为一个值而非消息文本。
 
 如果提供了 [name]，它应为接收到无效参数的形参名称。
 
@@ -233,7 +233,7 @@ class RangeError extends ArgumentError {}
 RangeError(dynamic message)
 ```
 
-使用给定的 [message] 创建一个新的 [RangeError]。
+使用给定的 [message] 创建一个新的 [RangeError](https://www.yuque.com/thyname/dart.core/rangeerror)。
 
 ### RangeError.value()
 
@@ -241,7 +241,7 @@ RangeError(dynamic message)
 RangeError.value(num value, [String? name, String? message])
 ```
 
-针对给定的 [value]，创建一个带消息的新 [RangeError]。
+针对给定的 [value]，创建一个带消息的新 [RangeError](https://www.yuque.com/thyname/dart.core/rangeerror)。
 
 可选的 [name] 可以指定具有无效值的参数名称，[message] 可以覆盖默认的错误描述。
 
@@ -257,7 +257,7 @@ RangeError.range(
 ])
 ```
 
-针对超出有效范围的某个值，创建一个新的 [RangeError]。
+针对超出有效范围的某个值，创建一个新的 [RangeError](https://www.yuque.com/thyname/dart.core/rangeerror)。
 
 允许的范围为从 [minValue] 到 [maxValue]（含边界值）。如果 `minValue` 或 `maxValue` 为 `null`，则该方向上的范围视为无限。
 
@@ -277,7 +277,7 @@ RangeError.index(
 ])
 ```
 
-创建一个新的 [RangeError]，说明 [index] 不是 [indexable] 的有效索引。
+创建一个新的 [RangeError](https://www.yuque.com/thyname/dart.core/rangeerror)，说明 [index] 不是 [indexable] 的有效索引。
 
 可选的 [name] 可以指定具有无效值的参数名称，[message] 可以覆盖默认的错误描述。
 
@@ -398,7 +398,7 @@ num? get invalidValue
 class IndexError extends ArgumentError implements RangeError {}
 ```
 
-一种特殊的 [RangeError]，用于索引不在 `0..indexable.length-1` 范围内的情况。
+一种特殊的 [RangeError](https://www.yuque.com/thyname/dart.core/rangeerror)，用于索引不在 `0..indexable.length-1` 范围内的情况。
 
 同时包含该可索引对象、发生错误时该对象的长度，以及无效索引本身。
 
@@ -417,7 +417,7 @@ class IndexError extends ArgumentError implements RangeError {}
 })
 ```
 
-创建一个新的 [IndexError]，说明 [invalidValue] 不是 [indexable] 的有效索引。
+创建一个新的 [IndexError](https://www.yuque.com/thyname/dart.core/indexerror)，说明 [invalidValue] 不是 [indexable] 的有效索引。
 
 [length] 是发生错误时 [indexable] 的长度。
 
@@ -464,7 +464,7 @@ Object? indexable
 
 `invalidValue` 不是其有效索引的那个可索引对象。
 
-例如可以是 [List] 或 [String]，二者都具有基于索引的操作。
+例如可以是 [List](https://www.yuque.com/thyname/dart.core/list) 或 [String](https://www.yuque.com/thyname/dart.core/string)，二者都具有基于索引的操作。
 
 ### length
 
@@ -514,7 +514,7 @@ class NoSuchMethodError extends Error {}
 NoSuchMethodError.withInvocation(Object? receiver, Invocation invocation)
 ```
 
-创建一个与失败的方法调用相对应的 [NoSuchMethodError]。
+创建一个与失败的方法调用相对应的 [NoSuchMethodError](https://www.yuque.com/thyname/dart.core/nosuchmethoderror)。
 
 [receiver] 是该方法调用的接收者，即尝试调用该方法所针对的对象。
 
@@ -530,7 +530,7 @@ class UnsupportedError extends Error {}
 
 该对象不允许执行此操作。
 
-当某个实例无法实现其签名中的某个方法时，会抛出此 [Error]。例如，它被用于集合的不可修改（unmodifiable）版本，当有人调用某个修改性方法时。
+当某个实例无法实现其签名中的某个方法时，会抛出此 [Error](https://www.yuque.com/thyname/dart.core/error)。例如，它被用于集合的不可修改（unmodifiable）版本，当有人调用某个修改性方法时。
 
 ## 构造函数
 
@@ -550,9 +550,9 @@ class UnimplementedError extends Error implements UnsupportedError {}
 
 由尚未实现的操作抛出。
 
-此 [Error] 由尚未完成、尚未实现其所需全部功能的代码抛出。
+此 [Error](https://www.yuque.com/thyname/dart.core/error) 由尚未完成、尚未实现其所需全部功能的代码抛出。
 
-如果某个类并不打算实现该功能，则应改为抛出 [UnsupportedError]。此错误仅用于开发阶段。
+如果某个类并不打算实现该功能，则应改为抛出 [UnsupportedError](https://www.yuque.com/thyname/dart.core/unsupportederror)。此错误仅用于开发阶段。
 
 ## 构造函数
 
@@ -582,7 +582,7 @@ class StateError extends Error {}
 
 当某个特定对象当前处于不支持所请求操作的状态，但其他类似对象可能支持该操作，或者该对象本身之后可以切换到支持该操作的状态时，应使用此错误。
 
-示例：对当前为空的列表调用 `list.first`。如果该操作从未被该对象或该类支持，请考虑改用 [UnsupportedError]。
+示例：对当前为空的列表调用 `list.first`。如果该操作从未被该对象或该类支持，请考虑改用 [UnsupportedError](https://www.yuque.com/thyname/dart.core/unsupportederror)。
 
 这是一种通用错误，用于表示多种不同的错误操作。消息内容应当具有描述性。
 
@@ -612,7 +612,7 @@ class ConcurrentModificationError extends Error {}
 
 当集合在迭代过程中被修改时发生的错误。
 
-对于某些集合，某些修改操作在迭代期间可能是被允许的，因此每个集合（[Iterable] 或类似的值集合）都应声明在迭代期间允许哪些操作。
+对于某些集合，某些修改操作在迭代期间可能是被允许的，因此每个集合（[Iterable](https://www.yuque.com/thyname/dart.core/iterable) 或类似的值集合）都应声明在迭代期间允许哪些操作。
 
 ## 构造函数
 

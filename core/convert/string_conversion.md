@@ -6,9 +6,9 @@ abstract mixin class StringConversionSink implements ChunkedConversionSink<Strin
 
 用于转换器高效传输 String 数据的 sink。
 
-不同于将接口限制为单个非分块的 [String]，它可以接受部分字符串，或转换为接受 UTF-8 码元的字节 sink。
+不同于将接口限制为单个非分块的 [String](https://www.yuque.com/thyname/dart.core/string)，它可以接受部分字符串，或转换为接受 UTF-8 码元的字节 sink。
 
-[StringConversionSink] 类提供了 [add]、[asUtf8Sink] 和 [asStringSink] 的默认实现。
+[StringConversionSink](https://www.yuque.com/thyname/dart.convert/stringconversionsink) 类提供了 [add]、[asUtf8Sink] 和 [asStringSink] 的默认实现。
 
 ## 构造函数
 
@@ -67,7 +67,7 @@ void add(String str)
 
 将分块数据添加到此 sink。
 
-当转换器用作 [StreamTransformer](https://api.dart.dev/dart-async/StreamTransformer-class.html) 时，也会使用此方法。
+当转换器用作 [StreamTransformer](https://www.yuque.com/thyname/dart.async/streamtransformer) 时，也会使用此方法。
 
 ### asUtf8Sink()
 
@@ -85,7 +85,7 @@ ByteConversionSink asUtf8Sink(bool allowMalformed)
 ClosableStringSink asStringSink()
 ```
 
-将 `this` 作为 [ClosableStringSink] 返回。
+将 `this` 作为 [ClosableStringSink](https://www.yuque.com/thyname/dart.convert/closablestringsink) 返回。
 
 如果使用此方法，必须是对 `this` 的第一次也是唯一一次调用。它会使 `this` 失效。所有后续操作都必须在结果上执行。
 
@@ -97,7 +97,7 @@ ClosableStringSink asStringSink()
 abstract interface class ClosableStringSink implements StringSink {}
 ```
 
-[ClosableStringSink] 通过添加 `close` 方法扩展了 [StringSink] 接口。
+[ClosableStringSink](https://www.yuque.com/thyname/dart.convert/closablestringsink) 通过添加 `close` 方法扩展了 [StringSink](https://www.yuque.com/thyname/dart.core/stringsink) 接口。
 
 ## 构造函数
 
@@ -107,7 +107,7 @@ abstract interface class ClosableStringSink implements StringSink {}
 ClosableStringSink.fromStringSink(StringSink sink, void Function() onClose)
 ```
 
-创建一个组合了 [StringSink] [sink] 和回调 [onClose] 的新实例，该回调会在返回的实例关闭时被调用。
+创建一个组合了 [StringSink](https://www.yuque.com/thyname/dart.core/stringsink) [sink] 和回调 [onClose] 的新实例，该回调会在返回的实例关闭时被调用。
 
 ## 方法
 

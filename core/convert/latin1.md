@@ -4,7 +4,7 @@
 Latin1Codec latin1
 ```
 
-[Latin1Codec] 默认实现的一个实例。
+[Latin1Codec](https://www.yuque.com/thyname/dart.convert/latin1codec) 默认实现的一个实例。
 
 该实例便于访问最常见的 ISO Latin 1 使用场景。
 
@@ -24,7 +24,7 @@ var decoded = latin1.decode([0x62, 0x6c, 0xe5, 0x62, 0xe6,
 final class Latin1Codec extends Encoding {}
 ```
 
-[Latin1Codec] 将字符串编码为 ISO Latin-1（即 ISO-8859-1）字节，并将 Latin-1 字节解码为字符串。
+[Latin1Codec](https://www.yuque.com/thyname/dart.convert/latin1codec) 将字符串编码为 ISO Latin-1（即 ISO-8859-1）字节，并将 Latin-1 字节解码为字符串。
 
 ## 构造函数
 
@@ -34,7 +34,7 @@ final class Latin1Codec extends Encoding {}
 Latin1Codec({bool allowInvalid = false})
 ```
 
-实例化一个新的 [Latin1Codec]。
+实例化一个新的 [Latin1Codec](https://www.yuque.com/thyname/dart.convert/latin1codec)。
 
 如果 [allowInvalid] 为 true，则 [decode] 方法以及 [decoder] 返回的转换器默认将允许无效值。无效值会被解码为 Unicode 替换字符（U+FFFD）。调用 [decode] 方法时可以覆盖此默认设置。
 
@@ -78,9 +78,9 @@ String decode(List<int> bytes, {bool? allowInvalid})
 
 将 Latin-1 编码的 [bytes]（一个无符号 8 位整数列表）解码为对应的字符串。
 
-如果 [bytes] 包含不在 0 到 255 范围内的值，解码器最终会抛出 [FormatException]。
+如果 [bytes] 包含不在 0 到 255 范围内的值，解码器最终会抛出 [FormatException](https://www.yuque.com/thyname/dart.core/formatexception)。
 
-如果未提供 [allowInvalid]，其默认值为创建此 [Latin1Codec] 时使用的值。
+如果未提供 [allowInvalid]，其默认值为创建此 [Latin1Codec](https://www.yuque.com/thyname/dart.convert/latin1codec) 时使用的值。
 
 ---
 
@@ -133,7 +133,7 @@ final decodedHexBytes = latin1Decoder.convert(hexBytes);
 print(decodedHexBytes); // àáâãäå
 ```
 
-如果编码输入包含不在 0 到 255 范围内的值，且 [allowInvalid] 为 false（默认值），则抛出 [FormatException]。
+如果编码输入包含不在 0 到 255 范围内的值，且 [allowInvalid] 为 false（默认值），则抛出 [FormatException](https://www.yuque.com/thyname/dart.core/formatexception)。
 
 如果 [allowInvalid] 为 true，无效字节将被转换为 Unicode 替换字符 U+FFFD（�）。
 
@@ -154,11 +154,11 @@ print(decoded); // �
 Latin1Decoder({bool allowInvalid = false})
 ```
 
-实例化一个新的 [Latin1Decoder]。
+实例化一个新的 [Latin1Decoder](https://www.yuque.com/thyname/dart.convert/latin1decoder)。
 
 可选参数 [allowInvalid] 定义 [convert] 如何处理无效字节。
 
-如果为 `true`，[convert] 将无效字节替换为 Unicode 替换字符 `U+FFFD`（�）。否则将抛出 [FormatException]。
+如果为 `true`，[convert] 将无效字节替换为 Unicode 替换字符 `U+FFFD`（�）。否则将抛出 [FormatException](https://www.yuque.com/thyname/dart.core/formatexception)。
 
 ## 方法
 
@@ -170,4 +170,4 @@ ByteConversionSink startChunkedConversion(Sink<String> sink)
 
 开始一次分块转换。
 
-如果给定的 [sink] 是 [StringConversionSink]，转换器的工作效率会更高。
+如果给定的 [sink] 是 [StringConversionSink](https://www.yuque.com/thyname/dart.convert/stringconversionsink)，转换器的工作效率会更高。

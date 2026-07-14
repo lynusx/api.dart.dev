@@ -4,13 +4,13 @@
 abstract mixin class Codec<S, T> {}
 ```
 
-[Codec] 用于编码，并且（如果支持）解码数据。
+[Codec](https://www.yuque.com/thyname/dart.ui/codec) 用于编码，并且（如果支持）解码数据。
 
-编解码器（Codec）可以被融合（fuse）。例如，将 [json] 与 [utf8] 融合会生成一个能够将 Json 对象直接转换为字节，或将字节直接解码为 json 对象的编码器。
+编解码器（Codec）可以被融合（fuse）。例如，将 [json](https://www.yuque.com/thyname/dart.convert/json) 与 [utf8](https://www.yuque.com/thyname/dart.convert/utf8) 融合会生成一个能够将 Json 对象直接转换为字节，或将字节直接解码为 json 对象的编码器。
 
 融合后的编解码器通常会尝试对操作进行优化，其速度可能比单独执行每一步编码更快。
 
-[Codec] 类提供了 [encode]、[decode]、[fuse] 和 [inverted] 的默认实现。子类可以选择提供这些方法更高效的实现。
+[Codec](https://www.yuque.com/thyname/dart.ui/codec) 类提供了 [encode]、[decode]、[fuse] 和 [inverted] 的默认实现。子类可以选择提供这些方法更高效的实现。
 
 ## 构造函数
 

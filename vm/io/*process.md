@@ -6,11 +6,11 @@ Never exit(int code)
 
 立即以给定的退出码退出 Dart VM 进程。
 
-此操作不会等待任何异步操作终止，也不会执行 `finally` 代码块。因此使用 [exit] 很可能会导致数据丢失。
+此操作不会等待任何异步操作终止，也不会执行 `finally` 代码块。因此使用 [exit](https://www.yuque.com/thyname/dart.io/exit) 很可能会导致数据丢失。
 
 子进程不会被显式终止（但当它们检测到父进程已退出时，可能会自行终止）。
 
-在调试时，如果调用 [exit]，VM 将不会遵循 `--pause-isolates-on-exit` 标志，因为调用此方法会导致 Dart VM 进程立即关闭。要在退出时正确中断，可考虑在调用 [exit] 之前，从 `dart:developer` 调用 [debugger]，或在当前 isolate（[Isolate.current]）上调用 `dart:isolate` 中的 [Isolate.pause] 来暂停该 isolate。
+在调试时，如果调用 [exit](https://www.yuque.com/thyname/dart.io/exit)，VM 将不会遵循 `--pause-isolates-on-exit` 标志，因为调用此方法会导致 Dart VM 进程立即关闭。要在退出时正确中断，可考虑在调用 [exit](https://www.yuque.com/thyname/dart.io/exit) 之前，从 `dart:developer` 调用 [debugger](https://www.yuque.com/thyname/dart.developer/debugger)，或在当前 isolate（[Isolate.current]）上调用 `dart:isolate` 中的 [Isolate.pause] 来暂停该 isolate。
 
 退出码的处理方式因平台而异。
 
@@ -34,7 +34,7 @@ void set exitCode(int code)
 
 默认值为 `0`。
 
-有关如何选择退出码值的更多信息，请参见 [exit]。
+有关如何选择退出码值的更多信息，请参见 [exit](https://www.yuque.com/thyname/dart.io/exit)。
 
 # exitCode
 
@@ -46,7 +46,7 @@ int get exitCode
 
 退出码是 Dart VM 全局的，任何 isolate 对 exitCode 的最后一次赋值将决定 Dart VM 正常终止时的退出码。
 
-有关退出码值的更多信息，请参见 [exit]。
+有关退出码值的更多信息，请参见 [exit](https://www.yuque.com/thyname/dart.io/exit)。
 
 # sleep()
 
@@ -56,7 +56,7 @@ void sleep(Duration duration)
 
 按 [duration] 指定的时长休眠。
 
-请谨慎使用此方法，因为在 isolate 因调用 [sleep] 而阻塞期间，无法处理任何异步操作。
+请谨慎使用此方法，因为在 isolate 因调用 [sleep](https://www.yuque.com/thyname/dart.io/sleep) 而阻塞期间，无法处理任何异步操作。
 
 ```dart
 var duration = const Duration(seconds: 5);
@@ -165,7 +165,7 @@ abstract interface class Process {}
 
 ## 使用 run 方法启动进程
 
-以下示例代码使用 run 方法创建一个进程来运行 UNIX 命令 `ls`，用于列出目录内容。当进程终止时，run 方法会以一个 [ProcessResult] 对象完成。该对象提供了对进程输出和退出码的访问。run 方法不会返回 `Process` 对象；这可以防止代码与正在运行的进程进行交互。
+以下示例代码使用 run 方法创建一个进程来运行 UNIX 命令 `ls`，用于列出目录内容。当进程终止时，run 方法会以一个 [ProcessResult](https://www.yuque.com/thyname/dart.io/processresult) 对象完成。该对象提供了对进程输出和退出码的访问。run 方法不会返回 `Process` 对象；这可以防止代码与正在运行的进程进行交互。
 
 ```dart
 import 'dart:io';
@@ -179,7 +179,7 @@ main() async {
 
 ## 使用 start 方法启动进程
 
-以下示例使用 start 来创建进程。start 方法返回一个 `Process` 对象的 [Future]。当该 Future 完成时，进程已启动，代码可以与该进程进行交互：写入 stdin、监听 stdout 等。
+以下示例使用 start 来创建进程。start 方法返回一个 `Process` 对象的 [Future](https://www.yuque.com/thyname/dart.async/future)。当该 Future 完成时，进程已启动，代码可以与该进程进行交互：写入 stdin、监听 stdout 等。
 
 以下示例启动 UNIX 的 `cat` 工具，该工具在不带命令行参数的情况下，会回显其输入。程序向进程的标准输入流写入数据，并打印来自其标准输出流的数据。
 
@@ -200,7 +200,7 @@ main() async {
 
 ## 标准 I/O 流
 
-如前面的示例代码所示，可以通过 getter [stdout] 与 `Process` 的标准输出流进行交互，通过 getter [stdin] 与 `Process` 的标准输入流进行交互。此外，`Process` 还提供了 getter [stderr]，用于使用 `Process` 的标准错误流。
+如前面的示例代码所示，可以通过 getter [stdout] 与 `Process` 的标准输出流进行交互，通过 getter [stdin] 与 `Process` 的标准输入流进行交互。此外，`Process` 还提供了 getter [stderr](https://www.yuque.com/thyname/dart.io/stderr)，用于使用 `Process` 的标准错误流。
 
 `Process` 的流与当前程序的顶层流是不同的。
 
@@ -220,9 +220,9 @@ main() async {
 
 ## 退出码
 
-调用 [exitCode] 方法获取进程的退出码。退出码表示程序是成功终止（通常用退出码 0 表示）还是出错终止。
+调用 [exitCode](https://www.yuque.com/thyname/dart.io/exitcode) 方法获取进程的退出码。退出码表示程序是成功终止（通常用退出码 0 表示）还是出错终止。
 
-如果使用 start 方法，则可以通过 `Process` 对象上的 Future 获取 [exitCode]（如下例所示）。如果使用 run 方法，则可以通过 [ProcessResult] 实例上的 getter 获取 [exitCode]。
+如果使用 start 方法，则可以通过 `Process` 对象上的 Future 获取 [exitCode](https://www.yuque.com/thyname/dart.io/exitcode)（如下例所示）。如果使用 run 方法，则可以通过 [ProcessResult](https://www.yuque.com/thyname/dart.io/processresult) 实例上的 getter 获取 [exitCode](https://www.yuque.com/thyname/dart.io/exitcode)。
 
 ```dart
 import 'dart:io';
@@ -242,7 +242,7 @@ Future<int> get exitCode
 
 一个 `Future`，当进程结束时以进程的退出码完成。
 
-对于以 [ProcessStartMode.detached] 或 [ProcessStartMode.detachedWithStdio] 模式运行的进程，退出码不可用，使用该 getter 将抛出 [StateError]。
+对于以 [ProcessStartMode.detached] 或 [ProcessStartMode.detachedWithStdio] 模式运行的进程，退出码不可用，使用该 getter 将抛出 [StateError](https://www.yuque.com/thyname/dart.core/stateerror)。
 
 退出码的处理方式因平台而异。
 
@@ -250,7 +250,7 @@ Future<int> get exitCode
 
 在 Windows 上，进程可以报告任意 32 位值作为退出码。返回退出码时，该退出码会被转换为有符号值。一些特殊值用于报告因系统事件而终止的情况。例如，如果进程因访问违规而崩溃，32 位退出码为 `0xc0000005`，将作为负数 `-1073741819` 返回。要获得原始的 32 位值，可使用 `(0x100000000 + exitCode) & 0xffffffff`。
 
-无法保证在返回的 Future 完成时，[stdout] 和 [stderr] 已完成报告进程的缓冲输出。要确保捕获所有输出，请等待流上的 done 事件。
+无法保证在返回的 Future 完成时，[stdout] 和 [stderr](https://www.yuque.com/thyname/dart.io/stderr) 已完成报告进程的缓冲输出。要确保捕获所有输出，请等待流上的 done 事件。
 
 ### start()
 
@@ -260,7 +260,7 @@ Future<Process> start(String executable, List<String> arguments, {String? workin
 
 使用指定的 [arguments] 启动运行 [executable] 的进程。
 
-返回一个 `Future<Process>`，当进程成功启动时以 [Process] 实例完成。该 [Process] 对象可用于与进程交互。如果进程无法启动，返回的 [Future] 将以异常完成。
+返回一个 `Future<Process>`，当进程成功启动时以 [Process](https://www.yuque.com/thyname/dart.io/process) 实例完成。该 [Process](https://www.yuque.com/thyname/dart.io/process) 对象可用于与进程交互。如果进程无法启动，返回的 [Future](https://www.yuque.com/thyname/dart.async/future) 将以异常完成。
 
 建议为 [executable] 使用绝对路径，因为解析 [executable] 路径的方式是特定于平台的。在 Windows 上，出于解析 [executable] 路径的目的，[environment] 映射参数中设置的任何 `PATH` 以及 [workingDirectory] 参数中设置的路径都会被忽略。
 
@@ -281,7 +281,7 @@ void main() async {
 }
 ```
 
-使用 `Process.start` 启动的进程，用户必须读取其 [stdout] 和 [stderr] 流上的所有数据。如果用户没有读取流上的所有数据，由于仍有待处理数据，底层系统资源将不会被释放。
+使用 `Process.start` 启动的进程，用户必须读取其 [stdout] 和 [stderr](https://www.yuque.com/thyname/dart.io/stderr) 流上的所有数据。如果用户没有读取流上的所有数据，由于仍有待处理数据，底层系统资源将不会被释放。
 
 以下代码使用 `Process.start` 在 Linux 上的 `test.dart` 文件中查找 `main`。
 
@@ -291,7 +291,7 @@ stdout.addStream(process.stdout);
 stderr.addStream(process.stderr);
 ```
 
-如果 [mode] 为 [ProcessStartMode.normal]（默认值），将启动一个子进程，其 `stdin`、`stdout` 和 `stderr` 与其父进程相连。只要子进程在运行，父进程就不会退出，除非父进程调用了 [exit]。如果父进程调用了 [exit]，父进程将被终止，但子进程会继续运行。
+如果 [mode] 为 [ProcessStartMode.normal]（默认值），将启动一个子进程，其 `stdin`、`stdout` 和 `stderr` 与其父进程相连。只要子进程在运行，父进程就不会退出，除非父进程调用了 [exit](https://www.yuque.com/thyname/dart.io/exit)。如果父进程调用了 [exit](https://www.yuque.com/thyname/dart.io/exit)，父进程将被终止，但子进程会继续运行。
 
 如果 `mode` 为 [ProcessStartMode.detached]，将创建一个分离的进程。分离的进程与其父进程没有连接，即使父进程终止，它也可以继续独立运行。分离进程唯一可获取的信息是其 `pid`。它的 `stdin`、`stdout` 或 `stderr` 均无连接，其退出码在终止时也不可用。
 
@@ -326,7 +326,7 @@ void main() async {
 }
 ```
 
-用于将 `stdout` 和 `stderr` 解码为文本的编码方式由 [stdoutEncoding] 和 [stderrEncoding] 控制。默认编码为 [systemEncoding]。如果使用 `null`，则不进行解码，[ProcessResult] 将持有二进制数据。
+用于将 `stdout` 和 `stderr` 解码为文本的编码方式由 [stdoutEncoding] 和 [stderrEncoding] 控制。默认编码为 [systemEncoding](https://www.yuque.com/thyname/dart.io/systemencoding)。如果使用 `null`，则不进行解码，[ProcessResult](https://www.yuque.com/thyname/dart.io/processresult) 将持有二进制数据。
 
 返回一个 `Future<ProcessResult>`，以运行该进程的结果（即退出码、标准输出和标准错误）完成。
 
@@ -348,7 +348,7 @@ ProcessResult runSync(String executable, List<String> arguments, {String? workin
 
 参数与 [Process.run] 相同。
 
-返回一个 [ProcessResult]，包含运行该进程的结果（即退出码、标准输出和标准错误）。
+返回一个 [ProcessResult](https://www.yuque.com/thyname/dart.io/processresult)，包含运行该进程的结果（即退出码、标准输出和标准错误）。
 
 ### killPid()
 
@@ -356,11 +356,11 @@ ProcessResult runSync(String executable, List<String> arguments, {String? workin
 bool killPid(int pid, [ProcessSignal signal = ProcessSignal.sigterm])
 ```
 
-终止 id 为 [pid] 的进程。
+终止 id 为 [pid](https://www.yuque.com/thyname/dart.io/pid) 的进程。
 
-在可能的情况下，将 [signal] 发送给 id 为 [pid] 的进程，包括在 Linux 和 OS X 上。默认信号为 [ProcessSignal.sigterm]，通常会终止进程。
+在可能的情况下，将 [signal] 发送给 id 为 [pid](https://www.yuque.com/thyname/dart.io/pid) 的进程，包括在 Linux 和 OS X 上。默认信号为 [ProcessSignal.sigterm]，通常会终止进程。
 
-在不支持信号的平台（包括 Windows）上，此调用只会以特定于平台的方式终止 id 为 [pid] 的进程，[signal] 参数将被忽略。
+在不支持信号的平台（包括 Windows）上，此调用只会以特定于平台的方式终止 id 为 [pid](https://www.yuque.com/thyname/dart.io/pid) 的进程，[signal] 参数将被忽略。
 
 如果信号成功发送到进程，则返回 `true`。否则信号无法发送，通常意味着进程已经终止。
 
@@ -414,7 +414,7 @@ main() async {
 IOSink get stdin
 ```
 
-进程的标准输入流，以 [IOSink] 形式提供。
+进程的标准输入流，以 [IOSink](https://www.yuque.com/thyname/dart.io/iosink) 形式提供。
 
 ### pid
 
@@ -464,7 +464,7 @@ dynamic stdout
 
 进程的标准输出。
 
-传给 [Process.run] 的 `stdoutEncoding` 参数的值决定了该值的类型。如果使用了 `null`，此值为 [Uint8List] 类型，否则为 `String` 类型。
+传给 [Process.run] 的 `stdoutEncoding` 参数的值决定了该值的类型。如果使用了 `null`，此值为 [Uint8List](https://www.yuque.com/thyname/dart.typed_data/uint8list) 类型，否则为 `String` 类型。
 
 ### stderr
 
@@ -474,7 +474,7 @@ dynamic stderr
 
 进程的标准错误。
 
-传给 [Process.run] 的 `stderrEncoding` 参数的值决定了该值的类型。如果使用了 `null`，此值为 [Uint8List] 类型，否则为 [String] 类型。
+传给 [Process.run] 的 `stderrEncoding` 参数的值决定了该值的类型。如果使用了 `null`，此值为 [Uint8List](https://www.yuque.com/thyname/dart.typed_data/uint8list) 类型，否则为 [String](https://www.yuque.com/thyname/dart.core/string) 类型。
 
 ### pid
 
@@ -496,9 +496,9 @@ ProcessResult(int pid, int exitCode, dynamic stdout, dynamic stderr)
 interface class ProcessSignal {}
 ```
 
-在 Posix 系统上，[ProcessSignal] 用于向子进程发送特定信号，参见 `Process.kill`。
+在 Posix 系统上，[ProcessSignal](https://www.yuque.com/thyname/dart.io/processsignal) 用于向子进程发送特定信号，参见 `Process.kill`。
 
-某些 [ProcessSignal] 也可以被监听，作为拦截默认信号处理程序并实现另一个处理程序的方式。有关更多信息，请参见 [ProcessSignal.watch]。
+某些 [ProcessSignal](https://www.yuque.com/thyname/dart.io/processsignal) 也可以被监听，作为拦截默认信号处理程序并实现另一个处理程序的方式。有关更多信息，请参见 [ProcessSignal.watch]。
 
 ### sighup
 
@@ -704,7 +704,7 @@ Stream<ProcessSignal> watch()
 
 监听进程信号。
 
-可以监听以下 [ProcessSignal]：
+可以监听以下 [ProcessSignal](https://www.yuque.com/thyname/dart.io/processsignal)：
 
 - [ProcessSignal.sighup]。
 - [ProcessSignal.sigint]。例如由 CTRL-C 发送的信号。
